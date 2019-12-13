@@ -61,18 +61,38 @@ i {
   text-align: right;
 }
 
-.layui-normal-btn {
-  background: #ec6c3f;
+.text-center {
+  text-align: center;
 }
 
-.layui-input {
-  border-color: #bfbfbf;
+.text-left {
+  text-align: left;
 }
 
-.layui-form-select dl dd.layui-this {
-  background: #edeff3;
-  color: #333;
+/* 浮动 */
+.clearfix:before,
+.clearfix:after {
+  content: '';
+  display: table;
 }
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+
 
 /*********************************************** header ***********************************************/
 .layui-layout-admin .layui-header {
@@ -630,22 +650,71 @@ i {
 
 
 
-/*********************************************** 统一动画 ***********************************************/
 
-.layui-layout-admin .layui-header .layui-nav .layui-nav-item,
-.layui-layout-admin .layui-layout-left,
-.layadmin-pagetabs,
-.layui-layout-admin .layui-body,
-.layui-layout-admin .layui-footer,
-.layui-layout-admin .layui-side,
-.layui-layout-admin .layui-logo,
-.layui-layout-admin .layui-header .layui-layout-right {
-  transition: all .3s;
-  -webkit-transition: all .3s;
+/*********************************************** 按钮 ***********************************************/
+
+.layui-btn {
+  background: #ec6c3f;
+  border-radius: 3px;
 }
 
+.layui-btn.layui-btn-primary {
+  background: #fff;
+}
 
-/* 表单 */
+.layui-btn-primary:hover {
+  border-color: inherit;
+}
+
+/* 搜索按钮 */
+.search-btn-wrap {
+  width: 200px;
+  position: relative;
+}
+
+.search-btn-wrap.layui-inline {
+  margin: 0;
+}
+
+.search-btn-wrap .layui-icon {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+
+/*********************************************** form ***********************************************/
+
+.layui-input,
+.layui-textarea {
+  border-color: #D2D2D2;
+  border-radius: 5px;
+}
+
+.layui-form-select dl dd.layui-this {
+  background: #edeff3;
+  color: #333;
+}
+
+.layui-form-label {
+  color: #333;
+}
+
+.layui-form-radio div {
+  font-size: 16px;
+  color: #666;
+  text-decoration: underline;
+}
+
+.layui-form-radio>i {
+  font-size: 16px;
+}
+
+.layui-form-radio>i:hover,
+.layui-form-radioed>i {
+  color: #c8c7c7;
+}
+
 .layui-form[wid100] .layui-form-label {
   width: 100px;
 }
@@ -729,40 +798,37 @@ i {
 }
 
 /*********************************************** tab ***********************************************/
-.layui-card .layui-tab-brief .layui-tab-title {
+/* 简约风格 */
+.layui-tab-brief .layui-tab-title {
   height: 42px;
   border: 0;
 }
 
-.layui-card .layui-tab-brief .layui-tab-title li {
+.layui-tab-brief .layui-tab-title li {
   margin: 0 15px;
   padding: 0;
   line-height: 42px;
 }
 
-.layui-card .layui-tab-brief .layui-tab-title li.layui-this {
+.layui-tab-brief .layui-tab-title li.layui-this {
   color: #ec6c3f;
 }
 
-.layui-card .layui-tab-brief .layui-tab-title .layui-this:after {
+.layui-tab-brief .layui-tab-title .layui-this:after {
   height: 43px;
   border-color: #ec6c3f;
 }
 
-.layui-card .layui-tab-brief .layui-tab-content {
+.layui-tab-brief .layui-tab-content {
   padding: 15px;
 }
 
-.layui-card .layui-table-view {
-  margin: 0;
-}
 
 /*********************************************** layui-card ***********************************************/
 
 .layui-card {
-  border: 1px solid rgb(227, 227, 229);
-  border-radius: 10px;
-  /* padding-top: 15px; */
+  border: 1px solid #D2D2D2;
+  border-radius: 5px;
 }
 
 .layui-card-header {
@@ -782,6 +848,20 @@ i {
 
 .layui-card-body {
   padding: 10px 20px;
+}
+
+/*********************************************** 统一动画 ***********************************************/
+
+.layui-layout-admin .layui-header .layui-nav .layui-nav-item,
+.layui-layout-admin .layui-layout-left,
+.layadmin-pagetabs,
+.layui-layout-admin .layui-body,
+.layui-layout-admin .layui-footer,
+.layui-layout-admin .layui-side,
+.layui-layout-admin .layui-logo,
+.layui-layout-admin .layui-header .layui-layout-right {
+  transition: all .3s;
+  -webkit-transition: all .3s;
 }
 
 /*********************************************** other ***********************************************/

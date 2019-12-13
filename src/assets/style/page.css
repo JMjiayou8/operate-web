@@ -157,8 +157,8 @@
 }
 
 .chart-link {
-  border: 1px solid rgb(227, 227, 229);
-  border-radius: 10px;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
   font-size: 14px;
   color: #999;
   width: 78px;
@@ -264,8 +264,7 @@
   color: #fff;
 }
 
-.policy-page .step-item::after,
-.policy-page .layui-tab-title .layui-this:after {
+.policy-page .step-item::after {
   content: "";
   width: 60%;
   display: inline-block;
@@ -398,4 +397,158 @@
 
 .policy-page .tag-list p {
   margin-top: 10px;
+}
+
+/*********************************************** 策略页面 ***********************************************/
+.strategy-page .step-top-wrap {
+  height: 130px;
+  padding: 30px 33% 30px 0;
+  width: auto;
+
+}
+
+.strategy-page .step-item .step-icon.step1 {
+  background: url('../images/strategy/step1.png') #fff no-repeat center;
+}
+
+.strategy-page .step-item .step-icon.step2 {
+  background: url('../images/strategy/step2.png') #fff no-repeat center;
+}
+
+.strategy-page .step-item .step-icon.step3 {
+  background: url('../images/strategy/step3.png') #fff no-repeat center;
+}
+
+.strategy-page .step-item.layui-this .step-icon.step1 {
+  background: url('../images/strategy/step1-active.png') #fff no-repeat center;
+}
+
+.strategy-page .step-item.layui-this .step-icon.step2 {
+  background: url('../images/strategy/step2-active.png') #fff no-repeat center;
+}
+
+.strategy-page .step-item.layui-this .step-icon.step3 {
+  background: url('../images/strategy/step3-active.png') #fff no-repeat center;
+}
+
+.strategy-page .layui-card .top-wrap {
+  border-bottom: 1px solid #d2d2d2;
+  line-height: 38px;
+  padding-bottom: 10px;
+}
+
+.strategy-page .policy-item {
+  margin: 10px 0;
+}
+
+.strategy-page .common-laypage {
+  text-align: center;
+  font-size: 16px;
+}
+
+.strategy-page .common-laypage .layui-laypage a,
+.strategy-page .common-laypage .layui-laypage span {
+  border: 0;
+  font-size: 16px;
+}
+
+.strategy-page .layui-laypage .layui-laypage-curr .layui-laypage-em,
+.strategy-page .layui-laypage .layui-laypage-curr em {
+  background-color: #fff !important;
+  color: #f0912d !important;
+}
+
+.strategy-page .layui-laypage a:hover {
+  color: #f0912d !important;
+}
+
+.strategy-page .custTypeTab .layui-tab-title li {
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 5px;
+  padding: 0 20px;
+}
+
+.strategy-page .custTypeTab .layui-tab-title li.layui-this {
+  border: 1px solid #ec6c3f;
+  background: #ec6c3f;
+  color: #fff;
+}
+
+.strategy-page .custTypeTab .layui-tab-title li.layui-this::after {
+  display: none;
+}
+
+.strategy-page .custTypeTab .upload-card .layui-card-body {
+  padding: 0;
+}
+
+.strategy-page .custTypeTab .layui-upload-drag {
+  background: #fafafa;
+  width: 100%;
+  height: 100%;
+  padding: 50px 0;
+  border: 0;
+  border-radius: 5px;
+}
+
+.strategy-page .custTypeTab .layui-upload-drag .upload-icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url('../images/upload.png') no-repeat center/cover;
+}
+
+.strategy-page .custTypeTab .layui-upload-drag .upload-text {
+  color: #979797;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 20px;
+}
+
+.strategy-page .layui-btn {
+  padding: 0 50px;
+}
+
+.strategy-page .multi-elem-line .layui-input-inline {
+  max-width: 150px;
+}
+
+.strategy-page .template-wrap {
+  border: 1px dashed #d2d2d2;
+  border-radius: 5px;
+}
+
+.choose-template-wrap .layui-textarea {
+  width: 70%;
+  display: inline-block;
+  resize: none;
+}
+
+.choose-template-wrap .layui-btn {
+  vertical-align: top;
+  margin-left: 5%;
+  background: #448aca;
+  position: relative;
+  padding-right: 20px;
+}
+
+.choose-template-wrap .layui-btn .chooseMsg-icon {
+  display: inline-block;
+  position: absolute;
+  background: url("../images/sms_temp.png") no-repeat center/100%;
+  width: 20px;
+  height: 15px;
+  left: 20px;
+  top: 10px;
+}
+
+/*不显示秒*/
+
+.laydate-theme-noSecond .layui-laydate-content>.layui-laydate-list>li {
+  width: 50%
+}
+
+.laydate-theme-noSecond .layui-laydate-content>.layui-laydate-list>li:last-child {
+  display: none;
 }

@@ -14,26 +14,22 @@
 </head>
 
 <body>
-  <div class="policy-page">
-    <div class="layui-tab ">
-      <div class="layui-row  step-top-wrap">
-        <div class="layui-col-md8 layui-col-sm8">
-          <ul class="layui-tab-title  layui-row ">
-            <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first">
-              <i class="step-icon step1"></i>
-              <p class="step-text">What:基本信息</p>
-            </li>
-            <li class="layui-col-md4 layui-col-sm4 step-item">
-              <i class="step-icon  step2"></i>
-              <p class="step-text">Who:目标客户群</p>
-            </li>
-            <li class="layui-col-md4 layui-col-sm4 step-item step-item-last">
-              <i class="step-icon  step3"></i>
-              <p class="step-text">How:执行触点</p>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <div class="policy-page strategy-page">
+    <div class="layui-tab" lay-filter="pageTab">
+      <ul class="layui-tab-title layui-row  step-top-wrap">
+        <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first" lay-id="11">
+          <i class="step-icon step1"></i>
+          <p class="step-text">What:基本信息</p>
+        </li>
+        <li class="layui-col-md4 layui-col-sm4 step-item" lay-id="22">
+          <i class="step-icon  step2"></i>
+          <p class="step-text">Who:目标客户群</p>
+        </li>
+        <li class="layui-col-md4 layui-col-sm4 step-item step-item-last" lay-id="33">
+          <i class="step-icon  step3"></i>
+          <p class="step-text">How:执行触点</p>
+        </li>
+      </ul>
       <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
           <div class="layui-card">
@@ -48,10 +44,23 @@
                 <div class="layui-form-item">
                   <label class="layui-form-label">关联政策：</label>
                   <div class="layui-input-block">
-                    <select name="prop2" id="">
-                      <option value=""></option>
-                      <option value="0">写作</option>
-                    </select>
+                    <div class="layui-card">
+                      <div class="layui-card-body">
+                        <div class="top-wrap clearfix">
+                          <span>所有政策</span>
+                          <div class="search-btn-wrap layui-inline fr">
+                            <input type="text" class="layui-input" placeholder="搜索政策">
+                            <i class="layui-icon layui-icon-search" onclick="rendCustWrap()"></i>
+                          </div>
+                        </div>
+                        <div>
+                          <form class="layui-form">
+                            <div id="choosePolicyWrap"></div>
+                          </form>
+                          <div id="cust-laypage" class="common-laypage"></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="layui-form-item">
@@ -60,10 +69,10 @@
                     <textarea placeholder="请输入内容" name="prop3" class="layui-textarea"></textarea>
                   </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item text-center">
                   <label class="layui-form-label"></label>
                   <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="serachBtn">继续</button>
+                    <button type="button" class="layui-btn" onclick="nextPage('22')">继续</button>
                   </div>
                 </div>
               </form>
@@ -71,29 +80,240 @@
           </div>
         </div>
         <div class="layui-tab-item">
-          2
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <form class="layui-form" wid100>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">客户群类型：</label>
+                  <div class="layui-input-block">
+                    <div class="layui-tab layui-tab-brief custTypeTab" lay-filter="typeTab">
+                      <ul class="layui-tab-title">
+                        <li class="layui-this" lay-id="11">取数模板</li>
+                        <li lay-id="22">标签选择</li>
+                        <li lay-id="33">总部模型</li>
+                        <li lay-id="44">文件上传</li>
+                      </ul>
+                      <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                          <div class="layui-card">
+                            <div class="layui-card-body">取数模板</div>
+                          </div>
+                        </div>
+                        <div class="layui-tab-item ">
+                          <div class="layui-card">
+                            <div class="layui-card-body">标签选择</div>
+                          </div>
+                        </div>
+                        <div class="layui-tab-item ">
+                          <div class="layui-card">
+                            <div class="layui-card-body">总部模型</div>
+                          </div>
+                        </div>
+                        <div class="layui-tab-item ">
+                          <div class="layui-card upload-card">
+                            <div class="layui-card-body">
+                              <div class="layui-upload-drag " id="uploadFile">
+                                <i class="upload-icon"></i>
+                                <p class="upload-text">文件上传</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-form-item text-center">
+                  <label class="layui-form-label"></label>
+                  <div class="layui-input-block">
+                    <button type="button" class="layui-btn" onclick="nextPage('33')">继续</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
         <div class="layui-tab-item">
-          3
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <form class="layui-form" wid100>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">执行周期：</label>
+                  <div class="layui-inline">
+                    <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="startDate" placeholder="yyyy-MM-dd">
+                    </div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="endDate" placeholder="yyyy-MM-dd">
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-form-item multi-elem-line">
+                  <label class="layui-form-label">触点选择：</label>
+                  <div class="layui-inline">
+                    <label class="layui-form-mid">当</label>
+                    <div class="layui-input-inline">
+                      <select name="select1" id="select1"></select>
+                    </div>
+                    <div class="layui-form-mid">是</div>
+                    <div class="layui-input-inline">
+                      <select name="select2" id="select2"></select>
+                    </div>
+                    <div class="layui-form-mid">时，执行</div>
+                    <div class="layui-input-inline">
+                      <select name="select3" id="select3"></select>
+                    </div>
+                    <div class="layui-input-inline">
+                      <select name="select4" id="select4"></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label"></label>
+                  <div class="layui-input-block template-wrap">
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">接触渠道模版：</label>
+                      <div class="layui-input-block choose-template-wrap">
+                        <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
+                        <button type="button" class="layui-btn" onclick="return false;"><i
+                            class="chooseMsg-icon"></i><span>选择模板</span></button>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">短信接入号：</label>
+                      <div class="layui-input-inline">
+                        <select name="select5" id="select5"></select>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">活动执行时间：</label>
+                      <div class="layui-inline">
+                        <div class="layui-input-inline">
+                          <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline">
+                          <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="layui-form-item text-center">
+                  <label class="layui-form-label"></label>
+                  <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-primary">保存</button>
+                    <button type="button" class="layui-btn ">提交</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <script id="policyTemplate" type="text/html">
+      <div class="layui-row">
+        {{#  layui.each(d, function(index, item){ }}
+        <div class="layui-col-md4 policy-item">
+          <input type="radio" name="policy" value="{{item.value}}" title="{{item.text}}">
+        </div>
+        {{#  }); }}
+      </div>
+    </script>
     <script src="../../assets/layui/layui.js"></script>
     <script>
       layui
         .config({
           base: '../../assets/' //静态资源所在路径
         })
-        .extend({
-          index: 'lib/index' //主入口模块
-        })
-        .use(['index', 'table', 'laytpl', 'laydate', 'form'], function () {
+        .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
           var $ = layui.$,
             table = layui.table,
             laydate = layui.laydate,
             form = layui.form,
-            laytpl = layui.laytpl;
+            laytpl = layui.laytpl,
+            element = layui.element,
+            upload = layui.upload,
+            laypage = layui.laypage;
 
+          window.nextPage = function (page) {
+            element.tabChange('pageTab', page);
+          };
+          /********************************************** 基本信息区域  **********************************************/
+          window.rendCustWrap = function (page) {
+            page = page || 1;
+
+            function f(i) { //渲染政策单选区域
+              var policyList = []
+              //模拟假数据，实际ajax请求
+              for (var i = 0; i < 15; i++) {
+                policyList.push({
+                  value: i,
+                  text: '政策' + (Math.random() * 100).toFixed(0)
+                })
+              }
+              var getTpl = policyTemplate.innerHTML,
+                view = document.getElementById('choosePolicyWrap');
+              laytpl(getTpl).render(policyList, function (html) {
+                view.innerHTML = html;
+                form.render()
+              });
+            }
+            f(page)
+            laypage.render({
+              elem: 'cust-laypage',
+              limit: 15,
+              cur: page,
+              count: 50,
+              theme: '#f0912d',
+              prev: '<em class="layui-icon layui-icon-left"></em>',
+              next: '<em class="layui-icon layui-icon-right"></em>',
+              jump: function (obj, first) {
+                if (!first) {
+                  f(obj.curr)
+                }
+              }
+            });
+          }
+          rendCustWrap()
+          /********************************************** 目标客户群区域  **********************************************/
+          upload.render({
+            elem: '#uploadFile',
+            // url: '/upload/',
+            before: function (obj) {
+              //预读本地文件示例，不支持ie8
+              obj.preview(function (index, file, result) {
+                console.log(file)
+                // $('#demo1').attr('src', result); //图片链接（base64）
+              });
+            },
+            done: function (res) {
+              console.log(res)
+            }
+          });
+          /********************************************** 执行触点区域  **********************************************/
+          laydate.render({
+            elem: '#startDate',
+          })
+          laydate.render({
+            elem: '#endDate',
+          })
+          laydate.render({
+            elem: '#startDate2',
+            type: 'time',
+            format: 'HH:mm',
+            theme: 'noSecond'
+          });
+          laydate.render({
+            elem: '#endDate2',
+            type: 'time',
+            format: 'HH:mm',
+            theme: 'noSecond'
+          });
         })
     </script>
 </body>
