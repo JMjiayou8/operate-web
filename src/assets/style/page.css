@@ -242,6 +242,10 @@
   padding: 20px;
 }
 
+.policy-page .layui-tab-brief .layui-tab-content {
+  padding: 20px 0;
+}
+
 .policy-page .step-top-wrap {
   background-image: -moz-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
   background-image: -webkit-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
@@ -484,11 +488,11 @@
   padding: 20px 0;
 }
 
-.strategy-page .custTypeTab .upload-card .layui-card-body {
+.strategy-page .upload-card .layui-card-body {
   padding: 0;
 }
 
-.strategy-page .custTypeTab .layui-upload-drag {
+.strategy-page .layui-upload-drag {
   background: #fafafa;
   width: 100%;
   height: 100%;
@@ -497,14 +501,14 @@
   border-radius: 5px;
 }
 
-.strategy-page .custTypeTab .layui-upload-drag .upload-icon {
+.strategy-page .layui-upload-drag .upload-icon {
   display: inline-block;
   width: 50px;
   height: 50px;
   background: url('../images/upload.png') no-repeat center/cover;
 }
 
-.strategy-page .custTypeTab .layui-upload-drag .upload-text {
+.strategy-page .layui-upload-drag .upload-text {
   color: #979797;
   font-size: 16px;
   font-weight: bold;
@@ -557,4 +561,34 @@
 
 .laydate-theme-noSecond .layui-laydate-content>.layui-laydate-list>li:last-child {
   display: none;
+}
+
+
+.createPolicy .step-item .step-icon.step2 {
+  background: url('../images/policy/product.png') #fff no-repeat center;
+}
+
+.createPolicy .step-item.layui-this .step-icon.step2 {
+  background: url('../images/policy/product-active.png') #fff no-repeat center;
+}
+
+.createPolicy-form .layui-form-item {
+  clear: none;
+}
+
+.createPolicy .search-btn-wrap {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 10;
+}
+
+.createPolicy .tip {
+  font-size: 14px;
+  line-height: 30px;
+  color: #df1818;
+}
+
+.createPolicy .layui-tab-brief .layui-tab-title {
+  border-bottom: 1px solid #d2d2d2;
 }

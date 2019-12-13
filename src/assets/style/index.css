@@ -681,6 +681,7 @@ i {
   top: 0;
   right: 10px;
   cursor: pointer;
+  line-height: 36px;
 }
 
 /*********************************************** form ***********************************************/
@@ -735,6 +736,10 @@ i {
 .box-radio .layui-form-radioed div,
 .box-radio .layui-form-radioed i {
   color: #fff;
+}
+
+.box-radio.no-icon .layui-form-radio i {
+  display: none;
 }
 
 .layui-form[wid100] .layui-form-label {
@@ -842,7 +847,7 @@ i {
 }
 
 .layui-tab-brief .layui-tab-content {
-  padding: 15px;
+  padding: 20px 0;
 }
 
 

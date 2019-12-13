@@ -14,8 +14,9 @@
 12-13
 
 - 创建策略：src/views/strategy/create.html
+- 创建政策：src/views/policy/create.html
+- 政策白名单：src/views/policy/whiteList.html
 
 > 待完成页面
 
-- 创建政策：src/views/policy/create.html
-- 政策白名单：src/views/policy/whiteList.html
+- 侧边栏和导航交互
