@@ -1,0 +1,401 @@
+.layui-fluid {
+  padding: 15px;
+  background: #fbfbfb;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+}
+
+/*********************************************** 控制台 ***********************************************/
+.config-part {
+  display: none;
+}
+
+/* 常用功能 */
+.comFuncs-wrap {
+  background: #fff;
+  text-align: center;
+}
+
+.func-title {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* 概览 */
+.console-page .over-list {
+  margin: 0 -8%;
+}
+
+
+.console-page .over-item {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.console-page .over-title {
+  font-size: 16px;
+}
+
+.console-page .over-icon {
+  width: 60px;
+  height: 60px;
+
+  margin: 10px auto;
+}
+
+.console-page .over-num {
+  font-size: 24px;
+  margin: 0 5px;
+}
+
+.console-page .connect {
+  position: absolute;
+  width: 90%;
+  height: 3px;
+  background: #e7e6e6;
+  top: 50%;
+  left: 60%;
+  z-index: -1;
+}
+
+.console-page .connect::before,
+.connect::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: #e7e6e6;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  left: 20%;
+}
+
+.console-page .connect::after {
+  left: 60%;
+}
+
+/* 各地市营销活动订购量排名 */
+.top9Wrap {
+  text-align: center;
+  font-size: 18px;
+}
+
+.top3Wrap {
+  margin: 20px 0 40px 0;
+}
+
+.top-num {
+  font-size: 24px;
+  color: #e9785e;
+  line-height: 40px;
+}
+
+.top-title {
+  line-height: 30px;
+}
+
+.topOther .top-num {
+  font-size: 18px;
+}
+
+.topOther {
+  margin-bottom: 30px;
+}
+
+.topOther .top-title {
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.topOther .top-level {
+  border: 3px solid rgb(126, 206, 244);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
+  text-align: center;
+}
+
+.topOther-item {
+  margin-top: 20px;
+}
+
+.top-icon {
+  display: block;
+  width: 60px;
+  height: 80px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.top-icon.top1 {
+  width: 80px;
+  height: 100px;
+  margin-top: 0;
+  background: url('../images/console/top1.png') no-repeat center/100%;
+}
+
+.top-icon.top2 {
+  background: url('../images/console/top2.png') no-repeat center/100%;
+}
+
+.top-icon.top3 {
+  background: url('../images/console/top3.png') no-repeat center/100%;
+}
+
+/* 图表 */
+.chart-wrap {
+  position: relative;
+}
+
+.chart-link {
+  border: 1px solid rgb(227, 227, 229);
+  border-radius: 10px;
+  font-size: 14px;
+  color: #999;
+  width: 78px;
+  height: 30px;
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.chart-info-list {
+  position: absolute;
+  top: -40px;
+  right: 0;
+}
+
+.chart-info-list p {
+  color: #666666;
+  font-size: 16px;
+}
+
+.chart-info-list span {
+  font-size: 30px;
+  line-height: 50px;
+}
+
+.info-item {
+  margin-top: 20px;
+}
+
+.info-item .status1 {
+  color: #1ca3ff;
+}
+
+.info-item .status2 {
+  color: #f74f77;
+}
+
+.info-item .status3 {
+  color: #f7b84f;
+}
+
+.info-item .status4 {
+  color: #6b5af4;
+}
+
+.chart-top-info {
+  font-size: 16px;
+  color: #333;
+  margin: 0 50px;
+}
+
+.chart-top-info .icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.chart-top-info .icon.icon1 {
+  background: url('../images/console/icon1.png') no-repeat center/cover;
+}
+
+.chart-top-info .icon.icon2 {
+  background: url('../images/console/icon2.png') no-repeat center/cover;
+}
+
+.chart-top-info .num {
+  font-size: 18px;
+  color: #ec6c3f;
+}
+
+
+/*********************************************** 政策页面 ***********************************************/
+.policy-page .layui-tab {
+  margin: 0;
+}
+
+.policy-page .layui-tab-content {
+  padding: 20px;
+}
+
+.policy-page .step-top-wrap {
+  background-image: -moz-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  background-image: -webkit-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  background-image: -ms-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  background-image: linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  width: 100%;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.policy-page .step-top-wrap .layui-tab-title {
+  border: 0;
+}
+
+
+.policy-page .step-item {
+  cursor: pointer;
+  color: #fff;
+}
+
+.policy-page .step-item::after,
+.policy-page .layui-tab-title .layui-this:after {
+  content: "";
+  width: 60%;
+  display: inline-block;
+  height: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 36px;
+  left: 70%;
+}
+
+.policy-page .step-item-last::after,
+.policy-page .step-item-last.layui-this::after {
+  width: 0;
+  border: 0;
+}
+
+.policy-page .step-item .step-icon {
+  width: 72px;
+  height: 72px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: block;
+  background: url('../images/policy/step1.png') #fff no-repeat center;
+  margin: 0 auto;
+}
+
+.policy-page .step-item.layui-this .step-icon {
+  border: 1px solid #ec6c3f;
+}
+
+.policy-page .step-item .step-icon.step1 {
+  background: url('../images/policy/step1.png') #fff no-repeat center;
+}
+
+.policy-page .step-item .step-icon.step2 {
+  background: url('../images/policy/step2.png') #fff no-repeat center;
+}
+
+.policy-page .step-item .step-icon.step3 {
+  background: url('../images/policy/step3.png') #fff no-repeat center;
+}
+
+.policy-page .step-item.layui-this .step-icon.step1 {
+  background: url('../images/policy/step1-active.png') #fff no-repeat center;
+}
+
+.policy-page .step-item.layui-this .step-icon.step2 {
+  background: url('../images/policy/step2-active.png') #fff no-repeat center;
+}
+
+.policy-page .step-item.layui-this .step-icon.step3 {
+  background: url('../images/policy/step3-active.png') #fff no-repeat center;
+}
+
+
+.policy-page .step-text {
+  margin-top: 20px;
+}
+
+.policy-page .add-policy .step-icon {
+  width: 72px;
+  height: 72px;
+  display: block;
+  background: url('../images/policy/create.png') no-repeat center;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.policy-page .part-title {
+  color: #ec6c3f;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 10px 0;
+}
+
+
+.policy-page .layui-table td,
+.policy-page .layui-table th {
+  color: #333;
+  height: 20px;
+  padding: 15px;
+}
+
+.policy-page .layui-table td.td-title {
+  width: 170px;
+  color: #666 !important;
+}
+
+.policy-page .fileLink {
+  color: #066fff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* 营销策划 */
+.policy-page .card-item {
+  color: #fff;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 30px 20px;
+}
+
+.policy-page .top-list {
+  margin-bottom: 20px;
+}
+
+.policy-page .card-item .num {
+  font-size: 30px;
+}
+
+.policy-page .card-item .unit {
+  font-size: 14px;
+}
+
+.policy-page .card-item.card1 {
+  background: #6babcc;
+}
+
+.policy-page .card-item.card2 {
+  background: #eaa36e;
+}
+
+.policy-page .card-item.card3 {
+  background: #9589cc;
+}
+
+.policy-page .card-item.card4 {
+  background: #929cb2;
+}
+
+.policy-page .tag-list p {
+  margin-top: 10px;
+}

@@ -1,0 +1,128 @@
+/* 公共样式类 */
+html,
+body {
+  font-family: "MicrosoftYaHei";
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.login-page {
+  background: url('../images/login/login-bg.png') no-repeat center;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 1200px;
+}
+
+.login-top {
+  padding: 4% 0 0 10%;
+}
+
+.sys-logo {
+  width: 136px;
+  height: 86px;
+  display: inline-block;
+  background: url('../images/login/login-logo.png') no-repeat center/100%;
+  vertical-align: bottom;
+}
+
+.sys-name {
+  font-size: 56px;
+  font-family: "Lantinghei SC";
+  color: rgb(80, 80, 80);
+  line-height: 86px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.login-box {
+  background: url('../images/login/login-box.png') no-repeat center/100%;
+  position: absolute;
+  top: 28%;
+  right: 5%;
+  padding: 100px 80px 60px 80px;
+}
+
+.login-form .layui-input-inline {
+  width: 440px;
+  margin-left: 0;
+  position: relative;
+}
+
+.login-form .layui-input-inline .layui-icon {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  font-size: 24px;
+  color: #ddd;
+}
+
+.login-form .layui-input {
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 24px;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 60px;
+  color: #333;
+}
+
+.layui-vercode-input {
+  width: 220px;
+}
+
+.login-form .login-btn {
+  width: 100%;
+  background: #ed7704;
+  border-radius: 10px;
+  font-size: 28px;
+  height: 70px;
+  line-height: 70px;
+}
+
+.code-img {
+  width: 170px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
+@media screen and (max-width:1440px) {
+  .sys-logo {
+    width: 100px;
+  }
+
+  .sys-name {
+    font-size: 36px;
+  }
+
+  .login-form .layui-input-inline {
+    width: 330px;
+  }
+
+  .layui-vercode-input {
+    width: 160px;
+  }
+
+  .login-form .layui-input,
+  .login-form .login-btn,
+  .code-img {
+    height: 52px;
+    line-height: 52px;
+    font-size: 14px;
+  }
+
+  .code-img {
+    width: 130px;
+  }
+
+  .login-form .layui-input-inline .layui-icon {
+    top: 12px;
+  }
+}

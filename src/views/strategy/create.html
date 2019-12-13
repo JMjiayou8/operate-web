@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>创建政策</title>
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="policy-page">
+    <div class="layui-tab ">
+      <div class="layui-row  step-top-wrap">
+        <div class="layui-col-md8 layui-col-sm8">
+          <ul class="layui-tab-title  layui-row ">
+            <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first">
+              <i class="step-icon step1"></i>
+              <p class="step-text">What:基本信息</p>
+            </li>
+            <li class="layui-col-md4 layui-col-sm4 step-item">
+              <i class="step-icon  step2"></i>
+              <p class="step-text">Who:目标客户群</p>
+            </li>
+            <li class="layui-col-md4 layui-col-sm4 step-item step-item-last">
+              <i class="step-icon  step3"></i>
+              <p class="step-text">How:执行触点</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <form class="layui-form">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">策略名称：</label>
+                  <div class="layui-input-block">
+                    <input type="text" name="prop1" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">关联政策：</label>
+                  <div class="layui-input-block">
+                    <select name="prop2" id="">
+                      <option value=""></option>
+                      <option value="0">写作</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">策略描述：</label>
+                  <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" name="prop3" class="layui-textarea"></textarea>
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label"></label>
+                  <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="serachBtn">继续</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="layui-tab-item">
+          2
+        </div>
+        <div class="layui-tab-item">
+          3
+        </div>
+      </div>
+    </div>
+    <script src="../../assets/layui/layui.js"></script>
+    <script>
+      layui
+        .config({
+          base: '../../assets/' //静态资源所在路径
+        })
+        .extend({
+          index: 'lib/index' //主入口模块
+        })
+        .use(['index', 'table', 'laytpl', 'laydate', 'form'], function () {
+          var $ = layui.$,
+            table = layui.table,
+            laydate = layui.laydate,
+            form = layui.form,
+            laytpl = layui.laytpl;
+
+        })
+    </script>
+</body>
+
+</html>

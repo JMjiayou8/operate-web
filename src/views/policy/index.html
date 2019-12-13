@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>营销策划</title>
+    <link
+      rel="stylesheet"
+      href="../../assets/layui/css/layui.css"
+      media="all"
+    />
+    <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+    <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+  </head>
+  <body>
+    <div class="layui-fluid policy-page">
+      <div class="layui-row layui-col-space20 top-list">
+        <div class="layui-col-md8 layui-col-sm8">
+          <ul class="layui-row layui-col-space10 card-list">
+            <li class="layui-col-md3 layui-col-sm3 ">
+              <div class="card-item card1">
+                <p>政策总数</p>
+                <p><span class="num">233</span> <span class="unit">个</span></p>
+              </div>
+            </li>
+            <li class="layui-col-md3 layui-col-sm3 ">
+              <div class="card-item card2">
+                <p>生效政策</p>
+                <p><span class="num">233</span><span class="unit">个</span></p>
+              </div>
+            </li>
+            <li class="layui-col-md3 layui-col-sm3 ">
+              <div class="card-item card3">
+                <p>暂停政策</p>
+                <p><span class="num">233</span><span class="unit">个</span></p>
+              </div>
+            </li>
+            <li class="layui-col-md3 layui-col-sm3 ">
+              <div class="card-item card4">
+                <p>失效政策</p>
+                <p><span class="num">233</span><span class="unit">个</span></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="layui-col-md4 layui-col-sm4">
+          <div class="layui-card">
+            <ul class="layui-card-body layui-row tag-list">
+              <li class="layui-col-md3 layui-col-sm3">
+                <img
+                  src="../../assets/images/console/overview/flow1.png"
+                  alt=""
+                />
+                <p class="text-ellipsis">创建政策</p>
+              </li>
+              <li class="layui-col-md3 layui-col-sm3">
+                <img
+                  src="../../assets/images/console/overview/flow2.png"
+                  alt=""
+                />
+                <p class="text-ellipsis">政策白名单</p>
+              </li>
+              <li class="layui-col-md3 layui-col-sm3">
+                <img
+                  src="../../assets/images/console/overview/flow3.png"
+                  alt=""
+                />
+                <p class="text-ellipsis">政策管理</p>
+              </li>
+              <li class="layui-col-md3 layui-col-sm3">
+                <img
+                  src="../../assets/images/console/overview/flow4.png"
+                  alt=""
+                />
+                <p class="text-ellipsis">政策监控</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="layui-card">
+        <div class="layui-card-body">
+          <div id="chart" style="width: 100%;height: 380px;"></div>
+        </div>
+      </div>
+      <table id="table1"></table>
+    </div>
+    <script src="../../assets/layui/layui.js"></script>
+    <script>
+      layui
+        .config({
+          base: '../../assets/' //静态资源所在路径
+        })
+        .extend({
+          index: 'lib/index' //主入口模块
+        })
+        .use(['index', 'table', 'echarts'], function() {
+          var $ = layui.$,
+            table = layui.table,
+            echarts = layui.echarts
+          table.render({
+            elem: '#table1',
+            cols: [
+              [
+                //标题栏
+                {
+                  field: 'name',
+                  title: '政策名称'
+                },
+                {
+                  field: 'type1',
+                  title: '政策大类'
+                },
+                {
+                  field: 'type2',
+                  title: '政策小类'
+                },
+                {
+                  field: 'user',
+                  title: '创建人'
+                },
+                {
+                  field: 'time',
+                  title: '修改时间'
+                },
+                {
+                  field: 'status',
+                  title: '状态'
+                }
+              ]
+            ],
+            data: [
+              {
+                name: '7天包政策',
+                user: 'admin',
+                time: '2016-10-14',
+                type1: '123',
+                type2: '333',
+                status: 1
+              },
+              {
+                name: '7天包政策',
+                user: '7天包政策',
+                time: '2016-10-14',
+                type1: '123',
+                type2: '333',
+                status: 1
+              },
+              {
+                name: '7天包政策',
+                user: '7天包政策',
+                time: '2016-10-14',
+                type1: '123',
+                type2: '333',
+                status: 1
+              },
+              {
+                name: '7天包政策',
+                user: '7天包政策',
+                time: '2016-10-14',
+                type1: '123',
+                type2: '333',
+                status: 1
+              }
+            ]
+          })
+          function rendChart() {
+            var option = {
+              backgroundColor: '#fff',
+              color: ['#f9932e'],
+              grid: {
+                containLabel: true,
+                top: 60,
+                left: 0,
+                right: 20,
+                bottom: 0
+              },
+              xAxis: [
+                {
+                  type: 'category',
+                  data: [
+                    '营销任务一',
+                    '营销任务二',
+                    '营销任务三',
+                    '营销任务四',
+                    '营销任务五'
+                  ],
+                  axisLine: {
+                    show: false
+                  },
+                  axisTick: {
+                    show: false
+                  },
+                  axisLabel: {
+                    color: '#999999',
+                    fontSize: 14
+                  }
+                }
+              ],
+              yAxis: [
+                {
+                  type: 'value',
+                  axisLine: {
+                    show: false
+                  },
+                  axisTick: {
+                    show: false
+                  },
+                  splitLine: {
+                    lineStyle: {
+                      color: '#f1f1f2'
+                    }
+                  },
+                  axisLabel: {
+                    color: '#999999',
+                    fontSize: 14
+                  }
+                }
+              ],
+              series: [
+                {
+                  name: '营销任务',
+                  type: 'bar',
+                  data: [111, 222, 333, 444, 555],
+                  barWidth: 18,
+                  itemStyle: {
+                    normal: {
+                      barBorderRadius: [5, 5, 0, 0],
+                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        {
+                          offset: 0,
+                          color: 'rgb(255,154,22)'
+                        },
+                        {
+                          offset: 1,
+                          color: 'rgb(234,130,113)'
+                        }
+                      ])
+                    }
+                  },
+                  label: {
+                    emphasis: {
+                      show: true,
+                      lineHeight: 30,
+                      width: 80,
+                      height: 30,
+                      backgroundColor: '#ec6c3f',
+                      borderRadius: 200,
+                      position: ['-35', '-80'],
+                      formatter: [' {a|{c}}\n', ' {b|}\n', ' {d|}'].join(''),
+                      rich: {
+                        d: {
+                          color: '#ec6c3f',
+                          align: 'center',
+                          width: 10,
+                          height: 10,
+                          backgroundColor: '#ec6c3f',
+                          borderWidth: 3,
+                          borderColor: 'rgba(255,255,255,.8)',
+                          borderRadius: 100
+                        },
+                        a: {
+                          color: '#fff',
+                          align: 'center'
+                        },
+                        b: {
+                          width: 1,
+                          height: 50,
+                          borderWidth: 1,
+                          borderColor: '#ec6c3f',
+                          align: 'center'
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+            var echartsApp = echarts.init(
+              document.getElementById('chart'),
+              layui.echartsTheme
+            )
+            echartsApp.setOption(option)
+            echartsApp.resize()
+            admin.resize(function() {
+              echartsApp.resize()
+            })
+          }
+          rendChart()
+        })
+    </script>
+  </body>
+</html>
