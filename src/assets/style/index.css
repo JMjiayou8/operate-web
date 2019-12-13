@@ -715,6 +715,28 @@ i {
   color: #c8c7c7;
 }
 
+/* 边框风格radio */
+.box-radio .layui-form-radio {
+  border: 1px solid #d2d2d2;
+  padding: 0 20px;
+  border-radius: 5px;
+  line-height: 36px;
+}
+
+.box-radio .layui-form-radio div {
+  text-decoration: none;
+}
+
+.box-radio .layui-form-radioed {
+  background: #ec6c3f;
+  border-color: #ec6c3f;
+}
+
+.box-radio .layui-form-radioed div,
+.box-radio .layui-form-radioed i {
+  color: #fff;
+}
+
 .layui-form[wid100] .layui-form-label {
   width: 100px;
 }
