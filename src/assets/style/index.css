@@ -684,6 +684,18 @@ i {
   line-height: 36px;
 }
 
+/*********************************************** date ***********************************************/
+
+/*不显示秒*/
+
+.laydate-theme-noSecond .layui-laydate-content>.layui-laydate-list>li {
+  width: 50%
+}
+
+.laydate-theme-noSecond .layui-laydate-content>.layui-laydate-list>li:last-child {
+  display: none;
+}
+
 /*********************************************** form ***********************************************/
 
 .layui-input,
@@ -825,6 +837,10 @@ i {
 }
 
 /*********************************************** tab ***********************************************/
+.layui-tab {
+  position: relative;
+}
+
 /* 简约风格 */
 .layui-tab-brief .layui-tab-title {
   height: 42px;

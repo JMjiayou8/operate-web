@@ -14,30 +14,22 @@
 </head>
 
 <body>
-  <div class="policy-page">
+  <div class="common-page">
     <div class="layui-tab " lay-filter="tabFilter">
-      <div class="layui-row  step-top-wrap">
-        <div class="layui-col-md8 layui-col-sm8">
-          <ul class="layui-tab-title  layui-row ">
-            <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first">
-              <i class="step-icon step1"></i>
-              <p class="step-text">政策配置</p>
-            </li>
-            <li class="layui-col-md4 layui-col-sm4 step-item">
-              <i class="step-icon  step2"></i>
-              <p class="step-text">政策白名单</p>
-            </li>
-            <li class="layui-col-md4 layui-col-sm4 step-item step-item-last">
-              <i class="step-icon  step3"></i>
-              <p class="step-text">政策执行</p>
-            </li>
-          </ul>
-        </div>
-        <div class="layui-col-md4 layui-col-sm4 layui-col-sm4 add-policy">
-          <i class="step-icon "></i>
-          <p class="step-text" lay-href="./create.html">创建政策</p>
-        </div>
-      </div>
+      <ul class="layui-tab-title layui-row  step-top-wrap">
+        <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first" lay-id="11">
+          <i class="step-icon step1"></i>
+          <p class="step-text">政策配置</p>
+        </li>
+        <li class="layui-col-md4 layui-col-sm4 step-item" lay-id="22">
+          <i class="step-icon  step2"></i>
+          <p class="step-text">政策白名单</p>
+        </li>
+        <li class="layui-col-md4 layui-col-sm4 step-item step-item-last" lay-id="33">
+          <i class="step-icon  step3"></i>
+          <p class="step-text">政策执行</p>
+        </li>
+      </ul>
       <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
           <p class="part-title">配置详情</p>
@@ -93,6 +85,10 @@
           </div>
           <table id="table4"></table>
         </div>
+      </div>
+      <div class="add-policy">
+        <i class="step-icon "></i>
+        <p class="step-text" lay-href="./create.html">创建政策</p>
       </div>
     </div>
   </div>

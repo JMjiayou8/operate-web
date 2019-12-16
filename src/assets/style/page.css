@@ -87,17 +87,17 @@
   font-size: 18px;
 }
 
-.top3Wrap {
+.top9Wrap .top3Wrap {
   margin: 20px 0 40px 0;
 }
 
-.top-num {
+.top9Wrap .top-num {
   font-size: 24px;
   color: #e9785e;
   line-height: 40px;
 }
 
-.top-title {
+.top9Wrap .top-title {
   line-height: 30px;
 }
 
@@ -105,16 +105,16 @@
   font-size: 18px;
 }
 
-.topOther {
+.top9Wrap .topOther {
   margin-bottom: 30px;
 }
 
-.topOther .top-title {
+.top9Wrap .topOther .top-title {
   font-size: 14px;
   margin: 0 10px;
 }
 
-.topOther .top-level {
+.top9Wrap .topOther .top-level {
   border: 3px solid rgb(126, 206, 244);
   border-radius: 50%;
   width: 30px;
@@ -124,11 +124,11 @@
   text-align: center;
 }
 
-.topOther-item {
+.top9Wrap .topOther-item {
   margin-top: 20px;
 }
 
-.top-icon {
+.top9Wrap .top-icon {
   display: block;
   width: 60px;
   height: 80px;
@@ -136,27 +136,27 @@
   margin-top: 20px;
 }
 
-.top-icon.top1 {
+.top9Wrap .top-icon.top1 {
   width: 80px;
   height: 100px;
   margin-top: 0;
   background: url('../images/console/top1.png') no-repeat center/100%;
 }
 
-.top-icon.top2 {
+.top9Wrap .top-icon.top2 {
   background: url('../images/console/top2.png') no-repeat center/100%;
 }
 
-.top-icon.top3 {
+.top9Wrap .top-icon.top3 {
   background: url('../images/console/top3.png') no-repeat center/100%;
 }
 
 /* 图表 */
-.chart-wrap {
+.console-page .chart-wrap {
   position: relative;
 }
 
-.chart-link {
+.console-page .chart-link {
   border: 1px solid #d2d2d2;
   border-radius: 5px;
   font-size: 14px;
@@ -169,7 +169,7 @@
   cursor: pointer;
 }
 
-.chart-info-list {
+.console-page .chart-info-list {
   position: absolute;
   top: -40px;
   right: 0;
@@ -185,23 +185,23 @@
   line-height: 50px;
 }
 
-.info-item {
+.chart-info-list .info-item {
   margin-top: 20px;
 }
 
-.info-item .status1 {
+.chart-info-list .info-item .status1 {
   color: #1ca3ff;
 }
 
-.info-item .status2 {
+.chart-info-list .info-item .status2 {
   color: #f74f77;
 }
 
-.info-item .status3 {
+.chart-info-list .info-item .status3 {
   color: #f7b84f;
 }
 
-.info-item .status4 {
+.chart-info-list .info-item .status4 {
   color: #6b5af4;
 }
 
@@ -232,21 +232,21 @@
   color: #ec6c3f;
 }
 
+/*********************************************** 常规功能页面 ***********************************************/
 
-/*********************************************** 政策页面 ***********************************************/
-.policy-page .layui-tab {
+.common-page .layui-tab {
   margin: 0;
 }
 
-.policy-page .layui-tab-content {
+.common-page .layui-tab-content {
   padding: 20px;
 }
 
-.policy-page .layui-tab-brief .layui-tab-content {
+.common-page .layui-tab-brief .layui-tab-content {
   padding: 20px 0;
 }
 
-.policy-page .step-top-wrap {
+.common-page .step-top-wrap {
   background-image: -moz-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
   background-image: -webkit-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
   background-image: -ms-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
@@ -256,19 +256,22 @@
   font-size: 16px;
   text-align: center;
   padding: 40px 0;
+  height: 130px;
+  padding: 30px 33% 30px 0;
+  width: auto;
 }
 
-.policy-page .step-top-wrap .layui-tab-title {
+.common-page .step-top-wrap .layui-tab-title {
   border: 0;
 }
 
 
-.policy-page .step-item {
+.common-page .step-item {
   cursor: pointer;
   color: #fff;
 }
 
-.policy-page .step-item::after {
+.common-page .step-item::after {
   content: "";
   width: 60%;
   display: inline-block;
@@ -279,13 +282,13 @@
   left: 70%;
 }
 
-.policy-page .step-item-last::after,
-.policy-page .step-item-last.layui-this::after {
+.common-page .step-item-last::after,
+.common-page .step-item-last.layui-this::after {
   width: 0;
   border: 0;
 }
 
-.policy-page .step-item .step-icon {
+.common-page .step-item .step-icon {
   width: 72px;
   height: 72px;
   border: 1px solid #fff;
@@ -295,49 +298,40 @@
   margin: 0 auto;
 }
 
-.policy-page .step-item.layui-this .step-icon {
+.common-page .step-item.layui-this .step-icon {
   border: 1px solid #ec6c3f;
 }
 
-.policy-page .step-item .step-icon.step1 {
+.common-page .step-item .step-icon.step1 {
   background: url('../images/policy/step1.png') #fff no-repeat center;
 }
 
-.policy-page .step-item .step-icon.step2 {
+.common-page .step-item .step-icon.step2 {
   background: url('../images/policy/step2.png') #fff no-repeat center;
 }
 
-.policy-page .step-item .step-icon.step3 {
+.common-page .step-item .step-icon.step3 {
   background: url('../images/policy/step3.png') #fff no-repeat center;
 }
 
-.policy-page .step-item.layui-this .step-icon.step1 {
+.common-page .step-item.layui-this .step-icon.step1 {
   background: url('../images/policy/step1-active.png') #fff no-repeat center;
 }
 
-.policy-page .step-item.layui-this .step-icon.step2 {
+.common-page .step-item.layui-this .step-icon.step2 {
   background: url('../images/policy/step2-active.png') #fff no-repeat center;
 }
 
-.policy-page .step-item.layui-this .step-icon.step3 {
+.common-page .step-item.layui-this .step-icon.step3 {
   background: url('../images/policy/step3-active.png') #fff no-repeat center;
 }
 
 
-.policy-page .step-text {
+.common-page .step-text {
   margin-top: 20px;
 }
 
-.policy-page .add-policy .step-icon {
-  width: 72px;
-  height: 72px;
-  display: block;
-  background: url('../images/policy/create.png') no-repeat center;
-  margin: 0 auto;
-  cursor: pointer;
-}
-
-.policy-page .part-title {
+.common-page .part-title {
   color: #ec6c3f;
   font-size: 16px;
   line-height: 20px;
@@ -345,128 +339,96 @@
 }
 
 
-.policy-page .layui-table td,
-.policy-page .layui-table th {
+.common-page .layui-table td,
+.common-page .layui-table th {
   color: #333;
   height: 20px;
   padding: 15px;
 }
 
-.policy-page .layui-table td.td-title {
+.common-page .layui-table td.td-title {
   width: 170px;
   color: #666 !important;
 }
 
-.policy-page .fileLink {
+.common-page .fileLink {
   color: #066fff;
   text-decoration: underline;
   cursor: pointer;
 }
 
 /* 营销策划 */
-.policy-page .card-item {
+.common-page .card-item {
   color: #fff;
   font-size: 16px;
   border-radius: 10px;
   padding: 30px 20px;
 }
 
-.policy-page .top-list {
+.common-page .top-list {
   margin-bottom: 20px;
 }
 
-.policy-page .card-item .num {
+.common-page .card-item .num {
   font-size: 30px;
 }
 
-.policy-page .card-item .unit {
+.common-page .card-item .unit {
   font-size: 14px;
 }
 
-.policy-page .card-item.card1 {
+.common-page .card-item.card1 {
   background: #6babcc;
 }
 
-.policy-page .card-item.card2 {
+.common-page .card-item.card2 {
   background: #eaa36e;
 }
 
-.policy-page .card-item.card3 {
+.common-page .card-item.card3 {
   background: #9589cc;
 }
 
-.policy-page .card-item.card4 {
+.common-page .card-item.card4 {
   background: #929cb2;
 }
 
-.policy-page .tag-list p {
+.common-page .tag-list p {
   margin-top: 10px;
 }
 
-/*********************************************** 策略页面 ***********************************************/
-.strategy-page .step-top-wrap {
-  height: 130px;
-  padding: 30px 33% 30px 0;
-  width: auto;
-
-}
-
-.strategy-page .step-item .step-icon.step1 {
-  background: url('../images/strategy/step1.png') #fff no-repeat center;
-}
-
-.strategy-page .step-item .step-icon.step2 {
-  background: url('../images/strategy/step2.png') #fff no-repeat center;
-}
-
-.strategy-page .step-item .step-icon.step3 {
-  background: url('../images/strategy/step3.png') #fff no-repeat center;
-}
-
-.strategy-page .step-item.layui-this .step-icon.step1 {
-  background: url('../images/strategy/step1-active.png') #fff no-repeat center;
-}
-
-.strategy-page .step-item.layui-this .step-icon.step2 {
-  background: url('../images/strategy/step2-active.png') #fff no-repeat center;
-}
-
-.strategy-page .step-item.layui-this .step-icon.step3 {
-  background: url('../images/strategy/step3-active.png') #fff no-repeat center;
-}
-
-.strategy-page .layui-card .top-wrap {
+.common-page .layui-card .top-wrap {
   border-bottom: 1px solid #d2d2d2;
   line-height: 38px;
   padding-bottom: 10px;
 }
 
-.strategy-page .policy-item {
+.common-page .policy-item {
   margin: 10px 0;
 }
 
-.strategy-page .common-laypage {
+.common-page .common-laypage {
   text-align: center;
   font-size: 16px;
 }
 
-.strategy-page .common-laypage .layui-laypage a,
-.strategy-page .common-laypage .layui-laypage span {
+.common-page .common-laypage .layui-laypage a,
+.common-page .common-laypage .layui-laypage span {
   border: 0;
   font-size: 16px;
 }
 
-.strategy-page .layui-laypage .layui-laypage-curr .layui-laypage-em,
-.strategy-page .layui-laypage .layui-laypage-curr em {
+.common-page .layui-laypage .layui-laypage-curr .layui-laypage-em,
+.common-page .layui-laypage .layui-laypage-curr em {
   background-color: #fff !important;
   color: #f0912d !important;
 }
 
-.strategy-page .layui-laypage a:hover {
+.common-page .layui-laypage a:hover {
   color: #f0912d !important;
 }
 
-.strategy-page .custTypeTab .layui-tab-title li {
+.common-page .custTypeTab .layui-tab-title li {
   border: 1px solid rgb(210, 210, 210);
   border-radius: 5px;
   padding: 0 20px;
@@ -474,25 +436,25 @@
   line-height: 36px;
 }
 
-.strategy-page .custTypeTab .layui-tab-title li.layui-this {
+.common-page .custTypeTab .layui-tab-title li.layui-this {
   border: 1px solid #ec6c3f;
   background: #ec6c3f;
   color: #fff;
 }
 
-.strategy-page .custTypeTab .layui-tab-title li.layui-this::after {
+.common-page .custTypeTab .layui-tab-title li.layui-this::after {
   display: none;
 }
 
-.strategy-page .custTypeTab .layui-tab-content {
+.common-page .custTypeTab .layui-tab-content {
   padding: 20px 0;
 }
 
-.strategy-page .upload-card .layui-card-body {
+.common-page .upload-card .layui-card-body {
   padding: 0;
 }
 
-.strategy-page .layui-upload-drag {
+.common-page .layui-upload-drag {
   background: #fafafa;
   width: 100%;
   height: 100%;
@@ -501,14 +463,14 @@
   border-radius: 5px;
 }
 
-.strategy-page .layui-upload-drag .upload-icon {
+.common-page .layui-upload-drag .upload-icon {
   display: inline-block;
   width: 50px;
   height: 50px;
   background: url('../images/upload.png') no-repeat center/cover;
 }
 
-.strategy-page .layui-upload-drag .upload-text {
+.common-page .layui-upload-drag .upload-text {
   color: #979797;
   font-size: 16px;
   font-weight: bold;
@@ -516,15 +478,15 @@
   margin-top: 20px;
 }
 
-.strategy-page .layui-btn {
+.common-page .layui-btn {
   padding: 0 50px;
 }
 
-.strategy-page .multi-elem-line .layui-input-inline {
+.common-page .multi-elem-line .layui-input-inline {
   max-width: 150px;
 }
 
-.strategy-page .template-wrap {
+.common-page .template-wrap {
   border: 1px dashed #d2d2d2;
   border-radius: 5px;
 }
@@ -553,17 +515,9 @@
   top: 10px;
 }
 
-/*不显示秒*/
+/*********************************************** 政策页面 ***********************************************/
 
-.laydate-theme-noSecond .layui-laydate-content>.layui-laydate-list>li {
-  width: 50%
-}
-
-.laydate-theme-noSecond .layui-laydate-content>.layui-laydate-list>li:last-child {
-  display: none;
-}
-
-
+/* 创建政策 */
 .createPolicy .step-item .step-icon.step2 {
   background: url('../images/policy/product.png') #fff no-repeat center;
 }
@@ -591,4 +545,54 @@
 
 .createPolicy .layui-tab-brief .layui-tab-title {
   border-bottom: 1px solid #d2d2d2;
+}
+
+/* 政策详情 */
+.common-page .add-policy {
+  position: absolute;
+  top: 30px;
+  right: 20%;
+  text-align: center;
+}
+
+.common-page .add-policy .step-icon {
+  width: 72px;
+  height: 72px;
+  display: block;
+  background: url('../images/policy/create.png') no-repeat center;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.common-page .add-policy .step-text {
+  font-size: 14px;
+  color: #fff;
+  line-height: 40px;
+}
+
+/*********************************************** 策略页面 ***********************************************/
+
+/* 创建策略 */
+.createStrategy .step-item .step-icon.step1 {
+  background: url('../images/strategy/step1.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item .step-icon.step2 {
+  background: url('../images/strategy/step2.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item .step-icon.step3 {
+  background: url('../images/strategy/step3.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item.layui-this .step-icon.step1 {
+  background: url('../images/strategy/step1-active.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item.layui-this .step-icon.step2 {
+  background: url('../images/strategy/step2-active.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item.layui-this .step-icon.step3 {
+  background: url('../images/strategy/step3-active.png') #fff no-repeat center;
 }
