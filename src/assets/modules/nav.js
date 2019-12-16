@@ -1,25 +1,25 @@
 layui.define(function (exports) {
-  layui.use(['laytpl', 'element'], function () {
-    var laytpl = layui.laytpl, element = layui.element;
+  layui.use(['laytpl', 'element', 'jquery'], function () {
+    var laytpl = layui.laytpl, element = layui.element, $ = layui.jquery;
     var data = [
       {
-        title: '产品政策',
+        title: '产品管理',
         iconClass: 'nav1'
       },
       {
-        title: '营销策划',
+        title: '业务政策',
         iconClass: 'nav2'
       },
       {
-        title: '营销执行',
+        title: '营销策略',
         iconClass: 'nav3'
       },
       {
-        title: '营销交付',
+        title: '业务订购',
         iconClass: 'nav4'
       },
       {
-        title: '计划计算',
+        title: '计收计算',
         iconClass: 'nav5'
       },
       {
@@ -27,13 +27,22 @@ layui.define(function (exports) {
         iconClass: 'nav6'
       }
     ]
+    function rendTopNav () {
+      var getTpl = topNavTemplate.innerHTML,
+        view = document.getElementById('topNavWrap')
+      var arr = [data, []];
+      if ($(window).width() < 1600) {//小屏折叠后几项
+        arr = [data.slice(0, 3), data.slice(3)]
+      }
+      laytpl(getTpl).render(arr, function (html) {
+        view.innerHTML = html
+        element.render()
+      })
+    }
+    admin.resize(function () {
+      rendTopNav();
+    });
 
-    var getTpl = topNavTemplate.innerHTML,
-      view = document.getElementById('topNavWrap')
-    laytpl(getTpl).render(data, function (html) {
-      view.innerHTML = html
-    })
-    element.render()
   })
-  exports('console', {})
+  exports('nav', {})
 });

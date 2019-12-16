@@ -1,14 +1,9 @@
 layui.define('view', function (exports) {
-  var $ = layui.jquery
-    , laytpl = layui.laytpl
-    , element = layui.element
-    , setter = layui.setter
-    , view = layui.view
-    , device = layui.device()
-    , $win = $(window), $body = $('body')
-    , container = $('#' + setter.container)
-    , SHOW = 'layui-show', HIDE = 'layui-hide', THIS = 'layui-this', DISABLED = 'layui-disabled', TEMP = 'template'
-    , APP_BODY = '#operate_body', APP_FLEXIBLE = 'operate_app_flexible'
+  var $ = layui.jquery, element = layui.element
+  var setter = layui.setter, view = layui.view, device = layui.device(),
+    $win = $(window), $body = $('body'), container = $('#' + setter.container),
+    SHOW = 'layui-show', THIS = 'layui-this',
+    APP_BODY = '#operate_body', APP_FLEXIBLE = 'operate_app_flexible'
     , FILTER_TAB_TBAS = 'layadmin-layout-tabs'
     , APP_SPREAD_SM = 'layadmin-side-spread-sm', TABS_BODY = 'layadmin-tabsbody-item'
     , ICON_SHRINK = 'layui-icon-shrink-right', ICON_SPREAD = 'layui-icon-spread-left'
@@ -17,7 +12,6 @@ layui.define('view', function (exports) {
 
   //通用方法
   admin = {
-
     //事件监听
     on: function (events, callback) {
       return layui.onevent.call(this, setter.MOD_NAME, events, callback);
@@ -36,6 +30,7 @@ layui.define('view', function (exports) {
         return 0; //超小屏幕
       }
     },
+
     //侧边伸缩
     sideFlexible: function (status) {
       var app = container,
@@ -74,7 +69,6 @@ layui.define('view', function (exports) {
       });
     },
 
-
     //记录最近一次点击的页面标签数据
     tabsPage: {},
 
@@ -88,7 +82,6 @@ layui.define('view', function (exports) {
       options = options || {};
       admin.tabsBody(index).addClass(SHOW).siblings().removeClass(SHOW);
       events.rollPage('auto', index);
-
       //执行 {setter.MOD_NAME}.tabsPage 下的事件
       layui.event.call(this, setter.MOD_NAME, 'tabsPage({*})', {
         url: options.url
@@ -100,12 +93,10 @@ layui.define('view', function (exports) {
     resize: function (fn) {
       var router = layui.router()
         , key = router.path.join('-');
-
       if (admin.resizeFn[key]) {
         $win.off('resize', admin.resizeFn[key]);
         delete admin.resizeFn[key];
       }
-
       if (fn === 'off') return; //如果是清除 resize 事件，则终止往下执行
 
       fn(), admin.resizeFn[key] = fn;
@@ -219,7 +210,6 @@ layui.define('view', function (exports) {
     rollPage: function (type, index) {
       var tabsHeader = $('#operate_app_tabsheader')
         , liItem = tabsHeader.children('li')
-        , scrollWidth = tabsHeader.prop('scrollWidth')
         , outerWidth = tabsHeader.outerWidth()
         , tabsLeft = parseFloat(tabsHeader.css('left'));
 
@@ -441,14 +431,12 @@ layui.define('view', function (exports) {
 
   //同步路由
   var setThisRouter = function (othis) {
-    var layid = othis.attr('lay-id')
-      , attr = othis.attr('lay-attr')
+    var attr = othis.attr('lay-attr')
       , index = othis.index();
 
     admin.tabsBodyChange(index, {
       url: attr
     });
-    //location.hash = layid === setter.entry ? '/' : attr;
   }
 
   //标签页标题点击
@@ -480,13 +468,12 @@ layui.define('view', function (exports) {
       , text = othis.attr('lay-text');
 
     admin.tabsPage.elem = othis;
-
     //执行跳转
     var topLayui = parent === self ? layui : top.layui;
     topLayui.index.openTabsPage(href, text || othis.text());
   });
 
-  //点击事件
+  //全局点击点击事件
   $body.on('click', '*[layadmin-event]', function () {
     var othis = $(this),
       attrEvent = othis.attr('layadmin-event');
@@ -496,7 +483,6 @@ layui.define('view', function (exports) {
 
   //窗口resize事件
   var resizeSystem = layui.data.resizeSystem = function () {
-    //layer.close(events.note.index);
     layer.closeAll('tips');
 
     if (!resizeSystem.lock) {

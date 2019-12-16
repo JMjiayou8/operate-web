@@ -20,7 +20,7 @@
       <div class="layui-header">
         <div class="page-logo">
           <span class="logo-icon"></span>
-          <span class="logo-text">用户运营平台</span>
+          <span class="logo-text">客户运营平台</span>
         </div>
         <ul id="topNavWrap" class="layui-nav layui-layout-left"></ul>
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
@@ -37,17 +37,18 @@
           </li>
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;">
-              <img src="../assets/images/login/login-logo.png" alt="" class="user-icon" />
-              <cite>admin</cite>
+              <img src="../assets/images/user-icon.png" alt="" class="user-icon" />
+              <cite>Admin</cite>
             </a>
             <dl class="layui-nav-child">
               <dd class="info-wrap">
                 <ul class="user-info">
-                  <li>
-                    <a href="javascript:;">
-                      <img src="../assets/images/login/login-logo.png" alt="" class="user-icon" />
-                      <cite>admin</cite>
-                    </a>
+                  <li class="user-top">
+                    <img src="../assets/images/user-icon.png" alt="" class="user-icon" />
+                    <span>
+                      <cite>Admin</cite>
+                      <cite>12345</cite>
+                    </span>
                   </li>
                   <li>地址：广东省广州市</li>
                   <li>级别：营销经理</li>
@@ -68,11 +69,21 @@
         <div class="layui-side-scroll">
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
             lay-filter="layadmin-system-side-menu">
-            <li class="layui-nav-item">
-              <a lay-href="policy/detail.html">政策详情</a>
-            </li>
-            <li class="layui-nav-item">
-              <a lay-href="policy/index.html">政策总览</a>
+            <li data-name="policy" class="layui-nav-item ">
+              <a href="javascript:;">
+                <cite>政策管理</cite>
+              </a>
+              <dl class="layui-nav-child">
+                <dd data-name="policy">
+                  <a lay-href="policy/index.html">政策总览</a>
+                </dd>
+                <dd data-name="policy">
+                  <a lay-href="policy/detail.html">政策详情</a>
+                </dd>
+                <dd data-name="policy">
+                  <a lay-href="policy/create.html">创建政策</a>
+                </dd>
+              </dl>
             </li>
             <li class="layui-nav-item">
               <a lay-href="strategy/create.html">创建策略</a>
@@ -80,9 +91,7 @@
             <li class="layui-nav-item">
               <a lay-href="policy/whiteList.html">政策白名单</a>
             </li>
-            <li class="layui-nav-item">
-              <a lay-href="policy/create.html">创建政策</a>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -118,7 +127,7 @@
         <span>工作台</span>
       </a>
     </li>
-    {{#  layui.each(d, function(index, item){ }}
+    {{#  layui.each(d[0], function(index, item){ }}
     <li class="layui-nav-item ">
       <a href="javascript:;">
         <i class="nav-icon {{item.iconClass}}"></i>
@@ -128,6 +137,21 @@
       </a>
     </li>
     {{#  }); }}
+    {{#  if(d[1].length> 0){ }}
+    <li class="layui-nav-item">
+      <a href="javascript:;"><i class="layui-icon layui-icon-more"></i>更多</a>
+      <dl class="layui-nav-child">
+        {{#  layui.each(d[1], function(index, item){ }}
+        <dd><a href="javascript:;">
+            <i class="nav-icon {{item.iconClass}}"></i>
+            <span>
+              {{item.title}}
+            </span>
+          </a></dd>
+        {{#  }); }}
+      </dl>
+    </li>
+    {{#  } }}
   </script>
   <script src="../assets/layui/layui.js"></script>
   <script>
