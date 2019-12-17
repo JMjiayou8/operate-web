@@ -191,61 +191,61 @@ i {
 }
 
 .layui-layout-left .nav-icon.navHome {
-  background-position: -52px -53px;
+  background-position: -49px -52px;
 }
 
-/* .layui-layout-left .layui-this .nav-icon.navHome {
-  background-position: -10px -53px;
-} */
+.layui-layout-left .layui-this .nav-icon.navHome {
+  background-position: -10px -52px;
+}
 
 .layui-layout-left .nav-icon.nav1 {
-  background-position: -96px -52px;
-}
-
-/* 
-.layui-layout-left .layui-this .nav-icon.nav1 {
-  background-position: -96px -10px;
-} */
-
-.layui-layout-left .nav-icon.nav2 {
-  background-position: -53px -10px;
-}
-
-/* .layui-layout-left .layui-this .nav-icon.nav2 {
-  background-position: -10px -10px;
-} */
-
-.layui-layout-left .nav-icon.nav3 {
-  background-position: -52px -95px;
-}
-
-/* .layui-layout-left .layui-this .nav-icon.nav3 {
-  background-position: -10px -95px;
-} */
-
-.layui-layout-left .nav-icon.nav4 {
-  background-position: -48px -137px;
-}
-
-/* .layui-layout-left .layui-this .nav-icon.nav4 {
-  background-position: -10px -137px;
-} */
-
-.layui-layout-left .nav-icon.nav5 {
   background-position: -138px -10px;
 }
 
-/* .layui-layout-left .layui-this .nav-icon.nav5 {
-  background-position: -94px -95px;
-} */
 
-.layui-layout-left .nav-icon.nav6 {
-  background-position: -138px -94px;
+.layui-layout-left .layui-this .nav-icon.nav1 {
+  background-position: -92px -10px;
 }
 
-/* .layui-layout-left .layui-this .nav-icon.nav6 {
+.layui-layout-left .nav-icon.nav2 {
+  background-position: -10px -10px;
+}
+
+.layui-layout-left .layui-this .nav-icon.nav2 {
+  background-position: -49px -10px;
+}
+
+.layui-layout-left .nav-icon.nav3 {
+  background-position: -49px -95px;
+}
+
+.layui-layout-left .layui-this .nav-icon.nav3 {
+  background-position: -10px -95px;
+}
+
+.layui-layout-left .nav-icon.nav4 {
+  background-position: -49px -137px;
+}
+
+.layui-layout-left .layui-this .nav-icon.nav4 {
+  background-position: -10px -137px;
+}
+
+.layui-layout-left .nav-icon.nav5 {
+  background-position: -138px -95px;
+}
+
+.layui-layout-left .layui-this .nav-icon.nav5 {
+  background-position: -92px -95px;
+}
+
+.layui-layout-left .nav-icon.nav6 {
   background-position: -138px -52px;
-} */
+}
+
+.layui-layout-left .layui-this .nav-icon.nav6 {
+  background-position: -92px -52px;
+}
 
 .layui-layout-left .layui-nav-child {
   background: #d72a43;
@@ -351,27 +351,29 @@ i {
 
 /* 配置 */
 .layui-layout-admin .layui-layout-right .config-icon {
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
   display: inline-block;
-  background: url("../images/header/setting.png") no-repeat center/100%;
+  background: url("../images/header/header-right.png") no-repeat;
+  background-position: -56px -56px;
   vertical-align: middle;
 }
 
 /* 公告 */
 .layui-layout-admin .layui-layout-right .msg-icon {
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
   display: inline-block;
-  background: url("../images/header/notice.png") no-repeat center/100%;
+  background: url("../images/header/header-right.png") no-repeat center;
+  background-position: -56px -14px;
   vertical-align: middle;
 }
 
 .layui-layout-admin .layui-layout-right .layui-badge {
   border-radius: 50%;
   font-size: 12px;
-  top: 20px;
-  left: 30px;
+  top: 12px;
+  left: 34px;
 }
 
 .layui-layout-right .message-text {
@@ -598,7 +600,7 @@ i {
   left: 0;
   right: 0;
   overflow: hidden;
-  background: #fbfbfb;
+  background: #ebebeb;
 }
 
 /*********************************************** layout ***********************************************/
