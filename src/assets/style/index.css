@@ -795,6 +795,59 @@ i {
   line-height: 38px;
 }
 
+/* 边框风格 */
+.layui-form-item .layui-form-checkbox[lay-skin=box] {
+  border: 1px solid #d2d2d2;
+  padding: 0;
+  border-radius: 5px;
+  height: 36px;
+  line-height: 34px;
+}
+
+.layui-form-item .layui-form-checkbox[lay-skin=box] span {
+  display: inline-block;
+  background: #fff;
+  color: #333;
+  padding: 0;
+  padding: 0 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.layui-form-item .layui-form-checkbox[lay-skin=box] span::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 2px solid #bababa;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 16px;
+  left: 10px;
+
+}
+
+.layui-form-item .layui-form-checkbox[lay-skin=box] i {
+  display: none;
+}
+
+.layui-form-item .layui-form-checked[lay-skin=box],
+.layui-form-item .layui-form-checked[lay-skin=box]:hover {
+  background: #ec6c3f;
+  border-color: #ec6c3f;
+}
+
+.layui-form-item .layui-form-checked[lay-skin=box] span,
+.layui-form-item .layui-form-checked[lay-skin=box]:hover span {
+  background: #ec6c3f !important;
+  color: #fff !important;
+}
+
+.layui-form-item .layui-form-checked[lay-skin=box] span::before {
+  border-color: #fff;
+}
+
+
 
 /*********************************************** layer ***********************************************/
 /* 遮罩 */
