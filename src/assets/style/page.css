@@ -609,21 +609,25 @@
 }
 
 .groupUser-wrap .user-input {
-  max-width: 200px;
+  max-width: 160px;
   display: inline-block;
   vertical-align: top;
 }
 
 .groupUser-wrap .person-line {
-  width: 49% !important;
+  width: 32% !important;
 }
 
 .groupUser-wrap .person-line .layui-colla-icon {
   font-size: 0;
 }
 
+.groupUser-wrap .person-line .layui-colla-title {
+  width: 70px;
+}
+
 .groupUser-wrap .distribe-wrap.rule1 .user-input {
-  max-width: 100px;
+  max-width: 60px;
 }
 
 .groupUser-wrap .distrib-btn {

@@ -145,10 +145,10 @@
           删除
         </a>
         {{#  if(item.type === 'group'){ }}
-        <div class="layui-colla-content layui-show">
+        <div class="layui-colla-content content{{index}} ">
           <div class="layui-row">
             {{#  layui.each(item.members, function(i, obj){ }}
-            <div class="user-item layui-col-md6 layui-col-sm6">
+            <div class="user-item layui-col-md4 layui-col-sm4">
               <span class="user-name">{{obj.name}}</span>
               <div class="distribe-wrap rule{{d.distribRule}}">
                 {{#  if(d.distribRule === 1){ }}
@@ -161,11 +161,10 @@
                 {{#  } }}
               </div>
               <a class="common-del-link del-groupMember" data-index="{{index}}-{{i}}" href="javascript:;"><i
-                  class="layui-icon layui-icon-close"></i>删除</a>
+                  class="layui-icon layui-icon-close" data-index="{{index}}-{{i}}"></i>删除</a>
             </div>
             {{#  }); }}
           </div>
-          <div id="page{{index}}" class="text-center"></div>
         </div>
         {{#  } }}
       </div>
@@ -203,7 +202,6 @@
           console.log(obj)
           return false;
         })
-
         table.render({
           elem: '#pageTable',
           page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
@@ -334,6 +332,7 @@
           var members = groupData.list[indexArr[0]].members;
           members.splice(indexArr[1], 1)
           rendGroupList();
+          $('.layui-colla-content.content' + indexArr[0]).addClass('layui-show')
         })
 
         function rendGroupList() {
@@ -343,18 +342,6 @@
             view.innerHTML = html;
             form.render()
             element.render('collapse', 'collapseWrap');
-            layui.each(groupData.list, function (index, item) {
-              if (item.type == 'group') {
-                laypage.render({
-                  elem: 'page' + index,
-                  limit: 10,
-                  theme: 'simple',
-                  prev: '<em class="layui-icon layui-icon-left"></em>',
-                  next: '<em class="layui-icon layui-icon-right"></em>',
-                  count: item.members.length,
-                });
-              }
-            })
           });
         }
         rendGroupList()
