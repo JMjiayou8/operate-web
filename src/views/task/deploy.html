@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>任务调配</title>
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="layui-fluid common-page">
+    <p class="part-title">查询待分配人员</p>
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <form class="layui-form layui-row" action="" lay-filter="searchForm">
+          <div class="layui-form-item layui-col-md4">
+            <label class="layui-form-label">策略选择：</label>
+            <div class="layui-input-block">
+              <div class="search-btn-wrap layui-inline">
+                <input type="text" class="layui-input" name="strategy" disabled>
+                <i class="layui-icon layui-icon-search" onclick="searchStrategy()"></i>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4">
+            <label class="layui-form-label">归属地市：</label>
+            <div class="layui-input-block">
+              <select name="area">
+                <option value="">请选择</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4">
+            <label class="layui-form-label">入网时间：</label>
+            <div class="layui-input-block">
+              <input type="text" name="date" id="date" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4">
+            <label class="layui-form-label">服务号码：</label>
+            <div class="layui-input-block">
+              <input type="text" name="number" autocomplete="off" placeholder="请输入" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4">
+            <label class="layui-form-label">客户名称：</label>
+            <div class="layui-input-block">
+              <input type="text" name="name" autocomplete="off" placeholder="请输入" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md12 text-center">
+            <div class="layui-input-block">
+              <button type="submit" class="layui-btn" lay-submit="" lay-filter="searchFormBtn">查询</button>
+              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <table id="pageTable" lay-filter="pageTable"></table>
+    <p class="part-title">分配规则</p>
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <form class="layui-form" lay-filter="distribForm">
+          <div class="layui-form-item layui-row">
+            <div class="layui-inline">
+              <label class="layui-form-label">分配算法：</label>
+              <div class="layui-input-inline">
+                <select name="rule1" lay-filter="distribRule">
+                  <option value="1">指定分配</option>
+                  <option value="2" selected>按量分配</option>
+                  <option value="3">发展部门</option>
+                </select>
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">下发规则：</label>
+              <div class="layui-input-inline">
+                <select name="rule2" lay-filter="memberRule">
+                  <option value="1" selected>责任团队</option>
+                  <option value="2">责任人</option>
+                </select>
+              </div>
+            </div>
+            <div class="layui-inline" id="groupFilter">
+              <label class="layui-form-label">责任团队：</label>
+              <div class="layui-input-inline">
+                <div class="search-btn-wrap layui-inline">
+                  <input type="text" class="layui-input" disabled name="groupName">
+                  <i class="layui-icon layui-icon-search" onclick="searchPerson()"></i>
+                </div>
+              </div>
+            </div>
+            <div class="layui-inline " id="personFilter" style="display: none;">
+              <label class="layui-form-label">责任人：</label>
+              <div class="layui-input-inline">
+                <div class="search-btn-wrap layui-inline">
+                  <input type="text" class="layui-input" disabled name="personName">
+                  <i class="layui-icon layui-icon-search" onclick="searchPerson()"></i>
+                </div>
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit lay-filter="distribFormBtn">添加</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div id="groupUserWrap" class="groupUser-wrap"></div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="layui-btn" onclick="pageHandle()">调配</button>
+    </div>
+  </div>
+  <!-- 分配规则区域 -->
+  <script id="groupUserTemplate" type="text/html">
+    <div class="layui-collapse common-collapse" lay-accordion lay-filter="collapseWrap">
+      {{#  layui.each(d.list, function(index, item){ }}
+      <div class="layui-colla-item  {{#  if(item.type === 'person'){ }} person-line {{#  } }}">
+        <h2 class="layui-colla-title">
+          <span class="colla-title-text">{{item.name}}</span>
+        </h2>
+        {{#  if(item.type === 'person'){ }}
+        <div class="distribe-wrap rule{{d.distribRule}}">
+          {{#  if(d.distribRule === 1){ }}
+          <!-- 指定分配 -->
+          <button class="layui-btn distrib-btn">指定给Ta</button>
+          <input type="text" class="layui-input user-input" disabled>
+          {{#  }else if(d.distribRule === 2){ }}
+          <!-- 按量分配 -->
+          <input type="text" class="layui-input user-input" placeholder="输入分配数量">
+          {{#  } }}
+        </div>
+        {{#  } }}
+        <a class="colla-title-del common-del-link" data-index="{{index}}">
+          <i class="layui-icon layui-icon-close"></i>
+          删除
+        </a>
+        {{#  if(item.type === 'group'){ }}
+        <div class="layui-colla-content layui-show">
+          <div class="layui-row">
+            {{#  layui.each(item.members, function(i, obj){ }}
+            <div class="user-item layui-col-md6 layui-col-sm6">
+              <span class="user-name">{{obj.name}}</span>
+              <div class="distribe-wrap rule{{d.distribRule}}">
+                {{#  if(d.distribRule === 1){ }}
+                <!-- 指定分配 -->
+                <button class="layui-btn distrib-btn">指定给Ta</button>
+                <input type="text" class="layui-input user-input" disabled>
+                {{#  }else if(d.distribRule === 2){ }}
+                <!-- 按量分配 -->
+                <input type="text" class="layui-input user-input" placeholder="输入分配数量">
+                {{#  } }}
+              </div>
+              <a class="common-del-link del-groupMember" data-index="{{index}}-{{i}}" href="javascript:;"><i
+                  class="layui-icon layui-icon-close"></i>删除</a>
+            </div>
+            {{#  }); }}
+          </div>
+          <div id="page{{index}}" class="text-center"></div>
+        </div>
+        {{#  } }}
+      </div>
+      {{#  }); }}
+    </div>
+  </script>
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload', 'table', 'element'], function () {
+        var table = layui.table,
+          element = layui.element,
+          form = layui.form,
+          laytpl = layui.laytpl,
+          laypage = layui.laypage,
+          laydate = layui.laydate,
+          layer = layui.layer,
+          $ = layui.jquery;
+        /************************** 分配规则 **************************/
+        laydate.render({
+          elem: '#date',
+        })
+        // 策略选择
+        window.searchStrategy = function () {
+          layer.open({
+            title: '策略选择',
+            content: '策略选择'
+          });
+        }
+        // 查询待分配人员
+        form.on('submit(searchFormBtn)', function (obj) {
+          console.log(obj)
+          return false;
+        })
+
+        table.render({
+          elem: '#pageTable',
+          page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['prev', 'page', 'next', 'skip'],
+            theme: 'common', //自定义分页布局
+            limit: 10
+          },
+          cols: [
+            [{
+                type: 'checkbox'
+              },
+              //标题栏
+              {
+                field: 'prop1',
+                title: '策略名称'
+              },
+              {
+                field: 'prop2',
+                title: '客户名称'
+              },
+              {
+                field: 'prop3',
+                title: '服务号码'
+              }
+            ]
+          ],
+          data: [{
+              prop1: '策略名称策略名称策略名称策略名称',
+              prop2: '7天包政策',
+              prop3: '1010001001',
+
+            }, {
+              prop1: '10001',
+              prop2: '7天包政策',
+              prop3: '1000110001',
+
+            },
+            {
+              prop1: '10001',
+              prop2: '7天包政策',
+              prop3: '100011000110001',
+
+            }, {
+              prop1: '10001',
+              prop2: '7天包政策',
+              prop3: '10001',
+            }
+          ]
+        })
+        /************************** 分配规则 **************************/
+        // 团队数据
+        var groupData = {
+          distribRule: 2,
+          list: []
+        }
+
+        // 切换分配算法
+        form.on('select(distribRule)', function (obj) {
+          var ruleType = obj.value;
+          if (ruleType == 1) { //指定分配
+            groupData.distribRule = 1;
+            rendGroupList();
+          } else if (ruleType == 2) { //按量分配
+            groupData.distribRule = 2;
+            rendGroupList();
+          } else if (ruleType == 3) { //发展部门
+
+          }
+        })
+
+        // 切换下发规则
+        form.on('select(memberRule)', function (obj) {
+          var ruleType = obj.value;
+          if (ruleType == 1) { //下发到团队
+            $('#groupFilter').show();
+            $('#personFilter').hide();
+          } else if (ruleType == 2) { //下发到个人
+            $('#groupFilter').hide();
+            $('#personFilter').show();
+          }
+        })
+        // 查询责任人、责任团队
+        window.searchPerson = function () {
+          layer.open({
+            title: '责任人、责任团队',
+            content: '责任人、责任团队'
+          });
+        }
+        // 分配规则添加
+        form.on('submit(distribFormBtn)', function (obj) {
+          var rule2 = obj.field.rule2;
+          // TODO 以下仅仅是为了演示交互的逻辑。实际开发以查询结果为准。
+          var id = (Math.random() * 100).toFixed(0);
+          if (rule2 == 1) { //责任团队
+            var arr = []
+            for (var i = 0; i < 10; i++) {
+              var randomId = (Math.random() * 100).toFixed(0)
+              arr.push({
+                id: randomId,
+                name: '团队成员' + randomId
+              })
+            }
+            groupData.list.push({
+              id: id,
+              name: '团队' + id,
+              type: 'group',
+              members: arr
+            })
+          } else if (rule2 == 2) { //责任人
+            groupData.list.push({
+              id: id,
+              name: '个人' + id,
+              type: 'person',
+            })
+          }
+          rendGroupList()
+          return false;
+        })
+        // 删除一个团队、人员
+        $(document).on('click', '.colla-title-del', function (evt) {
+          var index = $(evt.target).data('index');
+          groupData.list.splice(index, 1);
+          rendGroupList();
+        })
+        //  删除团队成员
+        $(document).on('click', '.del-groupMember', function (evt) {
+          var indexArr = $(evt.target).data('index').split('-');
+          var members = groupData.list[indexArr[0]].members;
+          members.splice(indexArr[1], 1)
+          rendGroupList();
+        })
+
+        function rendGroupList() {
+          var getTpl = groupUserTemplate.innerHTML,
+            view = document.getElementById('groupUserWrap');
+          laytpl(getTpl).render(groupData, function (html) {
+            view.innerHTML = html;
+            form.render()
+            element.render('collapse', 'collapseWrap');
+            layui.each(groupData.list, function (index, item) {
+              if (item.type == 'group') {
+                laypage.render({
+                  elem: 'page' + index,
+                  limit: 10,
+                  theme: 'simple',
+                  prev: '<em class="layui-icon layui-icon-left"></em>',
+                  next: '<em class="layui-icon layui-icon-right"></em>',
+                  count: item.members.length,
+                });
+              }
+            })
+          });
+        }
+        rendGroupList()
+
+        /************************** 调配 **************************/
+        window.pageHandle = function () {
+          //表格选中数据
+          var checkTableData = table.checkStatus('pageTable').data;
+          console.log(checkTableData)
+        }
+      })
+  </script>
+</body>
+
+</html>

@@ -173,11 +173,14 @@ i {
 }
 
 .layui-layout-admin .layui-header .layui-layout-left .layui-nav-item.layui-this:after {
-  width: 100%;
-  height: 4px;
-  left: 0;
-  top: 0;
-  background-color: #fff !important;
+  width: 0;
+  height: 0;
+  left: 50%;
+  bottom: 0;
+  margin-left: -5px;
+  background-color: #d72a43;
+  border: 10px solid transparent;
+  border-bottom-color: #ececec;
 }
 
 
@@ -671,12 +674,16 @@ i {
 /*********************************************** 按钮 ***********************************************/
 
 .layui-btn {
-  background: #ec6c3f;
+  background-image: -moz-linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%);
+  background-image: -webkit-linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%);
+  background-image: -ms-linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%);
+  background-image: linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%);
   border-radius: 3px;
+  border: 0;
 }
 
 .layui-btn.layui-btn-primary {
-  background: #fff;
+  background: #e5e5e5;
 }
 
 .layui-btn-primary:hover {
@@ -701,6 +708,95 @@ i {
   line-height: 36px;
 }
 
+/*********************************************** 表格 ***********************************************/
+.layui-table-view {
+  border: 0;
+}
+
+.layui-table-view .layui-table-box {
+  border: 1px solid #e5e5e5;
+}
+
+/*********************************************** 分页 ***********************************************/
+
+/*  常规分页 */
+
+.layui-laypage-common a,
+.layui-laypage-common span,
+.layui-table-page .layui-laypage-common a,
+.layui-table-page .layui-laypage-common span {
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 0 5px;
+  background: #fff;
+}
+
+.layui-laypage-common .layui-laypage-curr .layui-laypage-em,
+.layui-laypage-common .layui-laypage-curr em,
+.layui-table-page .layui-laypage-common .layui-laypage-curr .layui-laypage-em,
+.layui-table-page .layui-laypage-common .layui-laypage-curr em {
+  background-color: #e5e5e5 !important;
+  color: #333 !important;
+}
+
+.layui-laypage-common a:hover,
+.layui-table-page .layui-laypage-common a:hover {
+  color: #333 !important;
+}
+
+.layui-laypage-common .layui-laypage-skip,
+.layui-table-page .layui-laypage-common .layui-laypage-skip {
+  border: 0;
+  background: inherit;
+}
+
+.layui-laypage-common .layui-laypage-skip .layui-laypage-btn,
+.layui-table-page .layui-laypage-common .layui-laypage-skip .layui-laypage-btn {
+  display: none;
+}
+
+/* 表格分页 */
+.layui-table-page {
+  border: 0;
+  text-align: center;
+}
+
+
+/* 简易分页 */
+.layui-laypage-simple a,
+.layui-laypage-simple span {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  background-color: #CED0DA;
+  border-radius: 50%;
+  font-size: 0;
+  margin: 0 5px;
+}
+
+.layui-laypage-simple .layui-laypage-curr .layui-laypage-em {
+  background-color: #353C48;
+  border-radius: 50%;
+}
+
+.layui-laypage-simple .layui-laypage-prev,
+.layui-laypage-simple .layui-laypage-next {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  left: 36px;
+  border-radius: 50% !important;
+}
+
+.layui-laypage-simple .layui-laypage-next em,
+.layui-laypage-simple .layui-laypage-prev em {
+  font-size: 16px;
+  color: #333;
+  line-height: 36px;
+
+}
+
 /*********************************************** date ***********************************************/
 
 /*不显示秒*/
@@ -714,11 +810,25 @@ i {
 }
 
 /*********************************************** form ***********************************************/
+.layui-row .layui-form-item {
+  clear: none;
+}
 
 .layui-input,
 .layui-textarea {
   border-color: #D2D2D2;
-  border-radius: 5px;
+  border-radius: 3px;
+}
+
+.layui-input,
+.layui-form-select {
+  max-width: 200px;
+}
+
+.layui-input:disabled,
+.layui-textarea:disabled {
+  background: #eeeeee;
+  cursor: not-allowed;
 }
 
 .layui-form-select dl dd.layui-this {
@@ -795,7 +905,17 @@ i {
   line-height: 38px;
 }
 
-/* 边框风格 */
+/* checkbox */
+.layui-form-checked[lay-skin=primary] i {
+  border-color: #f87a25;
+  background-color: #f87a25;
+}
+
+.layui-form-checkbox[lay-skin=primary]:hover i {
+  border-color: #f87a25;
+}
+
+/* 边框风格checkbox */
 .layui-form-item .layui-form-checkbox[lay-skin=box] {
   border: 1px solid #d2d2d2;
   padding: 0;
@@ -962,6 +1082,39 @@ i {
 .layui-card-body {
   padding: 10px 20px;
 }
+
+/*********************************************** 面板 ***********************************************/
+/* 折叠面板 */
+.common-collapse {
+  border: 0;
+}
+
+.common-collapse .layui-colla-content,
+.common-collapse .layui-colla-item {
+  border: 0;
+  position: relative;
+}
+
+.common-collapse .layui-colla-item {
+  display: inline-block;
+  width: 100%;
+}
+
+.common-collapse .layui-colla-content {
+  padding-left: 35px;
+}
+
+.common-collapse .layui-colla-title {
+  background: #fff;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+}
+
+.colla-title-text {
+  color: #2b7dd2;
+}
+
 
 /*********************************************** 统一动画 ***********************************************/
 

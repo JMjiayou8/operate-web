@@ -9,6 +9,19 @@
   text-overflow: ellipsis;
 }
 
+
+.common-del-link {
+  color: #ff6600;
+  line-height: 36px;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.common-del-link i {
+  color: #333;
+}
+
 /*********************************************** 控制台 ***********************************************/
 .config-part {
   display: none;
@@ -329,10 +342,11 @@
 
 .common-page .step-text {
   margin-top: 20px;
+  font-size: 18px;
 }
 
 .common-page .part-title {
-  color: #ec6c3f;
+  color: #c30621;
   font-size: 16px;
   line-height: 20px;
   margin: 10px 0;
@@ -407,27 +421,6 @@
   margin: 10px 0;
 }
 
-.common-page .common-laypage {
-  text-align: center;
-  font-size: 16px;
-}
-
-.common-page .common-laypage .layui-laypage a,
-.common-page .common-laypage .layui-laypage span {
-  border: 0;
-  font-size: 16px;
-}
-
-.common-page .layui-laypage .layui-laypage-curr .layui-laypage-em,
-.common-page .layui-laypage .layui-laypage-curr em {
-  background-color: #fff !important;
-  color: #f0912d !important;
-}
-
-.common-page .layui-laypage a:hover {
-  color: #f0912d !important;
-}
-
 .common-page .custTypeTab .layui-tab-title li {
   border: 1px solid rgb(210, 210, 210);
   border-radius: 5px;
@@ -479,7 +472,7 @@
 }
 
 .common-page .layui-btn {
-  padding: 0 50px;
+  padding: 0 30px;
 }
 
 .common-page .multi-elem-line .layui-input-inline {
@@ -502,7 +495,7 @@
   margin-left: 5%;
   background: #448aca;
   position: relative;
-  padding-right: 20px;
+  padding: 0 15px 0 40px;
 }
 
 .choose-template-wrap .layui-btn .chooseMsg-icon {
@@ -511,7 +504,7 @@
   background: url("../images/sms_temp.png") no-repeat center/100%;
   width: 20px;
   height: 15px;
-  left: 20px;
+  left: 15px;
   top: 10px;
 }
 
@@ -565,7 +558,7 @@
 }
 
 .common-page .add-policy .step-text {
-  font-size: 14px;
+
   color: #fff;
   line-height: 40px;
 }
@@ -595,4 +588,45 @@
 
 .createStrategy .step-item.layui-this .step-icon.step3 {
   background: url('../images/strategy/step3-active.png') #fff no-repeat center;
+}
+
+/*********************************************** 任务调配页面 ***********************************************/
+
+.groupUser-wrap .user-item {
+  margin-bottom: 10px;
+  line-height: 38px;
+}
+
+.groupUser-wrap .user-name {
+  display: inline-block;
+  width: 90px;
+}
+
+.groupUser-wrap .distribe-wrap {
+  display: inline-block;
+  margin: 0 30px;
+  vertical-align: top;
+}
+
+.groupUser-wrap .user-input {
+  max-width: 200px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.groupUser-wrap .person-line {
+  width: 49% !important;
+}
+
+.groupUser-wrap .person-line .layui-colla-icon {
+  font-size: 0;
+}
+
+.groupUser-wrap .distribe-wrap.rule1 .user-input {
+  max-width: 100px;
+}
+
+.groupUser-wrap .distrib-btn {
+  background: #88abda;
+  border-color: #448aca;
 }
