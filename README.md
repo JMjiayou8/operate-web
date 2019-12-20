@@ -17,6 +17,10 @@
 - 创建政策：src/views/policy/create.html
 - 政策白名单：src/views/policy/whiteList.html
 
+12-18
+
+- 任务调配：src/views/task/deploy.html
+
 > 待完成页面
 
 - 侧边栏和导航交互

@@ -820,10 +820,7 @@ i {
   border-radius: 3px;
 }
 
-.layui-input,
-.layui-form-select {
-  max-width: 200px;
-}
+
 
 .layui-input:disabled,
 .layui-textarea:disabled {

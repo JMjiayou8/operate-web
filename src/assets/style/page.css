@@ -591,6 +591,10 @@
 }
 
 /*********************************************** 任务调配页面 ***********************************************/
+.taskPage .layui-input,
+.taskPage .layui-form-select {
+  max-width: 200px;
+}
 
 .groupUser-wrap .user-item {
   margin-bottom: 10px;
