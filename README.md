@@ -28,3 +28,4 @@
 ### 说明
 
 1. 打开新 tab：设置元素`lay-href=xxx`
+2. 导航栏配置：`src/assets/modules/nav.js`

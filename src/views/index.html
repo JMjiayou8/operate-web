@@ -22,8 +22,8 @@
           <span class="logo-icon"></span>
           <span class="logo-text">客户运营平台</span>
         </div>
-        <ul id="topNavWrap" class="layui-nav layui-layout-left"></ul>
-        <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+        <ul id="topNavWrap" class="layui-nav layui-layout-left" lay-filter="topNav"></ul>
+        <ul class="layui-nav layui-layout-right">
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;" lay-text="配置工作台" layadmin-event="configPanel">
               <i class="config-icon"></i>
@@ -67,35 +67,8 @@
       <!-- 侧边菜单 -->
       <div class="layui-side layui-side-menu">
         <div class="layui-side-scroll">
-          <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
-            lay-filter="layadmin-system-side-menu">
-            <li data-name="policy" class="layui-nav-item ">
-              <a href="javascript:;">
-                <cite>政策管理</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd data-name="policy">
-                  <a lay-href="policy/index.html">政策总览</a>
-                </dd>
-                <dd data-name="policy">
-                  <a lay-href="policy/detail.html">政策详情</a>
-                </dd>
-                <dd data-name="policy">
-                  <a lay-href="policy/create.html">创建政策</a>
-                </dd>
-              </dl>
-            </li>
-            <li class="layui-nav-item">
-              <a lay-href="strategy/create.html">创建策略</a>
-            </li>
-            <li class="layui-nav-item">
-              <a lay-href="policy/whiteList.html">政策白名单</a>
-            </li>
-            <li class="layui-nav-item">
-              <a lay-href="task/deploy.html">任务调配</a>
-            </li>
+          <div id="sideNavWrap"></div>
 
-          </ul>
         </div>
       </div>
       <!-- 页面标签 -->
@@ -109,7 +82,6 @@
           </ul>
         </div>
       </div>
-
       <!-- 主体内容 -->
       <div class="layui-body" id="operate_body">
         <div class="layadmin-tabsbody-item layui-show">
@@ -118,6 +90,7 @@
       </div>
     </div>
   </div>
+  <!-- 顶部导航栏 -->
   <script id="topNavTemplate" type="text/html">
     <li class="layui-nav-item layadmin-flexible" lay-unselect>
       <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
@@ -155,6 +128,32 @@
       </dl>
     </li>
     {{#  } }}
+  </script>
+  <!-- 侧边栏 -->
+  <script id="sideNavTemplate" type="text/html">
+    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
+      lay-filter="layadmin-system-side-menu">
+      {{#  layui.each(d, function(index, item){ }}
+      {{#  if(item.list&&item.list.length> 0){ }}
+      <li class="layui-nav-item ">
+        <a href="javascript:;">
+          <cite>{{item.title}}</cite>
+        </a>
+        <dl class="layui-nav-child">
+          {{#  layui.each(item.list, function(i, obj){ }}
+          <dd>
+            <a lay-href="{{obj.path}}.html">{{obj.title}}</a>
+          </dd>
+          {{#  }); }}
+        </dl>
+      </li>
+      {{#  } else{ }}
+      <li class="layui-nav-item">
+        <a lay-href="{{item.path}}.html">{{item.title}}</a>
+      </li>
+      {{#  } }}
+      {{#  }); }}
+    </ul>
   </script>
   <script src="../assets/layui/layui.js"></script>
   <script>
