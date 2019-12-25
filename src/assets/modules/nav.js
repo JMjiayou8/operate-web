@@ -97,6 +97,17 @@ layui.define(function (exports) {
           icon: '',
           title: '任务调配',
           path: 'task/deploy'
+        },
+        {
+          name: 'sms',
+          icon: '',
+          title: '互动短信',
+          list: [{
+            name: 'create',
+            icon: '',
+            title: '新增',
+            path: 'sms/create'
+          }]
         }
       ]
       var getTpl = sideNavTemplate.innerHTML,

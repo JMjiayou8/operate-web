@@ -21,6 +21,10 @@
 
 - 任务调配：src/views/task/deploy.html
 
+12-25
+
+- 互动短信-新增：src/views/sms/create.html
+
 > 待完成页面
 
 - 侧边栏和导航交互

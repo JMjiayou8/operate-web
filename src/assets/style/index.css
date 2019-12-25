@@ -10,9 +10,11 @@ html #layuicss-layuiAdmin {
 }
 
 /* 全局 */
-html {
-  background-color: #f2f2f2;
+html,
+body {
   color: #666;
+  font-size: 14px;
+  font-family: "Microsoft YaHei", "微软雅黑";
 }
 
 i {
@@ -115,7 +117,6 @@ i {
   background: #c30621;
   /* font-size: 24px; */
   font-size: 16px;
-  font-family: "Lantinghei SC";
   color: #fff;
   text-align: center;
   font-weight: 500;
@@ -810,8 +811,21 @@ i {
 }
 
 /*********************************************** form ***********************************************/
+.layui-form-label.layui-required:before {
+  content: "*";
+  color: red;
+  display: inline-block;
+  margin-right: 2px;
+}
+
 .layui-row .layui-form-item {
   clear: none;
+}
+
+.layui-form .tip {
+  font-size: 14px;
+  line-height: 30px;
+  color: #df1818;
 }
 
 .layui-input,
@@ -886,6 +900,14 @@ i {
   margin-left: 130px;
 }
 
+.layui-form[wid110] .layui-form-label {
+  width: 110px;
+}
+
+.layui-form[wid110] .layui-input-block {
+  margin-left: 140px;
+}
+
 @media screen and (max-width: 450px) {
   .layui-form[wid100] .layui-form-item .layui-input-inline {
     margin-left: 132px;
@@ -893,6 +915,14 @@ i {
 
   .layui-form[wid100] .layui-form-item .layui-input-inline+.layui-form-mid {
     margin-left: 130px;
+  }
+
+  .layui-form[wid110] .layui-form-item .layui-input-inline {
+    margin-left: 142px;
+  }
+
+  .layui-form[wid110] .layui-form-item .layui-input-inline+.layui-form-mid {
+    margin-left: 140px;
   }
 }
 
