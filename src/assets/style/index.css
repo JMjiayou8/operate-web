@@ -1,20 +1,10 @@
-html #layuicss-layuiAdmin {
-  display: none;
-  position: absolute;
-  width: 1989px;
-}
-
-/* 系统 */
-::-webkit-input-placeholder {
-  color: #ccc
-}
-
 /* 全局 */
 html,
 body {
   color: #666;
   font-size: 14px;
   font-family: "Microsoft YaHei", "微软雅黑";
+
 }
 
 i {
@@ -29,6 +19,11 @@ i {
 *[lay-href],
 *[layadmin-event] {
   cursor: pointer;
+}
+
+/* 系统 */
+::-webkit-input-placeholder {
+  color: #ccc
 }
 
 .layui-bg-white {
@@ -716,6 +711,14 @@ i {
 
 .layui-table-view .layui-table-box {
   border: 1px solid #e5e5e5;
+}
+
+.layui-table-view .layui-table {
+  width: 100% !important;
+}
+
+.layui-table-body {
+  overflow-x: hidden;
 }
 
 /*********************************************** 分页 ***********************************************/

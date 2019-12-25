@@ -35,11 +35,11 @@
           <p class="part-title">配置详情</p>
           <div id="table1"></div>
           <p class="part-title">修改记录</p>
-          <table id="table2"></table>
+          <table id="table2" class="layui-hide"></table>
         </div>
         <div class="layui-tab-item">
           <p class="part-title">白名单修改详情</p>
-          <table id="table3"></table>
+          <table id="table3" class="layui-hide"></table>
         </div>
         <div class="layui-tab-item">
           <p class="part-title">政策执行情况</p>
@@ -164,164 +164,203 @@
             format: 'yyyy/MM/dd'
           })
 
-          var data = {
-            title: '7天包政策',
-            source: '省公司政策',
-            startDate: '2019-10-01',
-            endDate: '2019-10-10',
-            type1: '1111',
-            type2: '2222',
-            desc: '描述',
-            file: '政策.doc',
-            product: '赠送流量权益'
+          function rendStep1() {
+            var data = {
+              title: '7天包政策',
+              source: '省公司政策',
+              startDate: '2019-10-01',
+              endDate: '2019-10-10',
+              type1: '1111',
+              type2: '2222',
+              desc: '描述',
+              file: '政策.doc',
+              product: '赠送流量权益'
+            }
+            var getTpl = tableTemplate.innerHTML,
+              view = document.getElementById('table1')
+            laytpl(getTpl).render(data, function (html) {
+              view.innerHTML = html
+            })
+            table.render({
+              elem: '#table2',
+              cols: [
+                [
+                  //标题栏
+                  {
+                    field: 'name',
+                    title: '政策名称',
+                    width: "33%"
+                  },
+                  {
+                    field: 'user',
+                    title: '修改人',
+                    width: "33%"
+                  },
+                  {
+                    field: 'time',
+                    title: '修改时间'
+                  }
+                ]
+              ],
+              data: [{
+                  name: '10001',
+                  user: '7天包政策',
+                  time: '2016-10-14'
+                },
+                {
+                  name: '10002',
+                  user: '7天包政策',
+                  time: '2016-10-14'
+                }
+              ]
+            })
           }
-          var getTpl = tableTemplate.innerHTML,
-            view = document.getElementById('table1')
-          laytpl(getTpl).render(data, function (html) {
-            view.innerHTML = html
-          })
-          table.render({
-            elem: '#table2',
-            cols: [
-              [
-                //标题栏
-                {
-                  field: 'name',
-                  title: '政策名称'
+
+          function rendStep2() {
+            table.render({
+              elem: '#table3',
+              page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip'],
+                theme: 'common', //自定义分页布局
+                limit: 10
+              },
+              cols: [
+                [
+                  //标题栏
+                  {
+                    field: 'name',
+                    title: '文件名称',
+                    templet: '#fileTemplate',
+                    width: '20%'
+                  },
+                  {
+                    field: 'num',
+                    title: '文件数量',
+                    width: '15%'
+                  },
+                  {
+                    field: 'status',
+                    title: '状态',
+                    width: '15%'
+                  },
+                  {
+                    field: 'time',
+                    title: '上传时间',
+                    width: '15%'
+                  },
+                  {
+                    field: 'operator',
+                    title: '操作人'
+                  }
+                ]
+              ],
+              data: [{
+                  num: 10002,
+                  name: '政策.txt',
+                  user: '100',
+                  time: '2016-10-14',
+                  status: '追加',
+                  operator: 'admin'
                 },
                 {
-                  field: 'user',
-                  title: '修改人'
-                },
-                {
-                  field: 'time',
-                  title: '修改时间'
+                  num: 1000,
+                  name: '政策.txt',
+                  user: '100',
+                  time: '2016-10-14',
+                  status: '追加追加',
+                  operator: 'admin'
                 }
               ]
-            ],
-            data: [{
-              name: '10001',
-              user: '7天包政策',
-              time: '2016-10-14'
-            }]
-          })
-          table.render({
-            elem: '#table3',
-            cols: [
-              [
-                //标题栏
-                {
-                  field: 'name',
-                  title: '文件名称',
-                  templet: '#fileTemplate'
+            })
+          }
+
+          function rendStep3() {
+            table.render({
+              elem: '#table4',
+              page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip'],
+                theme: 'common', //自定义分页布局
+                limit: 10
+              },
+              cols: [
+                [
+                  //标题栏
+                  {
+                    field: 'name',
+                    title: '策略名称',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num1',
+                    title: '导入量',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num2',
+                    title: '客户群生成过滤数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num3',
+                    title: '客户群数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num4',
+                    title: '频次过滤数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num5',
+                    title: '黑名单过滤数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num6',
+                    title: '推送数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num7',
+                    title: '订购数'
+                  }
+                ]
+              ],
+              data: [{
+                  name: '策略1',
+                  num1: 100,
+                  num2: 1002,
+                  num3: 134,
+                  num4: 3166,
+                  num5: 8345,
+                  num6: 12353,
+                  num7: 12
                 },
                 {
-                  field: 'num',
-                  title: '文件数量'
+                  name: '策略2',
+                  num1: 1235,
+                  num2: 1245,
+                  num3: 3416,
+                  num4: 6515,
+                  num5: 1345,
+                  num6: 64561,
+                  num7: 64511
                 },
                 {
-                  field: 'status',
-                  title: '状态'
-                },
-                {
-                  field: 'time',
-                  title: '上传时间'
-                },
-                {
-                  field: 'operator',
-                  title: '操作人'
+                  name: '策略3',
+                  num1: 43511,
+                  num2: 1456,
+                  num3: 636413,
+                  num4: 23461,
+                  num5: 134,
+                  num6: 1361,
+                  num7: 7371
                 }
               ]
-            ],
-            data: [{
-                num: 1000,
-                name: '政策.txt',
-                user: '100',
-                time: '2016-10-14',
-                status: '追加',
-                operator: 'admin'
-              },
-              {
-                num: 1000,
-                name: '政策.txt',
-                user: '100',
-                time: '2016-10-14',
-                status: '追加',
-                operator: 'admin'
-              }
-            ]
-          })
-          table.render({
-            elem: '#table4',
-            cols: [
-              [
-                //标题栏
-                {
-                  field: 'name',
-                  title: '策略名称'
-                },
-                {
-                  field: 'num1',
-                  title: '导入量'
-                },
-                {
-                  field: 'num2',
-                  title: '客户群生成过滤数'
-                },
-                {
-                  field: 'num3',
-                  title: '客户群数'
-                },
-                {
-                  field: 'num4',
-                  title: '频次过滤数'
-                },
-                {
-                  field: 'num5',
-                  title: '黑名单过滤数'
-                },
-                {
-                  field: 'num6',
-                  title: '推送数'
-                },
-                {
-                  field: 'num7',
-                  title: '订购数'
-                }
-              ]
-            ],
-            data: [{
-                name: '策略1',
-                num1: 100,
-                num2: 1002,
-                num3: 134,
-                num4: 3166,
-                num5: 8345,
-                num6: 12353,
-                num7: 12
-              },
-              {
-                name: '策略2',
-                num1: 1235,
-                num2: 1245,
-                num3: 3416,
-                num4: 6515,
-                num5: 1345,
-                num6: 64561,
-                num7: 64511
-              },
-              {
-                name: '策略3',
-                num1: 43511,
-                num2: 1456,
-                num3: 636413,
-                num4: 23461,
-                num5: 134,
-                num6: 1361,
-                num7: 7371
-              }
-            ]
-          })
+            })
+
+            rendChart();
+          }
 
           function rendChart() {
             var option = {
@@ -439,13 +478,20 @@
             })
           }
           element.on('tab(tabFilter)', function (elem) {
-            if (elem.index == 2) {
-              rendChart()
+            if (elem.index == 0) {
+              rendStep1()
+            } else if (elem.index == 1) {
+              rendStep2()
+            } else if (elem.index == 2) {
+              rendStep3()
             }
           })
           form.on('submit(serachBtn)', function (data) {
             console.log(data)
             return false
+          })
+          $(function () {
+            rendStep1();
           })
         }
       )
