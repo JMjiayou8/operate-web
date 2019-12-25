@@ -57,9 +57,9 @@
           <div class="layui-form-item layui-col-md4 layui-col-sm4">
             <label class="layui-form-label layui-required">校验目标用户：</label>
             <div class="layui-input-block">
-              <select name="prop4" id="" lay-verify="required">
-                <option value="1">是</option>
-                <option value="0" selected>否</option>
+              <select name="prop4" id="" lay-verify="required" lay-filter="targetUser">
+                <option value="1" selected>是</option>
+                <option value="0">否</option>
               </select>
 
             </div>
@@ -77,10 +77,27 @@
               <p class="tip ">上传前请查看模板格式：<a href="javascript:;" class="fileLink">短信目标用户模板</a></p>
             </div>
           </div>
-          <div class="layui-form-item layui-col-md6 layui-col-sm6">
+          <div class="layui-form-item layui-col-md6 layui-col-sm6 noTargetUser ">
             <label class="layui-form-label layui-required">短信内容：</label>
             <div class="layui-input-block">
-              <textarea name="prop7" class="layui-textarea" lay-verify="required"></textarea>
+              <input name="prop7" class="layui-textarea" lay-verify="required">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md12 layui-col-sm12 isTargetUser">
+            <label class="layui-form-label layui-required">选择文件：</label>
+            <div class="layui-input-block">
+              <button id="uploadFile" type="button" class="layui-btn layui-btn-primary">选择文件</button> </div>
+          </div>
+          <div class="layui-form-item layui-col-md6 layui-col-sm6  isTargetUser">
+            <label class="layui-form-label layui-required">符合目标用户内容：</label>
+            <div class="layui-input-block">
+              <input name="prop9" class="layui-textarea" lay-verify="required">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md6 layui-col-sm6 isTargetUser">
+            <label class="layui-form-label layui-required">不符合目标用户内容：</label>
+            <div class="layui-input-block">
+              <textarea name="prop10" class="layui-textarea" lay-verify="required"></textarea>
             </div>
           </div>
           <div class="layui-form-item layui-col-md12 layui-col-sm12 text-center">
@@ -98,17 +115,37 @@
       .config({
         base: '../../assets/' //静态资源所在路径
       })
-      .use(['laydate', 'form', 'layer'], function () {
+      .use(['laydate', 'form', 'layer', 'upload'], function () {
         var $ = layui.$,
           laydate = layui.laydate,
           form = layui.form,
-          layer = layui.layer;
+          layer = layui.layer,
+          upload = layui.upload;
 
         laydate.render({
           elem: '#startDate'
         })
         laydate.render({
           elem: '#endDate'
+        })
+        upload.render({
+          elem: '#uploadFile'
+            // ,url: '/upload/'
+            ,
+          accept: 'file',
+          done: function (res) {
+            console.log(res)
+          }
+        });
+        form.on('select(targetUser)', function (obj) {
+          if (obj.value == '1') { //是
+            $('.noTargetUser').hide();
+            $('.isTargetUser').show();
+
+          } else { //否
+            $('.noTargetUser').show();
+            $('.isTargetUser').hide();
+          }
         })
         // 提交
         form.on('submit(submitBtn)', function (obj) {
