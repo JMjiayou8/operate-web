@@ -57,7 +57,7 @@
                           <form class="layui-form">
                             <div id="choosePolicyWrap"></div>
                           </form>
-                          <div id="cust-laypage" class="text-center"></div>
+                          <div id="policy-laypage" class="text-center"></div>
                         </div>
                       </div>
                     </div>
@@ -89,7 +89,7 @@
                 </ul>
                 <div class="layui-tab-content">
                   <div class="layui-tab-item layui-show">
-                    <form class="layui-form" wid100>
+                    <form class="layui-form" wid110>
                       <div class="layui-form-item">
                         <label class="layui-form-label">客户群类型：</label>
                         <div class="layui-input-block">
@@ -120,52 +120,67 @@
                               <div class="layui-tab-item layui-show">
                                 <div class="layui-card">
                                   <div class="layui-card-body">
-                                    <form class="layui-form">
-                                      <div class="layui-form-item">
-                                        <label class="layui-form-label">任务类型：</label>
-                                        <div class="layui-input-block box-radio">
-                                          <input type="radio" name="taskType" value="1" title="催转化" checked="">
-                                          <input type="radio" name="taskType" value="2" title="催激活">
+                                    <div class="layui-form-item">
+                                      <label class="layui-form-label">任务类型：</label>
+                                      <div class="layui-input-block box-radio">
+                                        <input type="radio" name="taskType" value="1" title="催转化" checked="">
+                                        <input type="radio" name="taskType" value="2" title="催激活">
+                                      </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                      <label class="layui-form-label">充值数据来源：</label>
+                                      <div class="layui-input-block box-radio">
+                                        <input type="radio" name="originType" value="1" title="人工干预激活" checked="">
+                                        <input type="radio" name="originType" value="2" title="自主激活">
+                                      </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                      <label class="layui-form-label layui-required">预开户前几天(天)：</label>
+                                      <div class="layui-input-block">
+                                        <input type="text" name="" id="" class="layui-input" lay-verify="required">
+                                      </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                      <label class="layui-form-label">预开户时间：</label>
+                                      <div class="layui-inline">
+                                        <div class="layui-input-inline">
+                                          <input type="text" class="layui-input" id="startDate21"
+                                            placeholder="yyyy-MM-dd">
+                                        </div>
+                                        <div class="layui-form-mid">至</div>
+                                        <div class="layui-input-inline">
+                                          <input type="text" class="layui-input" id="endDate21"
+                                            placeholder="yyyy-MM-dd">
                                         </div>
                                       </div>
-                                      <div class="layui-form-item">
-                                        <label class="layui-form-label">充值数据来源：</label>
-                                        <div class="layui-input-block box-radio">
-                                          <input type="radio" name="originType" value="1" title="人工干预激活" checked="">
-                                          <input type="radio" name="originType" value="2" title="自主激活">
+
+                                    </div>
+                                    <div class="layui-form-item">
+                                      <label class="layui-form-label">签收状态：</label>
+                                      <div class="layui-input-block">
+                                        <input type="text" name="" id="" class="layui-input">
+                                      </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                      <label class="layui-form-label">签收时间：</label>
+                                      <div class="layui-inline">
+                                        <div class="layui-input-inline">
+                                          <input type="text" class="layui-input" id="startDate22"
+                                            placeholder="yyyy-MM-dd">
+                                        </div>
+                                        <div class="layui-form-mid">至</div>
+                                        <div class="layui-input-inline">
+                                          <input type="text" class="layui-input" id="endDate22"
+                                            placeholder="yyyy-MM-dd">
                                         </div>
                                       </div>
-                                      <div class="layui-form-item">
-                                        <label class="layui-form-label">预开户前几天：</label>
-                                        <div class="layui-input-block">
-                                          <input type="text" name="" id="" class="layui-input">
-                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                      <label class="layui-form-label">订单状态：</label>
+                                      <div class="layui-input-block">
+                                        <input type="text" name="" id="" class="layui-input">
                                       </div>
-                                      <div class="layui-form-item">
-                                        <label class="layui-form-label">预开户时间：</label>
-                                        <div class="layui-input-block">
-                                          <input type="text" name="" id="" class="layui-input">
-                                        </div>
-                                      </div>
-                                      <div class="layui-form-item">
-                                        <label class="layui-form-label">签收状态：</label>
-                                        <div class="layui-input-block">
-                                          <input type="text" name="" id="" class="layui-input">
-                                        </div>
-                                      </div>
-                                      <div class="layui-form-item">
-                                        <label class="layui-form-label">签收时间：</label>
-                                        <div class="layui-input-block">
-                                          <input type="text" name="" id="" class="layui-input">
-                                        </div>
-                                      </div>
-                                      <div class="layui-form-item">
-                                        <label class="layui-form-label">订单状态：</label>
-                                        <div class="layui-input-block">
-                                          <input type="text" name="" id="" class="layui-input">
-                                        </div>
-                                      </div>
-                                    </form>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -192,7 +207,10 @@
                       </div>
                     </form>
                   </div>
-                  <div class="layui-tab-item">2</div>
+                  <div class="layui-tab-item">
+                    <div id="selectWrap"></div>
+                    <div id="cust-laypage" class="text-center"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -304,6 +322,26 @@
         {{#  }); }}
       </div>
     </script>
+    <!-- 已有用户群模板 -->
+    <script id="selectHtml" type="text/html">
+      <div class="layui-row layui-col-space10">
+        {{#  layui.each(d.list, function(index, item){ }}
+        <div class="layui-col-md4 layui-col-sm4 layui-col-xs6">
+          <div class="custGroupContent {{item.id==d.chooseCustID?'active':''}}"
+            onclick="chooseCust(this,'{{item.id}}')">
+            <p class="custTitle">{{item.title}}</p>
+            <p class="custGroup-midWrap">
+              <span class="custNum">{{item.num}}</span><span class="unit">人</span>
+            </p>
+            <p class="clearfix">
+              <span class="custUser fl"><i class="layui-icon layui-icon-username"></i>{{item.user}}</span>
+              <a class="fr" href="javascript:;" onclick="toDetailCust(this,'{{item.title}}')">详情></a>
+            </p>
+          </div>
+        </div>
+        {{#  }); }}
+      </div>
+    </script>
     <script src="../../assets/layui/layui.js"></script>
     <script>
       layui
@@ -346,7 +384,7 @@
             }
             f(page)
             laypage.render({
-              elem: 'cust-laypage',
+              elem: 'policy-laypage',
               limit: 15,
               cur: page,
               count: 50,
@@ -362,6 +400,18 @@
           }
           rendCustWrap()
           /********************************************** 目标客户群区域  **********************************************/
+          laydate.render({
+            elem: '#startDate21',
+          })
+          laydate.render({
+            elem: '#endDate21',
+          })
+          laydate.render({
+            elem: '#startDate22',
+          })
+          laydate.render({
+            elem: '#endDate22',
+          })
           upload.render({
             elem: '#uploadFile',
             // url: '/upload/',
@@ -376,6 +426,63 @@
               console.log(res)
             }
           });
+          // 已有用户群区域
+          var chooseCustID = 24;
+          window.rendCustWrap = function (page) {
+            page = page || 1;
+
+            function f(i) { //顾客群数据
+              var randomData = []
+              for (var m = 0; m < 15; m++) {
+                var randomId = parseInt(Math.random() * 100)
+                randomData.push({
+                  "num": randomId,
+                  "user": "user-" + randomId,
+                  "title": "畅越" + randomId + "元档",
+                  "id": randomId
+                })
+              }
+              var custData = {
+                list: randomData,
+                chooseCustID: chooseCustID
+              }
+              var getTpl = selectHtml.innerHTML,
+                selectWrap = document.getElementById('selectWrap');
+              laytpl(getTpl).render(custData, function (html) {
+                selectWrap.innerHTML = html;
+              });
+            }
+            f(page)
+            laypage.render({
+              elem: 'cust-laypage',
+              limit: 15,
+              cur: page,
+              count: 50,
+              theme: 'common',
+              prev: '<em class="layui-icon layui-icon-left"></em>',
+              next: '<em class="layui-icon layui-icon-right"></em>',
+              jump: function (obj, first) {
+                if (!first) {
+                  f(obj.curr)
+                }
+              }
+            });
+          }
+          rendCustWrap()
+
+          window.chooseCust = function (obj, id) {
+            $('.custGroupContent').removeClass('active')
+            $(obj).addClass('active')
+            chooseCustID = id;
+          }
+
+          window.toDetailCust = function (obj, title) {
+            event.stopPropagation();
+            layer.open({
+              title: title + '详情查看',
+              content: title + '详情查看',
+            });
+          }
           /********************************************** 执行触点区域  **********************************************/
           laydate.render({
             elem: '#startDate',

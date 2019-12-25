@@ -617,6 +617,41 @@
   background: url('../images/strategy/step3-active.png') #fff no-repeat center;
 }
 
+.createStrategy .custGroupContent {
+  border: 1px solid rgb(236, 230, 230);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 5px 5px 0px rgba(231, 231, 231, 0.75);
+  padding: 15px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.createStrategy .custGroupContent.active {
+  background-image: -moz-linear-gradient(-70deg, rgb(238, 183, 119) 0%, rgb(230, 112, 91) 100%);
+  background-image: -webkit-linear-gradient(-70deg, rgb(238, 183, 119) 0%, rgb(230, 112, 91) 100%);
+  background-image: -ms-linear-gradient(-70deg, rgb(238, 183, 119) 0%, rgb(230, 112, 91) 100%);
+  color: #fff;
+}
+
+.createStrategy .custGroupContent a {
+  color: inherit;
+}
+
+.createStrategy .custGroup-midWrap {
+  text-align: center;
+  line-height: 60px;
+}
+
+.createStrategy .custGroup-midWrap .custNum {
+  font-size: 24px;
+}
+
+.createStrategy .custGroup-midWrap.unit {
+  font-size: 12px;
+}
+
 /*********************************************** 任务调配页面 ***********************************************/
 .taskPage .layui-input,
 .taskPage .layui-form-select {
