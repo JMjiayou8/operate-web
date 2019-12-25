@@ -80,59 +80,139 @@
           </div>
         </div>
         <div class="layui-tab-item">
-          <div class="layui-card">
-            <div class="layui-card-body">
-              <form class="layui-form" wid100>
-                <div class="layui-form-item">
-                  <label class="layui-form-label">客户群类型：</label>
-                  <div class="layui-input-block">
-                    <div class="layui-tab layui-tab-brief custTypeTab" lay-filter="typeTab">
-                      <ul class="layui-tab-title">
-                        <li class="layui-this" lay-id="11">取数模板</li>
-                        <li lay-id="22">标签选择</li>
-                        <li lay-id="33">总部模型</li>
-                        <li lay-id="44">文件上传</li>
-                      </ul>
-                      <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show">
-                          <div class="layui-card">
-                            <div class="layui-card-body">取数模板</div>
-                          </div>
-                        </div>
-                        <div class="layui-tab-item ">
-                          <div class="layui-card">
-                            <div class="layui-card-body">标签选择</div>
-                          </div>
-                        </div>
-                        <div class="layui-tab-item ">
-                          <div class="layui-card">
-                            <div class="layui-card-body">总部模型</div>
-                          </div>
-                        </div>
-                        <div class="layui-tab-item ">
-                          <div class="layui-card upload-card">
-                            <div class="layui-card-body">
-                              <div class="layui-upload-drag " id="uploadFile">
-                                <i class="upload-icon"></i>
-                                <p class="upload-text">文件上传</p>
+          <div class="layui-row layui-col-space10">
+            <div class="layui-col-md8">
+              <div class="layui-tab layui-tab-card tab2">
+                <ul class="layui-tab-title">
+                  <li class="layui-this">新增用户群</li>
+                  <li>已有用户群</li>
+                </ul>
+                <div class="layui-tab-content">
+                  <div class="layui-tab-item layui-show">
+                    <form class="layui-form" wid100>
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">客户群类型：</label>
+                        <div class="layui-input-block">
+                          <div class="layui-tab layui-tab-brief custTypeTab" lay-filter="typeTab">
+                            <ul class="layui-tab-title">
+                              <li>取数模板</li>
+                              <li>标签选择</li>
+                              <li>总部模型</li>
+                              <li class="layui-this">订单数据</li>
+                              <li>文件上传</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                              <div class="layui-tab-item ">
+                                <div class="layui-card">
+                                  <div class="layui-card-body">取数模板</div>
+                                </div>
+                              </div>
+                              <div class="layui-tab-item ">
+                                <div class="layui-card">
+                                  <div class="layui-card-body">标签选择</div>
+                                </div>
+                              </div>
+                              <div class="layui-tab-item ">
+                                <div class="layui-card">
+                                  <div class="layui-card-body">总部模型</div>
+                                </div>
+                              </div>
+                              <div class="layui-tab-item layui-show">
+                                <div class="layui-card">
+                                  <div class="layui-card-body">
+                                    <form class="layui-form">
+                                      <div class="layui-form-item">
+                                        <label class="layui-form-label">任务类型：</label>
+                                        <div class="layui-input-block box-radio">
+                                          <input type="radio" name="taskType" value="1" title="催转化" checked="">
+                                          <input type="radio" name="taskType" value="2" title="催激活">
+                                        </div>
+                                      </div>
+                                      <div class="layui-form-item">
+                                        <label class="layui-form-label">充值数据来源：</label>
+                                        <div class="layui-input-block box-radio">
+                                          <input type="radio" name="originType" value="1" title="人工干预激活" checked="">
+                                          <input type="radio" name="originType" value="2" title="自主激活">
+                                        </div>
+                                      </div>
+                                      <div class="layui-form-item">
+                                        <label class="layui-form-label">预开户前几天：</label>
+                                        <div class="layui-input-block">
+                                          <input type="text" name="" id="" class="layui-input">
+                                        </div>
+                                      </div>
+                                      <div class="layui-form-item">
+                                        <label class="layui-form-label">预开户时间：</label>
+                                        <div class="layui-input-block">
+                                          <input type="text" name="" id="" class="layui-input">
+                                        </div>
+                                      </div>
+                                      <div class="layui-form-item">
+                                        <label class="layui-form-label">签收状态：</label>
+                                        <div class="layui-input-block">
+                                          <input type="text" name="" id="" class="layui-input">
+                                        </div>
+                                      </div>
+                                      <div class="layui-form-item">
+                                        <label class="layui-form-label">签收时间：</label>
+                                        <div class="layui-input-block">
+                                          <input type="text" name="" id="" class="layui-input">
+                                        </div>
+                                      </div>
+                                      <div class="layui-form-item">
+                                        <label class="layui-form-label">订单状态：</label>
+                                        <div class="layui-input-block">
+                                          <input type="text" name="" id="" class="layui-input">
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="layui-tab-item ">
+                                <div class="layui-card upload-card">
+                                  <div class="layui-card-body">
+                                    <div class="layui-upload-drag " id="uploadFile">
+                                      <i class="upload-icon"></i>
+                                      <p class="upload-text">文件上传</p>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
+
                           </div>
                         </div>
                       </div>
-
-                    </div>
+                      <div class="layui-form-item text-center">
+                        <label class="layui-form-label"></label>
+                        <div class="layui-input-block">
+                          <button type="button" class="layui-btn" onclick="nextPage('33')">继续</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
+                  <div class="layui-tab-item">2</div>
                 </div>
-                <div class="layui-form-item text-center">
-                  <label class="layui-form-label"></label>
-                  <div class="layui-input-block">
-                    <button type="button" class="layui-btn" onclick="nextPage('33')">继续</button>
-                  </div>
-                </div>
-              </form>
+              </div>
             </div>
+            <div class="layui-col-md4">
+              <div class="layui-tab layui-tab-card tab2">
+                <ul class="layui-tab-title">
+                  <li class="layui-this">已选</li>
+                  <li>排除</li>
+                </ul>
+                <div class="layui-tab-content">
+                  <div class="layui-tab-item layui-show">默认宽度是相对于父元素100%适应的，你也可以固定宽度。</div>
+                  <div class="layui-tab-item">2</div>
+
+                </div>
+              </div>
+            </div>
+
           </div>
+
+
         </div>
         <div class="layui-tab-item">
           <div class="layui-card">
@@ -243,6 +323,7 @@
           window.nextPage = function (page) {
             element.tabChange('pageTab', page);
           };
+          element.tabChange('pageTab', '22');
           /********************************************** 基本信息区域  **********************************************/
           window.rendCustWrap = function (page) {
             page = page || 1;

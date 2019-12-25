@@ -33,3 +33,21 @@
 
 1. 打开新 tab：设置元素`lay-href=xxx`
 2. 导航栏配置：`src/assets/modules/nav.js`
+3. radio
+
+```html
+<div class="layui-input-block box-radio">
+  <input type="radio" name="operateType" value="1" title="催转化" checked="" />
+  <input type="radio" name="operateType" value="2" title="催激活" />
+</div>
+```
+
+4. checkbox
+
+```html
+<div class="layui-input-block box-radio">
+  <input type="checkbox" name="like[1]" lay-skin="box" title="短信" />
+  <input type="checkbox" name="like[2]" lay-skin="box" title="外呼" />
+  <input type="checkbox" name="like[3]" lay-skin="box" title="线上渠道" />
+</div>
+```
