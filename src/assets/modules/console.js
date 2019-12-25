@@ -130,7 +130,7 @@ layui.define(function (exports) {
           containLabel: true,
           top: 60,
           left: 0,
-          right: 200,
+          right: 150,
           bottom: 0,
         },
         xAxis: [{
@@ -239,6 +239,7 @@ layui.define(function (exports) {
       });
     }
     rendChart(0);
+
   })
 
   //策划活动执行情况
@@ -372,13 +373,13 @@ layui.define(function (exports) {
       var className = "";
       switch (+item.layout) {
         case 0:
-          className = 'layui-col-md8 layui-col-sm8'; break;
+          className = 'layui-col-md8 layui-col-sm12 layui-col-xs12'; break;
         case 1:
-          className = 'layui-col-md4 layui-col-sm4'; break;
+          className = 'layui-col-md4 layui-col-sm12 layui-col-xs12'; break;
         case 2:
-          className = 'layui-col-md12 layui-col-sm12'; break;
+          className = 'layui-col-md12 layui-col-sm12 layui-col-xs12'; break;
         default:
-          className = 'layui-col-md12 layui-col-sm12'; break;
+          className = 'layui-col-md12 layui-col-sm12 layui-col-xs12'; break;
       }
       $('#part' + item.id).removeClass().addClass(className).addClass('config-part').show();
     }

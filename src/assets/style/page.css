@@ -119,26 +119,39 @@
 }
 
 .top9Wrap .topOther {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .top9Wrap .topOther .top-title {
   font-size: 14px;
   margin: 0 10px;
+  display: inline-block;
+  line-height: 18px;
 }
+
+.top9Wrap .topOther .top-num {
+  display: inline-block;
+  line-height: 18px;
+}
+
 
 .top9Wrap .topOther .top-level {
   border: 3px solid rgb(126, 206, 244);
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
   display: inline-block;
   text-align: center;
+  margin-right: 10px;
+}
+
+.top9Wrap .topOther .top-text {
+  line-height: 40px;
 }
 
 .top9Wrap .topOther-item {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .top9Wrap .top-icon {
@@ -186,6 +199,7 @@
   position: absolute;
   top: -40px;
   right: 0;
+  min-width: 120px;
 }
 
 .chart-info-list p {
@@ -245,6 +259,20 @@
   color: #ec6c3f;
 }
 
+@media screen and (max-width:1400px) {
+  .top9Wrap .topOther .top-title {
+    display: block;
+  }
+
+  .top9Wrap .topOther .top-text {
+    line-height: 26px;
+  }
+
+  .top9Wrap .topOther {
+    margin-bottom: 0;
+  }
+}
+
 /*********************************************** 常规功能页面 ***********************************************/
 
 .common-page .layui-tab {
@@ -270,7 +298,7 @@
   text-align: center;
   padding: 40px 0;
   height: 130px;
-  padding: 30px 33% 30px 0;
+  padding: 20px 33% 10px 0;
   width: auto;
 }
 
@@ -341,8 +369,9 @@
 
 
 .common-page .step-text {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 18px;
+  line-height: 30px;
 }
 
 .common-page .part-title {
@@ -543,7 +572,7 @@
 /* 政策详情 */
 .common-page .add-policy {
   position: absolute;
-  top: 30px;
+  top: 20px;
   right: 20%;
   text-align: center;
 }
@@ -558,9 +587,7 @@
 }
 
 .common-page .add-policy .step-text {
-
   color: #fff;
-  line-height: 40px;
 }
 
 /*********************************************** 策略页面 ***********************************************/
