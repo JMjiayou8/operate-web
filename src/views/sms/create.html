@@ -98,7 +98,9 @@
     <div class="layui-form-item layui-col-md12 layui-col-sm12 ">
       <label class="layui-form-label layui-required">选择文件：</label>
       <div class="layui-input-block">
-        <button id="uploadFile" type="button" class="layui-btn layui-btn-primary">选择文件</button> </div>
+        <button id="uploadFile" type="button" class="layui-btn layui-btn-primary">选择文件</button>
+        <span id="fileName"></span>
+      </div>
     </div>
     <div class="layui-form-item layui-col-md6 layui-col-sm6  ">
       <label class="layui-form-label layui-required">符合目标用户内容：</label>
@@ -127,22 +129,13 @@
           layer = layui.layer,
           upload = layui.upload,
           laytpl = layui.laytpl;
-
         laydate.render({
           elem: '#startDate'
         })
         laydate.render({
           elem: '#endDate'
         })
-        upload.render({
-          elem: '#uploadFile'
-            // ,url: '/upload/'
-            ,
-          accept: 'file',
-          done: function (res) {
-            console.log(res)
-          }
-        });
+
 
         function renderTagetWrap(type) {
           var data = {
@@ -153,6 +146,22 @@
           laytpl(getTpl).render(data, function (html) {
             view.innerHTML = html;
             form.render()
+            if (type == '1') { //重新渲染
+              upload.render({
+                elem: '#uploadFile',
+                // ,url: '/upload/'
+                accept: 'file',
+                before: function (obj) {
+                  //预读本地文件示例，不支持ie8
+                  obj.preview(function (index, file, result) {
+                    console.log(file.name)
+                    $('#fileName').text(file.name)
+                  });
+                },
+                done: function (res) {}
+              });
+            }
+
           });
         }
         form.on('select(targetUser)', function (obj) {

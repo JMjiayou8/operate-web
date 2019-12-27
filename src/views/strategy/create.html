@@ -402,7 +402,7 @@
       </div>
     </div>
     <div class="layui-form-item">
-      <label class="layui-form-label">短信内容</label>
+      <label class="layui-form-label">短信内容：</label>
       <div class="layui-input-block choose-template-wrap">
         <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
         <button type="button" class="layui-btn" onclick="return false;"><i
@@ -443,7 +443,6 @@
           window.nextPage = function (page) {
             element.tabChange('pageTab', page);
           };
-          element.tabChange('pageTab', '33');
           /********************************************** 基本信息区域  **********************************************/
           window.rendCustWrap = function (page) {
             page = page || 1;
