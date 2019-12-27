@@ -287,6 +287,31 @@ layui.define('view', function (exports) {
       var topAdmin = parent === self ? admin : parent.layui.admin;
       topAdmin.closeThisTabs();
     },
+
+    //关闭其它标签页
+    closeOtherTabs: function (type) {
+      var TABS_REMOVE = 'LAY-system-pagetabs-remove';
+      if (type === 'all') {
+        $(TABS_HEADER + ':gt(0)').remove();
+        $(APP_BODY).find('.' + TABS_BODY + ':gt(0)').remove();
+
+        $(TABS_HEADER).eq(0).trigger('click');
+      } else {
+        $(TABS_HEADER).each(function (index, item) {
+          if (index && index != admin.tabsPage.index) {
+            $(item).addClass(TABS_REMOVE);
+            admin.tabsBody(index).addClass(TABS_REMOVE);
+          }
+        });
+        $('.' + TABS_REMOVE).remove();
+      }
+    }
+
+    //关闭全部标签页
+    , closeAllTabs: function () {
+      events.closeOtherTabs('all');
+      //location.hash = '';
+    },
     logout: function () {
       layer.msg('退出登录')
       location.href = './login.html';

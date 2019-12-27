@@ -45,7 +45,7 @@
 
 ```html
 <!-- 没有icon,按钮风格 -->
-<div class="box-radio no-icon">
+<div class="noIcon-radio">
   <input type="radio" name="pro1" value="1" title="七天包" checked="" />
   <input type="radio" name="pro1" value="2" title="沃派流量王" />
   <input type="radio" name="pro1" value="3" title="畅越低消" />

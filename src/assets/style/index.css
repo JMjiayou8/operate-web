@@ -454,8 +454,7 @@ i {
   line-height: 50px;*/
   height: 50px;
   line-height: 40px;
-  /* padding: 10px 80px 0 40px; */
-  padding: 10px 0 0 0;
+  padding: 10px 80px 0 40px;
   background-color: #fff;
   box-sizing: border-box;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
@@ -470,7 +469,7 @@ i {
   position: absolute;
   top: 10px;
   width: 50px;
-  /* height: 50px; */
+
   height: 40px;
   text-align: center;
   cursor: pointer;
@@ -491,8 +490,7 @@ i {
 }
 
 .layadmin-pagetabs .layui-icon-next {
-  /* right: 40px; */
-  right: 0;
+  right: 40px;
 }
 
 .layadmin-pagetabs .layui-icon-down {
@@ -569,6 +567,49 @@ i {
   top: 40px;
   left: auto;
   right: 0;
+}
+
+.layadmin-pagetabs .layui-icon-down {
+  right: 0;
+}
+
+.layadmin-tabs-select.layui-nav {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: none;
+}
+
+.layadmin-tabs-select.layui-nav .layui-nav-item {
+  line-height: 40px;
+}
+
+.layadmin-tabs-select.layui-nav .layui-nav-item>a {
+  height: 40px;
+}
+
+.layadmin-tabs-select.layui-nav .layui-nav-item a {
+  color: #666;
+}
+
+.layadmin-tabs-select.layui-nav .layui-nav-child {
+  top: 40px;
+  left: auto;
+  right: 0;
+}
+
+.layadmin-tabs-select.layui-nav .layui-nav-child dd.layui-this,
+.layadmin-tabs-select.layui-nav .layui-nav-child dd.layui-this a {
+  background-color: #f2f2f2 !important;
+  color: #333;
+}
+
+.layadmin-tabs-select.layui-nav .layui-nav-more,
+.layadmin-tabs-select.layui-nav .layui-nav-bar {
+  display: none;
 }
 
 /*********************************************** body ***********************************************/
@@ -855,13 +896,13 @@ i {
 }
 
 .layui-form-radio div {
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
   text-decoration: underline;
 }
 
 .layui-form-radio>i {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .layui-form-radio>i:hover,
@@ -874,66 +915,67 @@ i {
   border: 1px solid #d2d2d2;
   padding: 0 20px;
   border-radius: 5px;
-  line-height: 36px;
+  line-height: 32px;
+  font-size: 14px;
 }
 
 .box-radio .layui-form-radio div {
   text-decoration: none;
 }
 
+.box-radio .layui-form-radio div::before {
+  content: '●';
+  margin-right: 5px;
+  color: #bababa;
+  font-size: 12px;
+}
+
+.box-radio .layui-form-radio i {
+  display: none;
+}
+
 .box-radio .layui-form-radioed {
+  background: #fff;
+  border-color: #ec6c3f;
+}
+
+.box-radio .layui-form-radioed div {
+  color: #ec6c3f;
+}
+
+.box-radio .layui-form-radioed div::before {
+  content: "✓";
+  color: #ec6c3f;
+  font-size: 14px;
+}
+
+/*没有图标，按钮风格 */
+.noIcon-radio .layui-form-radio i,
+.noIcon-radio .layui-form-radio div::before {
+  display: none;
+}
+
+.noIcon-radio .layui-form-radio {
+  border: 1px solid #d2d2d2;
+  padding: 0 20px;
+  border-radius: 5px;
+  line-height: 32px;
+  font-size: 14px;
+}
+
+.noIcon-radio .layui-form-radio div {
+  text-decoration: none;
+}
+
+.noIcon-radio .layui-form-radioed {
   background: #ec6c3f;
   border-color: #ec6c3f;
 }
 
-.box-radio .layui-form-radioed div,
-.box-radio .layui-form-radioed i {
+.noIcon-radio .layui-form-radioed div {
   color: #fff;
 }
 
-.box-radio.no-icon .layui-form-radio i {
-  display: none;
-}
-
-.layui-form[wid100] .layui-form-label {
-  width: 100px;
-}
-
-.layui-form[wid100] .layui-input-block {
-  margin-left: 130px;
-}
-
-.layui-form[wid110] .layui-form-label {
-  width: 110px;
-}
-
-.layui-form[wid110] .layui-input-block {
-  margin-left: 140px;
-}
-
-@media screen and (max-width: 450px) {
-  .layui-form[wid100] .layui-form-item .layui-input-inline {
-    margin-left: 132px;
-  }
-
-  .layui-form[wid100] .layui-form-item .layui-input-inline+.layui-form-mid {
-    margin-left: 130px;
-  }
-
-  .layui-form[wid110] .layui-form-item .layui-input-inline {
-    margin-left: 142px;
-  }
-
-  .layui-form[wid110] .layui-form-item .layui-input-inline+.layui-form-mid {
-    margin-left: 140px;
-  }
-}
-
-.layui-form-item .layui-input-company {
-  width: auto;
-  padding-right: 10px;
-  line-height: 38px;
-}
 
 /* checkbox */
 .layui-form-checked[lay-skin=primary] i {
@@ -965,16 +1007,10 @@ i {
 }
 
 .layui-form-item .layui-form-checkbox[lay-skin=box] span::before {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 2px solid #bababa;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  top: 16px;
-  left: 10px;
-
+  content: '●';
+  margin-right: 5px;
+  color: #bababa;
+  font-size: 12px;
 }
 
 .layui-form-item .layui-form-checkbox[lay-skin=box] i {
@@ -983,18 +1019,76 @@ i {
 
 .layui-form-item .layui-form-checked[lay-skin=box],
 .layui-form-item .layui-form-checked[lay-skin=box]:hover {
-  background: #ec6c3f;
+  background: #fff;
   border-color: #ec6c3f;
 }
 
 .layui-form-item .layui-form-checked[lay-skin=box] span,
 .layui-form-item .layui-form-checked[lay-skin=box]:hover span {
-  background: #ec6c3f !important;
-  color: #fff !important;
+  color: #ec6c3f !important;
 }
 
 .layui-form-item .layui-form-checked[lay-skin=box] span::before {
-  border-color: #fff;
+  content: "✓";
+  color: #ec6c3f;
+  font-size: 14px;
+
+}
+
+.layui-form[wid100] .layui-form-label {
+  width: 100px;
+}
+
+.layui-form[wid100] .layui-input-block {
+  margin-left: 130px;
+}
+
+.layui-form[wid110] .layui-form-label {
+  width: 110px;
+}
+
+.layui-form[wid110] .layui-input-block {
+  margin-left: 140px;
+}
+
+.layui-form[wid140] .layui-form-label {
+  width: 140px;
+}
+
+.layui-form[wid140] .layui-input-block {
+  margin-left: 170px;
+}
+
+@media screen and (max-width: 450px) {
+  .layui-form[wid100] .layui-form-item .layui-input-inline {
+    margin-left: 132px;
+  }
+
+  .layui-form[wid100] .layui-form-item .layui-input-inline+.layui-form-mid {
+    margin-left: 130px;
+  }
+
+  .layui-form[wid110] .layui-form-item .layui-input-inline {
+    margin-left: 142px;
+  }
+
+  .layui-form[wid110] .layui-form-item .layui-input-inline+.layui-form-mid {
+    margin-left: 140px;
+  }
+
+  .layui-form[wid140] .layui-form-item .layui-input-inline {
+    margin-left: 172px;
+  }
+
+  .layui-form[wid140] .layui-form-item .layui-input-inline+.layui-form-mid {
+    margin-left: 170px;
+  }
+}
+
+.layui-form-item .layui-input-company {
+  width: auto;
+  padding-right: 10px;
+  line-height: 38px;
 }
 
 
@@ -1118,12 +1212,35 @@ i {
 
 .layui-tab-card>.layui-tab-title {
   background: #fff;
+  height: 50px;
 }
 
 .layui-tab-card.tab2>.layui-tab-title li {
   width: 50%;
   padding: 0;
   margin: 0;
+  font-size: 16px;
+  line-height: 50px;
+}
+
+
+
+.layui-tab-card>.layui-tab-title .layui-this {
+  color: #ec6c3f;
+}
+
+.layui-tab-card .layui-tab-title .layui-this:after {
+  height: 51px;
+}
+
+.layui-tab-card .layui-tab-content {
+  background: #fff;
+}
+
+.layui-tab-card .layui-tab-content .oversizeContent {
+  position: relative;
+  left: -10%;
+  width: 110%;
 }
 
 /*********************************************** 面板 ***********************************************/
