@@ -706,7 +706,15 @@ i {
 }
 
 
-
+.layui-icon-import {
+  background: url('../images/import.png') no-repeat center/100%;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  left: -5px;
+  top: 3px;
+}
 
 /*********************************************** 按钮 ***********************************************/
 
@@ -717,6 +725,7 @@ i {
   background-image: linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%);
   border-radius: 3px;
   border: 0;
+  position: relative;
 }
 
 .layui-btn.layui-btn-primary {
@@ -725,6 +734,14 @@ i {
 
 .layui-btn-primary:hover {
   border-color: inherit;
+}
+
+.layui-btn-gray {
+  background-image: linear-gradient(-90deg, #A8B1C5 0%, #6C8BA2 100%);
+}
+
+.layui-btn-red {
+  background-image: linear-gradient(-90deg, #CD1D36 0%, #E82641 100%);
 }
 
 /* 搜索按钮 */
@@ -1091,7 +1108,11 @@ i {
   line-height: 38px;
 }
 
+/*********************************************** layedit ***********************************************/
 
+.layui-layedit {
+  background: #fff;
+}
 
 /*********************************************** layer ***********************************************/
 /* 遮罩 */

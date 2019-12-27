@@ -108,6 +108,17 @@ layui.define(function (exports) {
             title: '新增',
             path: 'sms/create'
           }]
+        },
+        {
+          name: 'talking',
+          icon: '',
+          title: '话术',
+          list: [{
+            name: 'index',
+            icon: '',
+            title: '话术模板',
+            path: 'talking/index'
+          }]
         }
       ]
       var getTpl = sideNavTemplate.innerHTML,
