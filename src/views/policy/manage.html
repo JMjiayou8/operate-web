@@ -48,8 +48,12 @@
     </div>
   </div>
   <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs">失效</a>
-    <a class="layui-btn layui-btn-xs">暂停</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs">失效</a>
+    {{# if(d.statusTag==0){ }}
+    <a class="layui-btn layui-btn-red layui-btn-xs">暂停</a>
+    {{# }else if(d.statusTag==1){   }}
+    <a class="layui-btn layui-btn-xs">修改</a>
+    {{# } }}
   </script>
   <script src="../../assets/layui/layui.js"></script>
   <script>
@@ -113,14 +117,16 @@
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '执行中',
+              statusTag: 0
             }, {
               name: '931955',
               type1: '',
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '草稿',
+              statusTag: 1
             },
             {
               name: '931955',
@@ -128,7 +134,8 @@
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '草稿',
+              statusTag: 1
             },
             {
               name: '931955',
@@ -136,14 +143,16 @@
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '草稿',
+              statusTag: 1
             }, {
               name: '931955',
               type1: '',
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '待审批',
+              statusTag: 2
             },
             {
               name: '931955',
@@ -151,7 +160,8 @@
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '草稿',
+              statusTag: 1
             },
             {
               name: '931955',
@@ -159,7 +169,8 @@
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '草稿',
+              statusTag: 1
             },
             {
               name: '931955',
@@ -167,7 +178,8 @@
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '草稿',
+              statusTag: 1
             },
             {
               name: '931955',
@@ -175,14 +187,17 @@
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '草稿',
+              statusTag: 1
             }, {
               name: '931955',
               type1: '',
               type2: '10000',
               creator: 'SUPERUSER',
               updateDate: '2019-10-22 00:00:00',
-              status: '待审批'
+              status: '待审批',
+
+              statusTag: 2
             }
           ]
         })
