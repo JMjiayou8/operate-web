@@ -32,6 +32,7 @@
       cursor: pointer;
     }
 
+
     .elemType-list .elemType-icon {
       width: 30px;
       height: 30px;
@@ -67,6 +68,27 @@
     .elemType-list .elemType-text {
       color: #333;
     }
+
+    .elemType-item.active .elemType-text {
+      color: #ec6c3f;
+    }
+
+    .addProblem-page .desc-input {
+      position: relative;
+    }
+
+    .addProblem-page .desc-input .layui-input {
+      padding-left: 40px;
+    }
+
+    .addProblem-page .desc-input i {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      line-height: 28px;
+      border-right: 1px solid #d2d2d2;
+      padding: 0 10px;
+    }
   </style>
 </head>
 
@@ -77,7 +99,7 @@
         <label class="layui-form-label">题型选择：</label>
         <div class="layui-input-block">
           <ul class="layui-row elemType-list ">
-            <li class="layui-col-md2 layui-col-sm2 elemType-item">
+            <li class="layui-col-md2 layui-col-sm2 elemType-item active">
               <i class="elemType-icon type1"></i>
               <span class="elemType-text">单选按钮</span>
             </li>
@@ -120,22 +142,26 @@
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
         <label class="layui-form-label">问题描述：</label>
-        <div class=" layui-input-block ">
-          <input type="text" class="layui-input" name="desc[1]">
+        <div class=" layui-input-block desc-input">
+          <i>1</i>
+          <input type="text" class="layui-input " name="desc[1]">
         </div>
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
         <label class="layui-form-label"></label>
-        <div class=" layui-input-block ">
-          <input type="text" class="layui-input" name="desc[2]">
+        <div class=" layui-input-block desc-input">
+          <i>2</i>
+          <input type="text" class="layui-input " name="desc[2]">
         </div>
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
         <label class="layui-form-label"></label>
-        <div class=" layui-input-block ">
-          <input type="text" class="layui-input" name="desc[3]">
+        <div class=" layui-input-block desc-input">
+          <i>3</i>
+          <input type="text" class="layui-input " name="desc[3]">
         </div>
       </div>
+      <p class="tip">项目先决条件</p>
       <div class="layui-form-item layui-col-md4 layui-col-sm4">
         <label class="layui-form-label">项目级别：</label>
         <div class=" layui-input-block ">
@@ -163,9 +189,13 @@
       .config({
         base: '../../assets/' //静态资源所在路径
       })
-      .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
+      .use(['form', 'jquery'], function () {
         var form = layui.form,
-          table = layui.table;
+          $ = layui.jquery;
+        $('.elemType-item').click(function (obj) {
+          $('.elemType-item').removeClass('active')
+          $(this).addClass('active')
+        })
       })
   </script>
 </body>

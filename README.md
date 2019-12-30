@@ -32,6 +32,7 @@
 12-30
 
 - 短信手工发送：src/views/sms/create.html
+- 话术-新建问题：src/views/talking/addProblem.html
 
 > 待完成页面
 
