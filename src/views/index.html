@@ -119,14 +119,14 @@
       </a>
     </li>
     <li class="layui-nav-item layui-this">
-      <a href="javascript:;">
+      <a href="javascript:;" data-nav="console">
         <i class="nav-icon navHome"></i>
         <span>工作台</span>
       </a>
     </li>
     {{#  layui.each(d[0], function(index, item){ }}
     <li class="layui-nav-item ">
-      <a href="javascript:;">
+      <a href="javascript:;" data-nav="{{item.iconClass}}">
         <i class="nav-icon {{item.iconClass}}"></i>
         <span>
           {{item.title}}

@@ -504,6 +504,10 @@
   padding: 0 30px;
 }
 
+.common-page .layui-table-view .layui-btn {
+  padding: 0 10px;
+}
+
 .common-page .multi-elem-line .layui-input-inline {
   max-width: 150px;
 }
@@ -732,4 +736,14 @@
 
 .noTargetUser {
   display: none;
+}
+
+.hasOperateBtn .layui-input {
+  width: 60%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.hasOperateBtn .layui-btn {
+  vertical-align: top;
 }

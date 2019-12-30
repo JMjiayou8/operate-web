@@ -25,6 +25,14 @@
 
 - 互动短信-新增：src/views/sms/create.html
 
+12-27
+
+- 话术模板：src/views/talking/index.html
+
+12-30
+
+- 短信手工发送：src/views/sms/create.html
+
 > 待完成页面
 
 - 侧边栏和导航交互
