@@ -157,7 +157,7 @@
                 <input type="text" class="layui-input user-input" disabled>
                 {{#  }else if(d.distribRule === 2){ }}
                 <!-- 按量分配 -->
-                <input type="text" class="layui-input user-input" placeholder="输入分配数量">
+                <input type="text" class="layui-input user-input" placeholder="输入分配数量" onblur="sureInput(this)">
                 {{#  } }}
               </div>
               <a class="common-del-link del-groupMember" data-index="{{index}}-{{i}}" href="javascript:;"><i
@@ -351,6 +351,10 @@
           //表格选中数据
           var checkTableData = table.checkStatus('pageTable').data;
           console.log(checkTableData)
+        }
+
+        window.sureInput = function (obj) {
+          console.log(obj)
         }
       })
   </script>

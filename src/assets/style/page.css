@@ -701,7 +701,7 @@
 
 .groupUser-wrap .distribe-wrap {
   display: inline-block;
-  margin: 0 30px;
+  margin: 0 10px;
   vertical-align: top;
 }
 
@@ -712,7 +712,7 @@
 }
 
 .groupUser-wrap .person-line {
-  width: 32% !important;
+  width: 33% !important;
 }
 
 .groupUser-wrap .person-line .layui-colla-icon {
@@ -730,6 +730,7 @@
 .groupUser-wrap .distrib-btn {
   background: #88abda;
   border-color: #448aca;
+  padding: 0 15px;
 }
 
 /*********************************************** 互动短信页面 ***********************************************/
