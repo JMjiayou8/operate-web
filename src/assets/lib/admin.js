@@ -1,6 +1,8 @@
 layui.define('view', function (exports) {
   var $ = layui.jquery, element = layui.element
   var setter = layui.setter, view = layui.view, device = layui.device(),
+    laytpl = layui.laytpl,
+    element = layui.element,
     $win = $(window), $body = $('body'), container = $('#' + setter.container),
     SHOW = 'layui-show', THIS = 'layui-this',
     APP_BODY = '#operate_body', APP_FLEXIBLE = 'operate_app_flexible'
@@ -175,6 +177,200 @@ layui.define('view', function (exports) {
         , value: config
       });
     },
+    rendSideNav: function (topNav) {
+      var menus = {
+        nav1: [{
+          name: 'upc',
+          icon: '',
+          title: '产商品管理',
+          list: [
+            {
+              name: 'index1',
+              icon: '',
+              title: '产商品配置',
+              path: 'upc/index1'
+            },
+            {
+              name: 'index2',
+              icon: '',
+              title: '产商品上下架',
+              path: 'upc/index2'
+            },
+            {
+              name: 'index3',
+              icon: '',
+              title: '产商品审核',
+              path: 'upc/index3'
+            },
+            {
+              name: 'index4',
+              icon: '',
+              title: '产商品管理',
+              path: 'upc/index4'
+            },
+          ]
+        }],
+        nav2: [
+          {
+            name: 'targetUser',
+            icon: '',
+            title: '目标客户管理',
+            list: [
+              {
+                name: 'index1',
+                icon: '',
+                title: '目标客户配置',
+                path: 'targetUser/index1'
+              },
+              {
+                name: 'index2',
+                icon: '',
+                title: '目标客户审核',
+                path: 'targetUser/index2'
+              },
+              {
+                name: 'index3',
+                icon: '',
+                title: '目标客户管理',
+                path: 'targetUser/index3'
+              },
+
+            ]
+          },
+          {
+            name: 'policy',
+            icon: '',
+            title: '业务政策',
+            list: [
+              {
+                name: 'create',
+                icon: '',
+                title: '业务政策制定',
+                path: 'policy/create'
+              },
+              {
+                name: 'manage',
+                icon: '',
+                title: '业务政策管理',
+                path: 'policy/manage'
+              },
+            ]
+          },
+          {
+            name: 'strategy',
+            icon: '',
+            title: '营销策略',
+            list: [
+              {
+                name: '策略配置',
+                icon: '',
+                title: '业务政策制定',
+                path: 'strategy/create'
+              },
+              {
+                name: 'manage',
+                icon: '',
+                title: '策略管理',
+                path: 'strategy/manage'
+              },
+              {
+                name: 'excute',
+                icon: '',
+                title: '策略执行',
+                path: 'strategy/excute'
+              },
+            ]
+          }
+        ],
+        nav3: [
+          {
+            name: 'task',
+            icon: '',
+            title: '任务管理',
+            list: [
+              {
+                name: 'excute',
+                icon: '',
+                title: '外呼任务配置',
+                path: 'task/deploy'
+              },
+            ]
+          },
+          {
+            name: 'nav3',
+            icon: '',
+            title: '策略执行统计报表',
+            path: 'nav3/index'
+
+          }
+        ],
+        nav4: [],
+        nav5: [],
+        nav6: [
+          {
+            name: 'digital',
+            icon: '',
+            title: '营销评估',
+            list: [
+              {
+                name: 'digital',
+                icon: '',
+                title: '营销策略评估',
+                path: 'digital/strategyPreview'
+              },
+              {
+                name: 'excute',
+                icon: '',
+                title: '营销产品评估',
+                path: 'digital/strategyAssessSimple'
+              },
+              {
+                name: 'productAnalysis',
+                icon: '',
+                title: '产品分析',
+                path: 'digital/productAnalysis'
+              },
+              {
+                name: 'strategyAnalysis',
+                icon: '',
+                title: '策略分析',
+                path: 'digital/strategyAnalysis'
+              },
+            ]
+          },
+        ]
+
+      }
+      // 根据topNav再实际获取不同的侧边栏数据。可以使用配置文件，也可ajax获取。
+      var sideNavData = []
+      if (topNav) {
+        if (topNav != 'console') {
+          // debugger
+          admin.sideFlexible();
+          var appElem = parent.document.getElementById('operate_app')
+          $(appElem).removeClass('layadmin-side-shrink')
+          sideNavData = menus[topNav]
+        } else {
+          admin.sideFlexible();
+          $('.layadmin-tabsbody-item')
+          $(APP_BODY).find('.' + TABS_BODY).removeClass('layui-show')
+          $(APP_BODY).find('.' + TABS_BODY).eq(0).addClass('layui-show');
+          $('#operate_app_tabsheader').find('li').removeClass('layui-this')
+          $('#operate_app_tabsheader').find('li').eq(0).addClass('layui-this')
+        }
+      }
+
+      var topNavELem = parent.document.getElementById('topNavWrap')
+      $(topNavELem).find('.layui-nav-item').removeClass('layui-this')
+      $(topNavELem).find('.layui-nav-item.' + topNav).addClass('layui-this')
+      var getTpl = parent === self ? sideNavTemplate.innerHTML : parent.sideNavTemplate.innerHTML,
+        view = parent === self ? document.getElementById('sideNavWrap') : parent.document.getElementById('sideNavWrap');
+      laytpl(getTpl).render(sideNavData, function (html) {
+        view.innerHTML = html
+        parent === self ? element.render('nav') : parent.layui.element.render('nav');
+        element.render('nav')
+      })
+    }
 
   };
 
@@ -365,6 +561,7 @@ layui.define('view', function (exports) {
         , id: 'LAY_errorIE'
       });
     }
+    // admin.sideFlexible();
 
 
   }();
@@ -512,7 +709,7 @@ layui.define('view', function (exports) {
 
     if (!resizeSystem.lock) {
       setTimeout(function () {
-        admin.sideFlexible(admin.screen() < 2 ? '' : 'spread');
+        // admin.sideFlexible(admin.screen() < 2 ? '' : 'spread');
         delete resizeSystem.lock;
       }, 100);
     }

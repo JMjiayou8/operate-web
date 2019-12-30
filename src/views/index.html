@@ -21,7 +21,7 @@
 </head>
 
 <body class="layui-layout-body">
-  <div id="operate_app">
+  <div id="operate_app" class="layadmin-side-shrink">
     <div class="layui-layout layui-layout-admin">
       <!-- 头部区域 -->
       <div class="layui-header">
@@ -118,14 +118,14 @@
         <i class="layui-icon layui-icon-shrink-right" id="operate_app_flexible"></i>
       </a>
     </li>
-    <li class="layui-nav-item layui-this">
+    <li class="layui-nav-item layui-this console">
       <a href="javascript:;" data-nav="console">
         <i class="nav-icon navHome"></i>
         <span>工作台</span>
       </a>
     </li>
     {{#  layui.each(d[0], function(index, item){ }}
-    <li class="layui-nav-item ">
+    <li class="layui-nav-item nav{{index+1}}">
       <a href="javascript:;" data-nav="{{item.iconClass}}">
         <i class="nav-icon {{item.iconClass}}"></i>
         <span>
