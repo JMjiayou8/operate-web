@@ -45,7 +45,7 @@ layui.define(function (exports) {
             {
               name: 'index1',
               icon: '',
-              title: '客户群管理',
+              title: '目标客户配置',
               path: 'targetUser/index1'
             },
             {

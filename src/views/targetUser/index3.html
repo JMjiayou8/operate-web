@@ -13,9 +13,175 @@
 
 <body>
   <div class="layui-fluid common-page">
-    目标客户管理
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <form class="layui-form layui-row" wid140>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">客户群名称：</label>
+            <div class="layui-input-block">
+              <input type="text" name="name" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">目标客户提取模式：</label>
+            <div class="layui-input-block">
+              <select name="status" id="">
+                <option value="1">全部</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+              <button class="layui-btn" type="button">查询</button> </div>
+          </div>
+        </form>
+        <table id="table1"></table>
+      </div>
+    </div>
   </div>
+  <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs">修改</a>
+    <a class="layui-btn layui-btn-xs">删除</a>
+  </script>
   <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
+        var form = layui.form,
+          table = layui.table;
+        table.render({
+          elem: '#table1',
+          page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['prev', 'page', 'next', 'skip'],
+            theme: 'common', //自定义分页布局
+            limit: 10
+          },
+          cols: [
+            [
+
+              {
+                field: 'name',
+                title: '客户群名称',
+                width: '10%'
+              },
+              {
+                field: 'desc',
+                title: '描述'
+
+              },
+              {
+                field: 'userNum',
+                title: '用户量',
+                width: '10%'
+              },
+              {
+                field: 'creator',
+                title: '创建人',
+                width: '10%'
+              },
+              {
+                field: 'creatDate',
+                title: '创建时间',
+                width: '10%'
+              },
+              {
+                field: 'status',
+                title: '状态',
+                width: '10%'
+              },
+              {
+                title: '操作',
+                toolbar: '#barDemo',
+              }
+            ]
+          ],
+          data: [{
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '待审批'
+            }, {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '待审批'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '待审批'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '待审批'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '待审批'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '审批通过'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '审批通过'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '审批未通过'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '审批未通过'
+            },
+            {
+              name: '931955',
+              desc: '',
+              userNum: '10000',
+              creator: 'SUPERUSER',
+              creatDate: '2019-10-22 00:00:00',
+              status: '审批未通过'
+            }
+          ]
+        })
+      })
+  </script>
 </body>
 
 </html>

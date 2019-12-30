@@ -9,13 +9,294 @@
   <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
   <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
   <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+  <style>
+    .overview-wrap {
+      border-left: 1px solid #d2d2d2;
+    }
+
+    .overview-wrap li {
+      padding: 0 20px;
+      height: 150px;
+    }
+
+    .overview-wrap .title,
+    .overview-wrap .num {
+      font-size: 16px;
+      margin-right: 10px;
+    }
+  </style>
 </head>
 
 <body>
   <div class="layui-fluid common-page">
-    策略执行
+    <div class="layui-card">
+      <div class="layui-card-header">
+        实时指标
+        <i class="layui-icon layui-icon-refresh"></i>
+      </div>
+      <div class="layui-card-body layui-row layui-col-space10">
+        <div class="layui-col-md8 layui-col-sm8">
+          <div id="chart" style="width: 100%;height: 300px;"></div>
+        </div>
+        <ul class="layui-col-md4 layui-col-sm4 overview-wrap">
+          <li>
+            <p class="clearfix"><span class="title fl">已完成活动</span><a class="fr layui-link"
+                href="javascript:;">实时查询></a></p>
+            <p><span class="num">0</span><span>个</span></p>
+          </li>
+          <li>
+            <p class="clearfix"><span class="title fl">未完成活动</span><a class="fr layui-link"
+                href="javascript:;">实时查询></a></p>
+            <p><span class="num">2</span><span>个</span></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="layui-card">
+      <div class="layui-card-header">
+        过程指标
+      </div>
+      <div class="layui-card-body">
+        <form class="layui-form layui-row">
+          <div class="layui-form-item layui-col-md12 layui-col-sm12">
+            <label class="layui-form-label">时间：</label>
+            <div class="layui-inline">
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="startDate" name="startDate" placeholder="yyyy-MM-dd">
+              </div>
+              <div class="layui-form-mid">至</div>
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="endDate" name="endDate" placeholder="yyyy-MM-dd">
+              </div>
+            </div>
+
+          </div>
+          <div class="layui-form-item layui-col-md12 layui-col-sm12">
+            <label class="layui-form-label">地市：</label>
+            <div class="layui-input-block">
+              <input type="checkbox" name="like1[write]" lay-skin="primary" title="全省" checked="">
+              <input type="checkbox" name="like1[广州市]" lay-skin="primary" title="广州市">
+              <input type="checkbox" name="like1[深圳市]" lay-skin="primary" title="深圳市">
+              <input type="checkbox" name="like1[佛山市]" lay-skin="primary" title="佛山市">
+              <input type="checkbox" name="like1[东莞市]" lay-skin="primary" title="东莞市">
+              <input type="checkbox" name="like1[中山市]" lay-skin="primary" title="中山市">
+              <input type="checkbox" name="like1[珠海市]" lay-skin="primary" title="珠海市">
+              <input type="checkbox" name="like1[江门市]" lay-skin="primary" title="江门市">
+              <input type="checkbox" name="like1[肇庆市]" lay-skin="primary" title="肇庆市">
+              <input type="checkbox" name="like1[惠州市]" lay-skin="primary" title="惠州市">
+              <input type="checkbox" name="like1[汕头市]" lay-skin="primary" title="汕头市">
+              <input type="checkbox" name="like1[潮州市]" lay-skin="primary" title="潮州市">
+              <input type="checkbox" name="like1[揭阳市]" lay-skin="primary" title="揭阳市">
+              <input type="checkbox" name="like1[汕尾市]" lay-skin="primary" title="汕尾市">
+              <input type="checkbox" name="like1[湛江市]" lay-skin="primary" title="湛江市">
+              <input type="checkbox" name="like1[茂名市]" lay-skin="primary" title="茂名市">
+              <input type="checkbox" name="like1[阳江市]" lay-skin="primary" title="阳江市">
+              <input type="checkbox" name="like1[云浮市]" lay-skin="primary" title="云浮市">
+              <input type="checkbox" name="like1[韶关市]" lay-skin="primary" title="韶关市">
+              <input type="checkbox" name="like1[清远市]" lay-skin="primary" title="清远市">
+              <input type="checkbox" name="like1[梅州市]" lay-skin="primary" title="梅州市">
+              <input type="checkbox" name="like1[河源市]" lay-skin="primary" title="河源市">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">活动：</label>
+            <div class="layui-input-block">
+              <select name="status" id="">
+                <option value="1">全部</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">活动名称：</label>
+            <div class="layui-input-block">
+              <input type="text" name="creator" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md12 layui-col-sm12">
+            <label class="layui-form-label">触点：</label>
+            <div class="layui-input-block">
+              <input type="checkbox" name="chnl[1]" lay-skin="primary" title="老用户专区" checked="">
+              <input type="checkbox" name="chnl[2]" lay-skin="primary" title="微信专区">
+              <input type="checkbox" name="chnl[3]" lay-skin="primary" title="支付宝">
+              <input type="checkbox" name="chnl[4]" lay-skin="primary" title="手厅">
+              <input type="checkbox" name="chnl[5]" lay-skin="primary" title="网厅">
+              <input type="checkbox" name="chnl[6]" lay-skin="primary" title="老用户特惠区">
+              <input type="checkbox" name="chnl[7]" lay-skin="primary" title="短信">
+              <input type="checkbox" name="chnl[8]" lay-skin="primary" title="外呼">
+              <input type="checkbox" name="chnl[9]" lay-skin="primary" title="客服弹窗">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+              <button class="layui-btn" type="button">查询</button> </div>
+          </div>
+        </form>
+        <table id="table1"></table>
+      </div>
+    </div>
   </div>
+  <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs">失效</a>
+    <a class="layui-btn layui-btn-xs">暂停</a>
+  </script>
   <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .extend({
+        index: 'lib/index' //主入口模块
+      })
+      .use(['index', 'table', 'laydate', 'form', 'echarts'], function () {
+        var form = layui.form,
+          table = layui.table,
+          echarts = layui.echarts,
+          laydate = layui.laydate;
+        laydate.render({
+          elem: '#startDate',
+        })
+        laydate.render({
+          elem: '#endDate',
+        })
+        table.render({
+          elem: '#table1',
+          page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['prev', 'page', 'next', 'skip'],
+            theme: 'common', //自定义分页布局
+            limit: 10
+          },
+          data: [],
+          cols: [
+            [
+
+              {
+                field: 'name',
+                title: '活动名称',
+                width: '10%'
+              },
+              {
+                field: 'desc',
+                title: '初始客户群',
+                width: '10%'
+              },
+
+              {
+                field: 'creator',
+                title: '重复过滤量',
+                width: '10%'
+              },
+              {
+                field: 'updator',
+                title: '可用客户群',
+                width: '10%'
+              },
+              {
+                field: 'status',
+                title: '渠道',
+                width: '5%'
+              },
+              {
+                field: 'updateDate',
+                title: '频次过滤',
+                width: '10%'
+              },
+              {
+                field: 'prop1',
+                title: '免打扰过滤',
+                width: '10%'
+              },
+              {
+                field: 'prop2',
+                title: '产品互斥过滤',
+                width: '10%'
+              },
+              {
+                field: 'prop3',
+                title: '成功推送量',
+              },
+
+
+            ]
+          ],
+        })
+        var echartsApp = null;
+        var option = {
+          backgroundColor: '#fff',
+          color: ['#f9932e', '#333'],
+          grid: {
+            containLabel: true,
+            top: 60,
+            left: 0,
+            right: 150,
+            bottom: 0,
+          },
+          xAxis: [{
+            type: 'category',
+            data: ['9点', '10点', '11点', '12点', '14点', '16点', '18点', '20点', '22点', '23点'],
+            axisLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLabel: {
+              color: '#999999',
+              fontSize: 14
+            }
+
+          }],
+          yAxis: [{
+            type: 'value',
+            axisLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#f1f1f2'
+              }
+
+            },
+            axisLabel: {
+              color: '#999999',
+              fontSize: 14
+            }
+          }],
+          legend: {
+            data: ['未完成活动', '已完成活动']
+          },
+          series: [{
+              name: '未完成活动',
+              type: 'line',
+              data: [0, 0, 1, 2, 3],
+
+            },
+            {
+              name: '已完成活动',
+              type: 'line',
+
+
+              data: [0, 0, 0, 0, 0],
+            }
+          ]
+        }
+
+        function rendChart() {
+          echartsApp = echarts.init(document.getElementById('chart'), layui.echartsTheme);
+          echartsApp.setOption(option);
+          admin.resize(function () {
+            echartsApp.resize();
+          });
+
+        }
+
+        rendChart();
+      })
+  </script>
 </body>
 
 </html>
