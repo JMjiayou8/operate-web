@@ -1,11 +1,11 @@
 var showMonthList = [];
 var wholeMonthList;
-var curMonth=new Date();
-var activeMonth =formatterDate(curMonth) ;
+var curMonth = new Date();
+var activeMonth = formatterDate(curMonth);
 // 获取全部月份数据
-var getWholeMonth = function(start) {
+var getWholeMonth = function (start) {
   var year = new Date(start).getFullYear();
-  var month = new Date(start).getMonth()+1;
+  var month = new Date(start).getMonth() + 1;
 
   var jump = (curMonth.getFullYear() - year) * 12 + curMonth.getMonth() - month + 1
   var re = []
@@ -16,27 +16,27 @@ var getWholeMonth = function(start) {
   return re
 }
 //渲染时间轴
-function rendList (month , offset ) {
-  activeMonth = month||formatterDate(curMonth);
-  offset=offset||0
+function rendList (month, offset) {
+  activeMonth = month || formatterDate(curMonth);
+  offset = offset || 0
   showMonthList = wholeMonthList.slice(wholeMonthList.length - 12 - offset, wholeMonthList.length - offset)
 
-  var validArr=[],listArr=[];
-  for(var i=0;i<wholeMonthList.length;i++){
-    if(new Date(wholeMonthList[i])<curMonth){
+  var validArr = [], listArr = [];
+  for (var i = 0; i < wholeMonthList.length; i++) {
+    if (new Date(wholeMonthList[i]) < curMonth) {
       validArr.push(wholeMonthList[i])
     }
   }
-  for(var i=0;i<showMonthList.length;i++){
-    var item=showMonthList[i];
-    listArr.push('<li class="timeLine-item '+(item == activeMonth ? 'active' : '')+' '+((new Date(item) > curMonth) ? 'disabled' : '')+' " onclick="clickMonth(\''+item+'\');"><p>'+item+'</p><i></i></li>')
+  for (var i = 0; i < showMonthList.length; i++) {
+    var item = showMonthList[i];
+    listArr.push('<li class="timeLine-item ' + (item == activeMonth ? 'active' : '') + ' ' + ((new Date(item) > curMonth) ? 'disabled' : '') + ' " ' + ((new Date(item) > curMonth) ? '' : 'onclick="clickMonth(\'' + item + '\');') + '"><p>' + item + '</p><i></i></li>')
   }
-  var prevFlag=activeMonth == validArr[0],nextFlag=activeMonth == validArr[validArr.length - 1] ;
-  var prevHtml = '<div class="fl timeLine-prev '+(prevFlag?'disabled':'')+'" ' + (prevFlag ? '' : 'onclick="change(\'prev\')"') + '></div>'
-  var nextHtml = '<div class="fl timeLine-next '+(nextFlag?'disabled':'')+'" ' + (nextFlag ? '' : 'onclick="change(\'next\')"') +
+  var prevFlag = activeMonth == validArr[0], nextFlag = activeMonth == validArr[validArr.length - 1];
+  var prevHtml = '<div class="fl timeLine-prev ' + (prevFlag ? 'disabled' : '') + '" ' + (prevFlag ? '' : 'onclick="change(\'prev\')"') + '></div>'
+  var nextHtml = '<div class="fl timeLine-next ' + (nextFlag ? 'disabled' : '') + '" ' + (nextFlag ? '' : 'onclick="change(\'next\')"') +
     '></div>'
   $('#timeLine').html([prevHtml, '<div class="timeLine-body "><ul class="timeLine-slide" >' + listArr.join('') + '</ul></div>', nextHtml].join(''))
-  renderPage({month:activeMonth})
+  renderPage({ month: activeMonth })
 }
 // 月份点击事件
 function clickMonth (month) {
@@ -62,12 +62,12 @@ function change (dir) {
   }
 }
 
-function formatterDate(date){
-  var dateVal=new Date(date);
-  return dateVal.getFullYear()+'-'+addZero(date.getMonth()+1)
+function formatterDate (date) {
+  var dateVal = new Date(date);
+  return dateVal.getFullYear() + '-' + addZero(date.getMonth() + 1)
 }
-function addZero(num){
-  return num<10?'0'+num:num
+function addZero (num) {
+  return num < 10 ? '0' + num : num
 }
 
-$('.timeLine-wrapper').onselectstart = function(){return false;};
+$('.timeLine-wrapper').onselectstart = function () { return false; };

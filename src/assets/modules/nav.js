@@ -122,6 +122,13 @@ layui.define(function (exports) {
             },
           ]
         },
+        {
+          name: 'nav3',
+          icon: '',
+          title: '策略执行统计报表',
+          path: 'nav3/index'
+
+        }
       ],
       nav4: [],
       nav5: [],
@@ -142,6 +149,18 @@ layui.define(function (exports) {
               icon: '',
               title: '营销产品评估',
               path: 'digital/strategyAssessSimple'
+            },
+            {
+              name: 'productAnalysis',
+              icon: '',
+              title: '产品分析',
+              path: 'digital/productAnalysis'
+            },
+            {
+              name: 'strategyAnalysis',
+              icon: '',
+              title: '策略分析',
+              path: 'digital/strategyAnalysis'
             },
           ]
         },

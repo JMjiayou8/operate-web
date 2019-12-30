@@ -15,7 +15,6 @@
 
 <body>
   <div class="layui-fluid common-page ">
-
     <form class="layui-form layui-row inline-form" wid110>
       <div class="layui-form-item layui-col-md6 layui-col-sm6">
         <label class="layui-form-label">归属省份：</label>
@@ -49,7 +48,8 @@
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
         <div class="layui-input-block">
-          <button type="button" class="layui-btn "><i class="layui-icon layui-icon-add-1"></i>添加问题</button>
+          <button type="button" class="layui-btn " onclick="addProblem()"><i
+              class="layui-icon layui-icon-add-1"></i>添加问题</button>
           <button type="button" class="layui-btn "><i class="layui-icon-import"></i>导入问题</button>
           <button type="button" class="layui-btn"><i class="layui-icon-import"></i>导入话术</button>
         </div>
@@ -92,6 +92,19 @@
         layedit.build('demo2', {
           height: 180
         });
+        window.addProblem = function () {
+          layer.open({
+            type: 2,
+            title: '添加问题',
+            skin: 'common-layer',
+            area: ['1100px', '550px'],
+            content: './addProblem.html',
+            btn: ['确定', '取消'],
+            yes: function () {
+              layer.closeAll()
+            }
+          })
+        }
 
       })
   </script>

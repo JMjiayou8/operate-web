@@ -1,16 +1,13 @@
+
+
 $(function () {
-  rendTimeLine(new Date().getMonth());//初始化时间轴区域
-  rendPage()
+  var startMonth = '2019-06'
+  wholeMonthList = getWholeMonth(startMonth)
+  rendList()
 })
 
-// 时间轴点击事件
-function clickTimeLine (i, month) {
-  console.log(i, month)
-  rendTimeLine(i)
-  rendPage()
-}
 
-function rendPage () {
+function renderPage () {
   //todo 数据操作
   var width = $('#chart1').width()
   var legendData = ['推送量', '订购量']

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>策略执行统计报表</title>
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="layui-fluid common-page">
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <form class="layui-form layui-row" wid140>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">策略名称：</label>
+            <div class="layui-input-block">
+              <input type="text" name="name" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">触点名称：</label>
+            <div class="layui-input-block">
+              <select name="status" id="">
+                <option value="1">全部</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">执行时间：</label>
+            <div class="layui-input-block">
+              <input type="text" id="dateRange" name="dateRange" class="layui-input" placeholder="请选择时间范围">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+              <button class="layui-btn" type="button">查询</button> </div>
+          </div>
+        </form>
+        <table id="table1"></table>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
+        var form = layui.form,
+          table = layui.table,
+          laydate = layui.laydate;
+        laydate.render({
+          elem: '#dateRange',
+          range: true,
+          format: 'yyyy/MM/dd'
+        })
+
+        table.render({
+          elem: '#table1',
+          page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['prev', 'page', 'next', 'skip'],
+            theme: 'common', //自定义分页布局
+            limit: 10
+          },
+          cols: [
+            [{
+                field: 'name',
+                title: '策略名称',
+                width: '10%'
+              },
+              {
+                field: 'chnl',
+                title: '执行触点',
+                width: '10%'
+
+              },
+              {
+                field: 'userNum',
+                title: '用户总数',
+                width: '10%'
+              },
+              {
+                field: 'num1',
+                title: '过滤数',
+                width: '10%'
+              },
+              {
+                field: 'num2',
+                title: '推送数',
+                width: '10%'
+              },
+              {
+                field: 'num3',
+                title: '订购数',
+                width: '10%'
+              },
+              {
+                field: 'num4',
+                title: '订购率',
+                width: '10%'
+
+              },
+              {
+                field: 'num5',
+                title: '任务回收数',
+
+              }
+            ]
+          ],
+          data: [{
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 23451,
+              num2: 123876,
+              num3: 145,
+              num4: 1234,
+              num5: 23451
+            }, {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 2345,
+              num2: 4561,
+              num3: 2345,
+              num4: 81,
+              num5: 15
+            },
+            {
+              name: '7天包执行策略',
+              chnl: '微信',
+              userNum: 1000,
+              num1: 1234,
+              num2: 91,
+              num3: 34123,
+              num4: 14,
+              num5: 189
+            },
+            {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 51,
+              num2: 71,
+              num3: 56781,
+              num4: 31,
+              num5: 21
+            },
+            {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 41,
+              num2: 56781,
+              num3: 8,
+              num4: 3,
+              num5: 5
+            },
+            {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 5671,
+              num2: 45,
+              num3: 4,
+              num4: 0,
+              num5: 3
+            }, {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 0,
+              num2: 21,
+              num3: 0,
+              num4: 9,
+              num5: 10
+            }, {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 6,
+              num2: 6,
+              num3: 4,
+              num4: 11,
+              num5: 9
+            }, {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 3,
+              num2: 2,
+              num3: 7,
+              num4: 4,
+              num5: 0
+            }, {
+              name: '7天包执行策略',
+              chnl: '短信',
+              userNum: 1000,
+              num1: 2,
+              num2: 5,
+              num3: 13,
+              num4: 2,
+              num5: 11
+            }
+          ]
+        })
+      })
+  </script>
+</body>
+
+</html>
