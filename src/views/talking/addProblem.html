@@ -154,29 +154,9 @@
           </ul>
         </div>
       </div>
-
-
       <div id="paramWrap"></div>
+      <div id="relyWrap"></div>
 
-      <p class="tip">项目先决条件</p>
-      <div class="layui-form-item layui-col-md4 layui-col-sm4">
-        <label class="layui-form-label">项目级别：</label>
-        <div class=" layui-input-block ">
-          <select name="" id=""></select>
-        </div>
-      </div>
-      <div class="layui-form-item layui-col-md4 layui-col-sm4">
-        <label class="layui-form-label">依赖项目：</label>
-        <div class=" layui-input-block ">
-          <select name="" id=""></select>
-        </div>
-      </div>
-      <div class="layui-form-item layui-col-md4 layui-col-sm4">
-        <label class="layui-form-label">依赖选项：</label>
-        <div class=" layui-input-block ">
-          <select name="" id=""></select>
-        </div>
-      </div>
     </form>
   </div>
   <script id="paramTemplate" type="text/html">
@@ -194,7 +174,7 @@
       <label class="layui-form-label layui-required">问题标题：</label>
       <div class=" layui-input-block ">
         <textarea type="text" class="layui-textarea" name="title" lay-verify="required" onblur="getTitleInput(this)"
-          value="{{d.title}}">{{d.title}}</textarea>
+          value="{{d.itemDesc}}">{{d.itemDesc}}</textarea>
       </div>
     </div>
     {{# }else{ }}
@@ -202,16 +182,16 @@
       <label class="layui-form-label layui-required">问题标题：</label>
       <div class=" layui-input-block ">
         <input type="text" class="layui-input" name="title" lay-verify="required" onblur="getTitleInput(this)"
-          value="{{d.title}}">
+          value="{{d.itemDesc}}">
       </div>
     </div>
-    {{#  layui.each(d.params, function(index, item){ }}
+    {{#  layui.each(d.options, function(index, item){ }}
     <div class="layui-form-item layui-col-md12 layui-col-sm12">
       {{#  if(index=== 0){ }} <label class="layui-form-label layui-required">问题描述：</label> {{#  } }}
       <div class=" layui-input-block desc-input">
         <i class="index">{{index+1}}</i>
-        <input type="text" class="layui-input " name="desc[1]" onblur="getParamInput(this,'{{index}}')" value="{{item}}"
-          lay-verify="required">
+        <input type="text" class="layui-input " name="desc[1]" onblur="getParamInput(this,'{{index}}')"
+          value="{{item.optionDes}}" lay-verify="required">
         <button type="button" class="layui-btn  layui-btn-sm  layui-btn-add" data-index="{{index}}">
           <i class="layui-icon layui-icon-add-1"></i> 添加
         </button>
@@ -222,6 +202,38 @@
     </div>
     {{#  }); }}
     {{# } }}
+  </script>
+  <script id="relyTemplate" type="text/html">
+    <p class="tip">项目先决条件</p>
+    <div class="layui-form-item layui-col-md4 layui-col-sm4">
+      <label class="layui-form-label">项目级别：</label>
+      <div class=" layui-input-block ">
+        <select name="itemGrade" {{d.data.length==0?'disabled':''}} lay-filter="problem-itemGrade">
+          <option value="1" {{d.itemGrade=='1'?'selected':''}}>一级</option>
+          <option value="2" {{d.itemGrade=='2'?'selected':''}}>二级</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-col-md4 layui-col-sm4">
+      <label class="layui-form-label">依赖项目：</label>
+      <div class=" layui-input-block ">
+        <select name="" {{(d.data.length>0&&d.itemGrade=='2')?'':'disabled'}} lay-filter="rely-project">
+          {{#  layui.each(d.data, function(i, obj){ }}
+          <option value="{{obj.itemCode}}" {{obj.itemCode==d.dependItemCode?'selected':''}}>{{obj.itemDesc}}</option>
+          {{#  }); }}
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-col-md4 layui-col-sm4">
+      <label class="layui-form-label">依赖选项：</label>
+      <div class=" layui-input-block ">
+        <select name="" {{(d.data.length>0&&d.itemGrade=='2')?'':'disabled'}} lay-filter="rely-param">
+          {{#  layui.each(d.options, function(i, obj){ }}
+          <option value="{{obj.optionId}}" {{obj.optionId==d.dependOptionId?'selected':''}}>{{obj.optionDes}}</option>
+          {{#  }); }}
+        </select>
+      </div>
+    </div>
   </script>
   <script src="../../assets/layui/layui.js"></script>
   <script>
@@ -235,79 +247,153 @@
           laytpl = layui.laytpl,
           layer = layui.layer;
         var pageData = {
-          type: 'radio',
-          isRequired: false,
-          title: '',
-          params: ['']
+          type: 'radio', //类型
+          itemCode: '', //编码
+          itemDesc: '', //名称
+          isRequired: false, //是否必填
+          options: [{ //描述
+            optionDes: '',
+            optionId: '0'
+          }],
+          itemGrade: '1', //级别
+          dependItemCode: '', //依赖项目
+          dependOptionId: "" //依赖选项
         }
+        var problemList = [];
+        var relyData = {
+          itemGrade: '1',
+          dependItemCode: '',
+          dependOptionId: "",
+          data: [],
+          options: []
+        };
         $('.elemType-item').click(function (obj) {
           $('.elemType-item').removeClass('active')
           pageData.type = $(this).data('type')
           if (['radio', 'checkbox', 'select'].indexOf(pageData.type) == -1) {
-            delete pageData.params
+            delete pageData.options
           } else {
-            pageData.params = ['']
+            pageData.options = [{
+              optionDes: '',
+              optionId: '0'
+            }]
           }
-          renderSelectWrap()
+          renderParamWrap()
           $(this).addClass('active')
         })
 
-        function renderSelectWrap() {
+        function renderParamWrap() {
           var getTpl = paramTemplate.innerHTML,
             selectWrap = document.getElementById('paramWrap');
           laytpl(getTpl).render(pageData, function (html) {
             selectWrap.innerHTML = html;
             form.render()
             setData()
-
           });
         }
-
         // 添加一行触点选择
         $(document).on('click', '.layui-btn-add', function () {
-          pageData.params.push('')
-          renderSelectWrap()
+          pageData.options.push({
+            optionDes: '',
+            optionId: ''
+          })
+          renderParamWrap()
         })
         // 删除一行触点选择
         $(document).on('click', '.layui-btn-del', function (evt) {
           var index = $(evt.target).data('index')
-          if (pageData.params.length > 1) {
-            pageData.params.splice(index, 1)
-            renderSelectWrap()
+          if (pageData.options.length > 1) {
+            pageData.options.splice(index, 1)
+            renderParamWrap()
           } else {
             layer.msg('至少保留一条配置');
           }
         })
         // 保留输入
         window.getParamInput = function (obj, index) {
-          pageData.params[index] = $(obj).val()
+          pageData.options[index] = {
+            optionDes: $(obj).val(),
+            optionId: index
+          }
           setData()
         }
         window.getTitleInput = function (obj) {
-          pageData.title = $(obj).val()
+          pageData.itemDesc = $(obj).val()
           setData()
         }
         form.on('radio(isRequired)', function (data) {
           pageData.isRequired = data.value;
           setData()
         });
-
+        //传值回主页面
         function setData() {
+          // console.log('pageData==', pageData)
           layui.data('talking', {
             key: 'problem',
             value: pageData
           });
         }
+        // 渲染先决条件
+        function renderRelyWrap() {
+          var getTpl = relyTemplate.innerHTML,
+            selectWrap = document.getElementById('relyWrap');
+          // console.log('relyData===', relyData)
+          laytpl(getTpl).render(relyData, function (html) {
+            selectWrap.innerHTML = html;
+            form.render()
+          });
+        }
+        // 项目级别
+        form.on('select(problem-itemGrade)', function (obj) {
+          pageData.itemGrade = relyData.itemGrade = obj.value;
+          if (relyData.itemGrade == '2') {
+            relyData.options = relyData.data[0].options || []
+            // relyData.dependItemCode = pageData.dependItemCode = relyData.data[0].itemCode
+            relyData.dependItemCode = pageData.dependItemCode = relyData.data[0].itemDesc
+            relyData.dependOptionId = pageData.dependOptionId = relyData.options[0].optionId
+          } else {
+            relyData.options = []
+            relyData.dependItemCode = pageData.dependItemCode = ''
+            relyData.dependOptionId = pageData.dependOptionId = ''
+          }
+          renderRelyWrap()
+          setData()
+        })
+        // 依赖项目
+        form.on('select(rely-project)', function (obj) {
+          for (var i = 0; i < relyData.data.length; i++) {
+            if (relyData.data[i].itemCode == obj.value) {
+              relyData.options = relyData.data[i].options || []
+              relyData.dependItemCode = pageData.dependItemCode = relyData.data[i].itemCode
+              relyData.dependOptionId = pageData.dependOptionId = relyData.options[0].optionId
+            }
+          }
+          renderRelyWrap()
+          setData()
+        })
+        // 依赖选项
+        form.on('select(rely-param)', function (obj) {
+          relyData.dependOptionId = pageData.dependOptionId = obj.value
+          renderRelyWrap()
+          setData()
+        })
         $(function () {
           var pageType = location.search.split('=')[1]
           if (pageType == 'edit') {
             pageData = layui.data('talking').problem;
-            renderSelectWrap()
             $('.elemType-item').removeClass('active')
             $('.elemType-item[data-type=' + pageData.type + ']').addClass('active')
           } else {
-            renderSelectWrap()
+            problemList = layui.data('talking').problemList;
+            relyData.data = [];
+            for (var i = 0; i < problemList.length; i++) {
+              if (['radio', 'checkbox', 'select'].indexOf(problemList[i].type) > -1) {
+                relyData.data.push(problemList[i])
+              }
+            }
           }
+          renderParamWrap()
+          renderRelyWrap()
         })
       })
   </script>

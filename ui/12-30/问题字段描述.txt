@@ -1,0 +1,95 @@
+    /**
+     * 问题id
+     */
+    private Long itemId;
+
+    /**
+     * 话术id
+     */
+    private Long templateCode;
+
+    /**
+     * 项目编码
+     */
+    private String itemCode;
+
+    /**
+     * 话术分类(关联话术)
+     */
+    private String tempCategory;
+
+    /**
+     * 问题大类
+     */
+    private String measureClass;
+
+    /**
+     * 问题小类
+     */
+    private String measureType;
+
+    /**
+     * 问题名称
+     */
+    private String itemDesc;
+
+    /**
+     * 问题类型(如：1-单选 1:问题类型，单选:问题类型描述)
+     */
+    private String itemType;
+
+    /**
+     * 问题状态
+     */
+    private String itemStatus;
+
+    /**
+     * 问题样式描述(问题类型描述，如单选，多选，)
+     */
+    private String itemStyle;
+
+    /**
+     * 问题
+     */
+    private String remark;
+
+    /**
+     * 问题层次
+     */
+    private Integer itemLevel;
+
+    /**
+     * 问题编号(用于问题排序展示)
+     */
+    private Integer itemIndex;
+
+    /**
+     * 创建人
+     */
+    private String createStaffId;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 归属地市
+     */
+    private String eparchyCode;
+
+
+    /**
+     * 项目级别(1:一级；2:二级)
+     */
+    private String itemGrade;
+
+    /**
+     * 依赖项目(如果项目级别为二级时改字段必填)
+     */
+    private String dependItemCode;
+
+    /**
+     * 依赖项目选项
+     */
+    private String dependOptionId;

@@ -71,24 +71,24 @@
   <script id="contentTemplate" type="text/html">
     {{#  layui.each(d, function(index, item){ }}
     <div class="layui-form-item ">
-      <label class="layui-form-label {{item.isRequired?'layui-required':''}}">{{index+1}}、{{item.title}}</label>
+      <label class="layui-form-label {{item.isRequired?'layui-required':''}}">{{index+1}}、{{item.itemDesc}}</label>
       {{# if(item.type=='radio'){ }}
       <div class="layui-input-block ">
-        {{#  layui.each(item.params, function(i, obj){ }}
-        <input type="radio" name="radio{{index}}" value="{{i}}" title="{{obj}}" />
+        {{#  layui.each(item.options, function(i, obj){ }}
+        <input type="radio" name="radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDes}}" />
         {{#  }); }}
       </div>
       {{# }else if(item.type=='checkbox'){ }}
       <div class=" layui-input-block ">
-        {{#  layui.each(item.params, function(i, obj){ }}
-        <input type="checkbox" name="check{{index}}[{{i}}]" lay-skin="primary" title="{{obj}}" />
+        {{#  layui.each(item.options, function(i, obj){ }}
+        <input type="checkbox" name="check{{index}}[{{obj.optionId}}]" lay-skin="primary" title="{{obj.optionDes}}" />
         {{#  }); }}
       </div>
       {{# }else if(item.type=='select'){ }}
       <div class=" layui-input-block ">
         <select>
-          {{#  layui.each(item.params, function(i, obj){ }}
-          <option value="{{i}}">{{obj}}</option>
+          {{#  layui.each(item.options, function(i, obj){ }}
+          <option value="{{obj.optionId}}">{{obj.optionDes}}</option>
           {{#  }); }}
         </select>
       </div>
@@ -130,37 +130,87 @@
         //问题列表，模拟数据，默认[]
         var contentData = [
           // {
-          //   type: "radio",
-          //   isRequired: false,
-          //   title: "是否开心1",
-          //   params: ["开心", "不开心"]
-          // }, {
-          //   type: "checkbox",
-          //   isRequired: true,
-          //   title: "是否开心2",
-          //   params: ["开心", "不开心"]
-          // },
-          // {
-          //   type: "select",
-          //   isRequired: true,
-          //   title: "是否开心3",
-          //   params: ["开心", "不开心"]
-          // },
-          // {
-          //   type: "input",
-          //   isRequired: false,
-          //   title: "input",
-          // },
-          // {
-          //   type: "textarea",
-          //   isRequired: false,
-          //   title: "textarea",
-          // },
-          // {
-          //   type: "desc",
-          //   isRequired: false,
-          //   title: "desc",
-          // }
+          //     "itemCode": '1',
+          //     "type": "radio",
+          //     "isRequired": false,
+          //     "itemDesc": "radio",
+
+          //     "options": [{
+          //       "optionDes": "是",
+          //       "optionId": "0"
+          //     }, {
+          //       "optionDes": "否",
+          //       "optionId": "1"
+          //     }],
+          //     "itemGrade": "1",
+          //     "dependItemCode": "",
+          //     "dependOptionId": ""
+          //   },
+          //   {
+          //     "itemCode": '2',
+          //     "type": "checkbox",
+          //     "isRequired": false,
+          //     "itemDesc": "checkbox",
+          //     "options": [{
+          //       "optionDes": "checkbox-option1",
+          //       "optionId": "0"
+          //     }, {
+          //       "optionDes": "checkbox-option2",
+          //       "optionId": "1"
+          //     }, {
+          //       "optionDes": "checkbox-option3",
+          //       "optionId": "2"
+          //     }, {
+          //       "optionDes": "checkbox-option4",
+          //       "optionId": "3"
+          //     }],
+          //     "itemGrade": "1",
+          //     "dependItemCode": "",
+          //     "dependOptionId": ""
+          //   }, {
+          //     "itemCode": '3',
+          //     "type": "select",
+          //     "isRequired": true,
+          //     "itemDesc": "select",
+          //     "options": [{
+          //       "optionDes": "select-option1",
+          //       "optionId": "0"
+          //     }, {
+          //       "optionDes": "select-option2",
+          //       "optionId": "1"
+          //     }, {
+          //       "optionDes": "select-option3",
+          //       "optionId": "2"
+          //     }],
+          //     "itemGrade": "1",
+          //     "dependItemCode": "",
+          //     "dependOptionId": ""
+          //   }, {
+          //     "itemCode": '4',
+          //     "type": "input",
+          //     "isRequired": false,
+          //     "itemDesc": "input",
+          //     "itemGrade": "1",
+          //     "dependItemCode": "",
+          //     "dependOptionId": ""
+          //   },
+          //   {
+          //     "itemCode": '5',
+          //     "type": "textarea",
+          //     "isRequired": true,
+          //     "itemDesc": "textarea",
+          //     "itemGrade": "1",
+          //     "dependItemCode": "",
+          //     "dependOptionId": ""
+          //   }, {
+          //     "itemCode": '6',
+          //     "type": "desc",
+          //     "isRequired": "true",
+          //     "itemDesc": "desc",
+          //     "itemGrade": "1",
+          //     "dependItemCode": "",
+          //     "dependOptionId": ""
+          //   }
         ];
         layedit.build('demo1', {
           height: 180
@@ -169,11 +219,19 @@
         layedit.build('demo2', {
           height: 180
         });
+
+        function setListData() {
+          layui.data('talking', {
+            key: 'problemList',
+            value: contentData
+          });
+        }
         window.addProblem = function (type, dataIndex) {
           layui.data('talking', {
             key: 'problem',
             value: contentData[dataIndex]
           });
+          setListData()
           layer.open({
             type: 2,
             title: '添加问题',
@@ -186,16 +244,18 @@
 
               function setData() {
                 if (type == 'add') {
+                  problemData.itemCode = "" + (contentData.length + 1);
                   contentData.push(problemData)
                 } else {
                   contentData[dataIndex] = problemData
                 }
+                setListData()
                 renderContent()
                 layer.closeAll()
               }
-              if (problemData.title) {
+              if (problemData.itemDesc) {
                 if (['radio', 'checkbox', 'select'].indexOf(problemData.type) > -1) {
-                  if (problemData.params.length > 0 && problemData.params[0] !== '') {
+                  if (problemData.options.length > 0 && problemData.options[0].optionId !== '') {
                     setData()
                   } else {
                     layer.msg('请填完所有必填项')
@@ -219,8 +279,13 @@
         function renderContent(data) {
           var getTpl = contentTemplate.innerHTML,
             selectWrap = document.getElementById('contentWrap');
-          laytpl(getTpl).render(contentData, function (html) {
-            // console.log(contentData)
+          var pageData = []
+          for (var i = 0; i < contentData.length; i++) {
+            if (contentData[i].itemGrade == '1') {
+              pageData.push(contentData[i])
+            }
+          }
+          laytpl(getTpl).render(pageData, function (html) {
             selectWrap.innerHTML = html;
             form.render()
           });
