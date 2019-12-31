@@ -996,7 +996,7 @@ i {
 
 /* checkbox */
 .layui-form-checked[lay-skin=primary] i {
-  border-color: #f87a25;
+  border-color: #f87a25 !important;
   background-color: #f87a25;
 }
 
@@ -1162,7 +1162,8 @@ i {
 }
 
 .common-layer .layui-layer-btn .layui-layer-btn0 {
-  background-color: #ec6c3f;
+  /* background-color: #ec6c3f; */
+  background-image: linear-gradient(-90deg, #CD1D36 0%, #E82641 100%);
   color: #fff;
 }
 

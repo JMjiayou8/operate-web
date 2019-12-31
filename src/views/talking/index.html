@@ -50,8 +50,10 @@
         <div class="layui-input-block">
           <button type="button" class="layui-btn " onclick="addProblem('add')"><i
               class="layui-icon layui-icon-add-1"></i>添加问题</button>
-          <button type="button" class="layui-btn "><i class="layui-icon-import"></i>导入问题</button>
-          <button type="button" class="layui-btn"><i class="layui-icon-import"></i>导入话术</button>
+          <button type="button" class="layui-btn " onclick="importProblem()"><i
+              class="layui-icon-import"></i>导入问题</button>
+          <button type="button" class="layui-btn" onclick="importTemplate()"><i
+              class="layui-icon-import"></i>导入话术</button>
         </div>
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
@@ -307,6 +309,37 @@
           contentData.splice(index, 1);
           renderContent()
         }
+
+
+        //导入问题
+        window.importProblem = function () {
+          layer.open({
+            type: 2,
+            title: '导入问题',
+            skin: 'common-layer',
+            area: ['900px', '650px'],
+            content: './importProblem.html',
+            btn: ['导入', '取消'],
+            yes: function (index, layero) {
+
+            }
+          })
+        }
+        //导入话术
+        window.importTemplate = function () {
+          layer.open({
+            type: 2,
+            title: '导入话术',
+            skin: 'common-layer',
+            area: ['900px', '650px'],
+            content: './importTemplate.html',
+            btn: ['导入', '取消'],
+            yes: function (index, layero) {
+
+            }
+          })
+        }
+
       })
   </script>
 </body>
