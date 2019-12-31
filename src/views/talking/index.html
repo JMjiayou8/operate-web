@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="layui-fluid common-page ">
+  <div class="layui-fluid common-page talkingPage">
     <form class="layui-form layui-row inline-form" wid110>
       <div class="layui-form-item layui-col-md6 layui-col-sm6">
         <label class="layui-form-label">归属省份：</label>
@@ -43,12 +43,12 @@
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
         <label class="layui-form-label ">话术内容：</label>
         <div class="layui-input-block">
-          <textarea class="layui-textarea"></textarea>
+          <div id="contentWrap" class="contentWrap"></div>
         </div>
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
         <div class="layui-input-block">
-          <button type="button" class="layui-btn " onclick="addProblem()"><i
+          <button type="button" class="layui-btn " onclick="addProblem('add')"><i
               class="layui-icon layui-icon-add-1"></i>添加问题</button>
           <button type="button" class="layui-btn "><i class="layui-icon-import"></i>导入问题</button>
           <button type="button" class="layui-btn"><i class="layui-icon-import"></i>导入话术</button>
@@ -68,6 +68,50 @@
     </form>
 
   </div>
+  <script id="contentTemplate" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+    <div class="layui-form-item ">
+      <label class="layui-form-label {{item.isRequired?'layui-required':''}}">{{index+1}}、{{item.title}}</label>
+      {{# if(item.type=='radio'){ }}
+      <div class="layui-input-block ">
+        {{#  layui.each(item.params, function(i, obj){ }}
+        <input type="radio" name="radio{{index}}" value="{{i}}" title="{{obj}}" />
+        {{#  }); }}
+      </div>
+      {{# }else if(item.type=='checkbox'){ }}
+      <div class=" layui-input-block ">
+        {{#  layui.each(item.params, function(i, obj){ }}
+        <input type="checkbox" name="check{{index}}[{{i}}]" lay-skin="primary" title="{{obj}}" />
+        {{#  }); }}
+      </div>
+      {{# }else if(item.type=='select'){ }}
+      <div class=" layui-input-block ">
+        <select>
+          {{#  layui.each(item.params, function(i, obj){ }}
+          <option value="{{i}}">{{obj}}</option>
+          {{#  }); }}
+        </select>
+      </div>
+      {{# }else if(item.type=='input'){ }}
+      <div class=" layui-input-block ">
+        <input type="text" class="layui-input">
+      </div>
+      {{# }else if(item.type=='textarea'||item.type=='desc'){ }}
+      <div class=" layui-input-block ">
+        <textarea class="layui-textarea"></textarea>
+      </div>
+      {{# } }}
+      <div class="handle-list">
+        <a href="javascript:;" onclick="exchangeData('{{index}}','{{index-1}}')"><i
+            class="layui-icon layui-icon-up"></i>上移</a>
+        <a href="javascript:;" onclick="exchangeData('{{index}}','{{index+1}}')"><i
+            class="layui-icon layui-icon-down"></i>下移</a>
+        <a href="javascript:;" onclick="addProblem('edit','{{index}}')"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+        <a href="javascript:;" onclick="removeProblem('{{index}}')"><i class="layui-icon layui-icon-close"></i>删除</a>
+      </div>
+    </div>
+    {{#  }); }}
+  </script>
 
   <script src="../../assets/layui/layui.js"></script>
   <script>
@@ -83,7 +127,41 @@
           upload = layui.upload,
           laytpl = layui.laytpl,
           layedit = layui.layedit;
-
+        //问题列表，模拟数据，默认[]
+        var contentData = [
+          // {
+          //   type: "radio",
+          //   isRequired: false,
+          //   title: "是否开心1",
+          //   params: ["开心", "不开心"]
+          // }, {
+          //   type: "checkbox",
+          //   isRequired: true,
+          //   title: "是否开心2",
+          //   params: ["开心", "不开心"]
+          // },
+          // {
+          //   type: "select",
+          //   isRequired: true,
+          //   title: "是否开心3",
+          //   params: ["开心", "不开心"]
+          // },
+          // {
+          //   type: "input",
+          //   isRequired: false,
+          //   title: "input",
+          // },
+          // {
+          //   type: "textarea",
+          //   isRequired: false,
+          //   title: "textarea",
+          // },
+          // {
+          //   type: "desc",
+          //   isRequired: false,
+          //   title: "desc",
+          // }
+        ];
         layedit.build('demo1', {
           height: 180
         });
@@ -91,20 +169,75 @@
         layedit.build('demo2', {
           height: 180
         });
-        window.addProblem = function () {
+        window.addProblem = function (type, dataIndex) {
+          layui.data('talking', {
+            key: 'problem',
+            value: contentData[dataIndex]
+          });
           layer.open({
             type: 2,
             title: '添加问题',
             skin: 'common-layer',
             area: ['1100px', '600px'],
-            content: './addProblem.html',
+            content: './addProblem.html?pageType=' + type,
             btn: ['确定', '取消'],
-            yes: function () {
-              layer.closeAll()
+            yes: function (index, layero) {
+              var body = layer.getChildFrame('body', index);
+              var iframeWin = window[layero.find('iframe')[0]['name']];
+              var problemData = iframeWin.pageData;
+
+              function setData() {
+                if (type == 'add') {
+                  contentData.push(problemData)
+                } else {
+                  contentData[dataIndex] = problemData
+                }
+                renderContent()
+                layer.closeAll()
+              }
+              if (problemData.title) {
+                if (['radio', 'checkbox', 'select'].indexOf(problemData.type) > -1) {
+                  if (problemData.params.length > 0 && problemData.params[0] !== '') {
+                    setData()
+                  } else {
+                    layer.msg('请填完所有必填项')
+                  }
+                } else {
+                  setData()
+                }
+              } else {
+                layer.msg('请填完所有必填项')
+              }
             }
           })
         }
 
+        function renderContent(data) {
+          var getTpl = contentTemplate.innerHTML,
+            selectWrap = document.getElementById('contentWrap');
+          laytpl(getTpl).render(contentData, function (html) {
+            // console.log(contentData)
+            selectWrap.innerHTML = html;
+            form.render()
+          });
+        }
+        renderContent()
+        // 上下移动
+        window.exchangeData = function (index1, index2) {
+          if (index1 > -1 && index2 > -1 && index2 < contentData.length) {
+            var temp = contentData[index1];
+            contentData[index1] = contentData[index2];
+            contentData[index2] = temp;
+            renderContent()
+          } else {
+            layer.msg('不可移动了')
+          }
+        }
+        //删除问题
+        window.removeProblem = function (index) {
+          contentData.splice(index, 1);
+          renderContent()
+        }
       })
   </script>
 </body>

@@ -32,7 +32,6 @@
       cursor: pointer;
     }
 
-
     .elemType-list .elemType-icon {
       width: 30px;
       height: 30px;
@@ -42,27 +41,27 @@
     }
 
     .elemType-icon.type1 {
-      background: url('../../assets/images/form-element.png') -112px -10px;
+      background: url('../../assets/images/form-element.png') -112px -60px;
     }
 
     .elemType-icon.type2 {
-      background: url('../../assets/images/form-element.png') -10px -10px;
-    }
-
-    .elemType-icon.type3 {
-      background: url('../../assets/images/form-element.png') -61px -10px;
-    }
-
-    .elemType-icon.type4 {
-      background: url('../../assets/images/form-element.png') -10px -60px;
-    }
-
-    .elemType-icon.type5 {
       background: url('../../assets/images/form-element.png') -61px -60px;
     }
 
+    .elemType-icon.type3 {
+      background: url('../../assets/images/form-element.png') -10px -60px;
+    }
+
+    .elemType-icon.type4 {
+      background: url('../../assets/images/form-element.png') -61px -10px;
+    }
+
+    .elemType-icon.type5 {
+      background: url('../../assets/images/form-element.png') -10px -10px;
+    }
+
     .elemType-icon.type6 {
-      background: url('../../assets/images/form-element.png') -112px -60px;
+      background: url('../../assets/images/form-element.png') -112px -10px;
     }
 
     .elemType-list .elemType-text {
@@ -73,6 +72,30 @@
       color: #ec6c3f;
     }
 
+    .elemType-item.active .elemType-icon.type1 {
+      background: url('../../assets/images/form-element-active.png') -112px -60px;
+    }
+
+    .elemType-item.active .elemType-icon.type2 {
+      background: url('../../assets/images/form-element-active.png') -61px -60px;
+    }
+
+    .elemType-item.active .elemType-icon.type3 {
+      background: url('../../assets/images/form-element-active.png') -10px -60px;
+    }
+
+    .elemType-item.active .elemType-icon.type4 {
+      background: url('../../assets/images/form-element-active.png') -61px -10px;
+    }
+
+    .elemType-item.active .elemType-icon.type5 {
+      background: url('../../assets/images/form-element-active.png') -10px -10px;
+    }
+
+    .elemType-item.active .elemType-icon.type6 {
+      background: url('../../assets/images/form-element-active.png') -112px -10px;
+    }
+
     .addProblem-page .desc-input {
       position: relative;
     }
@@ -81,13 +104,18 @@
       padding-left: 40px;
     }
 
-    .addProblem-page .desc-input i {
+    .addProblem-page .desc-input .index {
       position: absolute;
       top: 5px;
       left: 0;
       line-height: 28px;
       border-right: 1px solid #d2d2d2;
       padding: 0 10px;
+    }
+
+    .addProblem-page .desc-input .layui-input {
+      display: inline-block;
+      width: 80%;
     }
   </style>
 </head>
@@ -96,71 +124,40 @@
   <div class="addProblem-page">
     <form class="layui-form layui-row">
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
-        <label class="layui-form-label">题型选择：</label>
+        <label class="layui-form-label  layui-required">题型选择：</label>
         <div class="layui-input-block">
           <ul class="layui-row elemType-list ">
-            <li class="layui-col-md2 layui-col-sm2 elemType-item active">
+            <li class="layui-col-md2 layui-col-sm2 elemType-item active" data-type="radio">
               <i class="elemType-icon type1"></i>
               <span class="elemType-text">单选按钮</span>
             </li>
-            <li class="layui-col-md2 layui-col-sm2 elemType-item">
+            <li class="layui-col-md2 layui-col-sm2 elemType-item" data-type="checkbox">
               <i class="elemType-icon type2"></i>
               <span class="elemType-text">复选框</span>
             </li>
-            <li class="layui-col-md2 layui-col-sm2 elemType-item">
+            <li class="layui-col-md2 layui-col-sm2 elemType-item" data-type="select">
               <i class="elemType-icon type3"></i>
               <span class="elemType-text">下拉列表</span>
             </li>
-            <li class="layui-col-md2 layui-col-sm2 elemType-item">
+            <li class="layui-col-md2 layui-col-sm2 elemType-item" data-type="input">
               <i class="elemType-icon type4"></i>
               <span class="elemType-text">文本框</span>
             </li>
-            <li class="layui-col-md2 layui-col-sm2 elemType-item">
+            <li class="layui-col-md2 layui-col-sm2 elemType-item" data-type="textarea">
               <i class="elemType-icon type5"></i>
               <span class="elemType-text">文本域</span>
             </li>
-
-            <li class="layui-col-md2 layui-col-sm2 elemType-item">
+            <li class="layui-col-md2 layui-col-sm2 elemType-item" data-type="desc">
               <i class="elemType-icon type6"></i>
               <span class="elemType-text">描述</span>
             </li>
           </ul>
         </div>
       </div>
-      <div class="layui-form-item layui-col-md12 layui-col-sm12">
-        <label class="layui-form-label">是否必填：</label>
-        <div class=" layui-input-block box-radio">
-          <input type="radio" name="isRequired" value="1" title="是" checked="" />
-          <input type="radio" name="isRequired" value="2" title="否" />
-        </div>
-      </div>
-      <div class="layui-form-item layui-col-md12 layui-col-sm12">
-        <label class="layui-form-label">问题标题：</label>
-        <div class=" layui-input-block ">
-          <input type="text" class="layui-input" name="title">
-        </div>
-      </div>
-      <div class="layui-form-item layui-col-md12 layui-col-sm12">
-        <label class="layui-form-label">问题描述：</label>
-        <div class=" layui-input-block desc-input">
-          <i>1</i>
-          <input type="text" class="layui-input " name="desc[1]">
-        </div>
-      </div>
-      <div class="layui-form-item layui-col-md12 layui-col-sm12">
-        <label class="layui-form-label"></label>
-        <div class=" layui-input-block desc-input">
-          <i>2</i>
-          <input type="text" class="layui-input " name="desc[2]">
-        </div>
-      </div>
-      <div class="layui-form-item layui-col-md12 layui-col-sm12">
-        <label class="layui-form-label"></label>
-        <div class=" layui-input-block desc-input">
-          <i>3</i>
-          <input type="text" class="layui-input " name="desc[3]">
-        </div>
-      </div>
+
+
+      <div id="paramWrap"></div>
+
       <p class="tip">项目先决条件</p>
       <div class="layui-form-item layui-col-md4 layui-col-sm4">
         <label class="layui-form-label">项目级别：</label>
@@ -181,20 +178,119 @@
         </div>
       </div>
     </form>
-
   </div>
+  <script id="paramTemplate" type="text/html">
+    <div class="layui-form-item layui-col-md12 layui-col-sm12">
+      <label class="layui-form-label layui-required">是否必填：</label>
+      <div class=" layui-input-block box-radio">
+        <input type="radio" name="isRequired" value="true" title="是" lay-filter="isRequired"
+          {{d.isRequired==true?'checked':''}} />
+        <input type="radio" name="isRequired" value="false" title="否" lay-filter="isRequired"
+          {{d.isRequired==false?'checked':''}} />
+      </div>
+    </div>
+    {{#  if(['radio', 'checkbox', 'select'].indexOf(d.type) == -1){ }}
+    <div class="layui-form-item layui-col-md12 layui-col-sm12">
+      <label class="layui-form-label layui-required">问题标题：</label>
+      <div class=" layui-input-block ">
+        <textarea type="text" class="layui-textarea" name="title" lay-verify="required" onblur="getTitleInput(this)"
+          value="{{d.title}}">{{d.title}}</textarea>
+      </div>
+    </div>
+    {{# }else{ }}
+    <div class="layui-form-item layui-col-md12 layui-col-sm12">
+      <label class="layui-form-label layui-required">问题标题：</label>
+      <div class=" layui-input-block ">
+        <input type="text" class="layui-input" name="title" lay-verify="required" onblur="getTitleInput(this)"
+          value="{{d.title}}">
+      </div>
+    </div>
+    {{#  layui.each(d.params, function(index, item){ }}
+    <div class="layui-form-item layui-col-md12 layui-col-sm12">
+      {{#  if(index=== 0){ }} <label class="layui-form-label layui-required">问题描述：</label> {{#  } }}
+      <div class=" layui-input-block desc-input">
+        <i class="index">{{index+1}}</i>
+        <input type="text" class="layui-input " name="desc[1]" onblur="getParamInput(this,'{{index}}')" value="{{item}}"
+          lay-verify="required">
+        <button type="button" class="layui-btn  layui-btn-sm  layui-btn-add" data-index="{{index}}">
+          <i class="layui-icon layui-icon-add-1"></i> 添加
+        </button>
+        <button type="button" class="layui-btn  layui-btn-sm  layui-btn-del" data-index="{{index}}">
+          <i class="layui-icon layui-icon-close"></i>删除
+        </button>
+      </div>
+    </div>
+    {{#  }); }}
+    {{# } }}
+  </script>
   <script src="../../assets/layui/layui.js"></script>
   <script>
+    var pageData = {
+      type: 'radio',
+      isRequired: false,
+      title: '',
+      params: ['']
+    }
     layui
       .config({
         base: '../../assets/' //静态资源所在路径
       })
-      .use(['form', 'jquery'], function () {
+      .use(['form', 'jquery', 'laytpl', 'layer'], function () {
         var form = layui.form,
-          $ = layui.jquery;
+          $ = layui.jquery,
+          laytpl = layui.laytpl,
+          layer = layui.layer;
+
         $('.elemType-item').click(function (obj) {
           $('.elemType-item').removeClass('active')
+          pageData.type = $(this).data('type')
+          renderSelectWrap()
           $(this).addClass('active')
+        })
+
+        function renderSelectWrap() {
+          var getTpl = paramTemplate.innerHTML,
+            selectWrap = document.getElementById('paramWrap');
+          laytpl(getTpl).render(pageData, function (html) {
+            selectWrap.innerHTML = html;
+            form.render()
+          });
+        }
+        renderSelectWrap()
+        // 添加一行触点选择
+        $(document).on('click', '.layui-btn-add', function () {
+          pageData.params.push('')
+          renderSelectWrap()
+        })
+        // 删除一行触点选择
+        $(document).on('click', '.layui-btn-del', function (evt) {
+          var index = $(evt.target).data('index')
+          if (pageData.params.length > 1) {
+            pageData.params.splice(index, 1)
+            renderSelectWrap()
+          } else {
+            layer.msg('至少保留一条配置');
+          }
+        })
+        // 保留输入
+        window.getParamInput = function (obj, index) {
+          pageData.params[index] = $(obj).val()
+        }
+        window.getTitleInput = function (obj) {
+          pageData.title = $(obj).val()
+        }
+        form.on('radio(isRequired)', function (data) {
+          pageData.isRequired = data.value;
+        });
+
+        $(function () {
+          var pageType = location.search.split('=')[1]
+          if (pageType == 'edit') {
+            pageData = layui.data('talking').problem;
+            renderSelectWrap()
+            $('.elemType-item').removeClass('active')
+            $('.elemType-item[data-type=' + pageData.type + ']').addClass('active')
+          }
         })
       })
   </script>

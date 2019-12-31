@@ -49,24 +49,7 @@ layui.define(function (exports) {
       // 提供不同的顶部导航栏参数再去渲染侧边栏，参数自定义
       admin.rendSideNav($(elem).data('nav'));
     });
-    // // 渲染侧边栏
-    // function rendSideNav (topNav) {
-    //   // 根据topNav再实际获取不同的侧边栏数据。可以使用配置文件，也可ajax获取。
-    //   var sideNavData = []
-    //   if (topNav) {
-    //     if (topNav != 'console') {
-    //       sideNavData = menus[topNav]
-    //     }
-    //   }
 
-    //   var getTpl = sideNavTemplate.innerHTML,
-    //     view = document.getElementById('sideNavWrap')
-
-    //   laytpl(getTpl).render(sideNavData, function (html) {
-    //     view.innerHTML = html
-    //     element.render()
-    //   })
-    // }
     admin.resize(function () {
       rendTopNav();
       admin.rendSideNav('console');
