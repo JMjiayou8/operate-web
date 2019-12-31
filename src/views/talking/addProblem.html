@@ -184,9 +184,9 @@
       <label class="layui-form-label layui-required">是否必填：</label>
       <div class=" layui-input-block box-radio">
         <input type="radio" name="isRequired" value="true" title="是" lay-filter="isRequired"
-          {{d.isRequired==true?'checked':''}} />
+          {{''+d.isRequired=='true'?'checked':''}} />
         <input type="radio" name="isRequired" value="false" title="否" lay-filter="isRequired"
-          {{d.isRequired==false?'checked':''}} />
+          {{''+d.isRequired=='false'?'checked':''}} />
       </div>
     </div>
     {{#  if(['radio', 'checkbox', 'select'].indexOf(d.type) == -1){ }}
@@ -225,12 +225,6 @@
   </script>
   <script src="../../assets/layui/layui.js"></script>
   <script>
-    var pageData = {
-      type: 'radio',
-      isRequired: false,
-      title: '',
-      params: ['']
-    }
     layui
       .config({
         base: '../../assets/' //静态资源所在路径
@@ -240,7 +234,12 @@
           $ = layui.jquery,
           laytpl = layui.laytpl,
           layer = layui.layer;
-
+        var pageData = {
+          type: 'radio',
+          isRequired: false,
+          title: '',
+          params: ['']
+        }
         $('.elemType-item').click(function (obj) {
           $('.elemType-item').removeClass('active')
           pageData.type = $(this).data('type')
@@ -254,9 +253,11 @@
           laytpl(getTpl).render(pageData, function (html) {
             selectWrap.innerHTML = html;
             form.render()
+            setData()
+
           });
         }
-        renderSelectWrap()
+
         // 添加一行触点选择
         $(document).on('click', '.layui-btn-add', function () {
           pageData.params.push('')
@@ -275,14 +276,23 @@
         // 保留输入
         window.getParamInput = function (obj, index) {
           pageData.params[index] = $(obj).val()
+          setData()
         }
         window.getTitleInput = function (obj) {
           pageData.title = $(obj).val()
+          setData()
         }
         form.on('radio(isRequired)', function (data) {
           pageData.isRequired = data.value;
+          setData()
         });
 
+        function setData() {
+          layui.data('talking', {
+            key: 'problem',
+            value: pageData
+          });
+        }
         $(function () {
           var pageType = location.search.split('=')[1]
           if (pageType == 'edit') {
@@ -290,6 +300,8 @@
             renderSelectWrap()
             $('.elemType-item').removeClass('active')
             $('.elemType-item[data-type=' + pageData.type + ']').addClass('active')
+          } else {
+            renderSelectWrap()
           }
         })
       })
