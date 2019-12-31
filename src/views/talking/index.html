@@ -128,38 +128,39 @@
           laytpl = layui.laytpl,
           layedit = layui.layedit;
         //问题列表，模拟数据，默认[]
-        var contentData = [{
-            type: "radio",
-            isRequired: false,
-            title: "是否开心1",
-            params: ["开心", "不开心"]
-          }, {
-            type: "checkbox",
-            isRequired: true,
-            title: "是否开心2",
-            params: ["开心", "不开心"]
-          },
-          {
-            type: "select",
-            isRequired: true,
-            title: "是否开心3",
-            params: ["开心", "不开心"]
-          },
-          {
-            type: "input",
-            isRequired: false,
-            title: "input",
-          },
-          {
-            type: "textarea",
-            isRequired: false,
-            title: "textarea",
-          },
-          {
-            type: "desc",
-            isRequired: false,
-            title: "desc",
-          }
+        var contentData = [
+          // {
+          //   type: "radio",
+          //   isRequired: false,
+          //   title: "是否开心1",
+          //   params: ["开心", "不开心"]
+          // }, {
+          //   type: "checkbox",
+          //   isRequired: true,
+          //   title: "是否开心2",
+          //   params: ["开心", "不开心"]
+          // },
+          // {
+          //   type: "select",
+          //   isRequired: true,
+          //   title: "是否开心3",
+          //   params: ["开心", "不开心"]
+          // },
+          // {
+          //   type: "input",
+          //   isRequired: false,
+          //   title: "input",
+          // },
+          // {
+          //   type: "textarea",
+          //   isRequired: false,
+          //   title: "textarea",
+          // },
+          // {
+          //   type: "desc",
+          //   isRequired: false,
+          //   title: "desc",
+          // }
         ];
         layedit.build('demo1', {
           height: 180

@@ -243,6 +243,11 @@
         $('.elemType-item').click(function (obj) {
           $('.elemType-item').removeClass('active')
           pageData.type = $(this).data('type')
+          if (['radio', 'checkbox', 'select'].indexOf(pageData.type) == -1) {
+            delete pageData.params
+          } else {
+            pageData.params = ['']
+          }
           renderSelectWrap()
           $(this).addClass('active')
         })
