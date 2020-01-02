@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>策略执行统计报表</title>
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="layui-fluid common-page">
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <!-- <p class="part-title"></p> -->
+        <form class="layui-form layui-row">
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">归属地市：</label>
+            <div class="layui-input-block">
+              <select name="area" id=""></select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">策略类型：</label>
+            <div class="layui-input-block">
+              <select name="type" id="">
+                <option value="1">全部</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">录入员工：</label>
+            <div class="layui-input-block">
+              <input type="text" class="layui-input" name="user">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">模板状态：</label>
+            <div class="layui-input-block">
+              <select name="type" id="">
+                <option value="1">全部</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">模板名称：</label>
+            <div class="layui-input-block">
+              <input type="text" class="layui-input" name="name">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md4 layui-col-sm4">
+            <label class="layui-form-label">录入时间：</label>
+            <div class="layui-input-block">
+              <input type="text" id="date" name="date" class="layui-input" placeholder="请选择时间">
+            </div>
+          </div>
+          <div class="layui-form-item layui-col-md12 layui-col-sm12 text-right">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+              <button class="layui-btn" type="button">查询</button> </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <!-- <p class="part-title">查询结果</p> -->
+        <div>
+          <p class="layui-btn" lay-href="talking/index.html">新增</p>
+        </div>
+        <table id="table1"></table>
+      </div>
+    </div>
+  </div>
+  <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs">失效</a>
+  </script>
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .extend({
+        index: 'lib/index' //主入口模块
+      })
+      .use(
+        ['index', 'table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'],
+        function () {
+          var form = layui.form,
+            table = layui.table,
+            laydate = layui.laydate;
+          laydate.render({
+            elem: '#dateRange',
+          })
+
+          table.render({
+            elem: '#table1',
+            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+              layout: ['prev', 'page', 'next', 'skip'],
+              theme: 'common', //自定义分页布局
+              limit: 10
+            },
+            cols: [
+              [{
+                  field: 'code',
+                  title: '模板编码',
+                  width: '10%'
+                },
+                {
+                  field: 'name',
+                  title: '模板名称',
+                  width: '10%'
+
+                },
+                {
+                  field: 'type',
+                  title: '策略类型',
+                  width: '10%'
+                },
+                {
+                  field: 'status',
+                  title: '策略状态',
+                  width: '10%'
+                },
+                {
+                  field: 'area',
+                  title: '归属地市',
+                  width: '10%'
+                },
+                {
+                  field: 'user',
+                  title: '录入员工',
+                  width: '10%'
+                },
+                {
+                  field: 'date',
+                  title: '录入时间',
+                  width: '10%'
+
+                },
+                {
+                  title: '操作',
+                  toolbar: '#barDemo'
+                }
+              ]
+            ],
+            data: [{
+              code: '2',
+              name: '222',
+              type: 2,
+              status: '已发布',
+              area: 2,
+              user: 'SUPERUSER',
+              date: '2019-11-11',
+            }, {
+              code: '3',
+              name: '222',
+              type: 2,
+              status: '已发布',
+              area: 2,
+              user: 'SUPERUSER',
+              date: '2019-11-11',
+            }, {
+              code: '4',
+              name: '222',
+              type: 2,
+              status: '已发布',
+              area: 2,
+              user: 'SUPERUSER',
+              date: '2019-11-11',
+            }, {
+              code: '5',
+              name: '222',
+              type: 2,
+              status: '已发布',
+              area: 2,
+              user: 'SUPERUSER',
+              date: '2019-11-11',
+            }]
+          })
+        })
+  </script>
+</body>
+
+</html>

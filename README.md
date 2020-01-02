@@ -40,7 +40,7 @@
 
 ### 说明
 
-1. 打开新 tab：设置元素`lay-href=xxx`
+1. 打开新 tab：设置元素`lay-href=xxx`。(页面要引入'index'模块)
 2. 导航栏配置：`src/assets/modules/nav.js`
 3. radio
 

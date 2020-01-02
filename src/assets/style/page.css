@@ -873,6 +873,7 @@
 .talkingPage .contentWrap .layui-form-label {
   float: none;
   text-align: left;
+  width: auto;
 }
 
 .talkingPage .contentWrap .layui-input-block {
@@ -901,4 +902,8 @@
 
 .talkingPage .contentWrap .layui-form-item:hover .handle-list {
   display: block;
+}
+
+.talkingPage .childWrap {
+  padding-left: 20px;
 }
