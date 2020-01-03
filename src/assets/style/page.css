@@ -907,3 +907,8 @@
 .talkingPage .childWrap {
   padding-left: 20px;
 }
+
+.talkingPage .layui-form-radio>i:hover,
+.talkingPage .layui-form-radioed>i {
+  color: #f87a25;
+}
