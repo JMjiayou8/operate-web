@@ -392,6 +392,11 @@
   padding: 20px 0;
 }
 
+.common-page .layui-tab-brief>.layui-tab-more li.layui-this:after,
+.common-page .layui-tab-brief>.layui-tab-title .layui-this:after {
+  border-color: #ec6c3f;
+}
+
 .common-page .step-top-wrap {
   background-image: -moz-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
   background-image: -webkit-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
@@ -676,6 +681,10 @@
 
 .createPolicy .layui-tab-brief .layui-tab-title {
   border-bottom: 1px solid #d2d2d2;
+}
+
+.createPolicy .product-tab {
+  margin-top: 40px;
 }
 
 /* 政策详情 */
