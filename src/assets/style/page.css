@@ -864,19 +864,27 @@
 }
 
 /***********************************************  话术相关 ***********************************************/
+.talkingPage .page-title {
+  font-size: 18px;
+  color: #ec6c3f;
+  text-align: center;
+}
+
 .talkingPage .contentWrap {
-  border: 1px solid #D2D2D2;
+  border-top: 1px dashed #d2d2d2;
   border-radius: 3px;
   background: #fff;
   min-height: 100px;
-  max-height: 400px;
   overflow-y: auto;
-  padding: 20px;
+  padding-top: 20px;
+  margin: 10px 0;
 }
 
 .talkingPage .contentWrap .layui-form-item {
   position: relative;
   cursor: pointer;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #d2d2d2;
 }
 
 .talkingPage .contentWrap .layui-form-label {
@@ -913,8 +921,13 @@
   display: block;
 }
 
+.talkingPage .contentWrap .layui-form-radio,
+.talkingPage .contentWrap .layui-form-checkbox {
+  display: block;
+}
+
 .talkingPage .childWrap {
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 
 .talkingPage .layui-form-radio>i:hover,

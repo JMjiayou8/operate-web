@@ -15,85 +15,92 @@
   <div class="layui-fluid common-page talkingPage">
     <div class="layui-card">
       <div class="layui-card-body">
-        <form class="layui-form" wid140>
-          <div id="contentWrap" class="contentWrap" style="max-height: 100%;"></div>
-        </form>
+        <div id="contentWrap"></div>
       </div>
     </div>
   </div>
   <script id="contentTemplate" type="text/html">
-    {{#  layui.each(d, function(index, item){ }}
-    <div class="layui-form-item ">
-      <label class="layui-form-label {{item.isRequired?'layui-required':''}}">{{index+1}}、{{item.itemDesc}}</label>
-      {{# if(item.type=='radio'){ }}
-      <div class="layui-input-block ">
-        {{#  layui.each(item.options, function(i, obj){ }}
-        <input type="radio" name="radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDes}}"
-          data-code="{{item.itemCode}}" />
-        {{#  }); }}
-      </div>
-      {{# }else if(item.type=='checkbox'){ }}
-      <div class=" layui-input-block ">
-        {{#  layui.each(item.options, function(i, obj){ }}
-        <input type="checkbox" name="check{{index}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
-          title="{{obj.optionDes}}" data-code="{{item.itemCode}}" />
-        {{#  }); }}
-      </div>
-      {{# }else if(item.type=='select'){ }}
-      <div class="layui-input-block ">
-        <select data-code="{{item.itemCode}}">
-          <option value="">请选择</option>
+    <p class="page-title">{{d.templateName}}</p>
+    <div>{{d.templateHead}}</div>
+    <form class="layui-form contentWrap" lay-filter="templateForm">
+      {{#  layui.each(d.contentData, function(index, item){ }}
+      <div class="layui-form-item ">
+        <label
+          class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{item.itemCode}}、{{item.itemDesc}}</label>
+        {{# if(item.itemType=='radio'){ }}
+        <div class="layui-input-block ">
           {{#  layui.each(item.options, function(i, obj){ }}
-          <option value="{{obj.optionId}}">{{obj.optionDes}}</option>
+          <input type="radio" name="radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+            data-itemid="{{item.itemId}}" />
           {{#  }); }}
-        </select>
+        </div>
+        {{# }else if(item.itemType=='checkbox'){ }}
+        <div class=" layui-input-block ">
+          {{#  layui.each(item.options, function(i, obj){ }}
+          <input type="checkbox" name="check{{index}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
+            title="{{obj.optionDesc}}" data-itemid="{{item.itemId}}" />
+          {{#  }); }}
+        </div>
+        {{# }else if(item.itemType=='select'){ }}
+        <div class="layui-input-block ">
+          <select data-itemid="{{item.itemId}}" name="select{{index}}">
+            <option value="">请选择</option>
+            {{#  layui.each(item.options, function(i, obj){ }}
+            <option value="{{obj.optionId}}">{{obj.optionDesc}}</option>
+            {{#  }); }}
+          </select>
+        </div>
+        {{# }else if(item.itemType=='input'){ }}
+        <div class=" layui-input-block ">
+          <input type="text" class="layui-input" name="input{{index}}">
+        </div>
+        {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
+        <div class=" layui-input-block ">
+          <textarea class="layui-textarea" name="textarea{{index}}"></textarea>
+        </div>
+        {{# } }}
       </div>
-      {{# }else if(item.type=='input'){ }}
-      <div class=" layui-input-block ">
-        <input type="text" class="layui-input">
-      </div>
-      {{# }else if(item.type=='textarea'||item.type=='desc'){ }}
-      <div class=" layui-input-block ">
-        <textarea class="layui-textarea"></textarea>
-      </div>
-      {{# } }}
-    </div>
-    <div id="childWrap{{item.itemCode}}" class="childWrap"></div>
-    {{#  }); }}
+      <div id="childWrap{{item.itemId}}" class="childWrap"></div>
+      {{#  }); }}
+    </form>
+    <div>{{d.templateEnd}}</div>
+    <!-- <div class="layui-progress">
+      <div class="layui-progress-bar" lay-percent="10%"></div>
+    </div> -->
   </script>
   <script id="childTemplate" type="text/html">
     {{#  layui.each(d, function(index, item){ }}
     <div class="layui-form-item ">
       <label
-        class="layui-form-label {{item.isRequired?'layui-required':''}}">{{item.itemCode}}、{{item.itemDesc}}</label>
-      {{# if(item.type=='radio'){ }}
+        class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{item.itemCode}}、{{item.itemDesc}}</label>
+      {{# if(item.itemType=='radio'){ }}
       <div class="layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
-        <input type="radio" name="child-radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDes}}"
-          data-code="{{item.itemCode}}" />
+        <input type="radio" name="child-radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+          data-itemid="{{item.itemCode}}" />
         {{#  }); }}
       </div>
-      {{# }else if(item.type=='checkbox'){ }}
+      {{# }else if(item.itemType=='checkbox'){ }}
       <div class=" layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
         <input type="checkbox" name="child-check{{index}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
-          title="{{obj.optionDes}}" data-code="{{item.itemCode}}" />
+          title="{{obj.optionDesc}}" data-itemid="{{item.itemCode}}" />
         {{#  }); }}
       </div>
-      {{# }else if(item.type=='select'){ }}
+      {{# }else if(item.itemType=='select'){ }}
       <div class="layui-input-block ">
-        <select data-code="{{item.itemCode}}">
+        <select data-itemid="{{item.itemCode}}">
           <option value="">请选择</option>
           {{#  layui.each(item.options, function(i, obj){ }}
-          <option value="{{obj.optionId}}">{{obj.optionDes}}</option>
+          <option value="{{obj.optionId}}">{{obj.optionDesc}}</option>
           {{#  }); }}
         </select>
       </div>
-      {{# }else if(item.type=='input'){ }}
+      {{# }else if(item.itemType=='input'){ }}
       <div class=" layui-input-block ">
         <input type="text" class="layui-input">
       </div>
-      {{# }else if(item.type=='textarea'||item.type=='desc'){ }}
+      {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
       <div class=" layui-input-block ">
         <textarea class="layui-textarea"></textarea>
       </div>
@@ -108,228 +115,21 @@
       .config({
         base: '../../assets/' //静态资源所在路径
       })
-      .use(['laydate', 'form', 'layer', 'upload', 'laytpl', 'layedit'], function () {
+      .use(['laydate', 'form', 'layer', 'laytpl', 'element'], function () {
         var $ = layui.$,
           laydate = layui.laydate,
           form = layui.form,
           layer = layui.layer,
-          upload = layui.upload,
           laytpl = layui.laytpl,
-          layedit = layui.layedit;
-        //问题列表，模拟数据，默认[]
-        var contentData = [{
-            "itemCode": '1',
-            "type": "radio",
-            "isRequired": false,
-            "itemDesc": "radio1",
-            "options": [{
-              "optionDes": "否",
-              "optionId": "0"
-            }, {
-              "optionDes": "是",
-              "optionId": "1"
-            }],
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          },
-          {
-            "itemCode": '11',
-            "type": "radio",
-            "isRequired": false,
-            "itemDesc": "radio2",
-            "options": [{
-              "optionDes": "否",
-              "optionId": "0"
-            }, {
-              "optionDes": "是",
-              "optionId": "1"
-            }],
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          },
-          {
-            "itemCode": '1-2',
-            "type": "input",
-            "isRequired": false,
-            "itemDesc": "radio-选择否",
-            "itemGrade": "2",
-            "dependItemCode": "1",
-            "dependOptionId": "0"
-          },
-          {
-            "itemCode": '1-3',
-            "type": "textarea",
-            "isRequired": false,
-            "itemDesc": "radio-选择否",
-            "itemGrade": "2",
-            "dependItemCode": "1",
-            "dependOptionId": "0"
-          },
-          {
-            "itemCode": '1-1',
-            "type": "radio",
-            "isRequired": false,
-            "itemDesc": "radio-选择是",
-            "options": [{
-              "optionDes": "否",
-              "optionId": "0"
-            }, {
-              "optionDes": "是",
-              "optionId": "1"
-            }],
-            "itemGrade": "2",
-            "dependItemCode": "1",
-            "dependOptionId": "1"
-          },
-          {
-            "itemCode": '2',
-            "type": "checkbox",
-            "isRequired": false,
-            "itemDesc": "checkbox1",
-            "options": [{
-              "optionDes": "checkbox-option1",
-              "optionId": "0"
-            }, {
-              "optionDes": "checkbox-option2",
-              "optionId": "1"
-            }, {
-              "optionDes": "checkbox-option3",
-              "optionId": "2"
-            }, {
-              "optionDes": "checkbox-option4",
-              "optionId": "3"
-            }],
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          },
-          {
-            "itemCode": '22',
-            "type": "checkbox",
-            "isRequired": false,
-            "itemDesc": "checkbox2",
-            "options": [{
-              "optionDes": "checkbox-option1",
-              "optionId": "0"
-            }, {
-              "optionDes": "checkbox-option2",
-              "optionId": "1"
-            }, {
-              "optionDes": "checkbox-option3",
-              "optionId": "2"
-            }, {
-              "optionDes": "checkbox-option4",
-              "optionId": "3"
-            }],
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          },
-          {
-            "itemCode": '2-1',
-            "type": "radio",
-            "isRequired": false,
-            "itemDesc": "checkbox-radio",
-            "options": [{
-              "optionDes": "是",
-              "optionId": "0"
-            }, {
-              "optionDes": "否",
-              "optionId": "1"
-            }],
-            "itemGrade": "2",
-            "dependItemCode": "2",
-            "dependOptionId": "1"
-          },
-          {
-            "itemCode": '2-2',
-            "type": "input",
-            "isRequired": false,
-            "itemDesc": "checkbox-input",
-            "itemGrade": "2",
-            "dependItemCode": "2",
-            "dependOptionId": "0"
-          }, {
-            "itemCode": '3',
-            "type": "select",
-            "isRequired": true,
-            "itemDesc": "select",
-            "options": [{
-              "optionDes": "select-option1",
-              "optionId": "0"
-            }, {
-              "optionDes": "select-option2",
-              "optionId": "1"
-            }, {
-              "optionDes": "select-option3",
-              "optionId": "2"
-            }],
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          },
-          {
-            "itemCode": '3-2',
-            "type": "input",
-            "isRequired": false,
-            "itemDesc": "select-选择option1",
-            "itemGrade": "2",
-            "dependItemCode": "3",
-            "dependOptionId": "0"
-          },
-          {
-            "itemCode": '3-1',
-            "type": "radio",
-            "isRequired": false,
-            "itemDesc": "select-选择option2",
-            "options": [{
-              "optionDes": "否",
-              "optionId": "0"
-            }, {
-              "optionDes": "是",
-              "optionId": "1"
-            }],
-            "itemGrade": "2",
-            "dependItemCode": "3",
-            "dependOptionId": "1"
-          }, {
-            "itemCode": '4',
-            "type": "input",
-            "isRequired": false,
-            "itemDesc": "input",
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          },
-          {
-            "itemCode": '5',
-            "type": "textarea",
-            "isRequired": true,
-            "itemDesc": "textarea",
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          }, {
-            "itemCode": '6',
-            "type": "desc",
-            "isRequired": "true",
-            "itemDesc": "desc",
-            "itemGrade": "1",
-            "dependItemCode": "",
-            "dependOptionId": ""
-          }
-        ];
-        var pageData = buildTreeData(contentData)
-
+          element = layui.element;
+        var templateData = {}
         // 将问题的转换成树形结构，方便显/隐展示
         function buildTreeData(list) {
           let temp = {};
           let tree = {};
           let arr = []
           for (let i in list) {
-            temp[list[i].itemCode] = list[i];
+            temp[list[i].itemId] = list[i];
           }
           for (let i in temp) {
             if (temp[i].dependItemCode) {
@@ -338,7 +138,7 @@
               }
               temp[temp[i].dependItemCode].children.push(temp[i]);
             } else {
-              tree[temp[i].itemCode] = temp[i];
+              tree[temp[i].itemId] = temp[i];
             }
           }
           for (let i in tree) {
@@ -346,17 +146,96 @@
           }
           return arr;
         }
-
+        //获取数据
+        function getData() {
+          templateData = {
+            "createDate": 1578067200000,
+            "creater": "SUPERUSER",
+            "eparchCode": "0020",
+            "saleType": "",
+            "templateCode": 1000030,
+            "templateContent": [{
+                "createStaffId": "SUPERUSER",
+                "dependItemCode": "",
+                "dependOptionId": "",
+                "eparchyCode": "0020",
+                "isRequired": "true",
+                "itemCode": "1",
+                "itemDesc": "话术模板新增问题",
+                "itemGrade": "1",
+                "itemId": 1000020,
+                "itemStatus": "1",
+                "itemType": "radio",
+                "options": [{
+                  "itemId": 1000020,
+                  "optionDesc": "话术模板新增问题选项1",
+                  "optionId": 0
+                }, {
+                  "itemId": 1000020,
+                  "optionDesc": "话术模板新增问题选项2",
+                  "optionId": 1
+                }],
+                "templateCode": 1000037
+              }, {
+                "createStaffId": "SUPERUSER",
+                "dependItemCode": "1000020",
+                "dependOptionId": "0",
+                "eparchyCode": "0020",
+                "isRequired": "false",
+                "itemCode": "2",
+                "itemDesc": "话术模板新增问题2",
+                "itemGrade": "2",
+                "itemId": 1000021,
+                "itemStatus": "1",
+                "itemType": "checkbox",
+                "options": [{
+                  "itemId": 1000021,
+                  "optionDesc": "话术模板新增问题2选项1",
+                  "optionId": 0
+                }, {
+                  "itemId": 1000021,
+                  "optionDesc": "话术模板新增问题2选项2",
+                  "optionId": 1
+                }],
+                "templateCode": 1000037
+              },
+              {
+                "createStaffId": "SUPERUSER",
+                "dependItemCode": "1000020",
+                "dependOptionId": "0",
+                "eparchyCode": "0020",
+                "isRequired": "false",
+                "itemCode": "3",
+                "itemDesc": "话术模板新增问题3",
+                "itemGrade": "2",
+                "itemId": 1000022,
+                "itemStatus": "1",
+                "itemType": "input",
+                "templateCode": 1000037
+              }
+            ],
+            "templateEnd": "<p><u>测试新增</u></p>",
+            "templateHead": "<p><u>测试新增</u></p>",
+            "templateName": "测试新增",
+            "templateState": "2",
+            "updateDate": 1578067200000
+          }
+          //问题列表，模拟数据
+          // templateData.contentData = buildTreeData(JSON.parse(templateData.templateContent))
+          templateData.contentData = buildTreeData(templateData.templateContent)
+        }
+        // 渲染问题区域
         function renderContent() {
           var getTpl = contentTemplate.innerHTML,
             selectWrap = document.getElementById('contentWrap');
-          laytpl(getTpl).render(pageData, function (html) {
+          laytpl(getTpl).render(templateData, function (html) {
             selectWrap.innerHTML = html;
             form.render()
+            element.render()
+
           });
         }
-        renderContent()
-
+        // 渲染二级问题区域
         function renderChildContent(data, code) {
           var getTpl = childTemplate.innerHTML,
             selectWrap = document.getElementById('childWrap' + code);
@@ -365,42 +244,55 @@
             form.render()
           });
         }
+
         form.on('select', function (data) {
-          var code = $(data.elem).data('code')
+          var code = $(data.elem).data('itemid')
           renderChild(code, [data.value])
+          getProgress()
+
         });
         var checkboxArr = []
         form.on('checkbox', function (data) {
-          var code = $(data.elem).data('code')
+          var code = $(data.elem).data('itemid')
           if (data.elem.checked) {
             checkboxArr.push(data.value)
           } else {
             checkboxArr.splice(checkboxArr.indexOf(data.value), 1)
           }
           renderChild(code, checkboxArr)
+          getProgress()
         });
         form.on('radio', function (data) {
-          var code = $(data.elem).data('code')
+          var code = $(data.elem).data('itemid')
           renderChild(code, [data.value])
+          getProgress()
         });
         //渲染二级问题
         function renderChild(code, valArr) {
-          for (var i = 0; i < pageData.length; i++) {
-            if (pageData[i].itemCode == code) {
+          for (var i = 0; i < templateData.contentData.length; i++) {
+            if (templateData.contentData[i].itemId == code) {
               var arr = []
-              if (pageData[i].children) {
-                for (var j = 0; j < pageData[i].children.length; j++) {
-                  if (valArr.indexOf(pageData[i].children[j].dependOptionId) > -1) {
-                    arr.push(pageData[i].children[j])
+              if (templateData.contentData[i].children) {
+                for (var j = 0; j < templateData.contentData[i].children.length; j++) {
+                  if (valArr.indexOf(templateData.contentData[i].children[j].dependOptionId) > -1) {
+                    arr.push(templateData.contentData[i].children[j])
                   }
                 }
                 renderChildContent(arr, code)
                 return
               }
-
             }
           }
         }
+
+        function getProgress() {
+          var data1 = form.val('templateForm');
+          console.log(data1)
+        }
+        $(function () {
+          getData()
+          renderContent()
+        })
       })
   </script>
 </body>

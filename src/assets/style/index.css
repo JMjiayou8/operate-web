@@ -11,6 +11,10 @@ i {
   font-style: normal;
 }
 
+/* u {
+  text-decoration: none;
+} */
+
 *[template],
 .layadmin-tabsbody-item {
   display: none;
