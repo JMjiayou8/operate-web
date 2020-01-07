@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>外呼</title>
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="common-page outCallPage">
+    <div class="layui-tab" lay-filter="pageTab">
+      <ul class="layui-tab-title layui-row  step-top-wrap">
+        <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first" lay-id="11">
+          <i class="step-icon step1"></i>
+          <p class="step-text">基础客户提取</p>
+        </li>
+        <li class="layui-col-md4 layui-col-sm4 step-item step-item-last" lay-id="22">
+          <i class="step-icon  step2"></i>
+          <p class="step-text">剔除规则配置</p>
+        </li>
+      </ul>
+      <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <form class="layui-form" wid140>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">客户群名称：</label>
+                  <div class="layui-input-block">
+                    <input type="text" name="prop1" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">客户群描述：</label>
+                  <div class="layui-input-block">
+                    <textarea name="desc" class="layui-textarea"></textarea>
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">客户群取数规则：</label>
+                  <div class="layui-input-block">
+                    <div class="layui-tab layui-tab-brief custTypeTab" lay-filter="typeTab">
+                      <ul class="layui-tab-title">
+                        <li class="layui-this">取数模板</li>
+                        <li>大数据标签</li>
+                        <li>文件上传</li>
+                      </ul>
+                      <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                          <div class="top-wrap clearfix">
+                            <div class="search-btn-wrap layui-inline fr">
+                              <input type="text" class="layui-input" placeholder="搜索模板" id="searchText">
+                              <i class="layui-icon layui-icon-search" onclick="rendTable()"></i>
+                            </div>
+                          </div>
+                          <table id="table1"></table>
+                        </div>
+                        <div class="layui-tab-item ">
+                          大数据标签
+                        </div>
+                        <div class="layui-tab-item ">
+                          文件上传
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">营销触点选择：</label>
+                  <div class="layui-input-block ">
+                    <input type="checkbox" name="originType[1]" lay-skin="box" title="外呼" checked="" />
+                    <input type="checkbox" name="originType[2]" lay-skin="box" title="外呼-短信" />
+                    <input type="checkbox" name="originType[3]" lay-skin="box" title="线上-内" />
+                    <input type="checkbox" name="originType[4]" lay-skin="box" title="线上-外" />
+                    <input type="checkbox" name="originType[5]" lay-skin="box" title="短信" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="layui-tab-item">
+          <div class="layui-row layui-col-space10">
+            <div class="layui-col-md7 layui-col-sm7">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  标签
+                </div>
+                <div class="layui-card-body">
+                  <div id="labelWrap"></div>
+                </div>
+                <div class="layui-card-header">
+                  自定义标签
+                </div>
+                <div class="layui-card-body">
+                  <div id="customlabelWrap"></div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md5 layui-col-sm5">
+              <div class="layui-row ">
+                <div class=" layui-col-md12">
+                  <div class="layui-card">
+                    <div class="layui-card-header">
+                      可为用户群剔除
+                    </div>
+                    <div class="layui-card-body">
+                      <div id="availCustWrap" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="layui-col-md12" style="margin-top:10px;">
+                  <div class="layui-card">
+                    <div class="layui-card-header">
+                      目标客户群剔除
+                    </div>
+                    <div class="layui-card-body">
+                      <div id="targetCustWrap" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="button" class="layui-btn layui-btn-primary">保存</button>
+        <button type="button" class="layui-btn nextBtn" onclick="nextPage()">继续</button>
+        <button type="button" class="layui-btn subBtn" style="display: none;">提交</button>
+      </div>
+    </div>
+    <!-- 标签区域 -->
+    <script id="labelTemplate" type="text/html">
+      <div class="label-list clearfix">
+        {{#  layui.each(d, function(index, item){ }}
+        <div class="lable-item {{item.active?'active':''}}" draggable='{{!item.active}}'
+          ondragstart="drag(event,'{{JSON.stringify(item).replace(/"/g, '&quot;')}}')">
+          <div class="label-content text-ellipsis">
+            {{item.title}}
+          </div>
+        </div>
+        {{#  }); }}
+      </div>
+    </script>
+    <!--自定义标签区域 -->
+    <script id="customlabelTemplate" type="text/html">
+      <div class="label-list clearfix">
+        {{#  layui.each(d, function(index, item){ }}
+        <div class="lable-item {{item.active?'active':''}}" draggable='{{!item.active}}'
+          ondragstart="drag(event,'{{JSON.stringify(item).replace(/"/g, '&quot;')}}')">
+          <div class="label-content text-ellipsis">
+            {{item.title}}
+          </div>
+        </div>
+        {{#  }); }}
+      </div>
+    </script>
+    <!-- 可为用户群剔除 -->
+    <script id="availCustTemplate" type="text/html">
+      <div class="cust-list clearfix ">
+        {{#  layui.each(d, function(index, item){ }}
+        <div class="cust-item" onclick="configCust()">
+          <div class="label-item-cust ">
+            <span class='title text-ellipsis'>{{item.title}}</span>
+            <i class="layui-icon layui-icon-close" onclick="delCust('list1','{{index}}')"></i>
+            <span class="condition">{{item.condition.join(',')}}</span>
+          </div>
+        </div>
+        {{#  }); }}
+      </div>
+    </script>
+    <!--目标客户群剔除 -->
+    <script id="targetCustTemplate" type="text/html">
+      <div class="cust-list clearfix">
+        {{#  layui.each(d, function(index, item){ }}
+        <div class="cust-item" onclick="configCust()">
+          <div class="label-item-cust ">
+            <span class='title text-ellipsis'>{{item.title}}</span>
+            <i class="layui-icon layui-icon-close" onclick="delCust('list2','{{index}}')"></i>
+            <span class="condition">{{item.condition.join(',')}}</span>
+          </div>
+        </div>
+        {{#  }); }}
+      </div>
+    </script>
+
+    <script src="../../assets/layui/layui.js"></script>
+    <script>
+      layui
+        .config({
+          base: '../../assets/' //静态资源所在路径
+        })
+        .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
+          var $ = layui.$,
+            table = layui.table,
+            laydate = layui.laydate,
+            form = layui.form,
+            laytpl = layui.laytpl,
+            element = layui.element,
+            upload = layui.upload,
+            laypage = layui.laypage;
+
+          element.on('tab(pageTab)', function (elem) {
+            if (elem.index == 0) {
+              $('.nextBtn').show()
+              $('.subBtn').hide()
+              renderStep1()
+            } else {
+              $('.nextBtn').hide()
+              $('.subBtn').show()
+              renderStep2()
+
+            }
+          });
+          window.nextPage = function () {
+            // element.tabChange('pageTab', '22');
+            // renderStep2()
+            console.log(form.data(''))
+          };
+          $(function () {
+            renderStep1()
+          })
+          /********************************************** 基本信息区域  **********************************************/
+          function renderStep1() {
+            table.render({
+              elem: '#table1',
+              // url: '/mockData/table.json',
+              page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip'],
+                theme: 'common', //自定义分页布局
+                limit: 10
+              },
+              cols: [
+                [{
+                    type: 'checkbox'
+                  },
+                  //标题栏
+                  {
+                    field: 'code',
+                    title: '模板编码',
+                    width: '10%'
+                  },
+                  {
+                    field: 'name',
+                    title: '模板名称',
+                    width: '30%'
+                  },
+                  {
+                    field: 'date',
+                    title: '模板创建时间',
+                    width: '10%'
+                  },
+                  {
+                    field: 'creator',
+                    title: '创建人',
+                    width: '10%'
+                  },
+                  {
+                    field: 'type',
+                    title: '模板类型',
+                    width: '10%'
+                  },
+                  {
+                    field: 'datetype',
+                    title: '时间类型',
+                  }
+                ]
+              ],
+              data: [{
+                code: '10001',
+                name: '7天包政策'
+
+              }, {
+                code: '10002',
+                name: '14天包政策'
+              }]
+            })
+
+          }
+
+          window.rendTable = function () {
+            table.reload('table1', {
+              // url: '/mockData/table.json',
+              where: {
+                name: $('#searchText').val()
+              }
+            })
+          }
+          /********************************************** 剔除区域  **********************************************/
+          var list1 = [],
+            list1Ids = [], //可为用户群剔除数据
+            list2 = [],
+            list2Ids = []; //目标客户群剔除数据
+          // 常规标签
+          function renderLabelWrap() {
+            var data = []
+            for (var i = 0; i < 40; i++) {
+              data[i] = {
+                id: 'label' + (i + 1),
+                title: '标签' + (i + 1),
+                condition: ['>=100000', '<200000']
+              }
+            }
+            for (var i = 0; i < data.length; i++) {
+              data[i].active = (list1Ids.indexOf(data[i].id) > -1 || list2Ids.indexOf(data[i].id) > -1)
+            }
+
+            var getTpl = labelTemplate.innerHTML,
+              view = document.getElementById('labelWrap');
+            laytpl(getTpl).render(data, function (html) {
+              view.innerHTML = html;
+            });
+          }
+
+          // 自定义标签
+          function rendercustomlabelWrap() {
+            var data = []
+            for (var i = 0; i < 3; i++) {
+              data[i] = {
+                id: 'custom' + (i + 1),
+                title: '自定义标签' + (i + 1),
+                condition: ['一类', '二类']
+              }
+            }
+            for (var i = 0; i < data.length; i++) {
+              data[i].active = (list1Ids.indexOf(data[i].id) > -1 || list2Ids.indexOf(data[i].id) > -1)
+            }
+
+            var getTpl = customlabelTemplate.innerHTML,
+              view = document.getElementById('customlabelWrap');
+            laytpl(getTpl).render(data, function (html) {
+              view.innerHTML = html;
+            });
+          }
+          // 可为用户群剔除
+          function renderAvailCustWrap() {
+            var getTpl = availCustTemplate.innerHTML,
+              view = document.getElementById('availCustWrap');
+            laytpl(getTpl).render(list1, function (html) {
+              view.innerHTML = html;
+              renderLabelWrap()
+              rendercustomlabelWrap()
+            });
+          }
+
+          // 自定义标签
+          function renderTargetCustWrap() {
+            var getTpl = targetCustTemplate.innerHTML,
+              view = document.getElementById('targetCustWrap');
+            laytpl(getTpl).render(list2, function (html) {
+              view.innerHTML = html;
+              renderLabelWrap()
+              rendercustomlabelWrap()
+
+            });
+          }
+          window.configCust = function () {
+            layer.open({
+              title: '客户群配置'
+            })
+          }
+          window.delCust = function (data, index) {
+            event.stopPropagation()
+            if (data == 'list1') {
+              list1.splice(index, 1)
+              list1Ids.splice(index, 1)
+              renderAvailCustWrap()
+            } else {
+              list2.splice(index, 1)
+              list2Ids.splice(index, 1)
+              renderTargetCustWrap()
+            }
+          }
+          // 拖拽
+          window.drag = function (ev, data) {
+            var content = null;
+            var $target = $(ev.target);
+            ev.dataTransfer.setData("custData", data);
+          }
+          // 拖拽
+          window.drop = function (ev) {
+            ev.preventDefault();
+            var $target = $(ev.target);
+            var custData = ev.dataTransfer.getData("custData")
+            if ($target.parents('#availCustWrap').length) {
+              list1.push(JSON.parse(custData))
+              list1Ids.push(JSON.parse(custData).id)
+              renderAvailCustWrap()
+            } else if ($target.parents('#targetCustWrap').length) {
+              list2.push(JSON.parse(custData))
+              list2Ids.push(JSON.parse(custData).id)
+              renderTargetCustWrap()
+            }
+          }
+          // 拖拽
+          window.allowDrop = function (ev) {
+            ev.preventDefault();
+          };
+
+          function renderStep2() {
+            renderLabelWrap()
+            rendercustomlabelWrap()
+            renderAvailCustWrap()
+            renderTargetCustWrap()
+          }
+
+        })
+    </script>
+</body>
+
+</html>

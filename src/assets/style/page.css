@@ -934,3 +934,82 @@
 .talkingPage .layui-form-radioed>i {
   color: #f87a25;
 }
+
+/***********************************************  外呼页面 ***********************************************/
+
+.outCallPage .layui-card .top-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.outCallPage .layui-card-header {
+  color: #ec6c3f;
+}
+
+.outCallPage .label-list,
+.outCallPage .cust-list {
+  margin: -7.5px;
+}
+
+.outCallPage .cust-list {
+  min-height: 200px;
+}
+
+.outCallPage .lable-item,
+.outCallPage .cust-item {
+  float: left;
+  width: 20%;
+  padding: 7.5px;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+
+
+.outCallPage .label-content {
+  background: #fff;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+  font-size: 16px;
+  line-height: 36px;
+  padding: 0 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.outCallPage .lable-item.active .label-content {
+  background: #ec6c3f;
+  color: #fff;
+  border-color: #ec6c3f;
+}
+
+.outCallPage .label-item-cust {
+  background: #fff;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.outCallPage .label-item-cust .title {
+  color: #ec6c3f;
+  max-width: 90%;
+  display: inline-block;
+}
+
+.outCallPage .label-item-cust .condition {
+  display: block;
+  white-space: pre-wrap;
+  min-height: 48px;
+}
+
+.outCallPage .label-item-cust .layui-icon {
+  position: absolute;
+  color: #ec6c3f;
+  top: 10px;
+  right: 10px;
+}

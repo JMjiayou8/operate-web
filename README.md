@@ -34,6 +34,11 @@
 - 短信手工发送：src/views/sms/create.html
 - 话术-新建问题：src/views/talking/addProblem.html
 
+01-07
+
+- 外呼：src/views/outcall/index.html
+- 政策审核：src/views/policy/examine.html
+
 > 待完成页面
 
 - 侧边栏和导航交互

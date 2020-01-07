@@ -30,20 +30,20 @@
         {{# if(item.itemType=='radio'){ }}
         <div class="layui-input-block ">
           {{#  layui.each(item.options, function(i, obj){ }}
-          <input type="radio" name="radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+          <input type="radio" name="{{item.itemId}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
             data-itemid="{{item.itemId}}" />
           {{#  }); }}
         </div>
         {{# }else if(item.itemType=='checkbox'){ }}
         <div class=" layui-input-block ">
           {{#  layui.each(item.options, function(i, obj){ }}
-          <input type="checkbox" name="check{{index}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
+          <input type="checkbox" name="{{item.itemId}}" value="{{obj.optionId}}" lay-skin="primary"
             title="{{obj.optionDesc}}" data-itemid="{{item.itemId}}" />
           {{#  }); }}
         </div>
         {{# }else if(item.itemType=='select'){ }}
         <div class="layui-input-block ">
-          <select data-itemid="{{item.itemId}}" name="select{{index}}">
+          <select data-itemid="{{item.itemId}}" name="{{item.itemId}}">
             <option value="">请选择</option>
             {{#  layui.each(item.options, function(i, obj){ }}
             <option value="{{obj.optionId}}">{{obj.optionDesc}}</option>
@@ -52,11 +52,12 @@
         </div>
         {{# }else if(item.itemType=='input'){ }}
         <div class=" layui-input-block ">
-          <input type="text" class="layui-input" name="input{{index}}">
+          <input type="text" class="layui-input" name="{{item.itemId}}" onblur="changeInput(this,'{{item.itemId}}')">
         </div>
         {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
         <div class=" layui-input-block ">
-          <textarea class="layui-textarea" name="textarea{{index}}"></textarea>
+          <textarea class="layui-textarea" name="{{item.itemId}}"
+            onblur="changeInput(this,'{{item.itemId}}')"></textarea>
         </div>
         {{# } }}
       </div>
@@ -76,20 +77,20 @@
       {{# if(item.itemType=='radio'){ }}
       <div class="layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
-        <input type="radio" name="child-radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
-          data-itemid="{{item.itemCode}}" />
+        <input type="radio" name="{{item.itemId}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+          data-itemid="{{item.itemId}}" />
         {{#  }); }}
       </div>
       {{# }else if(item.itemType=='checkbox'){ }}
       <div class=" layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
-        <input type="checkbox" name="child-check{{index}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
-          title="{{obj.optionDesc}}" data-itemid="{{item.itemCode}}" />
+        <input type="checkbox" name="{{item.itemId}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
+          title="{{obj.optionDesc}}" data-itemid="{{item.itemId}}" />
         {{#  }); }}
       </div>
       {{# }else if(item.itemType=='select'){ }}
       <div class="layui-input-block ">
-        <select data-itemid="{{item.itemCode}}">
+        <select data-itemid="{{item.itemId}}" name="{{item.itemId}}">
           <option value="">请选择</option>
           {{#  layui.each(item.options, function(i, obj){ }}
           <option value="{{obj.optionId}}">{{obj.optionDesc}}</option>
@@ -98,11 +99,11 @@
       </div>
       {{# }else if(item.itemType=='input'){ }}
       <div class=" layui-input-block ">
-        <input type="text" class="layui-input">
+        <input type="text" class="layui-input" name="{{item.itemId}}" onblur="changeInput(this,'{{item.itemId}}')">
       </div>
       {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
       <div class=" layui-input-block ">
-        <textarea class="layui-textarea"></textarea>
+        <textarea class="layui-textarea" name="{{item.itemId}}" onblur="changeInput(this,'{{item.itemId}}')"></textarea>
       </div>
       {{# } }}
     </div>
@@ -122,7 +123,8 @@
           layer = layui.layer,
           laytpl = layui.laytpl,
           element = layui.element;
-        var templateData = {}
+        var templateData = {},
+          answerData = {}
         // 将问题的转换成树形结构，方便显/隐展示
         function buildTreeData(list) {
           let temp = {};
@@ -182,7 +184,7 @@
                 "dependOptionId": "0",
                 "eparchyCode": "0020",
                 "isRequired": "false",
-                "itemCode": "2",
+                "itemCode": "1-1",
                 "itemDesc": "话术模板新增问题2",
                 "itemGrade": "2",
                 "itemId": 1000021,
@@ -205,14 +207,36 @@
                 "dependOptionId": "0",
                 "eparchyCode": "0020",
                 "isRequired": "false",
-                "itemCode": "3",
+                "itemCode": "1-2",
                 "itemDesc": "话术模板新增问题3",
                 "itemGrade": "2",
                 "itemId": 1000022,
                 "itemStatus": "1",
                 "itemType": "input",
                 "templateCode": 1000037
-              }
+              }, {
+                "createStaffId": "SUPERUSER",
+                "dependItemCode": "",
+                "dependOptionId": "",
+                "eparchyCode": "0020",
+                "isRequired": "true",
+                "itemCode": "2",
+                "itemDesc": "话术模板新增问题4",
+                "itemGrade": "1",
+                "itemId": 10000203,
+                "itemStatus": "1",
+                "itemType": "checkbox",
+                "options": [{
+                  "itemId": 1000020,
+                  "optionDesc": "话术模板新增问题选项1",
+                  "optionId": 0
+                }, {
+                  "itemId": 1000020,
+                  "optionDesc": "话术模板新增问题选项2",
+                  "optionId": 1
+                }],
+                "templateCode": 1000037
+              },
             ],
             "templateEnd": "<p><u>测试新增</u></p>",
             "templateHead": "<p><u>测试新增</u></p>",
@@ -223,6 +247,7 @@
           //问题列表，模拟数据
           // templateData.contentData = buildTreeData(JSON.parse(templateData.templateContent))
           templateData.contentData = buildTreeData(templateData.templateContent)
+
         }
         // 渲染问题区域
         function renderContent() {
@@ -248,23 +273,29 @@
         form.on('select', function (data) {
           var code = $(data.elem).data('itemid')
           renderChild(code, [data.value])
+          answerData[code] = data.value
           getProgress()
 
         });
-        var checkboxArr = []
+        var checkboxArr = {}
         form.on('checkbox', function (data) {
           var code = $(data.elem).data('itemid')
-          if (data.elem.checked) {
-            checkboxArr.push(data.value)
-          } else {
-            checkboxArr.splice(checkboxArr.indexOf(data.value), 1)
+          if (!checkboxArr[code]) {
+            checkboxArr[code] = []
           }
-          renderChild(code, checkboxArr)
+          if (data.elem.checked) {
+            checkboxArr[code].push(data.value)
+          } else {
+            checkboxArr[code].splice(checkboxArr[code].indexOf(data.value), 1)
+          }
+          renderChild(code, checkboxArr[code])
+          answerData[code] = checkboxArr[code]
           getProgress()
         });
         form.on('radio', function (data) {
           var code = $(data.elem).data('itemid')
           renderChild(code, [data.value])
+          answerData[code] = data.value
           getProgress()
         });
         //渲染二级问题
@@ -285,9 +316,14 @@
           }
         }
 
+        // 输入框交互
+        window.changeInput = function (obj, code) {
+          answerData[code] = $(obj).val()
+          getProgress()
+        }
+        // 获取答案数据，并计算进度
         function getProgress() {
-          var data1 = form.val('templateForm');
-          console.log(data1)
+          console.log('答案数据==', answerData)
         }
         $(function () {
           getData()

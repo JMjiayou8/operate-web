@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>政策审核</title>
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="layui-fluid common-page">
+    <form class="layui-form">
+      <div class="layui-card">
+        <div class="layui-card-body">
+          <p>订单信息：</p>
+          <table id="table1"></table>
+          <div class="layui-form-item">
+            <div class="layui-form-label">退款原因：</div>
+            <div class="layui-input-block">
+              <input type="text" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-form-label">退款描述：</div>
+            <div class="layui-input-block">
+              <textarea name="" class='layui-textarea'></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-card">
+        <div class="layui-card-body">
+          <div class="layui-form-item">
+            <div class="layui-form-label">审核意见：</div>
+            <div class="layui-input-block">
+              <textarea name="" class='layui-textarea'></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-form-item text-center">
+        <button type="button" class="layui-btn layui-btn-white">不通过</button>
+        <button type="button" class="layui-btn">通过</button>
+      </div>
+    </form>
+  </div>
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['table', 'form', ], function () {
+        var $ = layui.$,
+          form = layui.form,
+          table = layui.table;
+        table.render({
+          elem: '#table1',
+          cols: [
+            [
+
+              {
+                field: 'name',
+                title: '商品名称',
+                width: '30%'
+              },
+              {
+                field: 'num',
+                title: '商品订购数量',
+                width: '30%'
+
+              },
+              {
+                field: 'num2',
+                title: '商品实付金额',
+              }
+            ]
+          ],
+          data: [{
+            name: '7天流量包',
+            num: 12,
+            num2: '123'
+          }]
+        })
+
+      })
+  </script>
+</body>
+
+</html>
