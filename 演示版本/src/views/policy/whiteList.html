@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>政策白名单</title>
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="layui-fluid common-page ">
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <form class="layui-form" wid100>
+          <div class="layui-form-item">
+            <label class="layui-form-label">关联政策：</label>
+            <div class="layui-input-block">
+              <div class="layui-card">
+                <div class="layui-card-body">
+                  <div class="top-wrap clearfix">
+                    <span>所有政策</span>
+                    <div class="search-btn-wrap layui-inline fr">
+                      <input type="text" class="layui-input" placeholder="搜索政策">
+                      <i class="layui-icon layui-icon-search" onclick="rendCustWrap()"></i>
+                    </div>
+                  </div>
+                  <div id="choosePolicyWrap"></div>
+                  <div id="cust-laypage" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">操作类型：</label>
+            <div class="layui-input-block box-radio">
+              <input type="radio" name="operateType" value="1" title="新增" checked="">
+              <input type="radio" name="operateType" value="2" title="追加">
+              <input type="radio" name="operateType" value="3" title="覆盖">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">白名单类型：</label>
+            <div class="layui-input-block">
+              <div class="layui-tab layui-tab-brief custTypeTab" lay-filter="typeTab">
+                <ul class="layui-tab-title">
+                  <li lay-id="11" class="layui-this">标签选择</li>
+                  <li lay-id="22">文件上传</li>
+                </ul>
+                <div class="layui-tab-content">
+                  <div class="layui-tab-item layui-show">
+                    <div class="layui-card">
+                      <div class="layui-card-body">标签选择</div>
+                    </div>
+                  </div>
+                  <div class="layui-tab-item ">
+                    <div class="layui-card upload-card">
+                      <div class="layui-card-body">
+                        <div class="layui-upload-drag " id="uploadFile">
+                          <i class="upload-icon"></i>
+                          <p class="upload-text">文件上传</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item text-center">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+              <button type="button" class="layui-btn layui-btn-primary">保存</button>
+              <button type="button" class="layui-btn ">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script id="policyTemplate" type="text/html">
+    <div class="layui-row">
+      {{#  layui.each(d, function(index, item){ }}
+      <div class="layui-col-md4 layui-col-sm4 policy-item">
+        <input type="radio" name="policy" value="{{item.value}}" title="{{item.text}}">
+      </div>
+      {{#  }); }}
+    </div>
+  </script>
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
+        var $ = layui.$,
+          table = layui.table,
+          laydate = layui.laydate,
+          form = layui.form,
+          laytpl = layui.laytpl,
+          element = layui.element,
+          upload = layui.upload,
+          laypage = layui.laypage;
+
+
+        /********************************************** 关联政策区域  **********************************************/
+        window.rendCustWrap = function (page) {
+          page = page || 1;
+
+          function f(i) { //渲染政策单选区域
+            var policyList = []
+            //模拟假数据，实际ajax请求
+            for (var i = 0; i < 15; i++) {
+              policyList.push({
+                value: i,
+                text: '政策' + (Math.random() * 100).toFixed(0)
+              })
+            }
+            var getTpl = policyTemplate.innerHTML,
+              view = document.getElementById('choosePolicyWrap');
+            laytpl(getTpl).render(policyList, function (html) {
+              view.innerHTML = html;
+              form.render()
+            });
+          }
+          f(page)
+          laypage.render({
+            elem: 'cust-laypage',
+            limit: 15,
+            cur: page,
+            count: 50,
+            theme: 'common',
+            prev: '<em class="layui-icon layui-icon-left"></em>',
+            next: '<em class="layui-icon layui-icon-right"></em>',
+            jump: function (obj, first) {
+              if (!first) {
+                f(obj.curr)
+              }
+            }
+          });
+        }
+        rendCustWrap()
+        /********************************************** 白名单类型区域  **********************************************/
+        upload.render({
+          elem: '#uploadFile',
+          // url: '/upload/',
+          before: function (obj) {
+            //预读本地文件示例，不支持ie8
+            obj.preview(function (index, file, result) {
+              console.log(file)
+              // $('#demo1').attr('src', result); //图片链接（base64）
+            });
+          },
+          done: function (res) {
+            console.log(res)
+          }
+        });
+
+      })
+  </script>
+</body>
+
+</html>

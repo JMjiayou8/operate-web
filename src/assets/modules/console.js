@@ -2,27 +2,21 @@ layui.define(function (exports) {
   //概览
   layui.use(['laytpl'], function () {
     var laytpl = layui.laytpl;
-    // console.log(layui.nav)
     var data = {
       data: { num1: 12, num2: 20, num3: 10, num4: 40, num5: 2 },
       config: [
-        { key: 'nav1', title: '产商品配置', color: '#82cbbb', icon: '../../assets/images/console/overview2/flow1.png' },
-        { key: 'nav2', title: '营销策划', color: '#e9785e', icon: '../../assets/images/console/overview2/flow2.png' },
-        { key: 'nav3', title: '营销执行', color: '#e28ddd', icon: '../../assets/images/console/overview2/flow3.png' },
-        { key: 'nav4', title: '营销交付', color: '#968de2', icon: '../../assets/images/console/overview2/flow4.png' },
-        { key: 'nav5', title: '计收计算', color: '#66aee6', icon: '../../assets/images/console/overview2/flow5.png' },
-        { key: 'nav6', title: '数字运营', color: '#e6a566', icon: '../../assets/images/console/overview2/flow6.png' }
+        { title: '营销策划', color: '#23b192', icon: '../../assets/images/console/overview/flow1.png' },
+        { title: '营销确认', color: '#e9785e', icon: '../../assets/images/console/overview/flow2.png' },
+        { title: '营销执行', color: '#968de2', icon: '../../assets/images/console/overview/flow3.png' },
+        { title: '营销评估', color: '#e6a566', icon: '../../assets/images/console/overview/flow4.png' }
       ]
+
     }
     var getTpl = overviewTemplate.innerHTML,
       view = document.getElementById('overview-wrap');
     laytpl(getTpl).render(data, function (html) {
       view.innerHTML = html;
     });
-
-    window.toNavPage = function (data) {
-      admin.rendSideNav(data);
-    }
   })
 
   // 常用功能

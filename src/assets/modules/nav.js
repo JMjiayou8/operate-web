@@ -9,29 +9,29 @@ layui.define(function (exports) {
     function rendTopNav () {
       var TopNavData = [
         {
-          title: '产商品配置',
+          title: '功能页面',
           iconClass: 'nav1'
         },
-        {
-          title: '营销策划',
-          iconClass: 'nav2'
-        },
-        {
-          title: '营销执行',
-          iconClass: 'nav3'
-        },
-        {
-          title: '营销交付',
-          iconClass: 'nav4'
-        },
-        {
-          title: '计收计算',
-          iconClass: 'nav5'
-        },
-        {
-          title: '数字运营',
-          iconClass: 'nav6'
-        }
+        // {
+        //   title: '营销策划',
+        //   iconClass: 'nav2'
+        // },
+        // {
+        //   title: '营销执行',
+        //   iconClass: 'nav3'
+        // },
+        // {
+        //   title: '营销交付',
+        //   iconClass: 'nav4'
+        // },
+        // {
+        //   title: '计收计算',
+        //   iconClass: 'nav5'
+        // },
+        // {
+        //   title: '数字运营',
+        //   iconClass: 'nav6'
+        // }
       ]
       var getTpl = topNavTemplate.innerHTML,
         view = document.getElementById('topNavWrap')

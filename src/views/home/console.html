@@ -178,7 +178,7 @@
       </div>
     </div>
   </div>
-  <!-- <script id="overviewTemplate" type="text/html">
+  <script id="overviewTemplate" type="text/html">
     <ul class="over-list layui-row">
       <li class="over-item layui-col-md3 layui-col-sm3 layui-col-xs3">
         <p class="over-title" style="color:{{d.config[0].color}}">{{d.config[0].title}}</p>
@@ -213,22 +213,9 @@
         </p>
       </li>
     </ul>
-  </script> -->
-
-  <script id="overviewTemplate" type="text/html">
-    <ul class="over-list1 layui-row">
-      {{# layui.each(d.config,function(index,item){ }}
-      <li class="over-item layui-col-md2 layui-col-sm2 layui-col-xs2" onclick="toNavPage('{{item.key}}')">
-
-        <p class="over-icon" style="background-color:{{item.color}}"><img src="{{item.icon}}"></p>
-        {{# if(index<=4 ){ }}
-        <i class="connect"></i>
-        {{# } }}
-        <p class="over-title" style="color:{{item.color}}">{{item.title}}</p>
-      </li>
-      {{# }); }}
-    </ul>
   </script>
+
+
 
   <script id="comFuncsTemplate" type="text/html">
     <div carousel-item>

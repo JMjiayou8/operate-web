@@ -30,7 +30,7 @@
         <div class="layui-tab-item layui-show">
           <div class="layui-card">
             <div class="layui-card-body">
-              <form class="layui-form" wid140>
+              <form class="layui-form" wid140 lay-filter="step1Form">
                 <div class="layui-form-item">
                   <label class="layui-form-label">客户群名称：</label>
                   <div class="layui-input-block">
@@ -75,11 +75,11 @@
                 <div class="layui-form-item">
                   <label class="layui-form-label">营销触点选择：</label>
                   <div class="layui-input-block ">
-                    <input type="checkbox" name="originType[1]" lay-skin="box" title="外呼" checked="" />
-                    <input type="checkbox" name="originType[2]" lay-skin="box" title="外呼-短信" />
-                    <input type="checkbox" name="originType[3]" lay-skin="box" title="线上-内" />
-                    <input type="checkbox" name="originType[4]" lay-skin="box" title="线上-外" />
-                    <input type="checkbox" name="originType[5]" lay-skin="box" title="短信" />
+                    <input type="checkbox" value="1" lay-skin="box" title="外呼" />
+                    <input type="checkbox" value="2" lay-skin="box" title="外呼-短信" />
+                    <input type="checkbox" value="3" lay-skin="box" title="线上-内" />
+                    <input type="checkbox" value="4" lay-skin="box" title="线上-外" />
+                    <input type="checkbox" value="5" lay-skin="box" title="短信" />
                   </div>
                 </div>
               </form>
@@ -116,7 +116,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="layui-col-md12" style="margin-top:10px;">
+                <div class="layui-col-md12 targetCustWrap" style="margin-top:10px;display:none;">
                   <div class="layui-card">
                     <div class="layui-card-header">
                       目标客户群剔除
@@ -221,14 +221,21 @@
             }
           });
           window.nextPage = function () {
-            // element.tabChange('pageTab', '22');
-            // renderStep2()
-            console.log(form.data(''))
+            element.tabChange('pageTab', '22');
           };
           $(function () {
             renderStep1()
           })
           /********************************************** 基本信息区域  **********************************************/
+          var chnlArr = []; //触点选择
+          form.on('checkbox', function (data) {
+            if (data.elem.checked) {
+              chnlArr.push(data.value)
+            } else {
+              chnlArr.splice(chnlArr.indexOf(data.value), 1)
+            }
+          })
+
           function renderStep1() {
             table.render({
               elem: '#table1',
@@ -406,12 +413,16 @@
           };
 
           function renderStep2() {
+            if (chnlArr.indexOf('1') > -1 || chnlArr.indexOf('2') > -1) { //渠道包含外呼
+              $('.targetCustWrap').show()
+              renderTargetCustWrap()
+            } else {
+              $('.targetCustWrap').hide()
+            }
             renderLabelWrap()
             rendercustomlabelWrap()
             renderAvailCustWrap()
-            renderTargetCustWrap()
           }
-
         })
     </script>
 </body>

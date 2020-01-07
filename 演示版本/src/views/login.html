@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>登录页</title>
+  <link rel="stylesheet" href="../assets/layui/css/layui.css" />
+  <link rel="stylesheet" href="../assets/style/login.css" />
+</head>
+
+<body>
+  <div class="login-page">
+    <div class="login-top">
+      <span class="sys-logo"></span>
+      <span class="sys-name">中国联通广东分公司用户运营平台</span>
+    </div>
+    <div class="login-box">
+      <form class="layui-form login-form">
+        <div class="layui-form-item">
+          <div class="layui-input-inline">
+            <input type="text" name="username" autocomplete="off" placeholder="请输入用户名" class="layui-input" />
+            <i class="layui-icon layui-icon-username"></i>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-inline">
+            <input type="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input" />
+            <i class="layui-icon layui-icon-password"></i>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-inline">
+            <input type="text" name="vercode" autocomplete="off" placeholder="请输入验证码"
+              class="layui-input layui-vercode-input" />
+            <i class="layui-icon layui-icon-vercode"></i>
+            <!-- <img src="../assets/images/login/code.png" alt="" class="code-img" /> -->
+            <button type="button" id="getCode" class="layui-btn layui-btn-primary code-btn"
+              onclick="sendMessages(this)">获取验证码</button>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-inline">
+            <button type="button" class="layui-btn login-btn" lay-submit="" lay-filter="loginBtn">
+              登录
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="../assets/layui/layui.js"></script>
+  <script>
+    layui.use(['form', 'jquery'], function () {
+      var form = layui.form,
+        $ = layui.jquery;
+
+      var curCount, InterValObj, code = "";
+      window.sendMessages = function (obj) {
+        curCount = 60;
+        $(obj).attr("disabled", "true");
+        $(obj).text("请在" + curCount + "秒内输入");
+        InterValObj = window.setInterval(setRemainTimes, 1000);
+      }
+
+      function setRemainTimes() {
+        if (curCount == 0) {
+          window.clearInterval(InterValObj);
+          $("#getCode").removeAttr("disabled");
+          $("#getCode").text("重新发送验证码");
+          code = "";
+        } else {
+          curCount--;
+          $("#getCode").text("请在" + curCount + "秒内输入");
+        }
+      }
+      form.on('submit(loginBtn)', function (data) {
+        alert(JSON.stringify(data.field, null, 4))
+        return false
+      })
+
+
+    })
+  </script>
+</body>
+
+</html>

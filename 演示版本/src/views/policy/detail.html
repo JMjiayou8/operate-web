@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>政策详情</title>
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+</head>
+
+<body>
+  <div class="common-page">
+    <div class="layui-tab " lay-filter="tabFilter">
+      <ul class="layui-tab-title layui-row  step-top-wrap">
+        <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first" lay-id="11">
+          <i class="step-icon step1"></i>
+          <p class="step-text">政策配置</p>
+        </li>
+        <li class="layui-col-md4 layui-col-sm4 step-item" lay-id="22">
+          <i class="step-icon  step2"></i>
+          <p class="step-text">政策白名单</p>
+        </li>
+        <li class="layui-col-md4 layui-col-sm4 step-item step-item-last" lay-id="33">
+          <i class="step-icon  step3"></i>
+          <p class="step-text">政策执行</p>
+        </li>
+      </ul>
+      <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+          <p class="part-title">配置详情</p>
+          <div id="table1"></div>
+          <p class="part-title">修改记录</p>
+          <table id="table2" class="layui-hide"></table>
+        </div>
+        <div class="layui-tab-item">
+          <p class="part-title">白名单修改详情</p>
+          <table id="table3" class="layui-hide"></table>
+        </div>
+        <div class="layui-tab-item">
+          <p class="part-title">政策执行情况</p>
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <div id="chart1" style="width: 100%;height: 380px;"></div>
+            </div>
+          </div>
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <form class="layui-form">
+                <div class="layui-form-item" style="margin:0;">
+                  <div class="layui-inline">
+                    <label class="layui-form-label">地市：</label>
+                    <div class="layui-input-inline">
+                      <select name="area">
+                        <option value=""></option>
+                        <option value="0">广州市</option>
+                        <option value="1">深圳市</option>
+                        <option value="2">珠海市</option>
+                        <option value="3">佛山市</option>
+                        <option value="4">汕头市</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label">时间范围：</label>
+                    <div class="layui-input-inline">
+                      <input type="text" id="dateRange" name="dateRange" class="layui-input" placeholder="请选择时间范围" />
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-inline">
+                      <button type="submit" class="layui-btn " lay-submit="" lay-filter="serachBtn">
+                        查询
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <table id="table4"></table>
+        </div>
+      </div>
+      <div class="add-policy">
+        <i class="step-icon "></i>
+        <p class="step-text" lay-href="policy/create.html">创建政策</p>
+      </div>
+    </div>
+  </div>
+  <script id="tableTemplate" type="text/html">
+    <table class="layui-table">
+      <thead>
+        <tr>
+          <th>配置项</th>
+          <th>配置参数</th>
+          <th>配置项</th>
+          <th>配置参数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-title">政策名称</td>
+          <td class="td-text">{{d.title}}</td>
+          <td class="td-title">政策来源</td>
+          <td class="td-text">{{d.source}}</td>
+        </tr>
+        <tr>
+          <td class="td-title">开始时间</td>
+          <td class="td-text">{{d.startDate}}</td>
+          <td class="td-title">结束时间</td>
+          <td class="td-text">{{d.endDate}}</td>
+        </tr>
+        <tr>
+          <td class="td-title">业务分类</td>
+          <td class="td-text">{{d.type1}}</td>
+          <td class="td-title">业务小类</td>
+          <td class="td-text">{{d.type2}}</td>
+        </tr>
+        <tr>
+          <td class="td-title">政策说明</td>
+          <td class="td-text" colspan="3">{{d.desc}}</td>
+        </tr>
+        <tr>
+          <td class="td-title">政策文件</td>
+          <td class="td-text" colspan="3"><a class="fileLink">{{d.file}}</a></td>
+        </tr>
+        <tr>
+          <td class="td-title">产品选择</td>
+          <td class="td-text" colspan="3">{{d.product}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </script>
+  <script id="fileTemplate" type="text/html">
+    <a class="fileLink">{{d.name}}</a>
+  </script>
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .extend({
+        index: 'lib/index' //主入口模块
+      })
+      .use(
+        ['index', 'table', 'laytpl', 'laydate', 'form', 'echarts', 'element'],
+        function () {
+          var $ = layui.$,
+            table = layui.table,
+            laydate = layui.laydate,
+            form = layui.form,
+            echarts = layui.echarts,
+            element = layui.element,
+            laytpl = layui.laytpl
+          laydate.render({
+            elem: '#dateRange',
+            range: true,
+            format: 'yyyy/MM/dd'
+          })
+
+          function rendStep1() {
+            var data = {
+              title: '7天包政策',
+              source: '省公司政策',
+              startDate: '2019-10-01',
+              endDate: '2019-10-10',
+              type1: '1111',
+              type2: '2222',
+              desc: '描述',
+              file: '政策.doc',
+              product: '赠送流量权益'
+            }
+            var getTpl = tableTemplate.innerHTML,
+              view = document.getElementById('table1')
+            laytpl(getTpl).render(data, function (html) {
+              view.innerHTML = html
+            })
+            table.render({
+              elem: '#table2',
+              cols: [
+                [
+                  //标题栏
+                  {
+                    field: 'name',
+                    title: '政策名称',
+                    width: "33%"
+                  },
+                  {
+                    field: 'user',
+                    title: '修改人',
+                    width: "33%"
+                  },
+                  {
+                    field: 'time',
+                    title: '修改时间'
+                  }
+                ]
+              ],
+              data: [{
+                  name: '10001',
+                  user: '7天包政策',
+                  time: '2016-10-14'
+                },
+                {
+                  name: '10002',
+                  user: '7天包政策',
+                  time: '2016-10-14'
+                }
+              ]
+            })
+          }
+
+          function rendStep2() {
+            table.render({
+              elem: '#table3',
+              page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip'],
+                theme: 'common', //自定义分页布局
+                limit: 10
+              },
+              cols: [
+                [
+                  //标题栏
+                  {
+                    field: 'name',
+                    title: '文件名称',
+                    templet: '#fileTemplate',
+                    width: '20%'
+                  },
+                  {
+                    field: 'num',
+                    title: '文件数量',
+                    width: '15%'
+                  },
+                  {
+                    field: 'status',
+                    title: '状态',
+                    width: '15%'
+                  },
+                  {
+                    field: 'time',
+                    title: '上传时间',
+                    width: '15%'
+                  },
+                  {
+                    field: 'operator',
+                    title: '操作人'
+                  }
+                ]
+              ],
+              data: [{
+                  num: 10002,
+                  name: '政策.txt',
+                  user: '100',
+                  time: '2016-10-14',
+                  status: '追加',
+                  operator: 'admin'
+                },
+                {
+                  num: 1000,
+                  name: '政策.txt',
+                  user: '100',
+                  time: '2016-10-14',
+                  status: '追加追加',
+                  operator: 'admin'
+                }
+              ]
+            })
+          }
+
+          function rendStep3() {
+            table.render({
+              elem: '#table4',
+              page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip'],
+                theme: 'common', //自定义分页布局
+                limit: 10
+              },
+              cols: [
+                [
+                  //标题栏
+                  {
+                    field: 'name',
+                    title: '策略名称',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num1',
+                    title: '导入量',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num2',
+                    title: '客户群生成过滤数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num3',
+                    title: '客户群数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num4',
+                    title: '频次过滤数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num5',
+                    title: '黑名单过滤数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num6',
+                    title: '推送数',
+                    width: '10%'
+                  },
+                  {
+                    field: 'num7',
+                    title: '订购数'
+                  }
+                ]
+              ],
+              data: [{
+                  name: '策略1',
+                  num1: 100,
+                  num2: 1002,
+                  num3: 134,
+                  num4: 3166,
+                  num5: 8345,
+                  num6: 12353,
+                  num7: 12
+                },
+                {
+                  name: '策略2',
+                  num1: 1235,
+                  num2: 1245,
+                  num3: 3416,
+                  num4: 6515,
+                  num5: 1345,
+                  num6: 64561,
+                  num7: 64511
+                },
+                {
+                  name: '策略3',
+                  num1: 43511,
+                  num2: 1456,
+                  num3: 636413,
+                  num4: 23461,
+                  num5: 134,
+                  num6: 1361,
+                  num7: 7371
+                }
+              ]
+            })
+
+            rendChart();
+          }
+
+          function rendChart() {
+            var option = {
+              backgroundColor: '#fff',
+              color: ['#f9932e'],
+              grid: {
+                containLabel: true,
+                top: 60,
+                left: 0,
+                right: 20,
+                bottom: 0
+              },
+              xAxis: [{
+                type: 'category',
+                data: [
+                  '营销任务一',
+                  '营销任务二',
+                  '营销任务三',
+                  '营销任务四',
+                  '营销任务五'
+                ],
+                axisLine: {
+                  show: false
+                },
+                axisTick: {
+                  show: false
+                },
+                axisLabel: {
+                  color: '#999999',
+                  fontSize: 14
+                }
+              }],
+              yAxis: [{
+                type: 'value',
+                axisLine: {
+                  show: false
+                },
+                axisTick: {
+                  show: false
+                },
+                splitLine: {
+                  lineStyle: {
+                    color: '#f1f1f2'
+                  }
+                },
+                axisLabel: {
+                  color: '#999999',
+                  fontSize: 14
+                }
+              }],
+              series: [{
+                name: '营销任务',
+                type: 'bar',
+                data: [111, 222, 333, 444, 555],
+                barWidth: 18,
+                itemStyle: {
+                  normal: {
+                    barBorderRadius: [5, 5, 0, 0],
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(255,154,22)'
+                      },
+                      {
+                        offset: 1,
+                        color: 'rgb(234,130,113)'
+                      }
+                    ])
+                  }
+                },
+                label: {
+                  emphasis: {
+                    show: true,
+                    lineHeight: 30,
+                    width: 80,
+                    height: 30,
+                    backgroundColor: '#ec6c3f',
+                    borderRadius: 200,
+                    position: ['-35', '-80'],
+                    formatter: [' {a|{c}}\n', ' {b|}\n', ' {d|}'].join(''),
+                    rich: {
+                      d: {
+                        color: '#ec6c3f',
+                        align: 'center',
+                        width: 10,
+                        height: 10,
+                        backgroundColor: '#ec6c3f',
+                        borderWidth: 3,
+                        borderColor: 'rgba(255,255,255,.8)',
+                        borderRadius: 100
+                      },
+                      a: {
+                        color: '#fff',
+                        align: 'center'
+                      },
+                      b: {
+                        width: 1,
+                        height: 50,
+                        borderWidth: 1,
+                        borderColor: '#ec6c3f',
+                        align: 'center'
+                      }
+                    }
+                  }
+                }
+              }]
+            }
+            var echartsApp = echarts.init(
+              document.getElementById('chart1'),
+              layui.echartsTheme
+            )
+            echartsApp.setOption(option)
+            echartsApp.resize()
+            admin.resize(function () {
+              echartsApp.resize()
+            })
+          }
+          element.on('tab(tabFilter)', function (elem) {
+            if (elem.index == 0) {
+              rendStep1()
+            } else if (elem.index == 1) {
+              rendStep2()
+            } else if (elem.index == 2) {
+              rendStep3()
+            }
+          })
+          form.on('submit(serachBtn)', function (data) {
+            console.log(data)
+            return false
+          })
+          $(function () {
+            rendStep1();
+          })
+        }
+      )
+  </script>
+</body>
+
+</html>

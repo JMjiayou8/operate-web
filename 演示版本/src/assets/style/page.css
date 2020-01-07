@@ -1,0 +1,1015 @@
+.layui-fluid {
+  padding: 15px;
+  background: #ebebec;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+}
+
+
+.common-del-link {
+  color: #ff6600;
+  line-height: 36px;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.common-del-link i {
+  color: #333;
+}
+
+/*********************************************** 控制台 ***********************************************/
+.config-part {
+  display: none;
+}
+
+/* 常用功能 */
+.comFuncs-wrap {
+  background: #fff;
+  text-align: center;
+}
+
+.func-title {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* 概览 */
+
+.console-page .over-list1 .over-item {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.console-page .over-list1 .over-title {
+  font-size: 16px;
+}
+
+.console-page .over-list1 .over-icon {
+  width: 60px;
+  height: 60px;
+  margin: 10px auto;
+  border-radius: 50%;
+  line-height: 60px;
+}
+
+
+.console-page .over-list1 .connect {
+  position: absolute;
+  width: 90%;
+  height: 3px;
+  background: #e7e6e6;
+  top: 40%;
+  left: 60%;
+  z-index: -1;
+}
+
+.console-page .over-list1 .connect::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: #e7e6e6;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  left: 35%;
+}
+
+
+
+
+.console-page .over-list {
+  margin: 0 -8%;
+}
+
+
+.console-page .over-list .over-item {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.console-page .over-list .over-title {
+  font-size: 16px;
+}
+
+.console-page .over-list .over-icon {
+  width: 60px;
+  height: 60px;
+
+  margin: 10px auto;
+}
+
+.console-page .over-list .over-num {
+  font-size: 24px;
+  margin: 0 5px;
+}
+
+.console-page .over-list .connect {
+  position: absolute;
+  width: 90%;
+  height: 3px;
+  background: #e7e6e6;
+  top: 50%;
+  left: 60%;
+  z-index: -1;
+}
+
+.console-page .over-list .connect::before,
+.console-page .over-list .connect::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: #e7e6e6;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  left: 20%;
+}
+
+.console-page .console-page .over-list .connect::after {
+  left: 60%;
+}
+
+.console-page .over-list {
+  margin: 0 -8%;
+}
+
+
+.console-page .over-list .over-item {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.console-page .over-list .over-title {
+  font-size: 16px;
+}
+
+.console-page .over-list .over-icon {
+  width: 60px;
+  height: 60px;
+
+  margin: 10px auto;
+}
+
+.console-page .over-list .over-num {
+  font-size: 24px;
+  margin: 0 5px;
+}
+
+.console-page .over-list .connect {
+  position: absolute;
+  width: 90%;
+  height: 3px;
+  background: #e7e6e6;
+  top: 50%;
+  left: 60%;
+  z-index: -1;
+}
+
+.console-page .over-list .connect::before,
+.console-page .over-list .connect::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: #e7e6e6;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  left: 20%;
+}
+
+.console-page .console-page .over-list .connect::after {
+  left: 60%;
+}
+
+
+/* 各地市营销活动订购量排名 */
+.top9Wrap {
+  text-align: center;
+  font-size: 18px;
+}
+
+.top9Wrap .top3Wrap {
+  margin: 20px 0 40px 0;
+}
+
+.top9Wrap .top-num {
+  font-size: 24px;
+  color: #e9785e;
+  line-height: 40px;
+}
+
+.top9Wrap .top-title {
+  line-height: 30px;
+}
+
+.topOther .top-num {
+  font-size: 18px;
+}
+
+.top9Wrap .topOther {
+  margin-bottom: 10px;
+}
+
+.top9Wrap .topOther .top-title {
+  font-size: 14px;
+  margin: 0 10px;
+  display: inline-block;
+  line-height: 18px;
+}
+
+.top9Wrap .topOther .top-num {
+  display: inline-block;
+  line-height: 18px;
+}
+
+
+.top9Wrap .topOther .top-level {
+  border: 3px solid rgb(126, 206, 244);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.top9Wrap .topOther .top-text {
+  line-height: 40px;
+}
+
+.top9Wrap .topOther-item {
+  margin-top: 30px;
+}
+
+.top9Wrap .top-icon {
+  display: block;
+  width: 60px;
+  height: 80px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.top9Wrap .top-icon.top1 {
+  width: 80px;
+  height: 100px;
+  margin-top: 0;
+  background: url('../images/console/top1.png') no-repeat center/100%;
+}
+
+.top9Wrap .top-icon.top2 {
+  background: url('../images/console/top2.png') no-repeat center/100%;
+}
+
+.top9Wrap .top-icon.top3 {
+  background: url('../images/console/top3.png') no-repeat center/100%;
+}
+
+/* 图表 */
+.console-page .chart-wrap {
+  position: relative;
+}
+
+.console-page .chart-link {
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #999;
+  width: 78px;
+  height: 30px;
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.console-page .chart-info-list {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  min-width: 120px;
+}
+
+.chart-info-list p {
+  color: #666666;
+  font-size: 16px;
+}
+
+.chart-info-list span {
+  font-size: 30px;
+  line-height: 50px;
+}
+
+.chart-info-list .info-item {
+  margin-top: 20px;
+}
+
+.chart-info-list .info-item .status1 {
+  color: #1ca3ff;
+}
+
+.chart-info-list .info-item .status2 {
+  color: #f74f77;
+}
+
+.chart-info-list .info-item .status3 {
+  color: #f7b84f;
+}
+
+.chart-info-list .info-item .status4 {
+  color: #6b5af4;
+}
+
+.chart-top-info {
+  font-size: 16px;
+  color: #333;
+  margin: 0 50px;
+}
+
+.chart-top-info .icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.chart-top-info .icon.icon1 {
+  background: url('../images/console/icon1.png') no-repeat center/cover;
+}
+
+.chart-top-info .icon.icon2 {
+  background: url('../images/console/icon2.png') no-repeat center/cover;
+}
+
+.chart-top-info .num {
+  font-size: 18px;
+  color: #ec6c3f;
+}
+
+@media screen and (max-width:1400px) {
+  .top9Wrap .topOther .top-title {
+    display: block;
+  }
+
+  .top9Wrap .topOther .top-text {
+    line-height: 26px;
+  }
+
+  .top9Wrap .topOther {
+    margin-bottom: 0;
+  }
+}
+
+/*********************************************** 常规功能页面 ***********************************************/
+
+.common-page .layui-tab {
+  margin: 0;
+}
+
+.common-page .layui-tab-content {
+  padding: 20px;
+}
+
+.common-page .layui-tab-brief .layui-tab-content {
+  padding: 20px 0;
+}
+
+.common-page .layui-tab-brief>.layui-tab-more li.layui-this:after,
+.common-page .layui-tab-brief>.layui-tab-title .layui-this:after {
+  border-color: #ec6c3f;
+}
+
+.common-page .step-top-wrap {
+  background-image: -moz-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  background-image: -webkit-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  background-image: -ms-linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  background-image: linear-gradient(0deg, rgb(124, 187, 198) 0%, rgb(131, 166, 209) 100%);
+  width: 100%;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  padding: 40px 0;
+  height: 130px;
+  padding: 20px 33% 10px 0;
+  width: auto;
+}
+
+.common-page .step-top-wrap .layui-tab-title {
+  border: 0;
+}
+
+
+.common-page .step-item {
+  cursor: pointer;
+  color: #fff;
+}
+
+.common-page .step-item::after {
+  content: "";
+  width: 60%;
+  display: inline-block;
+  height: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 36px;
+  left: 70%;
+}
+
+.common-page .step-item-last::after,
+.common-page .step-item-last.layui-this::after {
+  width: 0;
+  border: 0;
+}
+
+.common-page .step-item .step-icon {
+  width: 72px;
+  height: 72px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: block;
+  background: url('../images/policy/step1.png') #fff no-repeat center;
+  margin: 0 auto;
+}
+
+.common-page .step-item.layui-this .step-icon {
+  border: 1px solid #ec6c3f;
+}
+
+.common-page .step-item .step-icon.step1 {
+  background: url('../images/policy/step1.png') #fff no-repeat center;
+}
+
+.common-page .step-item .step-icon.step2 {
+  background: url('../images/policy/step2.png') #fff no-repeat center;
+}
+
+.common-page .step-item .step-icon.step3 {
+  background: url('../images/policy/step3.png') #fff no-repeat center;
+}
+
+.common-page .step-item.layui-this .step-icon.step1 {
+  background: url('../images/policy/step1-active.png') #fff no-repeat center;
+}
+
+.common-page .step-item.layui-this .step-icon.step2 {
+  background: url('../images/policy/step2-active.png') #fff no-repeat center;
+}
+
+.common-page .step-item.layui-this .step-icon.step3 {
+  background: url('../images/policy/step3-active.png') #fff no-repeat center;
+}
+
+
+.common-page .step-text {
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.common-page .part-title {
+  color: #c30621;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 10px 0;
+}
+
+
+.common-page .layui-table td,
+.common-page .layui-table th {
+  color: #333;
+  height: 20px;
+  padding: 15px;
+}
+
+.common-page .layui-table td.td-title {
+  width: 170px;
+  color: #666 !important;
+}
+
+.common-page .fileLink {
+  color: #066fff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* 营销策划 */
+.common-page .card-item {
+  color: #fff;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 30px 20px;
+}
+
+.common-page .top-list {
+  margin-bottom: 20px;
+}
+
+.common-page .card-item .num {
+  font-size: 30px;
+}
+
+.common-page .card-item .unit {
+  font-size: 14px;
+}
+
+.common-page .card-item.card1 {
+  background: #6babcc;
+}
+
+.common-page .card-item.card2 {
+  background: #eaa36e;
+}
+
+.common-page .card-item.card3 {
+  background: #9589cc;
+}
+
+.common-page .card-item.card4 {
+  background: #929cb2;
+}
+
+.common-page .tag-list p {
+  margin-top: 10px;
+}
+
+.common-page .layui-card .top-wrap {
+  border-bottom: 1px solid #d2d2d2;
+  line-height: 38px;
+  padding-bottom: 10px;
+}
+
+.common-page .policy-item {
+  margin: 10px 0;
+}
+
+.common-page .custTypeTab .layui-tab-title li {
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 5px;
+  padding: 0 20px;
+  margin: 0 20px 0 0;
+  line-height: 36px;
+}
+
+.common-page .custTypeTab .layui-tab-title li.layui-this {
+  border: 1px solid #ec6c3f;
+  background: #ec6c3f;
+  color: #fff;
+}
+
+.common-page .custTypeTab .layui-tab-title li.layui-this::after {
+  display: none;
+}
+
+.common-page .custTypeTab .layui-tab-content {
+  padding: 20px 0;
+}
+
+.common-page .upload-card .layui-card-body {
+  padding: 0;
+}
+
+.common-page .layui-upload-drag {
+  background: #fafafa;
+  width: 100%;
+  height: 100%;
+  padding: 50px 0;
+  border: 0;
+  border-radius: 5px;
+}
+
+.common-page .layui-upload-drag .upload-icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url('../images/upload.png') no-repeat center/cover;
+}
+
+.common-page .layui-upload-drag .upload-text {
+  color: #979797;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 20px;
+}
+
+.common-page .layui-btn {
+  padding: 0 30px;
+}
+
+.common-page .layui-table-view .layui-btn {
+  padding: 0 10px;
+}
+
+.common-page .multi-elem-line .layui-input-inline {
+  max-width: 150px;
+}
+
+.common-page .template-wrap {
+  border: 1px dashed #d2d2d2;
+  border-radius: 5px;
+}
+
+.choose-template-wrap .layui-textarea {
+  width: 70%;
+  display: inline-block;
+  resize: none;
+}
+
+.choose-template-wrap .layui-btn {
+  vertical-align: top;
+  margin-left: 5%;
+  background: #448aca;
+  position: relative;
+  padding: 0 15px 0 40px;
+}
+
+.choose-template-wrap .layui-btn .chooseMsg-icon {
+  display: inline-block;
+  position: absolute;
+  background: url("../images/sms_temp.png") no-repeat center/100%;
+  width: 20px;
+  height: 15px;
+  left: 15px;
+  top: 10px;
+}
+
+/*********************************************** 政策页面 ***********************************************/
+
+/* 创建政策 */
+.createPolicy .step-item .step-icon.step2 {
+  background: url('../images/policy/product.png') #fff no-repeat center;
+}
+
+.createPolicy .step-item.layui-this .step-icon.step2 {
+  background: url('../images/policy/product-active.png') #fff no-repeat center;
+}
+
+.createPolicy-form .layui-form-item {
+  clear: none;
+}
+
+.createPolicy .search-btn-wrap {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 10;
+}
+
+.createPolicy .tip {
+  font-size: 14px;
+  line-height: 30px;
+  color: #df1818;
+}
+
+.createPolicy .layui-tab-brief .layui-tab-title {
+  border-bottom: 1px solid #d2d2d2;
+}
+
+.createPolicy .product-tab {
+  margin-top: 40px;
+}
+
+/* 政策详情 */
+.common-page .add-policy {
+  position: absolute;
+  top: 20px;
+  right: 20%;
+  text-align: center;
+}
+
+.common-page .add-policy .step-icon {
+  width: 72px;
+  height: 72px;
+  display: block;
+  background: url('../images/policy/create.png') no-repeat center;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.common-page .add-policy .step-text {
+  color: #fff;
+}
+
+/*********************************************** 策略页面 ***********************************************/
+
+/* 创建策略 */
+.createStrategy .step-item .step-icon.step1 {
+  background: url('../images/strategy/step1.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item .step-icon.step2 {
+  background: url('../images/strategy/step2.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item .step-icon.step3 {
+  background: url('../images/strategy/step3.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item.layui-this .step-icon.step1 {
+  background: url('../images/strategy/step1-active.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item.layui-this .step-icon.step2 {
+  background: url('../images/strategy/step2-active.png') #fff no-repeat center;
+}
+
+.createStrategy .step-item.layui-this .step-icon.step3 {
+  background: url('../images/strategy/step3-active.png') #fff no-repeat center;
+}
+
+.createStrategy .custGroupContent {
+  border: 1px solid rgb(236, 230, 230);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 5px 5px 0px rgba(231, 231, 231, 0.75);
+  padding: 15px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.createStrategy .custGroupContent.active {
+  background-image: -moz-linear-gradient(-70deg, rgb(238, 183, 119) 0%, rgb(230, 112, 91) 100%);
+  background-image: -webkit-linear-gradient(-70deg, rgb(238, 183, 119) 0%, rgb(230, 112, 91) 100%);
+  background-image: -ms-linear-gradient(-70deg, rgb(238, 183, 119) 0%, rgb(230, 112, 91) 100%);
+  color: #fff;
+}
+
+.createStrategy .custGroupContent a {
+  color: inherit;
+}
+
+.createStrategy .custGroup-midWrap {
+  text-align: center;
+  line-height: 60px;
+}
+
+.createStrategy .custGroup-midWrap .custNum {
+  font-size: 24px;
+}
+
+.createStrategy .custGroup-midWrap.unit {
+  font-size: 12px;
+}
+
+.createStrategy .hasChoosedCustList .choosedItem {
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 5px;
+  box-shadow: 0px 5px 5px 0px rgba(231, 231, 231, 0.75);
+  padding: 20px;
+  position: relative;
+  line-height: 30px;
+  color: #333;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.createStrategy .hasChoosedCustList .choosedItem .close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.createStrategy .hasChoosedCustList .choosedItem .title {
+  color: #ec6c3f;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+
+
+/*********************************************** 任务调配页面 ***********************************************/
+.taskPage .layui-input,
+.taskPage .layui-form-select {
+  max-width: 200px;
+}
+
+.groupUser-wrap .user-item {
+  margin-bottom: 10px;
+  line-height: 38px;
+}
+
+.groupUser-wrap .user-name {
+  display: inline-block;
+  width: 90px;
+}
+
+.groupUser-wrap .distribe-wrap {
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: top;
+}
+
+.groupUser-wrap .user-input {
+  max-width: 160px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.groupUser-wrap .person-line {
+  width: 33% !important;
+}
+
+.groupUser-wrap .person-line .layui-colla-icon {
+  font-size: 0;
+}
+
+.groupUser-wrap .person-line .layui-colla-title {
+  width: 70px;
+}
+
+.groupUser-wrap .distribe-wrap.rule1 .user-input {
+  max-width: 60px;
+}
+
+.groupUser-wrap .distrib-btn {
+  background: #88abda;
+  border-color: #448aca;
+  padding: 0 15px;
+}
+
+/*********************************************** 互动短信页面 ***********************************************/
+
+.noTargetUser {
+  display: none;
+}
+
+.hasOperateBtn .layui-input {
+  width: 60%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.hasOperateBtn .layui-btn {
+  vertical-align: top;
+}
+
+/***********************************************  话术相关 ***********************************************/
+.talkingPage .page-title {
+  font-size: 18px;
+  color: #ec6c3f;
+  text-align: center;
+}
+
+.talkingPage .contentWrap {
+  border-top: 1px dashed #d2d2d2;
+  border-radius: 3px;
+  background: #fff;
+  min-height: 100px;
+  overflow-y: auto;
+  padding-top: 20px;
+  margin: 10px 0;
+}
+
+.talkingPage .contentWrap .layui-form-item {
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #d2d2d2;
+}
+
+.talkingPage .contentWrap .layui-form-label {
+  float: none;
+  text-align: left;
+  width: auto;
+}
+
+.talkingPage .contentWrap .layui-input-block {
+  margin-left: 30px;
+
+}
+
+.talkingPage .contentWrap .layui-input-block>.layui-input,
+.talkingPage .contentWrap .layui-input-block .layui-form-select,
+.talkingPage .contentWrap .layui-input-block .layui-textarea {
+  width: 80%;
+}
+
+.talkingPage .contentWrap .handle-list {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: none;
+}
+
+.talkingPage .contentWrap .handle-list a {
+  margin: 0 10px;
+  color: #ec6c3f;
+  cursor: pointer;
+}
+
+.talkingPage .contentWrap .layui-form-item:hover .handle-list {
+  display: block;
+}
+
+.talkingPage .contentWrap .layui-form-radio,
+.talkingPage .contentWrap .layui-form-checkbox {
+  display: block;
+}
+
+.talkingPage .childWrap {
+  /* padding-left: 20px; */
+}
+
+.talkingPage .layui-form-radio>i:hover,
+.talkingPage .layui-form-radioed>i {
+  color: #f87a25;
+}
+
+/***********************************************  外呼页面 ***********************************************/
+
+.outCallPage .layui-card .top-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.outCallPage .layui-card-header {
+  color: #ec6c3f;
+}
+
+.outCallPage .label-list,
+.outCallPage .cust-list {
+  margin: -7.5px;
+}
+
+.outCallPage .cust-list {
+  min-height: 200px;
+}
+
+.outCallPage .lable-item,
+.outCallPage .cust-item {
+  float: left;
+  width: 20%;
+  padding: 7.5px;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+
+
+.outCallPage .label-content {
+  background: #fff;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+  font-size: 16px;
+  line-height: 36px;
+  padding: 0 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.outCallPage .lable-item.active .label-content {
+  background: #ec6c3f;
+  color: #fff;
+  border-color: #ec6c3f;
+}
+
+.outCallPage .label-item-cust {
+  background: #fff;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.outCallPage .label-item-cust .title {
+  color: #ec6c3f;
+  max-width: 90%;
+  display: inline-block;
+}
+
+.outCallPage .label-item-cust .condition {
+  display: block;
+  white-space: pre-wrap;
+  min-height: 48px;
+}
+
+.outCallPage .label-item-cust .layui-icon {
+  position: absolute;
+  color: #ec6c3f;
+  top: 10px;
+  right: 10px;
+}

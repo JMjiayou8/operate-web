@@ -179,69 +179,24 @@ layui.define('view', function (exports) {
     },
     rendSideNav: function (topNav) {
       var menus = {
-        nav1: [{
-          name: 'upc',
-          icon: '',
-          title: '产商品管理',
-          list: [
-            {
-              name: 'index1',
-              icon: '',
-              title: '产商品配置',
-              path: 'upc/index1'
-            },
-            {
-              name: 'index2',
-              icon: '',
-              title: '产商品上下架',
-              path: 'upc/index2'
-            },
-            {
-              name: 'index3',
-              icon: '',
-              title: '产商品审核',
-              path: 'upc/index3'
-            },
-            {
-              name: 'index4',
-              icon: '',
-              title: '产商品管理',
-              path: 'upc/index4'
-            },
-          ]
-        }],
-        nav2: [
-          {
-            name: 'targetUser',
-            icon: '',
-            title: '目标客户管理',
-            list: [
-              {
-                name: 'index1',
-                icon: '',
-                title: '目标客户配置',
-                path: 'targetUser/index1'
-              },
-              {
-                name: 'index2',
-                icon: '',
-                title: '目标客户审核',
-                path: 'targetUser/index2'
-              },
-              {
-                name: 'index3',
-                icon: '',
-                title: '目标客户管理',
-                path: 'targetUser/index3'
-              },
-
-            ]
-          },
+        nav1: [
           {
             name: 'policy',
             icon: '',
             title: '业务政策',
             list: [
+              {
+                name: 'index',
+                icon: '',
+                title: '政策总览',
+                path: 'policy/index'
+              },
+              {
+                name: 'detail',
+                icon: '',
+                title: '政策详情',
+                path: 'policy/detail'
+              },
               {
                 name: 'create',
                 icon: '',
@@ -253,6 +208,43 @@ layui.define('view', function (exports) {
                 icon: '',
                 title: '业务政策管理',
                 path: 'policy/manage'
+              },
+              {
+                name: 'examine',
+                icon: '',
+                title: '业务政策审核',
+                path: 'policy/examine'
+              },
+              {
+                name: 'whiteList',
+                icon: '',
+                title: '政策白名单',
+                path: 'policy/whiteList'
+              },
+            ]
+          },
+          {
+            name: 'talking',
+            icon: '',
+            title: '话术',
+            list: [
+              {
+                name: 'manage',
+                icon: '',
+                title: '模板管理',
+                path: 'talking/manage'
+              },
+              {
+                name: 'detail',
+                icon: '',
+                title: '话术详情',
+                path: 'talking/detail'
+              },
+              {
+                name: 'index',
+                icon: '',
+                title: '新增话术',
+                path: 'talking/index'
               },
             ]
           },
@@ -280,76 +272,62 @@ layui.define('view', function (exports) {
                 path: 'strategy/excute'
               },
             ]
-          }
-        ],
-        nav3: [
+          },
+          {
+            name: 'sms',
+            icon: '',
+            title: '互动短信',
+            list: [
+              {
+                name: 'create',
+                icon: '',
+                title: '新增互动短信',
+                path: 'sms/create'
+              },
+              {
+                name: 'hand',
+                icon: '',
+                title: '新增手动短信',
+                path: 'sms/hand'
+              }
+            ]
+          },
           {
             name: 'task',
             icon: '',
-            title: '任务管理',
+            title: '任务',
             list: [
               {
-                name: 'excute',
+                name: 'deploy',
                 icon: '',
-                title: '外呼任务配置',
+                title: '任务调配',
                 path: 'task/deploy'
-              },
+              }
             ]
           },
           {
-            name: 'nav3',
+            name: 'outcall',
             icon: '',
-            title: '策略执行统计报表',
-            path: 'nav3/index'
-
-          }
-        ],
-        nav4: [],
-        nav5: [],
-        nav6: [
-          {
-            name: 'digital',
-            icon: '',
-            title: '营销评估',
+            title: '外呼',
             list: [
               {
-                name: 'digital',
+                name: 'index',
                 icon: '',
-                title: '营销策略评估',
-                path: 'digital/strategyPreview'
-              },
-              {
-                name: 'excute',
-                icon: '',
-                title: '营销产品评估',
-                path: 'digital/strategyAssessSimple'
-              },
-              {
-                name: 'productAnalysis',
-                icon: '',
-                title: '产品分析',
-                path: 'digital/productAnalysis'
-              },
-              {
-                name: 'strategyAnalysis',
-                icon: '',
-                title: '策略分析',
-                path: 'digital/strategyAnalysis'
-              },
+                title: '外呼设置',
+                path: 'outcall/index'
+              }
             ]
           },
         ]
-
       }
       // 根据topNav再实际获取不同的侧边栏数据。可以使用配置文件，也可ajax获取。
       var sideNavData = []
       if (topNav) {
         if (topNav != 'console') {
-          // debugger
           admin.sideFlexible();
           var appElem = parent.document.getElementById('operate_app')
           $(appElem).removeClass('layadmin-side-shrink')
-          sideNavData = menus[topNav]
+          sideNavData = menus[topNav] || []
         } else {
           admin.sideFlexible();
           $('.layadmin-tabsbody-item')
