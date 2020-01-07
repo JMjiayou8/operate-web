@@ -224,31 +224,6 @@ layui.define('view', function (exports) {
             ]
           },
           {
-            name: 'talking',
-            icon: '',
-            title: '话术',
-            list: [
-              {
-                name: 'manage',
-                icon: '',
-                title: '模板管理',
-                path: 'talking/manage'
-              },
-              {
-                name: 'detail',
-                icon: '',
-                title: '话术详情',
-                path: 'talking/detail'
-              },
-              {
-                name: 'index',
-                icon: '',
-                title: '新增话术',
-                path: 'talking/index'
-              },
-            ]
-          },
-          {
             name: 'strategy',
             icon: '',
             title: '营销策略',
@@ -273,6 +248,32 @@ layui.define('view', function (exports) {
               },
             ]
           },
+          {
+            name: 'talking',
+            icon: '',
+            title: '话术',
+            list: [
+              {
+                name: 'manage',
+                icon: '',
+                title: '模板管理',
+                path: 'talking/manage'
+              },
+              {
+                name: 'detail',
+                icon: '',
+                title: '话术详情',
+                path: 'talking/detail'
+              },
+              {
+                name: 'index',
+                icon: '',
+                title: '新增话术',
+                path: 'talking/index'
+              },
+            ]
+          },
+
           {
             name: 'sms',
             icon: '',

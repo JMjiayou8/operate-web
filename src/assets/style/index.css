@@ -797,6 +797,47 @@ i {
   margin: 0 auto;
 }
 
+/* 表格按钮 */
+.table-btn {
+  border: 1px solid #ec6c3f;
+  color: #ec6c3f;
+  background: #fff;
+  border-radius: 3px;
+  line-height: 28px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.table-btn:hover {
+  opacity: .8;
+}
+
+.table-btn.table-btn-orange {
+  border-color: #ec6c3f;
+  color: #ec6c3f;
+}
+
+.table-btn.table-btn-red {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+.table-btn.table-btn-gray {
+  color: #666666;
+  border-color: #666666;
+}
+
+.table-btn.table-btn-blue {
+  color: #2a55cf;
+  border-color: #2a55cf;
+}
+
+.table-btn.table-btn-green {
+  color: #137f2f;
+  border-color: #137f2f;
+}
+
+
 /*********************************************** 分页 ***********************************************/
 
 /*  常规分页 */

@@ -54,8 +54,12 @@
     </div>
   </div>
   <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs">失效</a>
-    <a class="layui-btn layui-btn-xs">暂停</a>
+    <a class="table-btn table-btn-gray">失效</a>
+    <!-- <a class="table-btn table-btn-green">生效</a>
+    <a class="table-btn table-btn-orange ">修改</a>
+    <a class="table-btn table-btn-red">暂停</a>
+    <a class="table-btn table-btn-blue">内容测试</a>
+    <a class="table-btn table-btn-orange">客户群修改</a> -->
   </script>
   <script src="../../assets/layui/layui.js"></script>
   <script>
@@ -83,7 +87,8 @@
               },
               {
                 field: 'desc',
-                title: '策略描述'
+                title: '策略描述',
+                width: '10%'
               },
 
               {
@@ -99,7 +104,7 @@
               {
                 field: 'status',
                 title: '状态',
-                width: '10%'
+                width: '8%'
               },
               {
                 field: 'updateDate',
