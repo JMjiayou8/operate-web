@@ -192,16 +192,22 @@ layui.define('view', function (exports) {
                 path: 'policy/index'
               },
               {
+                name: 'create',
+                icon: '',
+                title: '业务政策制定',
+                path: 'policy/create'
+              },
+              {
                 name: 'detail',
                 icon: '',
                 title: '政策详情',
                 path: 'policy/detail'
               },
               {
-                name: 'create',
+                name: 'whiteList',
                 icon: '',
-                title: '业务政策制定',
-                path: 'policy/create'
+                title: '政策白名单',
+                path: 'policy/whiteList'
               },
               {
                 name: 'manage',
@@ -215,12 +221,7 @@ layui.define('view', function (exports) {
                 title: '业务政策审核',
                 path: 'policy/examine'
               },
-              {
-                name: 'whiteList',
-                icon: '',
-                title: '政策白名单',
-                path: 'policy/whiteList'
-              },
+
             ]
           },
           {

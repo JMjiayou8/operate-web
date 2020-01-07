@@ -32,6 +32,7 @@ i {
 
 .layui-bg-white {
   background-color: #fff;
+
 }
 
 .layadmin-loading {
@@ -748,14 +749,21 @@ i {
   background-image: linear-gradient(-90deg, #CD1D36 0%, #E82641 100%);
 }
 
-
 .layui-btn-white {
   background: #fff;
   color: #666;
+  border: 1px solid #c8c7c7;
 }
 
 .layui-btn.layui-btn-white:hover {
   color: inherit;
+}
+
+/* 线框 */
+.layui-btn.layui-btn-border {
+  background: #fff;
+  color: #ec6c3f;
+  border: 1px solid #ec6c3f;
 }
 
 /* 搜索按钮 */
@@ -803,9 +811,14 @@ i {
   color: #ec6c3f;
   background: #fff;
   border-radius: 3px;
-  line-height: 28px;
+  line-height: 26px;
   padding: 0 10px;
   cursor: pointer;
+  display: inline-block;
+}
+
+.table-btn+.table-btn {
+  margin-left: 5px;
 }
 
 .table-btn:hover {
@@ -1276,7 +1289,8 @@ i {
   padding: 5px 20px;
 }
 
-.layui-card-header .layui-icon {
+.layui-card-header .card-header-icon,
+.layui-card-header .card-header-btn {
   line-height: initial;
   position: absolute;
   right: 15px;

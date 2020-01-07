@@ -66,7 +66,14 @@
                           大数据标签
                         </div>
                         <div class="layui-tab-item ">
-                          文件上传
+                          <div class="layui-card upload-card">
+                            <div class="layui-card-body">
+                              <div class="layui-upload-drag " id="uploadFile">
+                                <i class="upload-icon"></i>
+                                <p class="upload-text">文件上传</p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -98,6 +105,8 @@
                 </div>
                 <div class="layui-card-header">
                   自定义标签
+                  <button type="button" class="layui-btn layui-btn-border card-header-btn" onclick="addLable()">
+                    <i class="layui-icon layui-icon-add-1"></i>添加</button>
                 </div>
                 <div class="layui-card-body">
                   <div id="customlabelWrap"></div>
@@ -132,10 +141,36 @@
         </div>
       </div>
       <div class="text-center">
-        <button type="button" class="layui-btn layui-btn-primary">保存</button>
+        <button type="button" class="layui-btn layui-btn-white">保存</button>
         <button type="button" class="layui-btn nextBtn" onclick="nextPage()">继续</button>
         <button type="button" class="layui-btn subBtn" style="display: none;">提交</button>
       </div>
+    </div>
+    <!-- 自定义标签弹框 -->
+    <div id="addLabel" style="padding:10px 20px;display: none;">
+      <form class="layui-form" lay-filter="customlabelForm">
+        <div class="layui-form-item">
+          <div class="layui-form-label">标签名称：</div>
+          <div class="layui-input-block"><input type="text" name="title" class="layui-input"></div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-form-label">标签文件：</div>
+          <div class="layui-input-block">
+            <div class="layui-card upload-card">
+              <div class="layui-card-body">
+                <div class="layui-upload-drag " id="uploadLabelFile">
+                  <i class="upload-icon"></i>
+                  <p class="upload-text">文件上传</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-form-item text-center">
+          <button type="button" class="layui-btn layui-btn-white" onclick="cancelAddLable()">关闭</button>
+          <button type="button" class="layui-btn" onclick="confirmAddLable()">确定</button>
+        </div>
+      </form>
     </div>
     <!-- 标签区域 -->
     <script id="labelTemplate" type="text/html">
@@ -205,8 +240,7 @@
             form = layui.form,
             laytpl = layui.laytpl,
             element = layui.element,
-            upload = layui.upload,
-            laypage = layui.laypage;
+            upload = layui.upload;
 
           element.on('tab(pageTab)', function (elem) {
             if (elem.index == 0) {
@@ -217,7 +251,6 @@
               $('.nextBtn').hide()
               $('.subBtn').show()
               renderStep2()
-
             }
           });
           window.nextPage = function () {
@@ -290,7 +323,20 @@
                 name: '14天包政策'
               }]
             })
-
+            upload.render({
+              elem: '#uploadFile',
+              // url: '/upload/',
+              before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                  console.log(file)
+                  // $('#demo1').attr('src', result); //图片链接（base64）
+                });
+              },
+              done: function (res) {
+                console.log(res)
+              }
+            });
           }
 
           window.rendTable = function () {
@@ -302,6 +348,7 @@
             })
           }
           /********************************************** 剔除区域  **********************************************/
+          var customlabelData = [];
           var list1 = [],
             list1Ids = [], //可为用户群剔除数据
             list2 = [],
@@ -329,21 +376,14 @@
 
           // 自定义标签
           function rendercustomlabelWrap() {
-            var data = []
-            for (var i = 0; i < 3; i++) {
-              data[i] = {
-                id: 'custom' + (i + 1),
-                title: '自定义标签' + (i + 1),
-                condition: ['一类', '二类']
-              }
-            }
-            for (var i = 0; i < data.length; i++) {
-              data[i].active = (list1Ids.indexOf(data[i].id) > -1 || list2Ids.indexOf(data[i].id) > -1)
+            for (var i = 0; i < customlabelData.length; i++) {
+              customlabelData[i].active = (list1Ids.indexOf(customlabelData[i].id) > -1 || list2Ids.indexOf(
+                customlabelData[i].id) > -1)
             }
 
             var getTpl = customlabelTemplate.innerHTML,
               view = document.getElementById('customlabelWrap');
-            laytpl(getTpl).render(data, function (html) {
+            laytpl(getTpl).render(customlabelData, function (html) {
               view.innerHTML = html;
             });
           }
@@ -368,6 +408,43 @@
               rendercustomlabelWrap()
 
             });
+          }
+          window.addLable = function () {
+            layer.open({
+              type: 1,
+              title: '剔除文件上传',
+              skin: 'common-layer',
+              area: ['800px', '400px'],
+              content: $('#addLabel')
+            })
+            upload.render({
+              elem: '#uploadLabelFile',
+              // url: '/upload/',
+              before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                  console.log(file)
+                  // $('#demo1').attr('src', result); //图片链接（base64）
+                });
+              },
+              done: function (res) {
+                console.log(res)
+              }
+            });
+          }
+          window.confirmAddLable = function () {
+            //模拟新增自定义数据
+            var data = form.val('customlabelForm');
+            data.id = data.title;
+            data.condition = [];
+
+            //渲染自定义标签区域
+            customlabelData.push(data)
+            rendercustomlabelWrap()
+            layer.closeAll()
+          }
+          window.cancelAddLable = function () {
+            layer.closeAll()
           }
           window.configCust = function () {
             layer.open({

@@ -4,7 +4,8 @@
 
 1. 打开新 tab：设置元素`lay-href=xxx`。(页面要引入'index'模块)
 2. 导航栏配置：`src/assets/modules/nav.js`
-3. radio
+3. 侧边栏：`src/assets/lib/admin.js`中的`rendSideNav`
+4. radio
 
 ```html
 <!-- 线框风格 -->
@@ -24,7 +25,7 @@
 </div>
 ```
 
-4. checkbox
+5. checkbox
 
 ```html
 <!-- 线框分隔 lay-skin="box" -->
@@ -34,3 +35,5 @@
   <input type="checkbox" name="like[3]" lay-skin="box" title="线上渠道" />
 </div>
 ```
+
+6. 表格操作按钮：`table-btn`,参考`src/views/strategy/manage.html`,目前有五种颜色风格。

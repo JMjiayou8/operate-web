@@ -1,20 +1,14 @@
 layui.define(['laytpl', 'layer'], function (exports) {
-  var $ = layui.jquery
-    , laytpl = layui.laytpl
-    , layer = layui.layer
-    , setter = layui.setter
-    , device = layui.device()
-    , hint = layui.hint()
-
-    //对外接口
-    , view = function (id) {
+  var $ = layui.jquery,
+    laytpl = layui.laytpl,
+    setter = layui.setter,
+    hint = layui.hint(),
+    view = function (id) {    //对外接口
       return new Class(id);
-    }
-
-    , SHOW = 'layui-show', LAY_BODY = 'operate_body'
-
+    },
+    LAY_BODY = 'operate_body',
     //构造器
-    , Class = function (id) {
+    Class = function (id) {
       this.id = id;
       this.container = $('#' + (id || LAY_BODY));
     };
@@ -33,7 +27,7 @@ layui.define(['laytpl', 'layer'], function (exports) {
 
   //请求模板文件渲染
   Class.prototype.render = function (views, params) {
-    var that = this, router = layui.router();
+    var that = this;
     views = setter.views + views + setter.engine;
 
     $('#' + LAY_BODY).children('.layadmin-loading').remove();
