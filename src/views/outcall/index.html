@@ -63,7 +63,28 @@
                           <table id="table1"></table>
                         </div>
                         <div class="layui-tab-item ">
-                          大数据标签
+                          <div class="layui-form-item">
+                            <div class="layui-form-label">选择筛选条件：</div>
+                            <div class="layui-input-block">
+                              <div class="box-radio">
+                                <input type="radio" name="radioType" value="month" title="月" checked="" />
+                                <input type="radio" name="radioType" value="day" title="天" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <div class="layui-form-label">指标筛选条件：</div>
+                            <div class="layui-input-block">
+                              <button type="button" class="layui-btn layui-btn-border"
+                                onclick="chooseIndex()">选择指标</button>
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <div class="layui-form-label">目标客户提取条件：</div>
+                            <div class="layui-input-block">
+                              <input type="text" class="layui-input">
+                            </div>
+                          </div>
                         </div>
                         <div class="layui-tab-item ">
                           <div class="layui-card upload-card">
@@ -344,6 +365,19 @@
               // url: '/mockData/table.json',
               where: {
                 name: $('#searchText').val()
+              }
+            })
+          }
+          //  选择指标
+          window.chooseIndex = function () {
+            layer.open({
+              skin: 'common-layer',
+              title: '选择指标',
+              area: ['600px', '300px'],
+              content: '',
+              btn: ['确定', '关闭'],
+              yes: function () {
+                layer.closeAll()
               }
             })
           }
