@@ -18,6 +18,10 @@
         <div id="contentWrap"></div>
       </div>
     </div>
+    <div class="text-center">
+      <button type="button" class="layui-btn layui-btn-gray">关闭</button>
+      <button type="button" class="layui-btn" onclick="saveData()">保存</button>
+    </div>
   </div>
   <!-- 一级问题 -->
   <script id="contentTemplate" type="text/html">
@@ -387,6 +391,9 @@
           } else {
             return true
           }
+        }
+        window.saveData = function () {
+          alert('答案数据:' + JSON.stringify(answerData, null, 4))
         }
         $(function () {
           getData()
