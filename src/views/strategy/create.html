@@ -17,15 +17,15 @@
   <div class="common-page createStrategy">
     <div class="layui-tab" lay-filter="pageTab">
       <ul class="layui-tab-title layui-row  step-top-wrap">
-        <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first" lay-id="11">
+        <li class="layui-this layui-col-md4 layui-col-sm4 step-item step-item-first" lay-id="0">
           <i class="step-icon step1"></i>
           <p class="step-text">What:基本信息</p>
         </li>
-        <li class="layui-col-md4 layui-col-sm4 step-item" lay-id="22">
+        <li class="layui-col-md4 layui-col-sm4 step-item" lay-id="1">
           <i class="step-icon  step2"></i>
           <p class="step-text">Who:目标客户群</p>
         </li>
-        <li class="layui-col-md4 layui-col-sm4 step-item step-item-last" lay-id="33">
+        <li class="layui-col-md4 layui-col-sm4 step-item step-item-last" lay-id="2">
           <i class="step-icon  step3"></i>
           <p class="step-text">How:执行触点</p>
         </li>
@@ -69,12 +69,7 @@
                     <textarea placeholder="请输入内容" name="prop3" class="layui-textarea"></textarea>
                   </div>
                 </div>
-                <div class="layui-form-item text-center">
-                  <label class="layui-form-label"></label>
-                  <div class="layui-input-block">
-                    <button type="button" class="layui-btn" onclick="nextPage('22')">继续</button>
-                  </div>
-                </div>
+
               </form>
             </div>
           </div>
@@ -199,14 +194,7 @@
                                 </div>
                               </div>
                             </div>
-
                           </div>
-                        </div>
-                      </div>
-                      <div class="layui-form-item text-center">
-                        <label class="layui-form-label"></label>
-                        <div class="layui-input-block">
-                          <button type="button" class="layui-btn" onclick="nextPage('33')">继续</button>
                         </div>
                       </div>
                     </form>
@@ -219,28 +207,18 @@
               </div>
             </div>
             <div class="layui-col-md3 layui-col-sm3">
-              <div class="layui-tab layui-tab-card tab2">
+              <div class="layui-tab layui-tab-card tab2" lay-filter="choosedTab">
                 <ul class="layui-tab-title">
                   <li class="layui-this">已选</li>
                   <li>排除</li>
                 </ul>
                 <div class="layui-tab-content">
                   <div class="layui-tab-item layui-show">
-                    <ul class="hasChoosedCustList">
-                      <li class="choosedItem">
-                        <span class="close layui-icon layui-icon-close"></span>
-                        <p class="title">畅视公测体验目标用户0810 </p>
-                        <p class="date">创建时间：2018-01-22</p>
-                      </li>
-                      <li class="choosedItem">
-                        <span class="close layui-icon layui-icon-close"></span>
-                        <p class="title">畅视公测体验目标用户0810 </p>
-                        <p class="date">创建时间：2018-01-22</p>
-                      </li>
-                    </ul>
+                    <div id="choosedCustWrap"></div>
                   </div>
-                  <div class="layui-tab-item">排除</div>
-
+                  <div class="layui-tab-item">
+                    <div id="excludeCustWrap"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -294,193 +272,253 @@
                     <div id="chnlWrap"></div>
                   </div>
                 </div>
-
-                <div class="layui-form-item text-center">
-                  <label class="layui-form-label"></label>
-                  <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-primary">保存</button>
-                    <button type="button" class="layui-btn ">提交</button>
-                  </div>
-                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script id="policyTemplate" type="text/html">
-      <div class="layui-row">
-        {{#  layui.each(d, function(index, item){ }}
-        <div class="layui-col-md4 layui-col-sm4 policy-item">
-          <input type="radio" name="policy" value="{{item.value}}" title="{{item.text}}">
-        </div>
-        {{#  }); }}
-      </div>
-    </script>
-    <!-- 已有用户群模板 -->
-    <script id="selectHtml" type="text/html">
-      <div class="layui-row layui-col-space10">
-        {{#  layui.each(d.list, function(index, item){ }}
-        <div class="layui-col-md4 layui-col-sm4 layui-col-xs6">
-          <div class="custGroupContent {{item.id==d.chooseCustID?'active':''}}"
-            onclick="chooseCust(this,'{{item.id}}')">
-            <p class="custTitle">{{item.title}}</p>
-            <p class="custGroup-midWrap">
-              <span class="custNum">{{item.num}}</span><span class="unit">人</span>
-            </p>
-            <p class="clearfix">
-              <span class="custUser fl"><i class="layui-icon layui-icon-username"></i>{{item.user}}</span>
-              <a class="fr" href="javascript:;" onclick="toDetailCust(this,'{{item.title}}')">详情></a>
-            </p>
-          </div>
-        </div>
-        {{#  }); }}
-      </div>
-    </script>
-    <!-- 触点选择后 -->
-    <script id="chnlTemplete" type="text/html">
-      <!-- 短信 -->
-      {{# if(d.type=='1'){ }}
-    <div class="layui-form-item">
-      <label class="layui-form-label">接触渠道模版：</label>
-      <div class="layui-input-block choose-template-wrap">
-        <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
-        <button type="button" class="layui-btn" onclick="return false;"><i
-            class="chooseMsg-icon"></i><span>选择模板</span></button>
-      </div>
+    <div class="text-center">
+      <button type="button" class="layui-btn nextPageBtn" onclick="nextPage()">继续</button>
+      <button type="button" class="layui-btn layui-btn-primary step3Btn" style="display:none;">保存</button>
+      <button type="button" class="layui-btn step3Btn" style="display:none;">提交</button>
     </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">短信接入号：</label>
+  </div>
+  <script id="policyTemplate" type="text/html">
+    <div class="layui-row">
+      {{#  layui.each(d, function(index, item){ }}
+      <div class="layui-col-md4 layui-col-sm4 policy-item">
+        <input type="radio" name="policy" value="{{item.value}}" title="{{item.text}}">
+      </div>
+      {{#  }); }}
+    </div>
+  </script>
+  <!-- 已有用户群模板 -->
+  <script id="selectHtml" type="text/html">
+    <div class="layui-row layui-col-space10">
+      {{#  layui.each(d.list, function(index, item){ }}
+      <div class="layui-col-md4 layui-col-sm4 layui-col-xs6">
+        <div
+          class="custGroupContent {{d.chooseCustID.indexOf(item.id)>-1?'active':''}} {{d.excludeCustID.indexOf(item.id)>-1?'exclude':''}}"
+          onclick="chooseCust(this,'{{JSON.stringify(item).replace(/"/g, '&quot;')}}')">
+          <p class="custTitle">{{item.title}}</p>
+          <p class="custGroup-midWrap">
+            <span class="custNum">{{item.num}}</span><span class="unit">人</span>
+          </p>
+          <p class="clearfix">
+            <span class="custUser fl"><i class="layui-icon layui-icon-username"></i>{{item.user}}</span>
+            <a class="fr" href="javascript:;" onclick="toDetailCust(this,'{{item.title}}')">详情></a>
+          </p>
+        </div>
+      </div>
+      {{#  }); }}
+    </div>
+  </script>
+  <!-- 触点选择后 -->
+  <script id="chnlTemplete" type="text/html">
+    <!-- 短信 -->
+    {{# if(d.type=='1'){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">接触渠道模版：</label>
+    <div class="layui-input-block choose-template-wrap">
+      <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
+      <button type="button" class="layui-btn" onclick="return false;"><i
+          class="chooseMsg-icon"></i><span>选择模板</span></button>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">短信接入号：</label>
+    <div class="layui-input-inline">
+      <select name="select5" id="select5"></select>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">活动执行时间：</label>
+    <div class="layui-inline">
       <div class="layui-input-inline">
-        <select name="select5" id="select5"></select>
+        <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
       </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">活动执行时间：</label>
-      <div class="layui-inline">
-        <div class="layui-input-inline">
-          <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
-        </div>
-        <div class="layui-form-mid">-</div>
-        <div class="layui-input-inline">
-          <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
-        </div>
-      </div>
-    </div>
-    <!-- 人工外呼 -->
-    {{# } else if(d.type=='2'){ }}
-    <div class="layui-form-item">
-      <label class="layui-form-label">有效间隔：</label>
-      <div class="layui-inline">
-        <div class="layui-input-inline">
-          <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
-        </div>
-        <div class="layui-form-mid">-</div>
-        <div class="layui-input-inline">
-          <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
-        </div>
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">剔除标准(天)：</label>
+      <div class="layui-form-mid">-</div>
       <div class="layui-input-inline">
-        <input type="text" class="layui-input">
+        <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
       </div>
     </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">任务周期：</label>
+  </div>
+  <!-- 人工外呼 -->
+  {{# } else if(d.type=='2'){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">有效间隔：</label>
+    <div class="layui-inline">
       <div class="layui-input-inline">
-        <select name="select5" id="select5"></select>
+        <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
       </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">短信类型：</label>
-      <div class="layui-input-block box-radio">
-        <input type="radio" name="smsType" value="1" title="短信" checked="">
-        <input type="radio" name="smsType" value="2" title="外呼">
-        <input type="radio" name="smsType" value="3" title="线上渠道">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">短信内容：</label>
-      <div class="layui-input-block choose-template-wrap">
-        <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
-        <button type="button" class="layui-btn" onclick="return false;"><i
-            class="chooseMsg-icon"></i><span>选择模板</span></button>
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">是否搭车：</label>
-      <div class="layui-input-block box-radio">
-        <input type="radio" name="isDa" value="1" title="短信" checked="">
-        <input type="radio" name="isDa" value="2" title="外呼">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">搭车专项1：</label>
+      <div class="layui-form-mid">-</div>
       <div class="layui-input-inline">
-        <input type="text" class="layui-input">
+        <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
       </div>
     </div>
-    {{# } }}
-    </script>
-    <script src="../../assets/layui/layui.js"></script>
-    <script>
-      layui
-        .config({
-          base: '../../assets/' //静态资源所在路径
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">剔除标准(天)：</label>
+    <div class="layui-input-inline">
+      <input type="text" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">任务周期：</label>
+    <div class="layui-input-inline">
+      <select name="select5" id="select5"></select>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">短信类型：</label>
+    <div class="layui-input-block box-radio">
+      <input type="radio" name="smsType" value="1" title="短信" checked="">
+      <input type="radio" name="smsType" value="2" title="外呼">
+      <input type="radio" name="smsType" value="3" title="线上渠道">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">短信内容：</label>
+    <div class="layui-input-block choose-template-wrap">
+      <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
+      <button type="button" class="layui-btn" onclick="return false;"><i
+          class="chooseMsg-icon"></i><span>选择模板</span></button>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">是否搭车：</label>
+    <div class="layui-input-block box-radio">
+      <input type="radio" name="isDa" value="1" title="短信" checked="">
+      <input type="radio" name="isDa" value="2" title="外呼">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">搭车专项1：</label>
+    <div class="layui-input-inline">
+      <input type="text" class="layui-input">
+    </div>
+  </div>
+  {{# } }}
+  </script>
+  <!-- 已选 -->
+  <script id="choosedCustTemplate" type="text/html">
+    <ul class="hasChoosedCustList">
+      {{#  layui.each(d, function(index, item){ }}
+      <li class="choosedItem">
+        <span class="close layui-icon layui-icon-close" onclick="deleteChoosed('choosedCust','{{index}}')"></span>
+        <p class="title">{{item.title}} </p>
+        <p class="date">创建时间：{{item.date||''}}</p>
+      </li>
+      {{#  }); }}
+    </ul>
+  </script>
+  <!-- 排除 -->
+  <script id="excludeCustTemplate" type="text/html">
+    <ul class="hasChoosedCustList">
+      {{#  layui.each(d, function(index, item){ }}
+      <li class="choosedItem">
+        <span class="close layui-icon layui-icon-close" onclick="deleteChoosed('excludeCust','{{index}}')"></span>
+        <p class="title">{{item.title}} </p>
+        <p class="date">创建时间：{{item.date||''}}</p>
+      </li>
+      {{#  }); }}
+    </ul>
+  </script>
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
+        var $ = layui.$,
+          table = layui.table,
+          laydate = layui.laydate,
+          form = layui.form,
+          laytpl = layui.laytpl,
+          element = layui.element,
+          upload = layui.upload,
+          laypage = layui.laypage;
+        // 切换主Tab
+        var pageTabIndex = 0;
+        element.on('tab(pageTab)', function (data) {
+          pageTabIndex = data.index;
+          if (pageTabIndex == 0) {
+            $('.nextPageBtn').show()
+            $('.step3Btn').hide()
+            renderPage1()
+          } else if (pageTabIndex == 1) {
+            $('.nextPageBtn').show()
+            $('.step3Btn').hide()
+            renderPage2()
+          } else if (pageTabIndex == 2) {
+            $('.nextPageBtn').hide()
+            $('.step3Btn').show()
+            renderPage3()
+          }
         })
-        .use(['table', 'laytpl', 'laydate', 'form', 'laypage', 'element', 'upload'], function () {
-          var $ = layui.$,
-            table = layui.table,
-            laydate = layui.laydate,
-            form = layui.form,
-            laytpl = layui.laytpl,
-            element = layui.element,
-            upload = layui.upload,
-            laypage = layui.laypage;
+        // 继续
+        window.nextPage = function () {
+          element.tabChange('pageTab', (pageTabIndex + 1) + '');
+        };
+        $(function () {
+          renderPage1()
+        })
+        /********************************************** 基本信息区域  **********************************************/
+        //  渲染关联政策区域
+        function rendPolicyWrap(page) {
+          page = page || 1;
 
-          window.nextPage = function (page) {
-            element.tabChange('pageTab', page);
-          };
-          /********************************************** 基本信息区域  **********************************************/
-          window.rendCustWrap = function (page) {
-            page = page || 1;
-
-            function f(i) { //渲染政策单选区域
-              var policyList = []
-              //模拟假数据，实际ajax请求
-              for (var i = 0; i < 15; i++) {
-                policyList.push({
-                  value: i,
-                  text: '政策' + (Math.random() * 100).toFixed(0)
-                })
-              }
-              var getTpl = policyTemplate.innerHTML,
-                view = document.getElementById('choosePolicyWrap');
-              laytpl(getTpl).render(policyList, function (html) {
-                view.innerHTML = html;
-                form.render()
-              });
+          function f(i) { //渲染政策单选区域
+            var policyList = []
+            //模拟假数据，实际ajax请求
+            for (var i = 0; i < 15; i++) {
+              policyList.push({
+                value: i + '',
+                text: '政策' + (Math.random() * 100).toFixed(0)
+              })
             }
-            f(page)
-            laypage.render({
-              elem: 'policy-laypage',
-              limit: 15,
-              cur: page,
-              count: 50,
-              theme: 'common',
-              prev: '<em class="layui-icon layui-icon-left"></em>',
-              next: '<em class="layui-icon layui-icon-right"></em>',
-              jump: function (obj, first) {
-                if (!first) {
-                  f(obj.curr)
-                }
-              }
+            var getTpl = policyTemplate.innerHTML,
+              view = document.getElementById('choosePolicyWrap');
+            laytpl(getTpl).render(policyList, function (html) {
+              view.innerHTML = html;
+              form.render()
             });
           }
-          rendCustWrap()
-          /********************************************** 目标客户群区域  **********************************************/
+          f(page)
+          laypage.render({
+            elem: 'policy-laypage',
+            limit: 15,
+            cur: page,
+            count: 50,
+            theme: 'common',
+            prev: '<em class="layui-icon layui-icon-left"></em>',
+            next: '<em class="layui-icon layui-icon-right"></em>',
+            jump: function (obj, first) {
+              if (!first) {
+                f(obj.curr)
+              }
+            }
+          });
+        }
+
+        function renderPage1() {
+          rendPolicyWrap()
+        }
+        /********************************************** 目标客户群区域  **********************************************/
+        // 已有用户群区域
+
+        var choosedCustList = [],
+          chooseCustID = [], //已选
+          excludeCustList = [],
+          excludeCustID = []; //排除
+        var custTabIndex = 0;
+        element.on('tab(choosedTab)', function (data) {
+          custTabIndex = data.index;
+        });
+
+        function renderPage2() {
           laydate.render({
             elem: '#startDate21',
           })
@@ -507,64 +545,131 @@
               console.log(res)
             }
           });
-          // 已有用户群区域
-          var chooseCustID = 24;
-          window.rendCustWrap = function (page) {
-            page = page || 1;
 
-            function f(i) { //顾客群数据
-              var randomData = []
-              for (var m = 0; m < 15; m++) {
-                var randomId = parseInt(Math.random() * 100)
-                randomData.push({
-                  "num": randomId,
-                  "user": "user-" + randomId,
-                  "title": "畅越" + randomId + "元档",
-                  "id": randomId
-                })
-              }
-              var custData = {
-                list: randomData,
-                chooseCustID: chooseCustID
-              }
-              var getTpl = selectHtml.innerHTML,
-                selectWrap = document.getElementById('selectWrap');
-              laytpl(getTpl).render(custData, function (html) {
-                selectWrap.innerHTML = html;
-              });
+          rendCustWrap()
+          rendChooseWrap()
+        }
+        // 渲染已有客户群
+        function rendCustWrap(page) {
+          page = page || 1;
+
+          function f(i) { //顾客群数据
+            var randomData = []
+            for (var m = 0; m < 15; m++) {
+              randomData.push({
+                "num": m,
+                "user": "user-" + m,
+                "title": "畅越" + m + "元档",
+                "id": m + '',
+                "date": '2019-12-12'
+              })
             }
-            f(page)
-            laypage.render({
-              elem: 'cust-laypage',
-              limit: 15,
-              cur: page,
-              count: 50,
-              theme: 'common',
-              prev: '<em class="layui-icon layui-icon-left"></em>',
-              next: '<em class="layui-icon layui-icon-right"></em>',
-              jump: function (obj, first) {
-                if (!first) {
-                  f(obj.curr)
-                }
-              }
+
+            var custData = {
+              list: randomData,
+              chooseCustID: chooseCustID,
+              excludeCustID: excludeCustID
+            }
+            var getTpl = selectHtml.innerHTML,
+              selectWrap = document.getElementById('selectWrap');
+            laytpl(getTpl).render(custData, function (html) {
+              selectWrap.innerHTML = html;
             });
+          }
+          f(page)
+          laypage.render({
+            elem: 'cust-laypage',
+            limit: 15,
+            cur: page,
+            count: 50,
+            theme: 'common',
+            prev: '<em class="layui-icon layui-icon-left"></em>',
+            next: '<em class="layui-icon layui-icon-right"></em>',
+            jump: function (obj, first) {
+              if (!first) {
+                f(obj.curr)
+              }
+            }
+          });
+        }
+        // 渲染右侧选择区域
+        function rendChooseWrap() {
+          var getTpl1 = choosedCustTemplate.innerHTML,
+            selectWrap1 = document.getElementById('choosedCustWrap');
+          laytpl(getTpl1).render(choosedCustList, function (html) {
+            selectWrap1.innerHTML = html;
+          });
+          var getTpl2 = excludeCustTemplate.innerHTML,
+            selectWrap2 = document.getElementById('excludeCustWrap');
+          laytpl(getTpl2).render(excludeCustList, function (html) {
+            selectWrap2.innerHTML = html;
+          });
+        }
+        //点击客户群
+        window.chooseCust = function (obj, data) {
+          var custData = JSON.parse(data)
+          if (custTabIndex == 0) {
+            var index = chooseCustID.indexOf(custData.id);
+            if (index > -1) {
+              chooseCustID.splice(index, 1);
+              choosedCustList.splice(index, 1)
+            } else {
+              chooseCustID.push(custData.id);
+              choosedCustList.push(custData)
+            }
+
+          } else {
+            var index = excludeCustID.indexOf(custData.id);
+            if (index > -1) {
+              excludeCustID.splice(index, 1);
+              excludeCustList.splice(index, 1)
+            } else {
+              excludeCustID.push(custData.id);
+              excludeCustList.push(custData)
+            }
           }
           rendCustWrap()
-
-          window.chooseCust = function (obj, id) {
-            $('.custGroupContent').removeClass('active')
-            $(obj).addClass('active')
-            chooseCustID = id;
+          rendChooseWrap()
+        }
+        // 删除已选/排除
+        window.deleteChoosed = function (tag, index) {
+          if (tag == 'choosedCust') {
+            chooseCustID.splice(index, 1);
+            choosedCustList.splice(index, 1)
+          } else if (tag == 'excludeCust') {
+            excludeCustID.splice(index, 1);
+            excludeCustList.splice(index, 1)
           }
+          rendCustWrap()
+          rendChooseWrap()
+        }
 
-          window.toDetailCust = function (obj, title) {
-            event.stopPropagation();
-            layer.open({
-              title: title + '详情查看',
-              content: title + '详情查看',
-            });
+        window.toDetailCust = function (obj, title) {
+          event.stopPropagation();
+          layer.open({
+            title: title + '详情查看',
+            content: title + '详情查看',
+          });
+        }
+        /********************************************** 执行触点区域  **********************************************/
+        //渲染不同触点类型配置区域
+        function renderChnl(type) {
+          var data = {
+            type: type
           }
-          /********************************************** 执行触点区域  **********************************************/
+          var getTpl = chnlTemplete.innerHTML,
+            selectWrap = document.getElementById('chnlWrap');
+          laytpl(getTpl).render(data, function (html) {
+            selectWrap.innerHTML = html;
+            form.render()
+          });
+        }
+        // 切换触点类型
+        form.on('select(selectChnl)', function (obj) {
+          renderChnl(obj.value)
+        })
+
+        function renderPage3() {
           laydate.render({
             elem: '#startDate',
           })
@@ -583,26 +688,10 @@
             format: 'HH:mm',
             theme: 'noSecond'
           });
-
-          //渲染不同触点类型配置区域
-          function renderChnl(type) {
-            var data = {
-              type: type
-            }
-            var getTpl = chnlTemplete.innerHTML,
-              selectWrap = document.getElementById('chnlWrap');
-            laytpl(getTpl).render(data, function (html) {
-              selectWrap.innerHTML = html;
-              form.render()
-            });
-          }
           renderChnl('1') //默认选中'短信'
-          // 切换触点类型
-          form.on('select(selectChnl)', function (obj) {
-            renderChnl(obj.value)
-          })
-        })
-    </script>
+        }
+      })
+  </script>
 </body>
 
 </html>

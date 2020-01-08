@@ -753,6 +753,11 @@
   color: #fff;
 }
 
+.createStrategy .custGroupContent.exclude {
+  background: #e8e8e8;
+  color: #c0c0c0;
+}
+
 .createStrategy .custGroupContent a {
   color: inherit;
 }
@@ -936,6 +941,25 @@
 }
 
 /***********************************************  外呼页面 ***********************************************/
+.outCallPage .step-item .step-icon.step1 {
+  background: url('../images/outcall/step1.png') #fff no-repeat center;
+
+}
+
+.outCallPage .step-item .step-icon.step2 {
+  background: url('../images/outcall/step2.png') #fff no-repeat center;
+
+}
+
+.outCallPage .step-item.layui-this .step-icon.step1 {
+  background: url('../images/outcall/step1-active.png') #fff no-repeat center;
+
+}
+
+.outCallPage .step-item.layui-this .step-icon.step2 {
+  background: url('../images/outcall/stpe2-active.png') #fff no-repeat center;
+
+}
 
 .outCallPage .layui-card .top-wrap {
   position: absolute;
