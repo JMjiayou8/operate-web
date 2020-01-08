@@ -935,8 +935,8 @@
   display: block;
 }
 
-.talkingPage .childWrap {
-  /* padding-left: 20px; */
+.talkingPage .childWrap.level1 {
+  padding-left: 20px;
 }
 
 .talkingPage .layui-form-radio>i:hover,
@@ -944,12 +944,22 @@
   color: #f87a25;
 }
 
-.talkingPage .progress-wrap {
-  margin-top: 20px;
+
+.talkingPage .detail-top {
+  text-align: center;
+  position: relative;
+  margin-bottom: 20px;
 }
 
+.talkingPage .detail-top .progress-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
 .talkingPage .progress-wrap .layui-progress {
-  width: 50%;
+  width: 200px;
   top: 8px;
   margin-right: 5px;
 }

@@ -16,36 +16,38 @@
     <div class="layui-card">
       <div class="layui-card-body">
         <div id="contentWrap"></div>
-        <div id="processWrap"></div>
-
       </div>
     </div>
   </div>
+  <!-- 一级问题 -->
   <script id="contentTemplate" type="text/html">
-    <p class="page-title">{{d.templateName}}</p>
+    <div class="detail-top">
+      <span class="page-title">{{d.templateName}}</span>
+      <div id="processWrap" class="progress-wrap clearfix"></div>
+    </div>
     <div>{{d.templateHead}}</div>
     <form class="layui-form contentWrap" lay-filter="templateForm">
-      {{#  layui.each(d.contentData, function(index, item){ }}
+      {{#  layui.each(d.contentDataArr, function(index, item){ }}
       <div class="layui-form-item level1-item">
         <label
           class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{index+1}}、{{item.itemDesc}}</label>
         {{# if(item.itemType=='radio'){ }}
         <div class="layui-input-block ">
           {{#  layui.each(item.options, function(i, obj){ }}
-          <input type="radio" name="{{item.itemId}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
-            data-itemid="{{item.itemId}}" />
+          <input type="radio" name="{{item.itemCode}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+            data-itemid="{{item.itemCode}}" />
           {{#  }); }}
         </div>
         {{# }else if(item.itemType=='checkbox'){ }}
         <div class=" layui-input-block ">
           {{#  layui.each(item.options, function(i, obj){ }}
-          <input type="checkbox" name="{{item.itemId}}" value="{{obj.optionId}}" lay-skin="primary"
-            title="{{obj.optionDesc}}" data-itemid="{{item.itemId}}" />
+          <input type="checkbox" name="{{item.itemCode}}" value="{{obj.optionId}}" lay-skin="primary"
+            title="{{obj.optionDesc}}" data-itemid="{{item.itemCode}}" />
           {{#  }); }}
         </div>
         {{# }else if(item.itemType=='select'){ }}
         <div class="layui-input-block ">
-          <select data-itemid="{{item.itemId}}" name="{{item.itemId}}">
+          <select data-itemid="{{item.itemCode}}" name="{{item.itemCode}}">
             <option value="">请选择</option>
             {{#  layui.each(item.options, function(i, obj){ }}
             <option value="{{obj.optionId}}">{{obj.optionDesc}}</option>
@@ -54,21 +56,23 @@
         </div>
         {{# }else if(item.itemType=='input'){ }}
         <div class=" layui-input-block ">
-          <input type="text" class="layui-input" name="{{item.itemId}}" onblur="changeInput(this,'{{item.itemId}}')">
+          <input type="text" class="layui-input" name="{{item.itemCode}}"
+            onblur="changeInput(this,'{{item.itemCode}}')">
         </div>
         {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
         <div class=" layui-input-block ">
-          <textarea class="layui-textarea" name="{{item.itemId}}"
-            onblur="changeInput(this,'{{item.itemId}}')"></textarea>
+          <textarea class="layui-textarea" name="{{item.itemCode}}"
+            onblur="changeInput(this,'{{item.itemCode}}')"></textarea>
         </div>
         {{# } }}
-        <div id="childWrap{{item.itemId}}" parentIndex="{{index+1}}" class="childWrap"></div>
+        <div id="childWrap{{item.itemCode}}" parentIndex="{{index+1}}" class="childWrap level1"></div>
       </div>
 
       {{#  }); }}
     </form>
     <div>{{d.templateEnd}}</div>
   </script>
+  <!-- 二级问题 -->
   <script id="childTemplate" type="text/html">
     {{#  layui.each(d.list, function(index, item){ }}
     <div class="layui-form-item ">
@@ -77,20 +81,20 @@
       {{# if(item.itemType=='radio'){ }}
       <div class="layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
-        <input type="radio" name="{{item.itemId}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
-          data-itemid="{{item.itemId}}" />
+        <input type="radio" name="{{item.itemCode}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+          data-itemid="{{item.itemCode}}" />
         {{#  }); }}
       </div>
       {{# }else if(item.itemType=='checkbox'){ }}
       <div class=" layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
-        <input type="checkbox" name="{{item.itemId}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
-          title="{{obj.optionDesc}}" data-itemid="{{item.itemId}}" />
+        <input type="checkbox" name="{{item.itemCode}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
+          title="{{obj.optionDesc}}" data-itemid="{{item.itemCode}}" />
         {{#  }); }}
       </div>
       {{# }else if(item.itemType=='select'){ }}
       <div class="layui-input-block ">
-        <select data-itemid="{{item.itemId}}" name="{{item.itemId}}">
+        <select data-itemid="{{item.itemCode}}" name="{{item.itemCode}}">
           <option value="">请选择</option>
           {{#  layui.each(item.options, function(i, obj){ }}
           <option value="{{obj.optionId}}">{{obj.optionDesc}}</option>
@@ -99,24 +103,25 @@
       </div>
       {{# }else if(item.itemType=='input'){ }}
       <div class=" layui-input-block ">
-        <input type="text" class="layui-input" name="{{item.itemId}}" onblur="changeInput(this,'{{item.itemId}}')">
+        <input type="text" class="layui-input" name="{{item.itemCode}}" onblur="changeInput(this,'{{item.itemCode}}')">
       </div>
       {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
       <div class=" layui-input-block ">
-        <textarea class="layui-textarea" name="{{item.itemId}}" onblur="changeInput(this,'{{item.itemId}}')"></textarea>
+        <textarea class="layui-textarea" name="{{item.itemCode}}"
+          onblur="changeInput(this,'{{item.itemCode}}')"></textarea>
       </div>
       {{# } }}
+      <div id="childWrap{{item.itemCode}}" parentIndex="{{d.parentIndex}}.{{index+1}}" class="childWrap"></div>
     </div>
     {{#  }); }}
   </script>
+  <!-- 进度 -->
   <script id="processTemplate" type="text/html">
-    <div class="progress-wrap clearfix">
-      <span class="fl">问题完成进度({{d.num}}/{{d.total}})：</span>
-      <div class="layui-progress fl" lay-filter="doPer">
-        <div class="layui-progress-bar layui-bg-orange" lay-percent="{{d.percent}}"></div>
-      </div>
-      <span class="fl">{{d.percent}}</span>
+    <span class="fl">问题完成进度({{d.num}}/{{d.total}})：</span>
+    <div class="layui-progress fl" lay-filter="doPer">
+      <div class="layui-progress-bar layui-bg-orange" lay-percent="{{d.percent}}"></div>
     </div>
+    <span class="fl">{{d.percent}}</span>
   </script>
 
   <script src="../../assets/layui/layui.js"></script>
@@ -140,7 +145,7 @@
           let tree = {};
           let arr = []
           for (let i in list) {
-            temp[list[i].itemId] = list[i];
+            temp[list[i].itemCode] = list[i];
           }
           for (let i in temp) {
             if (temp[i].dependItemCode) {
@@ -149,128 +154,139 @@
               }
               temp[temp[i].dependItemCode].children.push(temp[i]);
             } else {
-              tree[temp[i].itemId] = temp[i];
+              tree[temp[i].itemCode] = temp[i];
             }
           }
           for (let i in tree) {
             arr.push(tree[i])
           }
-          return arr;
+          return {
+            arr: arr,
+            temp: temp
+          };
         }
         //获取数据
         function getData() {
           templateData = {
-            "createDate": 1578067200000,
+            "createDate": 1578412800000,
             "creater": "SUPERUSER",
             "eparchCode": "0020",
+            "eparchName": "广州",
             "saleType": "",
-            "templateCode": 1000030,
+            "templateCode": 1000045,
             "templateContent": [{
-                "createStaffId": "SUPERUSER",
-                "dependItemCode": "",
-                "dependOptionId": "",
-                "eparchyCode": "0020",
-                "isRequired": "true",
-                "itemCode": "1",
-                "itemDesc": "话术模板新增问题",
-                "itemGrade": "1",
-                "itemId": 1000020,
-                "itemStatus": "1",
-                "itemType": "radio",
-                "options": [{
-                  "itemId": 1000020,
-                  "optionDesc": "话术模板新增问题选项1",
-                  "optionId": 0
-                }, {
-                  "itemId": 1000020,
-                  "optionDesc": "话术模板新增问题选项2",
-                  "optionId": 1
-                }],
-                "templateCode": 1000037
+              "createStaffId": "SUPERUSER",
+              "dependItemCode": "",
+              "dependOptionId": "",
+              "eparchyCode": "0020",
+              "isRequired": "false",
+              "itemCode": "1",
+              "itemDesc": "问题一级目录标题1",
+              "itemGrade": "1",
+              "itemId": 1000032,
+              "itemStatus": "1",
+              "itemType": "radio",
+              "options": [{
+                "itemId": 1000032,
+                "optionDesc": "问题一级目录选项描述",
+                "optionId": 0
               }, {
-                "createStaffId": "SUPERUSER",
-                "dependItemCode": "1000020",
-                "dependOptionId": "0",
-                "eparchyCode": "0020",
-                "isRequired": "false",
-                "itemCode": "1-1",
-                "itemDesc": "话术模板新增问题2",
-                "itemGrade": "2",
-                "itemId": 1000021,
-                "itemStatus": "1",
-                "itemType": "checkbox",
-                "options": [{
-                  "itemId": 1000021,
-                  "optionDesc": "话术模板新增问题2选项1",
-                  "optionId": 0
-                }, {
-                  "itemId": 1000021,
-                  "optionDesc": "话术模板新增问题2选项2",
-                  "optionId": 1
-                }],
-                "templateCode": 1000037
-              },
-              {
-                "createStaffId": "SUPERUSER",
-                "dependItemCode": "1000020",
-                "dependOptionId": "0",
-                "eparchyCode": "0020",
-                "isRequired": "false",
-                "itemCode": "1-2",
-                "itemDesc": "话术模板新增问题3",
-                "itemGrade": "2",
-                "itemId": 1000022,
-                "itemStatus": "1",
-                "itemType": "input",
-                "templateCode": 1000037
+                "itemId": 1000032,
+                "optionDesc": "问题一级目录选项描述2",
+                "optionId": 1
+              }],
+              "templateCode": 1000045
+            }, {
+              "createStaffId": "SUPERUSER",
+              "dependItemCode": "1",
+              "dependOptionId": "0",
+              "eparchyCode": "0020",
+              "isRequired": "false",
+              "itemCode": "2",
+              "itemDesc": "问题二级目录问题",
+              "itemGrade": "2",
+              "itemId": 1000033,
+              "itemStatus": "1",
+              "itemType": "radio",
+              "options": [{
+                "itemId": 1000033,
+                "optionDesc": "问题二级目录选项描述1",
+                "optionId": 0
               }, {
-                "createStaffId": "SUPERUSER",
-                "dependItemCode": "",
-                "dependOptionId": "",
-                "eparchyCode": "0020",
-                "isRequired": "true",
-                "itemCode": "2",
-                "itemDesc": "话术模板新增问题4",
-                "itemGrade": "1",
-                "itemId": 10000203,
-                "itemStatus": "1",
-                "itemType": "checkbox",
-                "options": [{
-                  "itemId": 1000020,
-                  "optionDesc": "话术模板新增问题选项1",
-                  "optionId": 0
-                }, {
-                  "itemId": 1000020,
-                  "optionDesc": "话术模板新增问题选项2",
-                  "optionId": 1
-                }],
-                "templateCode": 1000037
-              },
-              {
-                "createStaffId": "SUPERUSER",
-                "dependItemCode": "",
-                "dependOptionId": "",
-                "eparchyCode": "0020",
-                "isRequired": "true",
-                "itemCode": "3",
-                "itemDesc": "话术模板新增问题3",
-                "itemGrade": "1",
-                "itemId": 100002011,
-                "itemStatus": "1",
-                "itemType": "input",
+                "itemId": 1000033,
+                "optionDesc": "问题二级目录选项描述2",
+                "optionId": 1
+              }],
+              "templateCode": 1000045
+            }, {
+              "createStaffId": "SUPERUSER",
+              "dependItemCode": "2",
+              "dependOptionId": "0",
+              "eparchyCode": "0020",
+              "isRequired": "false",
+              "itemCode": "3",
+              "itemDesc": "问题三级目录问题",
+              "itemGrade": "2",
+              "itemId": 1000034,
+              "itemStatus": "1",
+              "itemType": "radio",
+              "options": [{
+                "itemId": 1000034,
+                "optionDesc": "问题二级关联二级目录选项1",
+                "optionId": 0
+              }, {
+                "itemId": 1000034,
+                "optionDesc": "问题二级关联二级目录选项2",
+                "optionId": 1
+              }],
+              "templateCode": 1000045
+            }, {
+              "createStaffId": "SUPERUSER",
+              "dependItemCode": "3",
+              "dependOptionId": "0",
+              "eparchyCode": "0020",
+              "isRequired": "false",
+              "itemCode": "4",
+              "itemDesc": "问题四级目录问题",
+              "itemGrade": "2",
+              "itemId": 1000034,
+              "itemStatus": "1",
+              "itemType": "input",
 
-                "templateCode": 1000037
-              }
-            ],
-            "templateEnd": "<p><u>测试新增</u></p>",
-            "templateHead": "<p><u>测试新增</u></p>",
-            "templateName": "测试新增",
-            "templateState": "2",
-            "updateDate": 1578067200000
+              "templateCode": 1000045
+            }, {
+              "createStaffId": "SUPERUSER",
+              "dependItemCode": "",
+              "dependOptionId": "",
+              "eparchyCode": "0020",
+              "isRequired": "false",
+              "itemCode": "5",
+              "itemDesc": "问题一级目录2",
+              "itemGrade": "1",
+              "itemId": 1000035,
+              "itemStatus": "1",
+              "itemType": "radio",
+              "options": [{
+                "itemId": 1000035,
+                "optionDesc": "问题一级目录选项描述1",
+                "optionId": 0
+              }, {
+                "itemId": 1000035,
+                "optionDesc": "问题一级目录选项描述2",
+                "optionId": 1
+              }],
+              "templateCode": 1000045
+            }],
+            "templateEnd": "<p>话术多级目录测试</p>",
+            "templateHead": "<p>话术多级目录测试</p>",
+            "templateName": "话术多级目录测试",
+            "templateState": "1",
+            "updateDate": 1578412800000
           }
-          //问题列表，模拟数据
-          // templateData.contentData = buildTreeData(JSON.parse(templateData.templateContent))
-          templateData.contentData = buildTreeData(templateData.templateContent)
+          // var data = buildTreeData(JSON.parse(templateData.templateContent))
+          var data = buildTreeData(templateData.templateContent)
+          templateData.contentDataArr = data.arr; //一级数据
+          templateData.contentDataObj = data.temp; //itemCode为key的数据
         }
         // 渲染问题区域
         function renderContent() {
@@ -327,20 +343,31 @@
         });
         //渲染二级问题
         function renderChild(code, valArr) {
-          for (var i = 0; i < templateData.contentData.length; i++) {
-            if (templateData.contentData[i].itemId == code) {
-              var arr = []
-              if (templateData.contentData[i].children) {
-                for (var j = 0; j < templateData.contentData[i].children.length; j++) {
-                  if (valArr.indexOf(templateData.contentData[i].children[j].dependOptionId) > -1) {
-                    arr.push(templateData.contentData[i].children[j])
-                  }
-                }
-                renderChildContent(arr, code)
-                return
-              }
+          var children = templateData.contentDataObj[code].children || []
+          var arr = []
+          for (var i = 0; i < children.length; i++) {
+            if (valArr.indexOf(children[i].dependOptionId) > -1) {
+              arr.push(children[i])
             }
+            renderChildContent(arr, code)
+            return
           }
+          // for (var i = 0; i < templateData.contentDataArr.length; i++) {
+          //   if (templateData.contentDataArr[i].itemCode == code) {
+          //     var arr = []
+          //     if (templateData.contentDataArr[i].children) {
+          //       for (var j = 0; j < templateData.contentDataArr[i].children.length; j++) {
+          //         if (valArr.indexOf(templateData.contentDataArr[i].children[j].dependOptionId) > -1) {
+          //           arr.push(templateData.contentDataArr[i].children[j])
+          //         }
+          //       }
+          //       renderChildContent(arr, code)
+          //       return
+          //     }
+          //   } else {
+
+          //   }
+          // }
         }
 
         // 输入框交互
@@ -351,9 +378,9 @@
         // 获取答案数据，并计算进度
         function getProgress() {
           var num = 0,
-            total = templateData.contentData.length
+            total = templateData.contentDataArr.length
           for (var i = 0; i < total; i++) {
-            if (judgeData(answerData[templateData.contentData[i].itemId])) {
+            if (judgeData(answerData[templateData.contentDataArr[i].itemCode])) {
               num++
             }
           }
