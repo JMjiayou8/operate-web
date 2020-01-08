@@ -263,8 +263,14 @@ layui.define('view', function (exports) {
               {
                 name: 'detail',
                 icon: '',
-                title: '话术详情',
+                title: '详情页',
                 path: 'talking/detail'
+              },
+              {
+                name: 'preview',
+                icon: '',
+                title: '答题页',
+                path: 'talking/preview'
               },
               {
                 name: 'index',

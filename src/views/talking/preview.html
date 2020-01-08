@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>话术详情</title>
+  <title>答题页</title>
   <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
   <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
   <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
@@ -18,12 +18,16 @@
         <div id="contentWrap"></div>
       </div>
     </div>
-
+    <div class="text-center">
+      <button type="button" class="layui-btn layui-btn-gray">关闭</button>
+      <button type="button" class="layui-btn" onclick="saveData()">保存</button>
+    </div>
   </div>
   <!-- 一级问题 -->
   <script id="contentTemplate" type="text/html">
     <div class="detail-top">
       <span class="page-title">{{d.templateName}}</span>
+      <div id="processWrap" class="progress-wrap clearfix"></div>
     </div>
     <div>{{d.templateHead}}</div>
     <form class="layui-form contentWrap" lay-filter="templateForm">
@@ -56,11 +60,13 @@
         </div>
         {{# }else if(item.itemType=='input'){ }}
         <div class=" layui-input-block ">
-          <input type="text" class="layui-input" name="{{item.itemCode}}">
+          <input type="text" class="layui-input" name="{{item.itemCode}}"
+            onblur="changeInput(this,'{{item.itemCode}}')">
         </div>
         {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
         <div class=" layui-input-block ">
-          <textarea class="layui-textarea" name="{{item.itemCode}}"></textarea>
+          <textarea class="layui-textarea" name="{{item.itemCode}}"
+            onblur="changeInput(this,'{{item.itemCode}}')"></textarea>
         </div>
         {{# } }}
         <div id="childWrap{{item.itemCode}}" parentIndex="{{index+1}}" class="childWrap level1"></div>
@@ -101,16 +107,25 @@
       </div>
       {{# }else if(item.itemType=='input'){ }}
       <div class=" layui-input-block ">
-        <input type="text" class="layui-input" name="{{item.itemCode}}">
+        <input type="text" class="layui-input" name="{{item.itemCode}}" onblur="changeInput(this,'{{item.itemCode}}')">
       </div>
       {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
       <div class=" layui-input-block ">
-        <textarea class="layui-textarea" name="{{item.itemCode}}"></textarea>
+        <textarea class="layui-textarea" name="{{item.itemCode}}"
+          onblur="changeInput(this,'{{item.itemCode}}')"></textarea>
       </div>
       {{# } }}
       <div id="childWrap{{item.itemCode}}" parentIndex="{{d.parentIndex}}.{{index+1}}" class="childWrap"></div>
     </div>
     {{#  }); }}
+  </script>
+  <!-- 进度 -->
+  <script id="processTemplate" type="text/html">
+    <span class="fl">问题完成进度({{d.num}}/{{d.total}})：</span>
+    <div class="layui-progress fl" lay-filter="doPer">
+      <div class="layui-progress-bar layui-bg-orange" lay-percent="{{d.percent}}"></div>
+    </div>
+    <span class="fl">{{d.percent}}</span>
   </script>
 
   <script src="../../assets/layui/layui.js"></script>
@@ -126,7 +141,8 @@
           layer = layui.layer,
           laytpl = layui.laytpl,
           element = layui.element;
-        var templateData = {};
+        var templateData = {},
+          answerData = {}
         // 将问题的转换成树形结构，方便显/隐展示
         function buildTreeData(list) {
           let temp = {};
@@ -275,7 +291,6 @@
           var data = buildTreeData(templateData.templateContent)
           templateData.contentDataArr = data.arr; //一级数据
           templateData.contentDataObj = data.temp; //itemCode为key的数据
-          renderContent()
         }
         // 渲染问题区域
         function renderContent() {
@@ -305,6 +320,8 @@
         form.on('select', function (data) {
           var code = $(data.elem).data('itemid')
           renderChild(code, [data.value])
+          answerData[code] = data.value
+          getProgress()
 
         });
         var checkboxArr = {}
@@ -319,10 +336,14 @@
             checkboxArr[code].splice(checkboxArr[code].indexOf(data.value), 1)
           }
           renderChild(code, checkboxArr[code])
+          answerData[code] = checkboxArr[code]
+          getProgress()
         });
         form.on('radio', function (data) {
           var code = $(data.elem).data('itemid')
           renderChild(code, [data.value])
+          answerData[code] = data.value
+          getProgress()
         });
         //渲染二级问题
         function renderChild(code, valArr) {
@@ -337,10 +358,47 @@
           }
         }
 
+        // 输入框交互
+        window.changeInput = function (obj, code) {
+          answerData[code] = $(obj).val()
+          getProgress()
+        }
+        // 获取答案数据，并计算进度
+        function getProgress() {
+          var num = 0,
+            total = templateData.contentDataArr.length
+          for (var i = 0; i < total; i++) {
+            if (judgeData(answerData[templateData.contentDataArr[i].itemCode])) {
+              num++
+            }
+          }
+          var getTpl = processTemplate.innerHTML,
+            selectWrap = document.getElementById('processWrap');
+          var renderData = {
+            num: num,
+            total: total,
+            percent: parseInt(num * 100 / total) + '%'
+          }
+          laytpl(getTpl).render(renderData, function (html) {
+            selectWrap.innerHTML = html;
+            element.render()
+          });
+        }
 
+        function judgeData(data) {
+          if (data == null || data == undefined || data.length == 0 || data.length == '') {
+            return false
+          } else {
+            return true
+          }
+        }
+        window.saveData = function () {
+          alert('答案数据:' + JSON.stringify(answerData, null, 4))
+        }
         $(function () {
           getData()
-
+          renderContent()
+          getProgress()
         })
       })
   </script>
