@@ -888,6 +888,10 @@
 .talkingPage .contentWrap .layui-form-item {
   position: relative;
   cursor: pointer;
+
+}
+
+.talkingPage .contentWrap .layui-form-item.level1-item {
   padding-bottom: 20px;
   border-bottom: 1px dashed #d2d2d2;
 }
@@ -938,6 +942,23 @@
 .talkingPage .layui-form-radio>i:hover,
 .talkingPage .layui-form-radioed>i {
   color: #f87a25;
+}
+
+.talkingPage .progress-wrap {
+  margin-top: 20px;
+}
+
+.talkingPage .progress-wrap .layui-progress {
+  width: 50%;
+  top: 8px;
+  margin-right: 5px;
+}
+
+.layui-bg-orange {
+  background-image: -moz-linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%) !important;
+  background-image: -webkit-linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%) !important;
+  background-image: -ms-linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%) !important;
+  background-image: linear-gradient(-35deg, rgb(244, 152, 39) 0%, rgb(255, 114, 57) 100%) !important;
 }
 
 /***********************************************  外呼页面 ***********************************************/

@@ -16,6 +16,8 @@
     <div class="layui-card">
       <div class="layui-card-body">
         <div id="contentWrap"></div>
+        <div id="processWrap"></div>
+
       </div>
     </div>
   </div>
@@ -24,9 +26,9 @@
     <div>{{d.templateHead}}</div>
     <form class="layui-form contentWrap" lay-filter="templateForm">
       {{#  layui.each(d.contentData, function(index, item){ }}
-      <div class="layui-form-item ">
+      <div class="layui-form-item level1-item">
         <label
-          class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{item.itemCode}}、{{item.itemDesc}}</label>
+          class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{index+1}}、{{item.itemDesc}}</label>
         {{# if(item.itemType=='radio'){ }}
         <div class="layui-input-block ">
           {{#  layui.each(item.options, function(i, obj){ }}
@@ -60,20 +62,18 @@
             onblur="changeInput(this,'{{item.itemId}}')"></textarea>
         </div>
         {{# } }}
+        <div id="childWrap{{item.itemId}}" parentIndex="{{index+1}}" class="childWrap"></div>
       </div>
-      <div id="childWrap{{item.itemId}}" class="childWrap"></div>
+
       {{#  }); }}
     </form>
     <div>{{d.templateEnd}}</div>
-    <!-- <div class="layui-progress">
-      <div class="layui-progress-bar" lay-percent="10%"></div>
-    </div> -->
   </script>
   <script id="childTemplate" type="text/html">
-    {{#  layui.each(d, function(index, item){ }}
+    {{#  layui.each(d.list, function(index, item){ }}
     <div class="layui-form-item ">
       <label
-        class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{item.itemCode}}、{{item.itemDesc}}</label>
+        class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{d.parentIndex}}.{{index+1}}、{{item.itemDesc}}</label>
       {{# if(item.itemType=='radio'){ }}
       <div class="layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
@@ -108,6 +108,15 @@
       {{# } }}
     </div>
     {{#  }); }}
+  </script>
+  <script id="processTemplate" type="text/html">
+    <div class="progress-wrap clearfix">
+      <span class="fl">问题完成进度({{d.num}}/{{d.total}})：</span>
+      <div class="layui-progress fl" lay-filter="doPer">
+        <div class="layui-progress-bar layui-bg-orange" lay-percent="{{d.percent}}"></div>
+      </div>
+      <span class="fl">{{d.percent}}</span>
+    </div>
   </script>
 
   <script src="../../assets/layui/layui.js"></script>
@@ -237,6 +246,21 @@
                 }],
                 "templateCode": 1000037
               },
+              {
+                "createStaffId": "SUPERUSER",
+                "dependItemCode": "",
+                "dependOptionId": "",
+                "eparchyCode": "0020",
+                "isRequired": "true",
+                "itemCode": "3",
+                "itemDesc": "话术模板新增问题3",
+                "itemGrade": "1",
+                "itemId": 100002011,
+                "itemStatus": "1",
+                "itemType": "input",
+
+                "templateCode": 1000037
+              }
             ],
             "templateEnd": "<p><u>测试新增</u></p>",
             "templateHead": "<p><u>测试新增</u></p>",
@@ -247,7 +271,6 @@
           //问题列表，模拟数据
           // templateData.contentData = buildTreeData(JSON.parse(templateData.templateContent))
           templateData.contentData = buildTreeData(templateData.templateContent)
-
         }
         // 渲染问题区域
         function renderContent() {
@@ -264,7 +287,11 @@
         function renderChildContent(data, code) {
           var getTpl = childTemplate.innerHTML,
             selectWrap = document.getElementById('childWrap' + code);
-          laytpl(getTpl).render(data, function (html) {
+          var renderData = {
+            list: data,
+            parentIndex: $(selectWrap).attr('parentIndex')
+          }
+          laytpl(getTpl).render(renderData, function (html) {
             selectWrap.innerHTML = html;
             form.render()
           });
@@ -323,11 +350,37 @@
         }
         // 获取答案数据，并计算进度
         function getProgress() {
-          console.log('答案数据==', answerData)
+          var num = 0,
+            total = templateData.contentData.length
+          for (var i = 0; i < total; i++) {
+            if (judgeData(answerData[templateData.contentData[i].itemId])) {
+              num++
+            }
+          }
+          var getTpl = processTemplate.innerHTML,
+            selectWrap = document.getElementById('processWrap');
+          var renderData = {
+            num: num,
+            total: total,
+            percent: parseInt(num * 100 / total) + '%'
+          }
+          laytpl(getTpl).render(renderData, function (html) {
+            selectWrap.innerHTML = html;
+            element.render()
+          });
+        }
+
+        function judgeData(data) {
+          if (data == null || data == undefined || data.length == 0 || data.length == '') {
+            return false
+          } else {
+            return true
+          }
         }
         $(function () {
           getData()
           renderContent()
+          getProgress()
         })
       })
   </script>
