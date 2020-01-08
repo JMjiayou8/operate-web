@@ -1220,6 +1220,7 @@ i {
 .common-layer.layui-layer-iframe .layui-layer-btn,
 .common-layer.layui-layer-page .layui-layer-btn {
   padding: 0 20px;
+  text-align: center;
 }
 
 .common-layer .layui-layer-btn a {

@@ -274,7 +274,6 @@ layui.define('view', function (exports) {
               },
             ]
           },
-
           {
             name: 'sms',
             icon: '',
@@ -319,6 +318,12 @@ layui.define('view', function (exports) {
                 path: 'outcall/index'
               }
             ]
+          },
+          {
+            name: 'demo',
+            icon: '',
+            title: '页面元素样例',
+            path: 'demo'
           },
         ]
       }

@@ -1004,6 +1004,7 @@
 .outCallPage .label-item-cust .condition {
   display: block;
   white-space: pre-wrap;
+  word-break: break-all;
   min-height: 48px;
 }
 
