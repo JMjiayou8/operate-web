@@ -278,7 +278,7 @@
     </div>
     <div class="text-center">
       <button type="button" class="layui-btn nextPageBtn" onclick="nextPage()">继续</button>
-      <button type="button" class="layui-btn layui-btn-primary step3Btn" style="display:none;">保存</button>
+      <button type="button" class="layui-btn layui-btn-gray step3Btn" style="display:none;">保存</button>
       <button type="button" class="layui-btn step3Btn" style="display:none;">提交</button>
     </div>
   </div>
@@ -650,24 +650,7 @@
           });
         }
         /********************************************** 执行触点区域  **********************************************/
-        //渲染不同触点类型配置区域
-        function renderChnl(type) {
-          var data = {
-            type: type
-          }
-          var getTpl = chnlTemplete.innerHTML,
-            selectWrap = document.getElementById('chnlWrap');
-          laytpl(getTpl).render(data, function (html) {
-            selectWrap.innerHTML = html;
-            form.render()
-          });
-        }
-        // 切换触点类型
-        form.on('select(selectChnl)', function (obj) {
-          renderChnl(obj.value)
-        })
-
-        function renderPage3() {
+        function renderDate() {
           laydate.render({
             elem: '#startDate',
           })
@@ -686,6 +669,27 @@
             format: 'HH:mm',
             theme: 'noSecond'
           });
+        }
+        //渲染不同触点类型配置区域
+        function renderChnl(type) {
+          var data = {
+            type: type
+          }
+          var getTpl = chnlTemplete.innerHTML,
+            selectWrap = document.getElementById('chnlWrap');
+          laytpl(getTpl).render(data, function (html) {
+            selectWrap.innerHTML = html;
+            form.render()
+            renderDate()
+          });
+        }
+        // 切换触点类型
+        form.on('select(selectChnl)', function (obj) {
+          renderChnl(obj.value)
+        })
+
+
+        function renderPage3() {
           renderChnl('1') //默认选中'短信'
         }
       })
