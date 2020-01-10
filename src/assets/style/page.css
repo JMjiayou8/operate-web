@@ -40,52 +40,6 @@
 
 /* 概览 */
 
-.console-page .over-list1 .over-item {
-  font-size: 14px;
-  color: #666;
-  text-align: center;
-  position: relative;
-  z-index: 10;
-  cursor: pointer;
-}
-
-.console-page .over-list1 .over-title {
-  font-size: 16px;
-}
-
-.console-page .over-list1 .over-icon {
-  width: 60px;
-  height: 60px;
-  margin: 10px auto;
-  border-radius: 50%;
-  line-height: 60px;
-}
-
-
-.console-page .over-list1 .connect {
-  position: absolute;
-  width: 90%;
-  height: 3px;
-  background: #e7e6e6;
-  top: 40%;
-  left: 60%;
-  z-index: -1;
-}
-
-.console-page .over-list1 .connect::before {
-  content: '';
-  width: 20px;
-  height: 20px;
-  background: #e7e6e6;
-  border-radius: 50%;
-  position: absolute;
-  top: -10px;
-  left: 35%;
-}
-
-
-
-
 .console-page .over-list {
   margin: 0 -8%;
 }
@@ -138,66 +92,9 @@
   left: 20%;
 }
 
-.console-page .console-page .over-list .connect::after {
-  left: 60%;
-}
-
-.console-page .over-list {
-  margin: 0 -8%;
-}
-
-
-.console-page .over-list .over-item {
-  font-size: 14px;
-  color: #666;
-  text-align: center;
-  position: relative;
-  z-index: 10;
-  cursor: pointer;
-}
-
-.console-page .over-list .over-title {
-  font-size: 16px;
-}
-
-.console-page .over-list .over-icon {
-  width: 60px;
-  height: 60px;
-
-  margin: 10px auto;
-}
-
-.console-page .over-list .over-num {
-  font-size: 24px;
-  margin: 0 5px;
-}
-
-.console-page .over-list .connect {
-  position: absolute;
-  width: 90%;
-  height: 3px;
-  background: #e7e6e6;
-  top: 50%;
-  left: 60%;
-  z-index: -1;
-}
-
-.console-page .over-list .connect::before,
 .console-page .over-list .connect::after {
-  content: '';
-  width: 20px;
-  height: 20px;
-  background: #e7e6e6;
-  border-radius: 50%;
-  position: absolute;
-  top: -10px;
-  left: 20%;
-}
-
-.console-page .console-page .over-list .connect::after {
   left: 60%;
 }
-
 
 /* 各地市营销活动订购量排名 */
 .top9Wrap {

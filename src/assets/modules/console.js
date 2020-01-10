@@ -3,7 +3,7 @@ layui.define(function (exports) {
   layui.use(['laytpl'], function () {
     var laytpl = layui.laytpl;
     var data = {
-      data: { num1: 12, num2: 20, num3: 10, num4: 40, num5: 2 },
+      data: { num1: 12, num2: 20, num3: 10, num4: 4000, num5: 2 },
       config: [
         { title: '营销策划', color: '#23b192', icon: '../../assets/images/console/overview/flow1.png' },
         { title: '营销确认', color: '#e9785e', icon: '../../assets/images/console/overview/flow2.png' },
