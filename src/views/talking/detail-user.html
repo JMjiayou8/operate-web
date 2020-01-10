@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>话术详情-用户</title>
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+  <style>
+    .layui-radio-disbaled.layui-form-radioed>i {
+      color: #f87a25 !important;
+      opacity: .8;
+    }
+
+    .layui-checkbox-disbaled.layui-form-checked>i {
+      opacity: .8;
+    }
+
+    .layui-checkbox-disbaled[lay-skin=primary] span {
+      color: #666;
+    }
+
+    .layui-select-disabled .layui-disabled {
+      color: #666 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layui-fluid common-page talkingPage">
+    <div class="layui-card">
+      <div class="layui-card-body">
+        <div id="contentWrap"></div>
+      </div>
+    </div>
+
+  </div>
+  <!-- 一级问题 -->
+  <script id="contentTemplate" type="text/html">
+    <div class="detail-top">
+      <span class="page-title">{{d.templateInfo.templateName}}</span>
+    </div>
+    <div>{{d.templateInfo.templateHead}}</div>
+    <form class="layui-form contentWrap" lay-filter="templateForm">
+      {{#  layui.each(d.contentDataArr, function(index, item){ }}
+      <div class="layui-form-item level1-item">
+        <label
+          class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{index+1}}、{{item.itemDesc}}</label>
+        {{# if(item.itemType=='radio'){ }}
+        <div class="layui-input-block ">
+          {{#  layui.each(item.options, function(i, obj){ }}
+          <input type="radio" name="{{item.itemCode}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+            data-itemid="{{item.itemCode}}" {{ d.answerData[item.itemCode]==obj.optionId?'checked':''}} disabled />
+          {{#  }); }}
+        </div>
+        {{# }else if(item.itemType=='checkbox'){ }}
+        <div class=" layui-input-block ">
+          {{#  layui.each(item.options, function(i, obj){ }}
+          <input type="checkbox" name="{{item.itemCode}}" value="{{obj.optionId}}" lay-skin="primary"
+            title="{{obj.optionDesc}}" data-itemid="{{item.itemCode}}"
+            {{ d.answerData[item.itemCode].indexOf(''+obj.optionId)>-1?'checked':''}} disabled />
+          {{#  }); }}
+        </div>
+        {{# }else if(item.itemType=='select'){ }}
+        <div class="layui-input-block ">
+          <select data-itemid="{{item.itemCode}}" name="{{item.itemCode}}" disabled>
+            <option value="">请选择</option>
+            {{#  layui.each(item.options, function(i, obj){ }}
+            <option value="{{obj.optionId}}" {{ d.answerData[item.itemCode]==obj.optionId?'selected':''}}>
+              {{obj.optionDesc}}</option>
+            {{#  }); }}
+          </select>
+        </div>
+        {{# }else if(item.itemType=='input'){ }}
+        <div class=" layui-input-block ">
+          <input type="text" class="layui-input" name="{{item.itemCode}}" value="{{d.answerData[item.itemCode]||''}} "
+            disabled>
+        </div>
+        {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
+        <div class=" layui-input-block ">
+          <textarea class="layui-textarea" name="{{item.itemCode}}"
+            disabled>{{ d.answerData[item.itemCode]||''}} </textarea>
+        </div>
+        {{# } }}
+        <div id="childWrap{{item.itemCode}}" parentIndex="{{index+1}}" class="childWrap level1"></div>
+      </div>
+
+      {{#  }); }}
+    </form>
+    <div>{{d.templateInfo.templateEnd}}</div>
+  </script>
+  <!-- 二级问题 -->
+  <script id="childTemplate" type="text/html">
+    {{#  layui.each(d.list, function(index, item){ }}
+    <div class="layui-form-item ">
+      <label
+        class="layui-form-label {{item.isRequired=='true'?'layui-required':''}}">{{d.parentIndex}}.{{index+1}}、{{item.itemDesc}}</label>
+      {{# if(item.itemType=='radio'){ }}
+      <div class="layui-input-block ">
+        {{#  layui.each(item.options, function(i, obj){ }}
+        <input type="radio" name="{{item.itemCode}}" value="{{obj.optionId}}" title="{{obj.optionDesc}}"
+          data-itemid="{{item.itemCode}}" {{ d.answerData[item.itemCode]==obj.optionId?'checked':''}} disabled />
+        {{#  }); }}
+      </div>
+      {{# }else if(item.itemType=='checkbox'){ }}
+      <div class=" layui-input-block ">
+        {{#  layui.each(item.options, function(i, obj){ }}
+        <input type="checkbox" name="{{item.itemCode}}[{{obj.optionId}}]" value="{{obj.optionId}}" lay-skin="primary"
+          title="{{obj.optionDesc}}" data-itemid="{{item.itemCode}}"
+          {{ d.answerData[item.itemCode].indexOf(''+obj.optionId)>-1?'checked':''}} disabled />
+        {{#  }); }}
+      </div>
+      {{# }else if(item.itemType=='select'){ }}
+      <div class="layui-input-block ">
+        <select data-itemid="{{item.itemCode}}" name="{{item.itemCode}}" disabled>
+          <option value="">请选择</option>
+          {{#  layui.each(item.options, function(i, obj){ }}
+          <option value="{{obj.optionId}}" {{ d.answerData[item.itemCode]==obj.optionId?'selected':''}}>
+            {{obj.optionDesc}}</option>
+          {{#  }); }}
+        </select>
+      </div>
+      {{# }else if(item.itemType=='input'){ }}
+      <div class=" layui-input-block ">
+        <input type="text" class="layui-input" name="{{item.itemCode}}" value="{{ d.answerData[item.itemCode]||''}} "
+          disabled>
+      </div>
+      {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
+      <div class=" layui-input-block ">
+        <textarea class="layui-textarea" name="{{item.itemCode}}"
+          disabled>{{ d.answerData[item.itemCode]||''}} </textarea>
+      </div>
+      {{# } }}
+      <div id="childWrap{{item.itemCode}}" parentIndex="{{d.parentIndex}}.{{index+1}}" class="childWrap"></div>
+    </div>
+    {{#  }); }}
+  </script>
+
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['laydate', 'form', 'layer', 'laytpl', 'element'], function () {
+        var $ = layui.$,
+          laydate = layui.laydate,
+          form = layui.form,
+          layer = layui.layer,
+          laytpl = layui.laytpl,
+          element = layui.element;
+        var templateData = {};
+
+        // 将问题的转换成树形结构，方便显/隐展示
+        function buildTreeData(list) {
+          let temp = {};
+          let tree = {};
+          let arr = []
+          for (let i in list) {
+            temp[list[i].itemCode] = list[i];
+          }
+          for (let i in temp) {
+            if (temp[i].dependItemCode) {
+              if (!temp[temp[i].dependItemCode].children) {
+                temp[temp[i].dependItemCode].children = [];
+              }
+              temp[temp[i].dependItemCode].children.push(temp[i]);
+            } else {
+              tree[temp[i].itemCode] = temp[i];
+            }
+          }
+          for (let i in tree) {
+            arr.push(tree[i])
+          }
+          return {
+            arr: arr,
+            temp: temp
+          };
+        }
+        //获取数据
+        function getData() {
+          templateData = {
+            "answerContent": "{\"1\":\"0\",\"2\":\"0\",\"3\":\"0\",\"4\":[\"0\"],\"5\":\"test-input\",\"6\":\"test-textarea\",\"7\":\"test-desc\"}",
+            "answerId": 1000002,
+            "createDate": 1578499200000,
+            "creater": "SUPERUSER",
+            "templateCode": 1000045,
+            "templateInfo": {
+              "createDate": 1578412800000,
+              "creater": "SUPERUSER",
+              "eparchCode": "0020",
+              "eparchName": "广州",
+              "saleType": "",
+              "templateCode": 1000045,
+              "templateContent": "[{\"createStaffId\":\"SUPERUSER\",\"dependItemCode\":\"\",\"dependOptionId\":\"\",\"eparchyCode\":\"0020\",\"isRequired\":\"false\",\"itemCode\":\"1\",\"itemDesc\":\"问题一级目录标题\",\"itemGrade\":\"1\",\"itemId\":1000032,\"itemStatus\":\"1\",\"itemType\":\"radio\",\"options\":[{\"itemId\":1000032,\"optionDesc\":\"问题一级目录选项描述1\",\"optionId\":0},{\"itemId\":1000032,\"optionDesc\":\"问题一级目录选项描述2\",\"optionId\":1}],\"templateCode\":1000045},{\"createStaffId\":\"SUPERUSER\",\"dependItemCode\":\"1\",\"dependOptionId\":\"0\",\"eparchyCode\":\"0020\",\"isRequired\":\"false\",\"itemCode\":\"2\",\"itemDesc\":\"问题二级目录问题\",\"itemGrade\":\"2\",\"itemId\":1000033,\"itemStatus\":\"1\",\"itemType\":\"radio\",\"options\":[{\"itemId\":1000033,\"optionDesc\":\"问题二级目录选项描述1\",\"optionId\":0},{\"itemId\":1000033,\"optionDesc\":\"问题二级目录选项描述2\",\"optionId\":1}],\"templateCode\":1000045},{\"createStaffId\":\"SUPERUSER\",\"dependItemCode\":\"2\",\"dependOptionId\":\"0\",\"eparchyCode\":\"0020\",\"isRequired\":\"false\",\"itemCode\":\"3\",\"itemDesc\":\"问题二级关联二级目录标题\",\"itemGrade\":\"2\",\"itemId\":1000034,\"itemStatus\":\"1\",\"itemType\":\"select\",\"options\":[{\"itemId\":1000034,\"optionDesc\":\"问题二级关联二级目录选项1\",\"optionId\":0},{\"itemId\":1000034,\"optionDesc\":\"问题二级关联二级目录选项2\",\"optionId\":1}],\"templateCode\":1000045},{\"createStaffId\":\"SUPERUSER\",\"dependItemCode\":\"\",\"dependOptionId\":\"\",\"eparchyCode\":\"0020\",\"isRequired\":\"false\",\"itemCode\":\"4\",\"itemDesc\":\"问题一级目录2\",\"itemGrade\":\"1\",\"itemId\":1000035,\"itemStatus\":\"1\",\"itemType\":\"checkbox\",\"options\":[{\"itemId\":1000035,\"optionDesc\":\"问题一级目录选项描述1\",\"optionId\":0},{\"itemId\":1000035,\"optionDesc\":\"问题一级目录选项描述2\",\"optionId\":1}],\"templateCode\":1000045},{\"createStaffId\":\"SUPERUSER\",\"dependItemCode\":\"\",\"dependOptionId\":\"\",\"eparchyCode\":\"0020\",\"isRequired\":\"false\",\"itemCode\":\"5\",\"itemDesc\":\"问题一级目录3\",\"itemGrade\":\"1\",\"itemId\":1000036,\"itemStatus\":\"1\",\"itemType\":\"input\",\"templateCode\":1000045},{\"createStaffId\":\"SUPERUSER\",\"dependItemCode\":\"\",\"dependOptionId\":\"\",\"eparchyCode\":\"0020\",\"isRequired\":\"false\",\"itemCode\":\"6\",\"itemDesc\":\"问题一级目录4\",\"itemGrade\":\"1\",\"itemId\":1000037,\"itemStatus\":\"1\",\"itemType\":\"textarea\",\"templateCode\":1000045},{\"createStaffId\":\"SUPERUSER\",\"dependItemCode\":\"\",\"dependOptionId\":\"\",\"eparchyCode\":\"0020\",\"isRequired\":\"false\",\"itemCode\":\"7\",\"itemDesc\":\"问题一级目录5\",\"itemGrade\":\"1\",\"itemId\":1000038,\"itemStatus\":\"1\",\"itemType\":\"desc\",\"templateCode\":1000045}]",
+              "templateEnd": "<p>话术多级目录测试</p>",
+              "templateHead": "<p>话术多级目录测试</p>",
+              "templateName": "话术多级目录测试",
+              "templateState": "1",
+              "updateDate": 1578412800000
+            },
+            "updateDate": 1578499200000
+          }
+          var data = buildTreeData(JSON.parse(templateData.templateInfo.templateContent))
+          templateData.contentDataArr = data.arr; //一级数据
+          templateData.contentDataObj = data.temp; //itemCode为key的数据
+          templateData.answerData = JSON.parse(templateData.answerContent)
+          renderContent()
+        }
+        // 渲染问题区域
+        function renderContent() {
+          var getTpl = contentTemplate.innerHTML,
+            selectWrap = document.getElementById('contentWrap');
+          laytpl(getTpl).render(templateData, function (html) {
+            selectWrap.innerHTML = html;
+            for (var i in templateData.answerData) {
+              renderChild(i, [templateData.answerData[i]])
+            }
+            form.render()
+            element.render()
+          });
+        }
+        // 渲染二级问题区域
+        function renderChildContent(data, code) {
+          var getTpl = childTemplate.innerHTML,
+            selectWrap = document.getElementById('childWrap' + code);
+          var renderData = {
+            list: data,
+            parentIndex: $(selectWrap).attr('parentIndex'),
+            answerData: templateData.answerData
+          }
+          laytpl(getTpl).render(renderData, function (html) {
+            selectWrap.innerHTML = html;
+            form.render()
+          });
+        }
+
+        //渲染二级问题
+        function renderChild(code, valArr) {
+          var children = templateData.contentDataObj[code].children || []
+          var arr = []
+          for (var i = 0; i < children.length; i++) {
+            if (valArr.indexOf(children[i].dependOptionId) > -1) {
+              arr.push(children[i])
+            }
+            renderChildContent(arr, code)
+            return
+          }
+        }
+        $(function () {
+          getData()
+        })
+      })
+  </script>
+</body>
+
+</html>

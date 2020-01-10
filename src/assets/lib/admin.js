@@ -273,6 +273,12 @@ layui.define('view', function (exports) {
                 path: 'talking/preview'
               },
               {
+                name: 'detail-user',
+                icon: '',
+                title: '答题页-用户',
+                path: 'talking/detail-user'
+              },
+              {
                 name: 'index',
                 icon: '',
                 title: '新增话术',
