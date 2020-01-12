@@ -190,12 +190,13 @@
       {{#  if(index=== 0){ }} <label class="layui-form-label layui-required">问题描述：</label> {{#  } }}
       <div class=" layui-input-block desc-input">
         <i class="index">{{index+1}}</i>
-        <input type="text" class="layui-input " name="desc[1]" onblur="getParamInput(this,'{{index}}')"
-          value="{{item.optionDes}}" lay-verify="required">
+        <input type="text" class="layui-input" onblur="getParamInput(this,'{{index}}')" value="{{item.optionDes}}"
+          lay-verify="required">
         <button type="button" class="layui-btn  layui-btn-sm  layui-btn-add" data-index="{{index}}">
           <i class="layui-icon layui-icon-add-1"></i> 添加
         </button>
-        <button type="button" class="layui-btn  layui-btn-sm  layui-btn-del" data-index="{{index}}">
+        <button type="button" class="layui-btn  layui-btn-sm  layui-btn-del" data-index="{{index}}"
+          data-optionid="{{item.optionId}}">
           <i class="layui-icon layui-icon-close"></i>删除
         </button>
       </div>
@@ -259,7 +260,7 @@
           dependItemCode: '', //依赖项目
           dependOptionId: "" //依赖选项
         }
-        var problemList = [];
+        var problemTreeData = [];
         var relyData = {
           itemGrade: '1',
           dependItemCode: '',
@@ -291,7 +292,7 @@
             setData()
           });
         }
-        // 添加一行触点选择
+        // 添加一行
         $(document).on('click', '.layui-btn-add', function () {
           pageData.options.push({
             optionDes: '',
@@ -299,10 +300,18 @@
           })
           renderParamWrap()
         })
-        // 删除一行触点选择
+        // 删除一行
         $(document).on('click', '.layui-btn-del', function (evt) {
-          var index = $(evt.target).data('index')
+          var index = $(evt.target).data('index'),
+            optionId = $(evt.target).data('optionid')
           if (pageData.options.length > 1) {
+            if (pageData.children) { //删除对应二级节点
+              for (var i = 0; i < pageData.children.length; i++) {
+                if (pageData.children[i].dependOptionId == optionId) {
+                  pageData.children.splice(i, 1)
+                }
+              }
+            }
             pageData.options.splice(index, 1)
             renderParamWrap()
           } else {
@@ -327,9 +336,8 @@
         });
         //传值回主页面
         function setData() {
-          // console.log('pageData==', pageData)
           layui.data('talking', {
-            key: 'problem',
+            key: 'curData',
             value: pageData
           });
         }
@@ -337,7 +345,6 @@
         function renderRelyWrap() {
           var getTpl = relyTemplate.innerHTML,
             selectWrap = document.getElementById('relyWrap');
-          // console.log('relyData===', relyData)
           laytpl(getTpl).render(relyData, function (html) {
             selectWrap.innerHTML = html;
             form.render()
@@ -348,7 +355,6 @@
           pageData.itemGrade = relyData.itemGrade = obj.value;
           if (relyData.itemGrade == '2') {
             relyData.options = relyData.data[0].options || []
-            // relyData.dependItemCode = pageData.dependItemCode = relyData.data[0].itemCode
             relyData.dependItemCode = pageData.dependItemCode = relyData.data[0].itemDesc
             relyData.dependOptionId = pageData.dependOptionId = relyData.options[0].optionId
           } else {
@@ -377,18 +383,33 @@
           renderRelyWrap()
           setData()
         })
+
+        function treeToList(tree) {
+          var result = []
+          var flat = function (nodes) {
+            for (var i = 0; i < nodes.length; i++) {
+              result.push(nodes[i])
+              if (nodes[i].children) {
+                flat(nodes[i].children)
+              }
+            }
+          }
+          flat(tree)
+          return result
+        }
         $(function () {
           var pageType = location.search.split('=')[1]
           if (pageType == 'edit') {
-            pageData = layui.data('talking').problem;
+            pageData = layui.data('talking').curData;
             $('.elemType-item').removeClass('active')
             $('.elemType-item[data-type=' + pageData.type + ']').addClass('active')
           } else {
-            problemList = layui.data('talking').problemList;
+            problemTreeData = layui.data('talking').problemTreeData;
             relyData.data = [];
-            for (var i = 0; i < problemList.length; i++) {
-              if (['radio', 'checkbox', 'select'].indexOf(problemList[i].type) > -1) {
-                relyData.data.push(problemList[i])
+            var list = treeToList(problemTreeData)
+            for (var i = 0; i < list.length; i++) {
+              if (['radio', 'checkbox', 'select'].indexOf(list[i].type) > -1) {
+                relyData.data.push(list[i])
               }
             }
           }

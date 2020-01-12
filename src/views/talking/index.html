@@ -48,7 +48,7 @@
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12">
         <div class="layui-input-block">
-          <button type="button" class="layui-btn " onclick="addProblem('add')"><i
+          <button type="button" class="layui-btn " onclick="addProblem()"><i
               class="layui-icon layui-icon-add-1"></i>添加问题</button>
           <button type="button" class="layui-btn " onclick="importProblem()"><i
               class="layui-icon-import"></i>导入问题</button>
@@ -64,8 +64,8 @@
       </div>
       <div class="layui-form-item layui-col-md12 layui-col-sm12 text-center">
         <button type="button" class="layui-btn layui-btn-gray">预览</button>
-        <button type="button" class="layui-btn ">保存</button>
-        <button type="button" class="layui-btn layui-btn-red">提交</button>
+        <button type="button" class="layui-btn " onclick="saveData()">保存</button>
+        <button type="button" class="layui-btn layui-btn-red" onclick="submitData()">提交</button>
       </div>
     </form>
 
@@ -108,7 +108,7 @@
             class="layui-icon layui-icon-up"></i>上移</a>
         <a href="javascript:;" onclick="exchangeData('{{index}}','{{index+1}}')"><i
             class="layui-icon layui-icon-down"></i>下移</a>
-        <a href="javascript:;" onclick="addProblem('edit','{{index}}')"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+        <a href="javascript:;" onclick="editProblem('{{index}}')"><i class="layui-icon layui-icon-edit"></i>编辑</a>
         <a href="javascript:;" onclick="removeProblem('{{index}}')"><i class="layui-icon layui-icon-close"></i>删除</a>
       </div>
     </div>
@@ -129,91 +129,8 @@
           upload = layui.upload,
           laytpl = layui.laytpl,
           layedit = layui.layedit;
-        //问题列表，模拟数据，默认[]
-        var contentData = [
-          // {
-          //     "itemCode": '1',
-          //     "type": "radio",
-          //     "isRequired": false,
-          //     "itemDesc": "radio",
 
-          //     "options": [{
-          //       "optionDes": "是",
-          //       "optionId": "0"
-          //     }, {
-          //       "optionDes": "否",
-          //       "optionId": "1"
-          //     }],
-          //     "itemGrade": "1",
-          //     "dependItemCode": "",
-          //     "dependOptionId": ""
-          //   },
-          //   {
-          //     "itemCode": '2',
-          //     "type": "checkbox",
-          //     "isRequired": false,
-          //     "itemDesc": "checkbox",
-          //     "options": [{
-          //       "optionDes": "checkbox-option1",
-          //       "optionId": "0"
-          //     }, {
-          //       "optionDes": "checkbox-option2",
-          //       "optionId": "1"
-          //     }, {
-          //       "optionDes": "checkbox-option3",
-          //       "optionId": "2"
-          //     }, {
-          //       "optionDes": "checkbox-option4",
-          //       "optionId": "3"
-          //     }],
-          //     "itemGrade": "1",
-          //     "dependItemCode": "",
-          //     "dependOptionId": ""
-          //   }, {
-          //     "itemCode": '3',
-          //     "type": "select",
-          //     "isRequired": true,
-          //     "itemDesc": "select",
-          //     "options": [{
-          //       "optionDes": "select-option1",
-          //       "optionId": "0"
-          //     }, {
-          //       "optionDes": "select-option2",
-          //       "optionId": "1"
-          //     }, {
-          //       "optionDes": "select-option3",
-          //       "optionId": "2"
-          //     }],
-          //     "itemGrade": "1",
-          //     "dependItemCode": "",
-          //     "dependOptionId": ""
-          //   }, {
-          //     "itemCode": '4',
-          //     "type": "input",
-          //     "isRequired": false,
-          //     "itemDesc": "input",
-          //     "itemGrade": "1",
-          //     "dependItemCode": "",
-          //     "dependOptionId": ""
-          //   },
-          //   {
-          //     "itemCode": '5',
-          //     "type": "textarea",
-          //     "isRequired": true,
-          //     "itemDesc": "textarea",
-          //     "itemGrade": "1",
-          //     "dependItemCode": "",
-          //     "dependOptionId": ""
-          //   }, {
-          //     "itemCode": '6',
-          //     "type": "desc",
-          //     "isRequired": "true",
-          //     "itemDesc": "desc",
-          //     "itemGrade": "1",
-          //     "dependItemCode": "",
-          //     "dependOptionId": ""
-          //   }
-        ];
+
         layedit.build('demo1', {
           height: 180
         });
@@ -221,43 +138,107 @@
         layedit.build('demo2', {
           height: 180
         });
-
-        function setListData() {
-          layui.data('talking', {
-            key: 'problemList',
-            value: contentData
+        var problemList = [],
+          problemTreeData = [],
+          problemNum = 0;
+        curData = {};
+        // 将问题的转换成树形结构，方便显/隐展示
+        function buildTreeData(list) {
+          let temp = {};
+          let tree = {};
+          let arr = []
+          for (let i in list) {
+            temp[list[i].itemCode] = list[i];
+          }
+          for (let i in temp) {
+            if (temp[i].dependItemCode) {
+              if (!temp[temp[i].dependItemCode].children) {
+                temp[temp[i].dependItemCode].children = [];
+              }
+              temp[temp[i].dependItemCode].children.push(temp[i]);
+            } else {
+              tree[temp[i].itemCode] = temp[i];
+            }
+          }
+          for (let i in tree) {
+            arr.push(tree[i])
+          }
+          return arr
+        }
+        //树结构平铺
+        function treeToList(tree) {
+          var result = []
+          var flat = function (nodes) {
+            for (var i = 0; i < nodes.length; i++) {
+              result.push(nodes[i])
+              if (nodes[i].children) {
+                flat(nodes[i].children)
+              }
+            }
+          }
+          flat(tree)
+          return result
+        }
+        //获取数据并渲染
+        function getData() {
+          problemList = []
+          problemTreeData = buildTreeData(problemList)
+          renderContent()
+        }
+        //渲染问题区域
+        function renderContent(data) {
+          setStorageData()
+          var getTpl = contentTemplate.innerHTML,
+            selectWrap = document.getElementById('contentWrap');
+          laytpl(getTpl).render(problemTreeData, function (html) {
+            selectWrap.innerHTML = html;
+            form.render()
           });
         }
-        window.addProblem = function (type, dataIndex) {
+
+        function setStorageData() {
           layui.data('talking', {
-            key: 'problem',
-            value: contentData[dataIndex]
+            key: 'problemTreeData',
+            value: problemTreeData
           });
-          setListData()
+          layui.data('talking', {
+            key: 'curData',
+            value: curData
+          });
+        }
+
+        //添加问题
+        window.addProblem = function () {
           layer.open({
             type: 2,
             title: '添加问题',
             skin: 'common-layer',
             area: ['1100px', '600px'],
-            content: './addProblem.html?pageType=' + type,
+            content: './addProblem.html?pageType=add',
             btn: ['确定', '取消'],
             yes: function (index, layero) {
-              var problemData = pageData = layui.data('talking').problem;
+              curData = layui.data('talking').curData;
 
               function setData() {
-                if (type == 'add') {
-                  problemData.itemCode = "" + (contentData.length + 1);
-                  contentData.push(problemData)
+                curData.itemCode = '' + (problemNum + 1);
+                if (curData.itemGrade == '1') {
+                  problemTreeData.push(curData)
                 } else {
-                  contentData[dataIndex] = problemData
+                  var list = treeToList(problemTreeData)
+                  for (var i = 0; i < list.length; i++) {
+                    if (list[i].itemCode == curData.dependItemCode) {
+                      list[i].children = list[i].children || []
+                      list[i].children.push(curData)
+                    }
+                  }
                 }
-                setListData()
+                problemNum++
                 renderContent()
                 layer.closeAll()
               }
-              if (problemData.itemDesc) {
-                if (['radio', 'checkbox', 'select'].indexOf(problemData.type) > -1) {
-                  if (problemData.options.length > 0 && problemData.options[0].optionId !== '') {
+              if (curData.itemDesc) {
+                if (['radio', 'checkbox', 'select'].indexOf(curData.type) > -1) {
+                  if (curData.options.length > 0 && curData.options[0].optionId !== '') {
                     setData()
                   } else {
                     layer.msg('请填完所有必填项')
@@ -270,35 +251,57 @@
               }
             },
             end: function () {
-              layui.data('talking', {
-                key: 'problem',
-                value: {}
-              });
+              curData = {}
+              setStorageData()
+            }
+          })
+        }
+        //编辑问题
+        window.editProblem = function (dataIndex) {
+          curData = problemTreeData[dataIndex]
+          setStorageData()
+          layer.open({
+            type: 2,
+            title: '添加问题',
+            skin: 'common-layer',
+            area: ['1100px', '600px'],
+            content: './addProblem.html?pageType=edit',
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+              curData = layui.data('talking').curData;
+
+              function setData() {
+                problemTreeData[dataIndex] = curData
+                renderContent()
+                layer.closeAll()
+              }
+              if (curData.itemDesc) {
+                if (['radio', 'checkbox', 'select'].indexOf(curData.type) > -1) {
+                  if (curData.options.length > 0 && curData.options[0].optionId !== '') {
+                    setData()
+                  } else {
+                    layer.msg('请填完所有必填项')
+                  }
+                } else {
+                  setData()
+                }
+              } else {
+                layer.msg('请填完所有必填项')
+              }
+            },
+            end: function () {
+              curData = {}
+              setStorageData()
             }
           })
         }
 
-        function renderContent(data) {
-          var getTpl = contentTemplate.innerHTML,
-            selectWrap = document.getElementById('contentWrap');
-          var pageData = []
-          for (var i = 0; i < contentData.length; i++) {
-            if (contentData[i].itemGrade == '1') {
-              pageData.push(contentData[i])
-            }
-          }
-          laytpl(getTpl).render(pageData, function (html) {
-            selectWrap.innerHTML = html;
-            form.render()
-          });
-        }
-        renderContent()
         // 上下移动
         window.exchangeData = function (index1, index2) {
-          if (index1 > -1 && index2 > -1 && index2 < contentData.length) {
-            var temp = contentData[index1];
-            contentData[index1] = contentData[index2];
-            contentData[index2] = temp;
+          if (index1 > -1 && index2 > -1 && index2 < problemTreeData.length) {
+            var temp = problemTreeData[index1];
+            problemTreeData[index1] = problemTreeData[index2];
+            problemTreeData[index2] = temp;
             renderContent()
           } else {
             layer.msg('不可移动了')
@@ -306,11 +309,9 @@
         }
         //删除问题
         window.removeProblem = function (index) {
-          contentData.splice(index, 1);
+          problemTreeData.splice(index, 1);
           renderContent()
         }
-
-
         //导入问题
         window.importProblem = function () {
           layer.open({
@@ -339,7 +340,25 @@
             }
           })
         }
+        //保存数据
+        window.saveData = function () {
+          //平铺的问题数据结构
+          var list = treeToList(problemTreeData)
+          //目前itemCode并不代表具体问题顺序，如有需要，可以遍历data后重新赋值itemCode再保存到数据库
+          console.log(list)
+        }
+        //提交数据
+        window.submitData = function () {
+          //平铺的问题数据结构
+          var list = treeToList(problemTreeData)
+          //目前itemCode并不代表具体问题顺序，如有需要，可以遍历data后重新赋值itemCode再保存到数据库
+          console.log(list)
+        }
 
+        // 页面初始化
+        $(function () {
+          getData()
+        })
       })
   </script>
 </body>
