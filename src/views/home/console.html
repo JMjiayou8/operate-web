@@ -16,7 +16,7 @@
 <body>
   <div class="layui-fluid console-page">
     <div class="layui-row layui-col-space15" id="console-page">
-      <div class="layui-col-md8 layui-col-sm12 " id="part0">
+      <div class="layui-col-md8 layui-col-sm12" id="part0">
         <div class="layui-card">
           <div class="layui-card-header">概览</div>
           <div class="layui-card-body">
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="layui-col-md4 layui-col-sm12 config-part" id="part1">
+      <div class="layui-col-md4 layui-col-sm12 " id="part1">
         <div class="layui-card">
           <div class="layui-card-header">
             常用功能
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div class="layui-col-md8 layui-col-sm8 config-part" id="part2">
+      <div class="layui-col-md8 layui-col-sm8" id="part2">
         <div class="layui-card">
           <div class="layui-card-header">营销任务</div>
           <div class="layui-card-body">
@@ -119,7 +119,7 @@
           </div>
         </div>
       </div>
-      <div class="layui-col-md4 layui-col-sm4 config-part" id="part3">
+      <div class="layui-col-md4 layui-col-sm4 " id="part3">
         <div class="layui-card">
           <div class="layui-card-header">各地市营销活动订购量排名</div>
           <div class="layui-card-body">
@@ -127,7 +127,7 @@
           </div>
         </div>
       </div>
-      <div class="layui-col-md12 layui-col-sm12 config-part" id="part4">
+      <div class="layui-col-md12 layui-col-sm12 " id="part4">
         <div class="layui-card">
           <div class="layui-card-header">策划活动执行情况</div>
           <div class="layui-card-body">
@@ -162,7 +162,7 @@
           </div>
         </div>
       </div>
-      <div class="layui-col-md12 layui-col-sm12 config-part" id="part5">
+      <div class="layui-col-md12 layui-col-sm12 " id="part5">
         <div class="layui-card">
           <div class="layui-card-header">经典活动</div>
           <div class="layui-card-body"></div>
@@ -194,7 +194,7 @@
         <i class="connect"></i>
         <p style="white-space: nowrap;">
           <span>待执行：<span class="over-num" style="color:{{d.config[2].color}}">{{d.data.num3}}</span>个 </span>
-          <span>正在执行：<span class="over-num" style="color:{{d.config[2].color}}">{{d.data.num4}}</span>个</span>
+          <!-- <span>正在执行：<span class="over-num" style="color:{{d.config[2].color}}">{{d.data.num4}}</span>个</span> -->
         </p>
       </li>
       <li class="over-item layui-col-md3 layui-col-sm3 layui-col-xs3">
@@ -253,6 +253,10 @@
       </div>
       {{#  }); }}
     </div>
+  </script>
+
+  <script id="layoutTemplate" type="text/html">
+
   </script>
   <script src="../../assets/layui/layui.js"></script>
   <script>
