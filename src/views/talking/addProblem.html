@@ -192,11 +192,11 @@
         <input type="text" class="layui-input" onblur="getParamInput(this,'{{index}}')" value="{{item.optionDes}}"
           lay-verify="required">
         <button type="button" class="layui-btn  layui-btn-sm  layui-btn-add" data-index="{{index}}">
-          <i class="layui-icon layui-icon-add-1"></i> 添加
+          <i class="layui-icon layui-icon-add-1" data-index="{{index}}"></i> 添加
         </button>
         <button type="button" class="layui-btn  layui-btn-sm  layui-btn-del" data-index="{{index}}"
           data-optionid="{{item.optionId}}">
-          <i class="layui-icon layui-icon-close"></i>删除
+          <i class="layui-icon layui-icon-close" data-index="{{index}}"></i>删除
         </button>
       </div>
     </div>
