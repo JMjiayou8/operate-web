@@ -68,25 +68,25 @@
         <button type="button" class="layui-btn layui-btn-red" onclick="submitData()">提交</button>
       </div>
     </form>
-
   </div>
   <script id="contentTemplate" type="text/html">
     {{#  layui.each(d, function(index, item){ }}
     <div class="layui-form-item ">
-      <label class="layui-form-label {{item.isRequired?'layui-required':''}}">{{index+1}}、{{item.itemDesc}}</label>
-      {{# if(item.type=='radio'){ }}
+      <label
+        class="layui-form-label {{(''+item.isRequired=='true')?'layui-required':''}}">{{index+1}}、{{item.itemDesc}}</label>
+      {{# if(item.itemType=='radio'){ }}
       <div class="layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
         <input type="radio" name="radio{{index}}" value="{{obj.optionId}}" title="{{obj.optionDes}}" />
         {{#  }); }}
       </div>
-      {{# }else if(item.type=='checkbox'){ }}
+      {{# }else if(item.itemType=='checkbox'){ }}
       <div class=" layui-input-block ">
         {{#  layui.each(item.options, function(i, obj){ }}
         <input type="checkbox" name="check{{index}}[{{obj.optionId}}]" lay-skin="primary" title="{{obj.optionDes}}" />
         {{#  }); }}
       </div>
-      {{# }else if(item.type=='select'){ }}
+      {{# }else if(item.itemType=='select'){ }}
       <div class=" layui-input-block ">
         <select>
           {{#  layui.each(item.options, function(i, obj){ }}
@@ -94,11 +94,11 @@
           {{#  }); }}
         </select>
       </div>
-      {{# }else if(item.type=='input'){ }}
+      {{# }else if(item.itemType=='input'){ }}
       <div class=" layui-input-block ">
         <input type="text" class="layui-input">
       </div>
-      {{# }else if(item.type=='textarea'||item.type=='desc'){ }}
+      {{# }else if(item.itemType=='textarea'||item.itemType=='desc'){ }}
       <div class=" layui-input-block ">
         <textarea class="layui-textarea"></textarea>
       </div>
@@ -138,10 +138,10 @@
         layedit.build('demo2', {
           height: 180
         });
-        var problemList = [],
-          problemTreeData = [],
-          problemNum = 0;
-        curData = {};
+        var problemList = [], //问题列表数据
+          problemTreeData = [], //问题数据树结构
+          problemNum = 0, //问题数目
+          curData = {}; //当前操作问题数据
         // 将问题的转换成树形结构，方便显/隐展示
         function buildTreeData(list) {
           let temp = {};
@@ -181,7 +181,9 @@
         }
         //获取数据并渲染
         function getData() {
+          // 新增页面默认为[],编辑页面时ajax获取数据problemList
           problemList = []
+          problemNum = problemList.length || 0;
           problemTreeData = buildTreeData(problemList)
           renderContent()
         }
@@ -237,7 +239,7 @@
                 layer.closeAll()
               }
               if (curData.itemDesc) {
-                if (['radio', 'checkbox', 'select'].indexOf(curData.type) > -1) {
+                if (['radio', 'checkbox', 'select'].indexOf(curData.itemType) > -1) {
                   if (curData.options.length > 0 && curData.options[0].optionId !== '') {
                     setData()
                   } else {
@@ -276,7 +278,7 @@
                 layer.closeAll()
               }
               if (curData.itemDesc) {
-                if (['radio', 'checkbox', 'select'].indexOf(curData.type) > -1) {
+                if (['radio', 'checkbox', 'select'].indexOf(curData.itemType) > -1) {
                   if (curData.options.length > 0 && curData.options[0].optionId !== '') {
                     setData()
                   } else {

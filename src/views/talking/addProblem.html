@@ -156,7 +156,6 @@
       </div>
       <div id="paramWrap"></div>
       <div id="relyWrap"></div>
-
     </form>
   </div>
   <script id="paramTemplate" type="text/html">
@@ -169,7 +168,7 @@
           {{''+d.isRequired=='false'?'checked':''}} />
       </div>
     </div>
-    {{#  if(['radio', 'checkbox', 'select'].indexOf(d.type) == -1){ }}
+    {{#  if(['radio', 'checkbox', 'select'].indexOf(d.itemType) == -1){ }}
     <div class="layui-form-item layui-col-md12 layui-col-sm12">
       <label class="layui-form-label layui-required">问题标题：</label>
       <div class=" layui-input-block ">
@@ -248,7 +247,7 @@
           laytpl = layui.laytpl,
           layer = layui.layer;
         var pageData = {
-          type: 'radio', //类型
+          itemType: 'radio', //类型
           itemCode: '', //编码
           itemDesc: '', //名称
           isRequired: false, //是否必填
@@ -268,10 +267,11 @@
           data: [],
           options: []
         };
+        // 点击选择问题类型
         $('.elemType-item').click(function (obj) {
           $('.elemType-item').removeClass('active')
-          pageData.type = $(this).data('type')
-          if (['radio', 'checkbox', 'select'].indexOf(pageData.type) == -1) {
+          pageData.itemType = $(this).data('type')
+          if (['radio', 'checkbox', 'select'].indexOf(pageData.itemType) == -1) {
             delete pageData.options
           } else {
             pageData.options = [{
@@ -283,6 +283,7 @@
           $(this).addClass('active')
         })
 
+        // 渲染页面内容
         function renderParamWrap() {
           var getTpl = paramTemplate.innerHTML,
             selectWrap = document.getElementById('paramWrap');
@@ -383,7 +384,7 @@
           renderRelyWrap()
           setData()
         })
-
+        //树结构平铺
         function treeToList(tree) {
           var result = []
           var flat = function (nodes) {
@@ -402,13 +403,13 @@
           if (pageType == 'edit') {
             pageData = layui.data('talking').curData;
             $('.elemType-item').removeClass('active')
-            $('.elemType-item[data-type=' + pageData.type + ']').addClass('active')
+            $('.elemType-item[data-type=' + pageData.itemType + ']').addClass('active')
           } else {
             problemTreeData = layui.data('talking').problemTreeData;
             relyData.data = [];
             var list = treeToList(problemTreeData)
             for (var i = 0; i < list.length; i++) {
-              if (['radio', 'checkbox', 'select'].indexOf(list[i].type) > -1) {
+              if (['radio', 'checkbox', 'select'].indexOf(list[i].itemType) > -1) {
                 relyData.data.push(list[i])
               }
             }
