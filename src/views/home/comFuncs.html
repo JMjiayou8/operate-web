@@ -1,242 +1,280 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>政策详情</title>
-    <meta name="renderer" content="webkit" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/layui/css/layui.css"
-      media="all"
-    />
-    <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
-    <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
-    <style>
-      .comFuns-page {
-        background: #fff;
-        padding-left: 40px;
-        overflow: hidden;
-        height: 100%;
-      }
-      .comFuns-page .funcs-list-item {
-        margin-bottom: 20px;
-      }
-      .comFuns-page .funcs-item {
-        cursor: pointer;
-      }
 
-      .comFuns-page .funcs-type {
-        font-size: 18px;
-        color: #333;
-        margin: 20px 0;
-      }
-      .comFuns-page .funcs-name {
-        background: #edeff3;
-        border-radius: 5px;
-        font-size: 14px;
-        line-height: 40px;
-        padding: 0 20px;
-        display: inline-block;
-        margin-bottom: 20px;
-        min-width: 60px;
-      }
-      .comFuns-page .choosedWrap {
-        border-left: 1px solid #f1f1f1;
-        height: 380px;
-        overflow: auto;
-        padding: 0 20px;
-      }
-      .comFuns-page .layui-icon {
-        font-weight: bolder;
-        color: #333;
-      }
-      .comFuns-page .choosed {
-        opacity: 0.3;
-        cursor: not-allowed;
-      }
-      .comFuns-page .choosed .funcs-name {
-        background: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="comFuns-page">
-      <div id="funcsWrap" class="layui-row"></div>
-    </div>
-    <script id="funcsTemplate" type="text/html">
-      {{#  layui.each(d.list, function(index, item){ }}
-        <div class="layui-col-md2 layui-col-sm2 layui-col-xs2">
-            {{#  layui.each(item, function(i, obj){ }}
-              <div class="funcs-list-item">
-                <p class="funcs-type">{{obj.type}}</p>
-                <ul>
-                  {{#  layui.each(obj.data, function(k, kk){ }}
-                  <li class="funcs-item todoItem {{d.ids.indexOf(kk.id)>-1?'choosed':''}}" data-index="{{index}}-{{i}}-{{k}}">
-                    <span class="funcs-name" data-index="{{index}}-{{i}}-{{k}}">{{kk.title}}</span>
-                    <span><i class="layui-icon layui-icon-add-1" data-index="{{index}}-{{i}}-{{k}}"></i></span>
-                  </li>
-                  {{#  }); }}
-                </ul>
-              </div>
-            {{#  }); }}
-        </div>
-      {{#  }); }}
-      <div class="layui-col-md2 layui-col-sm2 layui-col-xs2 choosedWrap">
-        <p class="funcs-type">已选择功能：</p>
+<head>
+  <meta charset="utf-8" />
+  <title>政策详情</title>
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="../../assets/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
+  <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
+  <style>
+    .comFuns-page {
+      background: #fff;
+      padding-left: 40px;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .comFuns-page .funcs-list-item {
+      margin-bottom: 20px;
+    }
+
+    .comFuns-page .funcs-item {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .comFuns-page .funcs-item .operator-icon {
+      position: absolute;
+      top: 10px;
+      left: 125px;
+    }
+
+    .comFuns-page .funcs-type {
+      font-size: 18px;
+      color: #333;
+      margin: 20px 0;
+    }
+
+    .comFuns-page .funcs-name {
+      background: #edeff3;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 40px;
+      /* padding: 0 20px; */
+      display: inline-block;
+      margin-bottom: 20px;
+      /* min-width: 60px; */
+      width: 100px;
+      padding: 0 10px;
+
+    }
+
+    .comFuns-page .choosedWrap {
+      border-left: 1px solid #f1f1f1;
+      height: 380px;
+      overflow: auto;
+      padding: 0 20px;
+    }
+
+    .comFuns-page .layui-icon {
+      font-weight: bolder;
+      color: #333;
+    }
+
+    .comFuns-page .choosed {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .comFuns-page .choosed .funcs-name {
+      background: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="comFuns-page">
+    <div id="funcsWrap" class="layui-row"></div>
+  </div>
+  <script id="funcsTemplate" type="text/html">
+    {{#  layui.each(d.list, function(index, item){ }}
+    <div class="layui-col-md2 layui-col-sm2 layui-col-xs2">
+      {{#  layui.each(item, function(i, obj){ }}
+      <div class="funcs-list-item">
+        <p class="funcs-type">{{obj.type}}</p>
         <ul>
-          {{#  layui.each(d.choosed, function(m, mm){ }}
-          <li class="funcs-item ">
-            <span class="funcs-name">{{mm.title}}</span>
-            <span><i class="layui-icon layui-icon-close remove-item" data-index="{{m}}"></i></span>
+          {{#  layui.each(obj.data, function(k, kk){ }}
+          <li class="funcs-item todoItem {{d.ids.indexOf(kk.id)>-1?'choosed':''}}" data-index="{{index}}-{{i}}-{{k}}">
+            <span class="funcs-name text-ellipsis" data-index="{{index}}-{{i}}-{{k}}">{{kk.title}}</span>
+            <span class="operator-icon"><i class="layui-icon layui-icon-add-1"
+                data-index="{{index}}-{{i}}-{{k}}"></i></span>
           </li>
           {{#  }); }}
         </ul>
       </div>
-    </script>
-    <script src="../../assets/layui/layui.js"></script>
-    <script>
-      layui
-        .config({
-          base: '../../assets/' //静态资源所在路径
-        })
-        .use(['laytpl', 'jquery'], function() {
-          var laytpl = layui.laytpl,
-            $ = layui.jquery
-          var data = {
-            list: [
-              [
-                {
-                  type: '产品政策',
-                  data: [
-                    {
-                      id: 11,
-                      title: '活动策划',
-                      icon: '../../assets/images/console/comfuncs/1.png'
-                    },
-                    {
-                      id: 12,
-                      title: '数据分析',
-                      icon: '../../assets/images/console/comfuncs/2.png'
-                    },
-                    {
-                      id: 13,
-                      title: '案例库',
-                      icon: '../../assets/images/console/comfuncs/3.png'
-                    },
-                    {
-                      id: 14,
-                      title: '政策管理',
-                      icon: '../../assets/images/console/comfuncs/4.png'
-                    }
-                  ]
-                }
-              ],
-              [
-                {
-                  type: '营销策划',
-                  data: [
-                    { title: '政策管理21', id: 21 },
-                    { title: '政策管理22', id: 22 }
-                  ]
-                }
-              ],
-              [
-                {
-                  type: '营销执行',
-                  data: [
-                    { title: '政策管理31', id: 31 },
-                    { title: '政策管理32', id: 32 },
-                    { title: '政策管理33', id: 33 },
-                    { title: '政策管理34', id: 34 }
-                  ]
-                }
-              ],
-              [
-                {
-                  type: '营销交付',
-                  data: [
-                    { title: '政策管理41', id: 41 },
-                    { title: '政策管理42', id: 42 }
-                  ]
-                }
-              ],
-              [
-                {
-                  type: '计收结算',
-                  data: [
-                    { title: '政策管理51', id: 51 },
-                    { title: '政策管理52', id: 52 }
-                  ]
+      {{#  }); }}
+    </div>
+    {{#  }); }}
+    <div class="layui-col-md2 layui-col-sm2 layui-col-xs2 choosedWrap">
+      <p class="funcs-type">已选择功能：</p>
+      <ul>
+        {{#  layui.each(d.choosed, function(m, mm){ }}
+        <li class="funcs-item ">
+          <span class="funcs-name text-ellipsis">{{mm.title}}</span>
+          <span class="operator-icon"><i class="layui-icon layui-icon-close remove-item" data-index="{{m}}"></i></span>
+        </li>
+        {{#  }); }}
+      </ul>
+    </div>
+  </script>
+  <script src="../../assets/layui/layui.js"></script>
+  <script>
+    layui
+      .config({
+        base: '../../assets/' //静态资源所在路径
+      })
+      .use(['laytpl', 'jquery'], function () {
+        var laytpl = layui.laytpl,
+          $ = layui.jquery
+        var data = {
+          list: [
+            [{
+              type: '产品政策',
+              data: [{
+                  id: 11,
+                  title: '活动策划',
+                  icon: '../../assets/images/console/comfuncs/1.png'
                 },
                 {
-                  type: '数字运营',
-                  data: [
-                    { title: '政策管理61', id: 61 },
-                    { title: '政策管理62', id: 62 }
-                  ]
+                  id: 12,
+                  title: '数据分析',
+                  icon: '../../assets/images/console/comfuncs/2.png'
+                },
+                {
+                  id: 13,
+                  title: '案例库',
+                  icon: '../../assets/images/console/comfuncs/3.png'
+                },
+                {
+                  id: 14,
+                  title: '政策管理',
+                  icon: '../../assets/images/console/comfuncs/4.png'
                 }
               ]
-            ],
-            choosed: []
-          }
-          function getFuncItem(id) {
-            var arr = []
-            for (var i = 0; i < data.list.length; i++) {
-              for (var j = 0; j < data.list[i].length; j++) {
-                arr = arr.concat(data.list[i][j].data)
+            }],
+            [{
+              type: '营销策划',
+              data: [{
+                  title: '线上订购明细渠道报表',
+                  id: 21
+                },
+                {
+                  title: '政策管理22',
+                  id: 22
+                }
+              ]
+            }],
+            [{
+              type: '营销执行',
+              data: [{
+                  title: '政策管理31',
+                  id: 31
+                },
+                {
+                  title: '政策管理32',
+                  id: 32
+                },
+                {
+                  title: '政策管理33',
+                  id: 33
+                },
+                {
+                  title: '政策管理34',
+                  id: 34
+                }
+              ]
+            }],
+            [{
+              type: '营销交付',
+              data: [{
+                  title: '线上订购明细渠道报表',
+                  id: 41
+                },
+                {
+                  title: '线上订购明细渠道报表',
+                  id: 42
+                }
+              ]
+            }],
+            [{
+                type: '计收结算',
+                data: [{
+                    title: '政策管理51',
+                    id: 51
+                  },
+                  {
+                    title: '线上订购明细渠道报表',
+                    id: 52
+                  }
+                ]
+              },
+              {
+                type: '数字运营',
+                data: [{
+                    title: '政策管理61',
+                    id: 61
+                  },
+                  {
+                    title: '政策管理62',
+                    id: 62
+                  }
+                ]
               }
+            ]
+          ],
+          choosed: []
+        }
+
+        function getFuncItem(id) {
+          var arr = []
+          for (var i = 0; i < data.list.length; i++) {
+            for (var j = 0; j < data.list[i].length; j++) {
+              arr = arr.concat(data.list[i][j].data)
             }
-            var obj = {}
-            for (var i = 0; i < arr.length; i++) {
-              if (arr[i].id == id) {
-                obj = arr[i]
-              }
-            }
-            return obj
           }
-          function renderList(flag) {
-            var getTpl = funcsTemplate.innerHTML,
-              view = document.getElementById('funcsWrap')
-            if (flag == 'init') {
-              var storageFucs = layui.data('ComFuncs').funcs
-              data.choosed = storageFucs
+          var obj = {}
+          for (var i = 0; i < arr.length; i++) {
+            if (arr[i].id == id) {
+              obj = arr[i]
             }
-            data.ids = []
-            for (var i = 0; i < data.choosed.length; i++) {
-              data.ids.push(data.choosed[i].id)
-            }
-            laytpl(getTpl).render(data, function(html) {
-              view.innerHTML = html
-              layui.data('ComFuncs', {
-                key: 'choosed',
-                value: data.choosed
-              })
+          }
+          return obj
+        }
+
+        function renderList(flag) {
+          var getTpl = funcsTemplate.innerHTML,
+            view = document.getElementById('funcsWrap')
+          if (flag == 'init') {
+            var storageFucs = layui.data('ComFuncs').funcs
+            data.choosed = storageFucs
+          }
+          data.ids = []
+          for (var i = 0; i < data.choosed.length; i++) {
+            data.ids.push(data.choosed[i].id)
+          }
+          laytpl(getTpl).render(data, function (html) {
+            view.innerHTML = html
+            layui.data('ComFuncs', {
+              key: 'choosed',
+              value: data.choosed
             })
-          }
-          renderList('init')
-          // 新增
-          $(document).on('click', '.todoItem', function(evt) {
-            var indexArr = $(evt.target)
-              .data('index')
-              .split('-')
-            var choosed = data.list[indexArr[0]][indexArr[1]].data[indexArr[2]]
-            if (data.ids.indexOf(choosed.id) == -1) {
-              data.choosed.push(choosed)
-              renderList()
-            }
           })
-          // 删除
-          $(document).on('click', '.remove-item', function(evt) {
-            var index = $(evt.target).data('index')
-            data.choosed.splice(index, 1)
+        }
+        renderList('init')
+        // 新增
+        $(document).on('click', '.todoItem', function (evt) {
+          var indexArr = $(evt.target)
+            .data('index')
+            .split('-')
+          var choosed = data.list[indexArr[0]][indexArr[1]].data[indexArr[2]]
+          if (data.ids.indexOf(choosed.id) == -1) {
+            data.choosed.push(choosed)
             renderList()
-          })
+          }
         })
-    </script>
-  </body>
+        // 删除
+        $(document).on('click', '.remove-item', function (evt) {
+          var index = $(evt.target).data('index')
+          data.choosed.splice(index, 1)
+          renderList()
+        })
+      })
+  </script>
+</body>
+
 </html>
