@@ -755,6 +755,10 @@ i {
   border: 1px solid #c8c7c7;
 }
 
+.layui-btn-blue {
+  background: #448aca;
+}
+
 .layui-btn.layui-btn-white:hover {
   color: inherit;
 }
@@ -1313,6 +1317,14 @@ i {
 
 .layui-tab-card.tab2>.layui-tab-title li {
   width: 50%;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 50px;
+}
+
+.layui-tab-card.tab3>.layui-tab-title li {
+  width: 20%;
   padding: 0;
   margin: 0;
   font-size: 16px;
