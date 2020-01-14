@@ -763,6 +763,10 @@
   cursor: pointer;
 }
 
+.createStrategy .productList {
+  margin-top: 10px;
+}
+
 .createStrategy .productItem .choosed-list .connet .line {
   width: 100px;
   height: 80px;
@@ -786,6 +790,17 @@
   padding: 0 20px;
   display: inline-block;
   background: #fff;
+  margin-bottom: 10px;
+}
+
+.createStrategy .tab3 {
+  border: 0;
+}
+
+@media screen and (max-width: 1400px) {
+  .createStrategy .productItem .choosed-list .choose-cust {
+    width: 70%;
+  }
 }
 
 /*********************************************** 任务调配页面 ***********************************************/

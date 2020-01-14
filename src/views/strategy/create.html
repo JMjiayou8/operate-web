@@ -16,7 +16,7 @@
       display: none;
     }
 
-    #productWrap2 .choosed-list .close-icon {
+    #productWrap2 .choose-cust .close-icon {
       display: none;
     }
   </style>
@@ -114,133 +114,133 @@
             </div>
             <div class="layui-col-md9 layui-col-sm9">
               <div class="layui-card">
-                <div class="layui-card-body">
-                  <div class="layui-tab layui-tab-card tab3">
-                    <ul class="layui-tab-title">
-                      <li class="layui-this">短信</li>
-                      <li>人工外呼</li>
-                      <li>智能外呼</li>
-                    </ul>
-                    <div class="layui-tab-content">
-                      <div class="layui-tab-item layui-show">
-                        <form class="layui-form" wid110>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">执行方式：</label>
-                            <div class="layui-input-block box-radio">
-                              <input type="radio" name="exType"" value=" 1" title="周期性" checked="">
-                              <input type="radio" name="exType" value="2" title="实时">
-                            </div>
-                          </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">执行周期：</label>
-                            <div class="layui-inline">
-                              <div class="layui-input-inline">
-                                <input type="text" class="layui-input" id="startDate" placeholder="yyyy-MM-dd">
-                              </div>
-                              <div class="layui-form-mid">至</div>
-                              <div class="layui-input-inline">
-                                <input type="text" class="layui-input" id="endDate" placeholder="yyyy-MM-dd">
-                              </div>
-                            </div>
-                          </div>
 
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">接触渠道模版：</label>
-                            <div class="layui-input-block choose-template-wrap">
-                              <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
-                              <button type="button" class="layui-btn" onclick="return false;"><i
-                                  class="chooseMsg-icon"></i><span>选择模板</span></button>
-                            </div>
+                <div class="layui-tab layui-tab-card tab3">
+                  <ul class="layui-tab-title">
+                    <li class="layui-this">短信</li>
+                    <li>人工外呼</li>
+                    <li>智能外呼</li>
+                  </ul>
+                  <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                      <form class="layui-form" wid110>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">执行方式：</label>
+                          <div class="layui-input-block box-radio">
+                            <input type="radio" name="exType"" value=" 1" title="周期性" checked="">
+                            <input type="radio" name="exType" value="2" title="实时">
                           </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">短信接入号：</label>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">执行周期：</label>
+                          <div class="layui-inline">
                             <div class="layui-input-inline">
-                              <select name="select5" id="select5"></select>
+                              <input type="text" class="layui-input" id="startDate" placeholder="yyyy-MM-dd">
                             </div>
-                          </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">活动执行时间：</label>
-                            <div class="layui-inline">
-                              <div class="layui-input-inline">
-                                <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
-                              </div>
-                              <div class="layui-form-mid">至</div>
-                              <div class="layui-input-inline">
-                                <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="layui-form-item text-center">
-                            <button type="button" class="layui-btn layui-btn-blue">保存</button>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="layui-tab-item">
-                        <form class="layui-form" wid110>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">有效间隔：</label>
-                            <div class="layui-inline">
-                              <div class="layui-input-inline">
-                                <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
-                              </div>
-                              <div class="layui-form-mid">-</div>
-                              <div class="layui-input-inline">
-                                <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">剔除标准(天)：</label>
+                            <div class="layui-form-mid">至</div>
                             <div class="layui-input-inline">
-                              <input type="text" class="layui-input">
+                              <input type="text" class="layui-input" id="endDate" placeholder="yyyy-MM-dd">
                             </div>
                           </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">任务周期：</label>
+                        </div>
+
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">接触渠道模版：</label>
+                          <div class="layui-input-block choose-template-wrap">
+                            <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
+                            <button type="button" class="layui-btn" onclick="return false;"><i
+                                class="chooseMsg-icon"></i><span>选择模板</span></button>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">短信接入号：</label>
+                          <div class="layui-input-inline">
+                            <select name="select5" id="select5"></select>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">活动执行时间：</label>
+                          <div class="layui-inline">
                             <div class="layui-input-inline">
-                              <select name="select5" id="select5"></select>
+                              <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
                             </div>
-                          </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">短信类型：</label>
-                            <div class="layui-input-block box-radio">
-                              <input type="radio" name="smsType" value="1" title="短信" checked="">
-                              <input type="radio" name="smsType" value="2" title="外呼">
-                              <input type="radio" name="smsType" value="3" title="线上渠道">
-                            </div>
-                          </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">短信内容：</label>
-                            <div class="layui-input-block choose-template-wrap">
-                              <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
-                              <button type="button" class="layui-btn" onclick="return false;"><i
-                                  class="chooseMsg-icon"></i><span>选择模板</span></button>
-                            </div>
-                          </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">是否搭车：</label>
-                            <div class="layui-input-block box-radio">
-                              <input type="radio" name="isDa" value="1" title="短信" checked="">
-                              <input type="radio" name="isDa" value="2" title="外呼">
-                            </div>
-                          </div>
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">搭车专项1：</label>
+                            <div class="layui-form-mid">至</div>
                             <div class="layui-input-inline">
-                              <input type="text" class="layui-input">
+                              <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
                             </div>
                           </div>
-                          <div class="layui-form-item text-center">
-                            <button type="button" class="layui-btn layui-btn-blue">保存</button>
+                        </div>
+                        <div class="layui-form-item text-center">
+                          <button type="button" class="layui-btn layui-btn-blue">保存</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="layui-tab-item">
+                      <form class="layui-form" wid110>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">有效间隔：</label>
+                          <div class="layui-inline">
+                            <div class="layui-input-inline">
+                              <input type="text" class="layui-input" id="startDate2" placeholder="HH:mm">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                              <input type="text" class="layui-input" id="endDate2" placeholder="HH:mm">
+                            </div>
                           </div>
-                        </form>
-                      </div>
-                      <div class="layui-tab-item">
-                        智能外呼内容
-                      </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">剔除标准(天)：</label>
+                          <div class="layui-input-inline">
+                            <input type="text" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">任务周期：</label>
+                          <div class="layui-input-inline">
+                            <select name="select5" id="select5"></select>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">短信类型：</label>
+                          <div class="layui-input-block box-radio">
+                            <input type="radio" name="smsType" value="1" title="短信" checked="">
+                            <input type="radio" name="smsType" value="2" title="外呼">
+                            <input type="radio" name="smsType" value="3" title="线上渠道">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">短信内容：</label>
+                          <div class="layui-input-block choose-template-wrap">
+                            <textarea placeholder="请输入内容" name="prop" class="layui-textarea"></textarea>
+                            <button type="button" class="layui-btn" onclick="return false;"><i
+                                class="chooseMsg-icon"></i><span>选择模板</span></button>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">是否搭车：</label>
+                          <div class="layui-input-block box-radio">
+                            <input type="radio" name="isDa" value="1" title="短信" checked="">
+                            <input type="radio" name="isDa" value="2" title="外呼">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">搭车专项1：</label>
+                          <div class="layui-input-inline">
+                            <input type="text" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item text-center">
+                          <button type="button" class="layui-btn layui-btn-blue">保存</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="layui-tab-item">
+                      智能外呼内容
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -295,14 +295,16 @@
             从右侧选择用户群
           </div>
           {{# } else if(item.cust.length==1){ }}
-          <div class="choose-cust choosed">
-            {{item.cust[0].title}}<i class="layui-icon layui-icon-close close-icon" onclick="deleteChoosed(0)"></i>
+          <div class="choose-cust choosed text-ellipsis">
+            {{item.cust[0].title}}<i class="layui-icon layui-icon-close close-icon"
+              onclick="deleteChoosed({{index}},0)"></i>
           </div>
           {{# } else if(item.cust.length==2){ }}
           <div class="choosed-list">
             {{#  layui.each(item.cust, function(i, obj){ }}
-            <div class="choose-cust choosed">
-              {{obj.title}}<i class="layui-icon layui-icon-close close-icon" onclick="deleteChoosed({{i}})"></i>
+            <div class="choose-cust choosed text-ellipsis">
+              {{obj.title}}<i class="layui-icon layui-icon-close close-icon"
+                onclick="deleteChoosed({{index}},{{i}})"></i>
             </div>
             {{#  }); }}
             <div class="connet">
@@ -555,18 +557,22 @@
 
         }
         // 删除已选/排除
-        window.deleteChoosed = function (cIndex) {
+        window.deleteChoosed = function (pIndex, cIndex) {
           event.stopPropagation()
           if (currentProduct.id) {
-            productList[currentProductIndex].cust.splice(cIndex, 1)
-            renderProductWrap()
-            currentProduct.cust.splice(cIndex, 1)
-            choosedCustList = currentProduct.cust;
-            chooseCustID = []
-            for (var i = 0; i < currentProduct.cust.length; i++) {
-              chooseCustID.push(currentProduct.cust[i].id)
+            if (pIndex == currentProductIndex) {
+              productList[pIndex].cust.splice(cIndex, 1)
+              renderProductWrap()
+              currentProduct.cust.splice(cIndex, 1)
+              choosedCustList = currentProduct.cust;
+              chooseCustID = []
+              for (var i = 0; i < currentProduct.cust.length; i++) {
+                chooseCustID.push(currentProduct.cust[i].id)
+              }
+              rendCustWrap()
+            } else {
+              layer.msg('请操作选中产品')
             }
-            rendCustWrap()
           } else {
             layer.msg('请先选中产品')
           }
