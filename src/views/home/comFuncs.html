@@ -63,7 +63,6 @@
 
     .comFuns-page .choosedWrap {
       padding-left: 10px;
-      overflow: auto;
     }
 
     .comFuns-page .layui-icon {
@@ -98,7 +97,8 @@
               {{#  layui.each(obj.data, function(k, kk){ }}
               <li class="funcs-item todoItem {{d.ids.indexOf(kk.id)>-1?'choosed':''}}"
                 data-index="{{index}}-{{i}}-{{k}}">
-                <span class="funcs-name text-ellipsis" data-index="{{index}}-{{i}}-{{k}}">{{kk.title}}</span>
+                <span class="funcs-name text-ellipsis" data-index="{{index}}-{{i}}-{{k}}"
+                  title="{{kk.title}}">{{kk.title}}</span>
                 <span class="operator-icon"><i class="layui-icon layui-icon-add-1"
                     data-index="{{index}}-{{i}}-{{k}}"></i></span>
               </li>
@@ -115,7 +115,7 @@
       <ul>
         {{#  layui.each(d.choosed, function(m, mm){ }}
         <li class="funcs-item ">
-          <span class="funcs-name text-ellipsis">{{mm.title}}</span>
+          <span class="funcs-name text-ellipsis" title="{{mm.title}}">{{mm.title}}</span>
           <span class="operator-icon"><i class="layui-icon layui-icon-close remove-item" data-index="{{m}}"></i></span>
         </li>
         {{#  }); }}
@@ -182,6 +182,20 @@
                 {
                   title: '政策管理26',
                   id: 26
+                }, {
+                  title: '政策管理27',
+                  id: 27
+                },
+                {
+                  title: '政策管理28',
+                  id: 28
+                }, {
+                  title: '政策管理29',
+                  id: 29
+                },
+                {
+                  title: '政策管理30',
+                  id: 30
                 }
               ]
             }],
