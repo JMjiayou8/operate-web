@@ -12,14 +12,10 @@
   <link rel="stylesheet" href="../../assets/style/index.css" media="all" />
   <link rel="stylesheet" href="../../assets/style/page.css" media="all" />
   <style>
-    html,
-    body {
-      height: 100%;
-    }
-
     .comFuns-page {
       background: #fff;
-      padding: 0 10px;
+      padding-left: 40px;
+      overflow: hidden;
       height: 100%;
     }
 
@@ -35,7 +31,7 @@
     .comFuns-page .funcs-item .operator-icon {
       position: absolute;
       top: 10px;
-      left: 120px;
+      left: 125px;
     }
 
     .comFuns-page .funcs-type {
@@ -49,20 +45,20 @@
       border-radius: 5px;
       font-size: 14px;
       line-height: 40px;
+      /* padding: 0 20px; */
       display: inline-block;
       margin-bottom: 20px;
-      width: 95px;
+      /* min-width: 60px; */
+      width: 100px;
       padding: 0 10px;
 
     }
 
-    .comFuns-page .listWrap {
-      border-right: 1px solid #d2d2d2;
-    }
-
     .comFuns-page .choosedWrap {
-      padding-left: 10px;
+      border-left: 1px solid #f1f1f1;
+      height: 380px;
       overflow: auto;
+      padding: 0 20px;
     }
 
     .comFuns-page .layui-icon {
@@ -83,33 +79,28 @@
 
 <body>
   <div class="comFuns-page">
-    <div id="funcsWrap" class="layui-row "></div>
+    <div id="funcsWrap" class="layui-row"></div>
   </div>
   <script id="funcsTemplate" type="text/html">
-    <div class="layui-col-md10 listWrap">
-      <div class="layui-row">
-        {{#  layui.each(d.list, function(index, item){ }}
-        <div class="layui-col-md2 ">
-          {{#  layui.each(item, function(i, obj){ }}
-          <div class="funcs-list-item">
-            <p class="funcs-type">{{obj.type}}</p>
-            <ul>
-              {{#  layui.each(obj.data, function(k, kk){ }}
-              <li class="funcs-item todoItem {{d.ids.indexOf(kk.id)>-1?'choosed':''}}"
-                data-index="{{index}}-{{i}}-{{k}}">
-                <span class="funcs-name text-ellipsis" data-index="{{index}}-{{i}}-{{k}}">{{kk.title}}</span>
-                <span class="operator-icon"><i class="layui-icon layui-icon-add-1"
-                    data-index="{{index}}-{{i}}-{{k}}"></i></span>
-              </li>
-              {{#  }); }}
-            </ul>
-          </div>
+    {{#  layui.each(d.list, function(index, item){ }}
+    <div class="layui-col-md2 layui-col-sm2 layui-col-xs2">
+      {{#  layui.each(item, function(i, obj){ }}
+      <div class="funcs-list-item">
+        <p class="funcs-type">{{obj.type}}</p>
+        <ul>
+          {{#  layui.each(obj.data, function(k, kk){ }}
+          <li class="funcs-item todoItem {{d.ids.indexOf(kk.id)>-1?'choosed':''}}" data-index="{{index}}-{{i}}-{{k}}">
+            <span class="funcs-name text-ellipsis" data-index="{{index}}-{{i}}-{{k}}">{{kk.title}}</span>
+            <span class="operator-icon"><i class="layui-icon layui-icon-add-1"
+                data-index="{{index}}-{{i}}-{{k}}"></i></span>
+          </li>
           {{#  }); }}
-        </div>
-        {{#  }); }}
+        </ul>
       </div>
+      {{#  }); }}
     </div>
-    <div class="layui-col-md2  choosedWrap">
+    {{#  }); }}
+    <div class="layui-col-md2 layui-col-sm2 layui-col-xs2 choosedWrap">
       <p class="funcs-type">已选择功能：</p>
       <ul>
         {{#  layui.each(d.choosed, function(m, mm){ }}
@@ -127,14 +118,13 @@
       .config({
         base: '../../assets/' //静态资源所在路径
       })
-      .use(['laytpl', 'jquery', 'layer'], function () {
+      .use(['laytpl', 'jquery'], function () {
         var laytpl = layui.laytpl,
-          layer = layui.layer,
           $ = layui.jquery
         var data = {
           list: [
             [{
-              type: '产商品配置',
+              type: '产品政策',
               data: [{
                   id: 11,
                   title: '活动策划',
@@ -166,28 +156,6 @@
                 {
                   title: '政策管理22',
                   id: 22
-                },
-                {
-                  title: '政策管理23',
-                  id: 23
-                },
-                {
-                  title: '政策管理24',
-                  id: 24
-                }, {
-                  title: '政策管理25',
-                  id: 25
-                },
-                {
-                  title: '政策管理26',
-                  id: 26
-                }, {
-                  title: '政策管理27',
-                  id: 27
-                },
-                {
-                  title: '政策管理28',
-                  id: 28
                 }
               ]
             }],
@@ -224,29 +192,30 @@
               ]
             }],
             [{
-              type: '计收计列',
-              data: [{
-                  title: '政策管理51',
-                  id: 51
-                },
-                {
-                  title: '线上订购明细渠道报表',
-                  id: 52
-                }
-              ]
-            }],
-            [{
-              type: '数字运营',
-              data: [{
-                  title: '政策管理61',
-                  id: 61
-                },
-                {
-                  title: '政策管理62',
-                  id: 62
-                }
-              ]
-            }]
+                type: '计收结算',
+                data: [{
+                    title: '政策管理51',
+                    id: 51
+                  },
+                  {
+                    title: '线上订购明细渠道报表',
+                    id: 52
+                  }
+                ]
+              },
+              {
+                type: '数字运营',
+                data: [{
+                    title: '政策管理61',
+                    id: 61
+                  },
+                  {
+                    title: '政策管理62',
+                    id: 62
+                  }
+                ]
+              }
+            ]
           ],
           choosed: []
         }
@@ -289,17 +258,13 @@
         renderList('init')
         // 新增
         $(document).on('click', '.todoItem', function (evt) {
-          if (data.choosed.length < 8) {
-            var indexArr = $(evt.target)
-              .data('index')
-              .split('-')
-            var choosed = data.list[indexArr[0]][indexArr[1]].data[indexArr[2]]
-            if (data.ids.indexOf(choosed.id) == -1) {
-              data.choosed.push(choosed)
-              renderList()
-            }
-          } else {
-            layer.msg('最多配置8个常用功能！')
+          var indexArr = $(evt.target)
+            .data('index')
+            .split('-')
+          var choosed = data.list[indexArr[0]][indexArr[1]].data[indexArr[2]]
+          if (data.ids.indexOf(choosed.id) == -1) {
+            data.choosed.push(choosed)
+            renderList()
           }
         })
         // 删除
